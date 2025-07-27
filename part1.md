@@ -1,6 +1,6 @@
 ## TL;DR My AI Training Hurdles
 
-I spent months training an AI to create BDD tests (and more). I discovered that LLMs are like keen cats - they forget instructions when given too many commands. This is Part 1 of my journey from chaos to **Context Smartness**. Parts 2-4 cover the solutions, framework, and market implications.
+I spent months training an AI to create BDD tests (and more). I discovered that AIs are like keen cats - they forget instructions when given too many commands. This is Part 1 of my journey from chaos to **Context Smartness**. Parts 2-4 cover the solutions, framework, and market implications.
 
 ## For the patient test automation engineers, the test leads who buy into the process, and the AI workflow engineers building the infrastructure, this information is valuable
 
@@ -20,7 +20,7 @@ Reality check: AI agents are like cats. They're very clever, but they have their
 
 ### It's AI right? It's clever
 
-I began treating the LLM like an equal - a brilliant colleague who needed proper instruction. I worked with them. I made clear rules, shared important context, and expected steady results.
+I began treating the AI like an equal - a brilliant colleague who needed proper instruction. I worked with them. I made clear rules, shared important context, and expected steady results.
 
 The conversations went like this:
 - **Me**: "Here are 47 detailed rules for writing BDD scenarios"
@@ -73,11 +73,11 @@ Rules included:
 
 The problem became clear: **The agent forgets things when the context is too large.**
 
-LLMs have extensive knowledge, but their application lacks consistency when overwhelmed. If I'm asking the LLM about task 4, it still has to sort through the stuff for tasks 1 to 3 and all the other conventions. It's like asking a cat to follow 47 commands at once. They ignore most, and the noise makes them mess up the few they do hear.
+AIs have extensive knowledge, but their application lacks consistency when overwhelmed. If I'm asking the AI about task 4, it still has to sort through the stuff for tasks 1 to 3 and all the other conventions. It's like asking a cat to follow 47 commands at once. They ignore most, and the noise makes them mess up the few they do hear.
 
-Context rot identified: Adding more input tokens can hurt LLM performance. I noticed this months before I found out it had a name. For more details, visit https://research.trychroma.com/context-rot.
+Context rot identified: Adding more input tokens can hurt AI performance. I noticed this months before I found out it had a name. For more details, visit https://research.trychroma.com/context-rot.
 
-In my case, if you were to ask the LLM why it did something, it could find the rule it should have applied. It's like the needle in a haystack test. But what it couldn't do was apply this rule at the right time with all the other stuff it needed to do.
+In my case, if you were to ask the AI why it did something, it could find the rule it should have applied. It's like the needle in a haystack test. But what it couldn't do was apply this rule at the right time with all the other stuff it needed to do.
 
 ### Why Your AI Starts Making Stuff Up
 
@@ -88,13 +88,13 @@ The breaking point came when I attempted to ensure the agent used domain context
 
 But the real problem wasn't just using the wrong things at the wrong time. I had unknowingly created a perfect storm of conflicting information and massive context load that was literally making the AI dumber.
 
-Training the LLM via conversations about 'why' things happened had contaminated what should be "generic" BDD patterns with car configurator specifics, package bundle terminology, and React SPA assumptions. But worse, the huge amount of context was hurting performance in ways I didn't understand then.
+Training the AI via conversations about 'why' things happened had contaminated what should be "generic" BDD patterns with car configurator specifics, package bundle terminology, and React SPA assumptions. But worse, the huge amount of context was hurting performance in ways I didn't understand then.
 
 **The tool was becoming domain-specific instead of universally applicable, AND performing worse as context expanded.**
 
 ## The Lightbulb Moment: It's More of a Guideline
 
-Then it struck me - the lightbulb turned on. **I was treating the LLM as an equal, but it isn't.** It's not as smart as I thought in the way I thought (my internal monologue about it was less charitable).
+Then it struck me - the lightbulb turned on. **I was treating the AI as an equal, but it isn't.** It's not as smart as I thought in the way I thought (my internal monologue about it was less charitable).
 
 The agent needed different training than a human colleague would. Even with focused context loading, the AI perceived key requirements as optional unless the language was clearly commanding. Or not applying mandatory rules - they were more guidelines.
 
@@ -112,7 +112,7 @@ Through months of frustrating talks with my AI agent, I found several basic prin
 Never give AI more than 10 competing instructions. Beyond this point, performance drops as the agent struggles to work out what matters most.
 
 ### Context Rot
-Adding more input context actually makes LLMs perform worse - not better. I was using 25% of Amazon Q's context window and wondering why my "smart" agent was getting dumber. https://research.trychroma.com/context-rot
+Adding more input context actually makes AIs perform worse - not better. I was using 25% of Amazon Q's context window and wondering why my "smart" agent was getting dumber. https://research.trychroma.com/context-rot
 
 ### Domain Contamination
 Generic rules slowly pick up domain-specific details through repeated conversations. This makes tools less reusable and adds to context bloat. You have to watch how the rules are formed and make sure they're generic.
