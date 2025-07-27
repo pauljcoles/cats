@@ -2,16 +2,13 @@
 
 I spent months training an AI to create BDD tests (and more). I discovered that LLMs are like keen cats - they forget instructions when given too many commands. This is Part 1 of my journey from chaos to **Context Smartness**. Parts 2-4 cover the solutions, framework, and market implications.
 
-## For Testers, Leads, and AI Engineers
+## For the patient test automation engineers, the test leads who buy into the process, and the AI workflow engineers building the infrastructure, this information is valuable
 
-**Primary Audience**: Test automation engineers building AI workflows who need consistent, reliable output from unpredictable AI systems.
+Different readers will benefit in different ways:
 
-**Also valuable for**: Test leads justifying AI investment, AI workflow engineers in any domain, and anyone discovering that "smart" AI agents have the attention span of caffeinated kittens.
-
-Different readers will benefit differently:
-- **Practitioners**: Learn specific patterns for AI training
-- **Leads**: Understand why AI initiatives fail and what works
-- **Engineers**: See systematic approaches to AI reliability
+- **Practitioners** will learn specific patterns for training AI systems
+- **Leads** will understand why AI initiatives often fail and what makes them successful
+- **Engineers** will see systematic approaches to AI reliability and context management
 
 ## Hopes vs. The Reality: When Smart Cats Act Dumb
 
@@ -21,7 +18,7 @@ Reality check: AI agents are like cats. They're very clever, but they have their
 
 ## From First Attempts to Hard-Earned Lessons
 
-### It's AI right? It's clever!
+### It's AI right? It's clever
 
 I began treating the LLM like an equal - a brilliant colleague who needed proper instruction. I worked with them. I made clear rules, shared important context, and expected steady results.
 
@@ -34,7 +31,32 @@ The conversations went like this:
 
 It was like chatting with a polite cat. It nods along, but then it still knocks your coffee mug off the table.
 
-**The Cat Rule Discovered**: AI agents, like cats, can't follow more than 10 competing instructions effectively. Beyond that threshold, performance degrades measurably. You know, sometimes they just do stuff when you're not looking.
+**The Cat Rule Discovered**: The Cat Rule isn't about counting rules literally. It's about the competing instructions. You may have 100 formatting guidelines, but the AI only needs to make about 10 types of decisions at once.
+
+I had thousands of BDD rules. They asked the AI to manage formatting, domain knowledge, quality checks, and technical implementation all at the same time. It's no surprise it made strange choices!
+
+## 🐱 The Cat Rule: Maximum 10 Instructions
+
+### ❌ What I Did Wrong (47 Rules)
+1. Follow BDD patterns
+2. Use domain mappings  
+3. Apply quality gates
+4. Handle errors properly
+...and 43 more rules! 🤯
+
+**Result**: AI ignored most rules, performed poorly
+
+### ✅ What Actually Works (8 Rules)
+1. Use clear business language
+2. Follow Given-When-Then
+3. Include spec references
+4. Focus on user outcomes
+5. Apply MANDATORY rules
+6. Use domain config
+7. Check quality gates  
+8. Generate clean scenarios
+
+**Result**: Consistent, reliable AI behavior! 🌈🦄
 
 ### The More You Say, the Less It Hears
 
@@ -70,7 +92,7 @@ Training the LLM via conversations about 'why' things happened had contaminated 
 
 **The tool was becoming domain-specific instead of universally applicable, AND performing worse as context expanded.**
 
-## The Lightbulb Moment: It's More of a Guideline!
+## The Lightbulb Moment: It's More of a Guideline
 
 Then it struck me - the lightbulb turned on. **I was treating the LLM as an equal, but it isn't.** It's not as smart as I thought in the way I thought (my internal monologue about it was less charitable).
 
@@ -79,6 +101,8 @@ The agent needed different training than a human colleague would. Even with focu
 **Pattern-Led Prompting Principle**: AI agents respond better to examples than explanations, tables and pseudocode better than natural language for complex logic.
 
 This discovery would lead to what I now call **Context Smartness** - providing exactly the right information, at the right time, in the right amount.
+
+This Pattern-Led Prompting Principle underpins the 'Show, Don't Tell' method. I will explain this in Part 2, with examples taking the place of lengthy documentation.
 
 ## Key Discoveries from Part 1
 
