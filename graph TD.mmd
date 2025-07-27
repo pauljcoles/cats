@@ -1,0 +1,27 @@
+graph TD
+    A[Jira Ticket Input] --> B[Base Context Always Loaded]
+    B --> C{Task Router}
+    
+    C --> D[Task 1: Context Extraction]
+    C --> E[Task 2: BDD Generation] 
+    C --> F[Task 3a: Behavioral Assessment]
+    C --> G[Task 3b: TAF Generation]
+    
+    D --> D1[Analysis Rules<br/>+ Domain Context<br/>❌ BDD Patterns<br/>❌ Automation Rules]
+    E --> E1[BDD Patterns<br/>+ Task 1 Output<br/>❌ Assessment Rules<br/>❌ Technical Details]
+    F --> F1[Assessment Criteria<br/>+ Task 2 Output<br/>❌ Code Generation<br/>❌ Implementation]
+    G --> G1[Technical Patterns<br/>+ Approved Scenarios<br/>❌ Analysis Rules<br/>❌ BDD Guidelines]
+    
+    D1 --> H[Conversation Log]
+    E1 --> I[Human-Readable BDD]
+    F1 --> J[Assessment Report]
+    G1 --> K[Executable Tests]
+    
+    style B fill:#e1f5fe
+    style D fill:#f3e5f5
+    style E fill:#e8f5e8
+    style F fill:#fff3e0
+    style G fill:#fce4ec
+    
+    classDef contextBox fill:#fff,stroke:#333,stroke-width:2px
+    class D1,E1,F1,G1 contextBox
