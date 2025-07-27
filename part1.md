@@ -125,7 +125,7 @@ AI agents treat everything as flexible unless you use very clear commanding lang
 In the remaining parts of this series, I'll show you exactly how I solved these problems:
 
 - **Part 2**: "Show, Don’t Tell: Teaching AI by Example" - The breakthrough solutions that actually worked
-- **Part 3**: "How I Turned Chaos Into a Repeatable Test Process" - Real examples with BMW vs Mercedes
+- **Part 3**: "How I Turned Chaos Into a Repeatable Test Process" - Universal BDD patterns across domains
 - **Part 4**: "Context Rot and the Billion Dollar Opportunity" - Why these solutions matter for the AI industry
 
 Each problem in Part 1 has a matching solution. The cat can be herded, but not the way you think.
