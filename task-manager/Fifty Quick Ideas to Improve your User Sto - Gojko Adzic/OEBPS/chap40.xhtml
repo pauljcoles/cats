@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Simplify outputs</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-simplify-outputs">Simplify outputs</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----simplify.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>If you’ve tried to simplify input channels and split by capacity, but a story is
+still too big, it’s often possible to split the story further from the other
+end, by simplifying outputs.</p>
+
+<p>This approach is particularly applicable to internal enterprise development,
+where the final output often needs to be stored in an obscure database handled
+by a completely different team. One of our clients used a complicated legacy
+data warehouse for reporting, and any changes to that system had to be
+coordinated across the whole group. They needed to add new reports for
+accountants to extract tax information from, but instead of doing everything in
+one story, they choose to save intermediate information into Excel files.
+Business users had to manually extract tax information from the files, but at
+least they got to use the new order management features sooner. Follow-up
+stories automated tax reporting using the data warehouse.</p>
+
+<p>Another situation in which simplifying outputs is effective is where storage
+introduces significant processing or compliance risk. For example, when working
+with an online gaming system, we split stories so that initially there was no
+storage of compliance-sensitive information such as credit card numbers. This
+allowed us to push the games out quickly, and deal with payment card storage
+compliance later. This is a good strategy if the outputs are not needed for
+critical business reports.</p>
+
+<p>Simplifying outputs is also applicable where outputs are not immediately
+required. For example, one of our clients had to produce quarterly regulatory
+reports. We split stories to ensure that the data was preserved but not easily
+accessible, and later planned stories that would make it easy to access.
+Effectively, the first few stories produced plain text files, and we later wrote
+a script to import those files into a reporting engine before the end of the
+quarter.</p>
+
+<h3 id="leanpub-auto-key-benefits-35">Key benefits</h3>
+
+<p>For complex enterprise systems, simplifying outputs can significantly de-risk
+short-term plans. Getting the right access rights and dealing with all the
+quirks of legacy systems can take up a lot of time, and often involves external
+people with specialist knowledge or administrative privileges. This is why
+stories involving external or legacy systems are often blocked and left
+incomplete. Splitting a story into one that uses a simple output channel and one
+to translate and push the data forward into legacy systems divides the risk. The
+first part can be completed while analysts are investigating the second part.</p>
+
+<p>When dealing with complex output formats this way of splitting stories can
+provide manageable chunks and help teams roll something out quickly instead of
+working for months on getting all the outputs right.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-35">How to make it work</h3>
+
+<p>An easy guideline is to choose one format instead of many formats if possible.
+For example, if a story involves exporting to PDF and Excel and tab-separated
+files, divide it into three stories for each output format. Use the first story
+to process the data and create the simplest output first, then use subsequent
+stories to provide more format options.</p>
+
+<p>The second good strategy is to store information insecurely first, and make it
+secure or encrypt it later. This works well in situations where security or
+encryption is more a long-term concern than an immediate risk. A retail company
+we worked with had to mask transaction IDs on customer receipts to prevent
+competitors from analysing their business volume. There was a considerable
+amount of disagreement about the masking strategy among different business
+stakeholders, which created a lot of risk for delivery and potentially blocked
+us from completing end-to-end workflows. The roll-out plan, though, assumed the
+new software would only be used in one of their smaller shops for a while, which
+limited the risk. We split stories to avoid any masking initially and used
+simple sequences at first, then added masking and encryption later. This allowed
+the client roll out software to the first shop quickly.</p>
+
+<p>The third good strategy is to investigate whether persistent outputs are needed
+for future data reports or just to improve workflows. If you discover persistent
+outputs that are not needed for business reports, a good option is to split
+stories so that the first story handles transient information, and subsequent
+stories make information persistent. This is particularly useful when data
+security is an immediate concern, due to compliance or financial risks, since
+not storing the data postpones all the risks. For example, credit card numbers
+are often stored so that customer service can process refunds and users can
+re-order things more easily. Not storing card numbers would slow down workflows,
+but for most companies it would not have an impact on critical information.
+Customers would have to enter their card information again for future purchases,
+or provide account numbers to customer service for refunds. This might be a good
+price to pay for getting some new features sooner. Not storing order contents,
+on the other hand, would probably make a huge mess for future reporting, so that
+wouldn’t be a good way of simplifying outputs.</p>
+
+<p>The fourth good strategy is to cut the outputs at a different boundary. For
+example, use files instead of connecting to the data warehouse. The information
+is still there, persistent, but just not pushed all the way. The trick with this
+technique is to create a simplified output that will still bring value. Dividing
+a story so that the first part creates an intermediate output which end-users
+don’t value is pointless. That would be a technical split, and not a user story.
+For example, it would be a good idea to split a story to use Excel for reports
+at first, and then later integrate with a legacy reporting engine, whereas it
+would be a bad idea to just keep the information in an internal format without
+sending it on to a place where people can actually use it.</p>
+
+
+</div>
+</body>
+</html>

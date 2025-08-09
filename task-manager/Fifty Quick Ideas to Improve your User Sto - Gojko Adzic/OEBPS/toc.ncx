@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta name="dtb:uid" content="https://leanpub.com/50quickideas"/>
+    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>Fifty Quick Ideas to Improve your User Stories</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="title_page" playOrder="1">
+      <navLabel>
+        <text>Title Page</text>
+      </navLabel>
+      <content src="title_page.xhtml"/>
+    </navPoint>
+    <navPoint id="toc" playOrder="2">
+      <navLabel>
+        <text>Table of Contents</text>
+      </navLabel>
+      <content src="toc.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter00" playOrder="3">
+      <navLabel>
+        <text>Introduction</text>
+      </navLabel>
+      <content src="chap00.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter01" playOrder="4">
+      <navLabel>
+        <text>Creating Stories</text>
+      </navLabel>
+      <content src="chap01.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter02" playOrder="5">
+      <navLabel>
+        <text>Tell stories, don’t write them</text>
+      </navLabel>
+      <content src="chap02.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter03" playOrder="6">
+      <navLabel>
+        <text>Don’t worry too much about story format</text>
+      </navLabel>
+      <content src="chap03.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter04" playOrder="7">
+      <navLabel>
+        <text>Describe a behaviour change</text>
+      </navLabel>
+      <content src="chap04.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter05" playOrder="8">
+      <navLabel>
+        <text>Describe the system change</text>
+      </navLabel>
+      <content src="chap05.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter06" playOrder="9">
+      <navLabel>
+        <text>Approach stories as survivable experiments</text>
+      </navLabel>
+      <content src="chap06.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter07" playOrder="10">
+      <navLabel>
+        <text>Watch out for generic roles</text>
+      </navLabel>
+      <content src="chap07.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter08" playOrder="11">
+      <navLabel>
+        <text>Evaluate zone of control and sphere of influence</text>
+      </navLabel>
+      <content src="chap08.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter09" playOrder="12">
+      <navLabel>
+        <text>Put a ‘best before’ date on stories</text>
+      </navLabel>
+      <content src="chap09.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter10" playOrder="13">
+      <navLabel>
+        <text>Planning with stories</text>
+      </navLabel>
+      <content src="chap10.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter11" playOrder="14">
+      <navLabel>
+        <text>Set deadlines for addressing major risks</text>
+      </navLabel>
+      <content src="chap11.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter12" playOrder="15">
+      <navLabel>
+        <text>Use hierarchical backlogs</text>
+      </navLabel>
+      <content src="chap12.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter13" playOrder="16">
+      <navLabel>
+        <text>Group stories by impact</text>
+      </navLabel>
+      <content src="chap13.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter14" playOrder="17">
+      <navLabel>
+        <text>Create a user story map</text>
+      </navLabel>
+      <content src="chap14.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter15" playOrder="18">
+      <navLabel>
+        <text>Change behaviours using the CREATE funnel</text>
+      </navLabel>
+      <content src="chap15.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter16" playOrder="19">
+      <navLabel>
+        <text>Set out global concerns at the start of a milestone</text>
+      </navLabel>
+      <content src="chap16.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter17" playOrder="20">
+      <navLabel>
+        <text>Prioritise according to stages of growth</text>
+      </navLabel>
+      <content src="chap17.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter18" playOrder="21">
+      <navLabel>
+        <text>Prioritise using purpose alignment</text>
+      </navLabel>
+      <content src="chap18.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter19" playOrder="22">
+      <navLabel>
+        <text>Make a stakeholder chart</text>
+      </navLabel>
+      <content src="chap19.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter20" playOrder="23">
+      <navLabel>
+        <text>Name your milestones</text>
+      </navLabel>
+      <content src="chap20.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter21" playOrder="24">
+      <navLabel>
+        <text>Focus milestones on a limited number of user segments</text>
+      </navLabel>
+      <content src="chap21.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter22" playOrder="25">
+      <navLabel>
+        <text>Discussing stories</text>
+      </navLabel>
+      <content src="chap22.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter23" playOrder="26">
+      <navLabel>
+        <text>Use low-tech for story conversations</text>
+      </navLabel>
+      <content src="chap23.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter24" playOrder="27">
+      <navLabel>
+        <text>Imagine the demonstration</text>
+      </navLabel>
+      <content src="chap24.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter25" playOrder="28">
+      <navLabel>
+        <text>Diverge and merge for story discussions</text>
+      </navLabel>
+      <content src="chap25.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter26" playOrder="29">
+      <navLabel>
+        <text>Involve all roles in the discussion</text>
+      </navLabel>
+      <content src="chap26.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter27" playOrder="30">
+      <navLabel>
+        <text>Measure alignment using feedback exercises</text>
+      </navLabel>
+      <content src="chap27.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter28" playOrder="31">
+      <navLabel>
+        <text>Play the devil’s advocate</text>
+      </navLabel>
+      <content src="chap28.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter29" playOrder="32">
+      <navLabel>
+        <text>Divide responsibility for defining stories</text>
+      </navLabel>
+      <content src="chap29.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter30" playOrder="33">
+      <navLabel>
+        <text>Split business and technical discussions</text>
+      </navLabel>
+      <content src="chap30.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter31" playOrder="34">
+      <navLabel>
+        <text>Investigate value on multiple levels</text>
+      </navLabel>
+      <content src="chap31.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter32" playOrder="35">
+      <navLabel>
+        <text>Discuss sliding-scale measurements with QUPER</text>
+      </navLabel>
+      <content src="chap32.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter33" playOrder="36">
+      <navLabel>
+        <text>Splitting stories</text>
+      </navLabel>
+      <content src="chap33.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter34" playOrder="37">
+      <navLabel>
+        <text>Start with the outputs</text>
+      </navLabel>
+      <content src="chap34.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter35" playOrder="38">
+      <navLabel>
+        <text>Forget the walking skeleton – put it on crutches</text>
+      </navLabel>
+      <content src="chap35.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter36" playOrder="39">
+      <navLabel>
+        <text>Narrow down the customer segment</text>
+      </navLabel>
+      <content src="chap36.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter37" playOrder="40">
+      <navLabel>
+        <text>Split by examples of usefulness</text>
+      </navLabel>
+      <content src="chap37.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter38" playOrder="41">
+      <navLabel>
+        <text>Split by capacity</text>
+      </navLabel>
+      <content src="chap38.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter39" playOrder="42">
+      <navLabel>
+        <text>Start with dummy, then move to dynamic</text>
+      </navLabel>
+      <content src="chap39.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter40" playOrder="43">
+      <navLabel>
+        <text>Simplify outputs</text>
+      </navLabel>
+      <content src="chap40.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter41" playOrder="44">
+      <navLabel>
+        <text>Split learning from earning</text>
+      </navLabel>
+      <content src="chap41.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter42" playOrder="45">
+      <navLabel>
+        <text>Extract basic utility</text>
+      </navLabel>
+      <content src="chap42.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter43" playOrder="46">
+      <navLabel>
+        <text>When all else fails, slice the hamburger</text>
+      </navLabel>
+      <content src="chap43.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter44" playOrder="47">
+      <navLabel>
+        <text>Managing Iterative Delivery</text>
+      </navLabel>
+      <content src="chap44.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter45" playOrder="48">
+      <navLabel>
+        <text>Don’t push everything into stories</text>
+      </navLabel>
+      <content src="chap45.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter46" playOrder="49">
+      <navLabel>
+        <text>Budget instead of estimate</text>
+      </navLabel>
+      <content src="chap46.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter47" playOrder="50">
+      <navLabel>
+        <text>Avoid using numeric story sizes</text>
+      </navLabel>
+      <content src="chap47.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter48" playOrder="51">
+      <navLabel>
+        <text>Estimate capacity based on rolling number of stories</text>
+      </navLabel>
+      <content src="chap48.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter49" playOrder="52">
+      <navLabel>
+        <text>Estimate capacity based on analysis time</text>
+      </navLabel>
+      <content src="chap49.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter50" playOrder="53">
+      <navLabel>
+        <text>Pick impacts instead of prioritising stories</text>
+      </navLabel>
+      <content src="chap50.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter51" playOrder="54">
+      <navLabel>
+        <text>Never say ‘no’ – say ‘not now’</text>
+      </navLabel>
+      <content src="chap51.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter52" playOrder="55">
+      <navLabel>
+        <text>Split UX improvements from consistency work</text>
+      </navLabel>
+      <content src="chap52.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter53" playOrder="56">
+      <navLabel>
+        <text>Get end-users to opt in to large user interface changes</text>
+      </navLabel>
+      <content src="chap53.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter54" playOrder="57">
+      <navLabel>
+        <text>Check outcomes with real users</text>
+      </navLabel>
+      <content src="chap54.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter55" playOrder="58">
+      <navLabel>
+        <text>Throw stories away after they are delivered</text>
+      </navLabel>
+      <content src="chap55.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter56" playOrder="59">
+      <navLabel>
+        <text>The End</text>
+      </navLabel>
+      <content src="chap56.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter57" playOrder="60">
+      <navLabel>
+        <text>Authors</text>
+      </navLabel>
+      <content src="chap57.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter58" playOrder="61">
+      <navLabel>
+        <text>Bibliography and resources</text>
+      </navLabel>
+      <content src="chap58.xhtml"/>
+    </navPoint>
+    <navPoint id="chapter59" playOrder="62">
+      <navLabel>
+        <text>Legal Stuff</text>
+      </navLabel>
+      <content src="chap59.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>

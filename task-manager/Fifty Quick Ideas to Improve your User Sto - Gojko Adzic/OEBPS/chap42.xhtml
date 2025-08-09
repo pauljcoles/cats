@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Extract basic utility</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-basic-utility">Extract basic utility</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----extract_basic_utility.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>In situations where a business process has to be implemented in its entirety to
+be useful, a good option for splitting a story is to simplify the user
+interaction to the bare minimum. Instead of usability, give users basic utility.
+The goal is to first make something that enables a user to at least complete a
+critical task, and then plan for making it faster, easier or require less effort
+later. Extracting basic utility often involves semi-automated process execution,
+solutions which require careful use to avoid data inconsistency, or combining
+tools which require the operator to transfer data between them.</p>
+
+<p>Offering utility instead of usability works best for internal IT delivery, where
+the end-users work closely with the delivery team. It’s much easier to involve
+internal users in the discussion about the bare minimum interface and support
+them in semi-automated task execution. The more independent the users are, the
+more difficult it will be to manage the expectations, so this is not a good
+strategy for consumer software.</p>
+
+<p>Extracting basic utility is one of the last-resort methods, so be careful to use
+it only when needed. It is mostly applicable in two situations: when the utility
+of the underlying business process is questionable, or when there is an urgent
+business problem that has to be solved and users can survive with a barely
+usable interface for a while.</p>
+
+<h3 id="leanpub-auto-key-benefits-37">Key benefits</h3>
+
+<p>This technique works particularly well for splitting a time-critical story into
+a smaller piece that remains time-critical and a larger section that can be
+managed without a deadline. Because of this, it is extremely valuable when there
+is a tight business deadline carrying a significant risk, such as an upcoming
+regulatory change or expiry of a contract. In situations such as these,
+extracting basic utility can help to relieve the pressure. If the basic utility
+part can be shipped on time, the rest can be done later.</p>
+
+<p>Extracting basic utility can also help de-risk larger pieces of work where the
+underlying business process needs to be tuned or simplified. If you need to
+first discover what works before making it work well, there isn’t much point in
+investing in neat user interaction until the underlying process is agreed on.
+For example, we worked with a financial services company that wanted to automate
+exception ranking to prioritise users’ manual tasks. People weren’t really sure
+if this would create the desired outcome or not, so the business stakeholders
+did not want to invest too much into this area. A simple, quick-and-dirty
+solution helped to prove the business case and nail down the scope.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-37">How to make it work</h3>
+
+<p>When a process is repetitive, the first stage of pairing down to basic utility
+can be to enable only a single execution. For example, avoid prepopulating
+information fields and ask users to enter all data each time. Instead of
+allowing batch orders using a shopping cart, only allow people to purchase one
+item at a time. As long as security is not compromised, instead of integrating
+with a legacy system or a third-party channel to load the current status (for
+example, an account balance), ask users to enter it manually.</p>
+
+<p>The second strategy to extract basic utility is to simplify data entry. Instead
+of complex user interface widgets, use simple text fields (for example, for
+dates). Instead of pre-emptive validation on the web page, just reject fields in
+the back end with a generic message. Instead of formatted WYSIWYG text, support
+only plain text entry. Instead of providing options for selection, ask users to
+type values in.</p>
+
+<p>The third common option for extracting utility is to completely change the input
+channel. For example, instead of users uploading information through a web page,
+have them load it from a text file. Instead of a queue system that automatically
+starts a process, ask users to initiate it manually.</p>
+
+<p>Make sure to communicate upfront what you are doing and manage stakeholder
+expectations. Extracting basic utility is effectively the exact opposite of The
+Skeleton On Crutches, sacrificing usability for the sake of shipping something
+quickly. About ten years ago, Gojko led a development team that built a slot
+machine game and they chose to apply this method of splitting, delivering a
+working basic game with a horrible user interface. The clients almost cancelled
+the contract after seeing the first version, even though it was just for
+internal feedback. It took two months of painful negotiations, with a
+significant financial risk to the delivery team, to get things back on track.
+The key problem was that the team did not agree or communicate with stakeholders
+about the purpose of the first cut.</p>
+
+<p>When stakeholders are aware of the plan upfront, such problems do not happen.
+For example, we’ve used this method with a large bank that had to solve a
+critical reporting problem, and the business stakeholders were amazed that the
+team could ship something in two days and get the regulators off their back,
+even though it was borderline usable.</p>
+
+
+</div>
+</body>
+</html>

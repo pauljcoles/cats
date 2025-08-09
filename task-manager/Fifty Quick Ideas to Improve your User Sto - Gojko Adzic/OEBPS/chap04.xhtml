@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Describe a behaviour change</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="leanpub-auto-describe-a-behaviour-change">Describe a behaviour change</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----describe_a_behaviour_change.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Bill Wake’s
+<a href="http://xp123.com/articles/invest-in-good-stories-and-smart-tasks/">INVEST</a> set
+of user story characteristics has two conflicting forces. <em>Independent</em> and
+<em>valuable</em> are often difficult to reconcile with <em>small</em>. The value of software
+is a vague and esoteric concept in the domain of business users, but task size
+is under the control of a delivery team, so many teams end up choosing size over
+value. This results in technical stories, that is, stories that don’t really
+produce any outcome, and a disconnect between what the team is pushing out and
+what the business sponsors really care about.</p>
+
+<p>Many delivery teams also implicitly assume that something has value just because
+business users are asking for it, so they don’t question it. Robert Brinkerhoff,
+in <a href="http://www.amazon.com/gp/product/B00134VONY/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00134VONY&amp;linkCode=as2&amp;tag=swingwiki-20"><em>Systems Thinking in Human Resource
+Development</em></a>,
+argues that valuable initiatives produce an observable change in someone’s way
+of working. This principle is a great way to start a conversation on the value
+of a story or to unblock a sticky situation. In essence, translating
+Brinkerhoff’s idea to software means that it’s not enough to describe just
+someone’s behaviour, but we should aim to describe a change in that behaviour
+instead. This trick is particularly useful with user stories that have an overly
+generic value statement, or where the value statement is missing.</p>
+
+<p>We recently worked with a team that was struggling to describe acceptance
+criteria for a user story that was mostly about splitting a background process
+into two. The story was perceived to be of value because the business
+stakeholders had asked for it. It was a strange situation, because the story was
+purely technical – a division of a background task. The success criterion was
+deceivingly simple – check that we have two jobs instead of one – so the team
+was worried that there was more to this than met the eye. </p>
+
+<p>The value statement was ‘being able to import contacts’. The problem was that
+the users were able to import contacts already, and they would still be able to
+import contacts after the story was done – there was no real success criterion.
+We tried to capture the value not just as a behaviour, but as a change in that
+behaviour, and the discussion suddenly took a much more productive turn. Some
+people argued that splitting the background process would allow users to import
+contacts faster, but the total time for a split task would be the same. So
+either the solution was wrong, or the assumed value was incorrect. Digging
+deeper into what would be different after the story was delivered, we discovered
+that users could not import large contact files easily. Imported data was going
+directly into the database, where it was processed in several steps
+synchronously. For large files, this process took longer than the allowed time
+for an HTTP request, so the users saw an error on the screen. They would have to
+re-upload the file and wait to see if it had been processed.</p>
+
+<p>We finally identified the change as ‘being able to upload larger sets of
+contacts faster’, and this opened a discussion on several potential solutions.
+One was to just store the uploaded file on the server and complete the HTTP
+request, letting the user go and do other things, while the same job as before
+picks up the file in the background and processes it. It was a better solution
+than the one in the original request because it did not depend on the speed of
+the background process, and it was also easier and faster to implement.</p>
+
+<p>In addition, understanding the expected behaviour changes allowed the team to
+set a good acceptance criterion for the user story. They could test that a large
+file upload completes within the HTTP request timeout limit, instead of just
+checking for the number of background tasks.</p>
+
+<h3 id="leanpub-auto-key-benefits-2">Key benefits</h3>
+
+<p>Capturing a behaviour change makes a story measurable from a business
+perspective, and this always opens up a good discussion. In our example, once we
+knew that a change was about uploading larger sets of contacts faster, two
+questions immediately popped up: how much larger, and how much faster? The right
+solution completely depended on these two factors. Were we talking about
+megabytes or gigabytes? Were we talking about speeding something up by a small
+percentage, or by an order of magnitude?</p>
+
+<p>Answering questions like these helps to determine whether the proposed solution
+is appropriate, inadequate or over the top. Describing the behaviour change sets
+the context which allows a delivery teams to propose better solutions.</p>
+
+<p>Describing expected changes allows teams to assess whether a story succeeds from
+a business perspective once it is delivered. Even if the story passes all
+technical and functional tests, if it fails to produce the expected behaviour
+change, it is not complete. This might lead the business sponsors to suggest
+more stories. By the same token, if there are several stories all aimed at the
+same behaviour change and the first one achieves more than planned, then the
+other stories can be thrown out of the plan – they are not needed any more.</p>
+
+<p>A measurable behaviour change makes stories easier to split, because there is
+one more dimension to discuss. For example, if the behaviour change is ‘import
+contacts 20% faster’, offering a small subset of functionality that speeds up
+importing by 5% is still valuable.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-2">How to make it work</h3>
+
+<p>Try to quantify expected changes – a good change is one that is observable and
+measurable. Effectively, once you have identified a change, ask ‘How much?’</p>
+
+<p>Even if you do not end up measuring it, capturing how much change is expected
+will help you discuss the proposed solutions. If discrete values are difficult
+to set, aim for ranges. For example, instead of ‘10% faster’, ask about the
+minimum that would make a behaviour change valuable, and what would make it over
+the top. Then set the range somewhere in between.</p>
+
+<p>Teams sometimes struggle to do this for new capabilities. If the capability is
+not there yet, then ‘Start to’ or ‘Stop doing’ are valid behaviour changes.
+Then you can discuss what exactly ‘Start to’ means. For example, a team we
+worked with had several weeks of work planned to enable traders to sell a new
+category of products, but it turned out that they could start to trade by
+logging purchase orders in Excel. The Excel solution did not deliver the final
+speed or capacity they needed, but traders started selling several months sooner
+than if they had to wait for the full big-bang deployment to production, and
+this had immense business value for the company.</p>
+
+
+</div>
+</body>
+</html>

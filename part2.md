@@ -1,22 +1,3 @@
-## 🐾 Series Navigation
-
-- **Part 1: Why AI Starts Making Stuff Up**  
-  *The cat has opinions — and your postcode formatting rules aren't one of them.*  
-  **Read it →**
-
-- **Part 2: Show, Don’t Tell: Teaching AI with Better Examples**  
-  *Bribing the cat with gold standards and smaller piles of paper.*  
-  *(← You are here)*
-
-- **Part 3: How I Made My AI Stop Guessing**  
-  *Teaching the cat one trick at a time with task-focused training.*  
-  *(Coming soon)*
-
-- **Part 4: The More You Say, the Less It Learns**  
-  *When you talk too much, the cat stops listening — and invents new requirements instead.*  
-  *(Coming soon)*
-
-
 # The Subtle Art of Herding Cats: Show, Don’t Tell: Teaching AI by Example (Part 2 of 4)
 
 ## Quick Recap: The Problems We Discovered
@@ -41,6 +22,8 @@ Sound familiar? I was trying to teach by explanation rather than showing example
 
 Instead of writing more rules, I tried something different. I created one perfect example of what I wanted:
 
+It didn't look exactly like this, this is just a tribute.
+
 **Gold Standard BDD Scenario:**
 ```gherkin
 Feature: Product Configuration [SPEC-123]
@@ -54,7 +37,7 @@ Scenario: Premium package selection shows correct pricing
 
 Then I asked the agent: **"Look at this gold standard. What rules do you need to reproduce this quality?"**
 
-The magic happened. Instead of 300 lines of rules, the AI found 10 key principles:
+The agent looked through the rules and Instead of 300 lines of rules, the AI found 10 key principles:
 - Use clear, business-focused language
 - Follow Given-When-Then structure  
 - Include specification references
@@ -95,6 +78,10 @@ For an online sock store, the same pattern works with different domain values:
 
 **The pattern stays universal, but the domain makes it real.**
 
+These domain mappings improve the BDD's accuracy and relevance to your specific context, making scenarios immediately useful rather than generic templates. Other domains will have completely different maps, allowing the AI to recognize universal patterns while adapting to your specific terminology.
+
+Previously, this context was scattered throughout the rules - a BMW configurator conversation would gradually contaminate generic BDD patterns with "M Sport Package" references. In the new approach, domain specifics live in dedicated files.
+
 ### "Show, Don't Tell" in Practice
 
 This discovery matched a principle I'd written in my framework: **"Show, don't tell."** Instead of explaining what makes good BDD, I showed the agent perfect examples and let it find the patterns.
@@ -128,7 +115,7 @@ I realised the agent needed **focused context per task**, not everything at once
 #### Dynamic Context (Loaded Per Task)
 
 **Task 1: Context Extraction**
-- **Load**: Analysis rules + Domain context only
+- **Load**: Analysis rules + Relevant Domain context only
 - **Goal**: Extract requirements from Jira  
 - **Output**: Structured conversation log
 - **Blocked**: BDD patterns, automation rules, technical details
@@ -145,10 +132,10 @@ I realised the agent needed **focused context per task**, not everything at once
 - **Output**: Automation assessment report
 - **Blocked**: Code generation patterns, implementation details
 
-**Task 3b: TAF Generation**
+**Task 3b: Test Automation Generation**
 - **Load**: Technical patterns + approved scenarios only
 - **Goal**: Create executable automation code  
-- **Output**: TAF-compatible feature files
+- **Output**: Test Automation-compatible feature files
 - **Blocked**: Analysis rules, BDD guidelines
 
 > 📌 **Context Smartness Principle**: Each task gets exactly the context it needs - no more, no less. No competing priorities, no overwhelming rule sets.
@@ -162,6 +149,8 @@ The difference was dramatic:
 The AI went from confused and unreliable to focused and consistent. Each task could concentrate on its specific job without distraction.
 
 ## Pseudocode Rules: When You Absolutely Must Be Obeyed
+
+If there is one thing you take from this, it's if you *really* need the AI to follow rules use pseudo code and not just words.
 
 ### The Guidelines vs Rules Problem
 
@@ -188,15 +177,7 @@ For absolutely critical processes, I learned to use clear commanding language:
 - **'ZERO TOLERANCE'** - not "try to avoid" 
 - **'AUTOMATIC EXCLUSIONS'** - not "generally not recommended"
 
-The AI follows pseudocode and explicit commands while treating natural language as flexible guidance.
-
-## The "Made Up" Requirements Solution: Embracing AI Creativity
-
-### The Unexpected Discovery
-
-Here's something that surprised me: the agent kept adding requirements that weren't in the original spec. My first idea was to stop this behavior.
-
-Instead, I asked it to **share invented requirements in a separate section.**
+The AI follows pseudocode and explicit commands while treating natural language as flexible guidance. But, each instance of commanding language is backed up with pseudo code.
 
 ### The Conversation State Pattern
 
@@ -223,6 +204,14 @@ The breakthrough was having the agent create a structured conversation log in Ta
 - Network error handling
 ```
 
+## The "Made Up" Requirements Solution: Embracing AI Creativity
+
+### The Unexpected Discovery
+
+Here's something that surprised me: the agent kept adding requirements that weren't in the original spec. My first idea was to stop this behavior.
+
+Instead, I asked it to **share invented requirements in a separate section.**
+
 ### The Value of AI Inference
 
 Sometimes these "made up" requirements were brilliant:
@@ -232,25 +221,38 @@ Sometimes these "made up" requirements were brilliant:
 
 The agent was thinking like a tester, finding gaps in specifications. I learned to embrace this creativity rather than suppress it - but keep it clearly labeled so humans could check the suggestions.
 
+## Don't Limit the AI (But Do Limit Its Authority)
+
+Something I decided early on: even though the AI can update Jira, I don't want it to. That's taking away too much control and will make people lazy. I need humans to decide whether other humans should do a test or not.
+
+Put it this way: if you make the AI limit tests to only those that are "important," and something goes wrong, it won't be the AI that gets told off.
+
+**The AI's role**: Prioritise and recommend  
+**Your role**: Make the final calls
+
+Yes, the AI puts a priority on its creations. They're in an order, but *you* decide what actually gets done. The AI can be creative with requirements, suggest test scenarios, and even rate automation suitability, but humans retain control over the decisions that matter.
+
+**The AI won't be the one getting told off**
+
 ## Quick Wins You Can Implement Today
 
-### 1. Create Your Gold Standard (15 minutes)
+### 1. Create Your Gold Standard
 Find your best existing BDD scenario and clean it to perfection. This becomes your teaching example.
 
-### 2. Extract Minimal Rules (10 minutes)  
+### 2. Extract Minimal Rules
 Ask your AI: "What rules do you need to reproduce this quality?" You'll get 5-10 essential principles instead of 300 lines of documentation.
 
-### 3. Separate Domain from Pattern (20 minutes)
+### 3. Separate Domain from Pattern
 Identify what's universal (user actions, observable results) vs domain-specific (product names, URLs, error messages). Put domain details in separate configuration.
 
-### 4. Use Pseudocode for Critical Logic (10 minutes)
-Replace "Please assess carefully" with explicit IF/THEN logic for anything that must happen without exception.
+### 4. Use Pseudocode for Critical Logic
+Replace "Please assess carefully" with explicit IF/THEN logic for anything that must happen without exception. You don't have to write the code, just write bullet points and ask it to make the code
 
 ## What's Coming in Part 3
 
 These solutions sound good in theory, but do they actually work in practice? In Part 3, I'll show you:
 
-- **Real before/after examples**: BMW vs Mercedes contaminated scenarios transformed into universal patterns
+- **Real before/after examples**: Contaminated scenarios transformed into universal patterns
 - **The framework in action**: Complete workflow from Jira ticket to executable tests  
 - **Honest assessment**: What actually works, ongoing challenges, and what it doesn't fix
 - **What Not to Automate: Smarter Test Filtering**: How to decide what should be automated vs tested manually

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Throw stories away after they are delivered</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-stories-transient">Throw stories away after they are delivered</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----throw_stories_away.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Many teams get stuck by using previous stories as documentation. They assign
+test cases, design diagrams or specifications to stories in digital
+task-tracking tools. Such tasks become a reference for future regression testing
+plans or impact analysis. The problem with this approach is that it is
+unsustainable for even moderately complex products.</p>
+
+<p>A user story can often change several functional aspects of a software system,
+and the same functionality can be impacted by many stories over a longer period
+of time. One story might put some feature in, another story might modify it
+later or take it out completely. In order to understand the current situation,
+someone has to discover all relevant stories, put them in reverse chronological
+order, find out about any potential conflicts and changes, and then come up with
+a complete picture.</p>
+
+<p>Designs, specifications and tests explain how a system works currently – not
+how it changes over time. Using previous stories as a reference is similar to
+looking at a history of credit card purchases instead of the current balance to
+find out how much money is available. It is an error-prone, time-consuming and
+labour-intensive way of getting important information.</p>
+
+<p>The reason why so many teams fall into this trap is that it isn’t immediately
+visible. Organising tests or specifications by stories makes perfect sense for
+work in progress, but not so much for documenting things done in the past. It
+takes a few months of work before this practice really starts to hurt. A story
+is a token for a conversation. The outcome of that conversation is important
+even after a story is complete, but it shouldn’t necessarily be tied to the
+story for all eternity. After a story is done, it’s better to restructure
+acceptance criteria by functionality instead of by stories.</p>
+
+<p>Divide work in progress and work already done, and manage specifications, tests
+and design documents differently for those two groups. Throw user stories away
+after they are done, tear up the cards, close the tickets, delete the related
+wiki pages. This way you won’t fall into the trap of having to manage
+documentation as a history of changes. Move the related tests and specifications
+over to a structure that captures the current behaviour organised from a
+functional perspective.</p>
+
+<h3 id="leanpub-auto-key-benefits-49">Key benefits</h3>
+
+<p>Specifications and tests organised by functional areas describe the current
+behaviour without the need for someone to understand the entire history. This
+saves a lot of time in future analysis and testing, because even new team
+members can quickly get up to speed with the project. It is far less error prone
+too.</p>
+
+<p>If your team is doing any kind of automated testing, the tests are probably
+already structured according to the current system behaviour and not to a
+history of changes. Managing the remaining specifications and tests in a similar
+structure can help avoid a split-brain syndrome where different people work from
+different sources of truth.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-49">How to make it work</h3>
+
+<p>Some teams explicitly divide tests and specifications for work in progress and
+for existing functionality. This allows them to organise information differently
+for different purposes. They group work in progress first by the relevant story,
+and then by functionality. They group tests for existing functionality by
+feature areas, then functionality. </p>
+
+<p>For example, if an enhanced registration story involves users logging in with
+their Google accounts and making a quick payment through PayPal, those two
+aspects of a story would be captured by two different tests, grouped under the
+story in a hierarchy. The team delivering the story can then divide work and
+assign different parts of that story to different people, but also ensure that
+they have an overall way of deciding when the story is done.  After delivery,
+the team can move the PayPal payment test to the payments functional area, and
+merge with any previous PayPal related tests. The Google Mail integration tests
+would go to the user management functional area.  This would allow the team to
+discover quickly how a particular payment mechanism works, regardless of how
+many user stories were involved in delivery.</p>
+
+<p>Other teams keep tests and specifications organised by functional areas only,
+and use tags to mark items in progress or related to a particular story. They
+would search by tag to identify all tests related to a story, and configure
+automated testing tools to execute only tests with a particular story tag, or
+only tests without the work-in-progress tag. This approach needs less
+restructuring after a story is done, but requires better tooling support.</p>
+
+<p>Organising tests and specifications in this way allows teams to define different
+testing policies. For example, if a test in the existing-feature area fails, the
+team can sound the alarm and break the current build. On the other hand, if a
+test in the current iteration area fails, that’s expected – the team is still
+building that feature. The significant point is when the whole group of tests
+for a story passes for the first time.</p>
+
+<p>Some test management tools are great for automation but not so good for
+publishing information so it can be easily discovered. If you use such a tool,
+it might be useful to create a visual navigation tool, such as a feature map.
+Feature maps are hierarchical mind maps of functionality with hyperlinks to
+relevant documents at each map node. They can help people quickly decide where
+to put related tests and specifications after a story is done to preserve a
+consistent structure.</p>
+
+<p>Some teams need to keep a history of changes, for regulatory or auditing
+purposes. In such cases, adding test plans and documentation to the same version
+control system as the underlying code is a far more powerful approach than
+keeping that information in a task-tracking tool. Version control systems
+automatically track who changed what and when. They also enable you to ensure
+that the specifications and tests follow the code whenever you create a separate
+branch or a version for a specific client.</p>
+
+
+</div>
+</body>
+</html>

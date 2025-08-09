@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Measure alignment using feedback exercises</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-feedback-exercise">Measure alignment using feedback exercises</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----feedback_excercises.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Conversation is the most important element of developing software with user
+stories, but the talking has to stop at some point, and work on implementing the
+story has to start. Common wisdom is to stop a story discussion when people have
+no more questions. This can be misleading where developers and testers lack
+experience of the business domain; they simply won’t know what additional
+questions to ask. Feedback exercises, introduced by Gary Klein in <a href="http://www.amazon.com/gp/product/0262611465/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0262611465&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=MR57FY4YVKWLUZYD"><em>Sources of
+Power</em></a>
+can make this process more objective.</p>
+
+<p>A feedback exercise is a very quick and effective way to measure whether a group
+is ready to move on after discussing a story. Someone (typically a tester) comes
+up with a difficult boundary condition based on the results of the story
+conversation. Instead of discussing the condition, everyone individually writes
+down the expected outcome. Everyone shows their answers at the same time, and if
+they all wrote down the same thing, that’s a pretty good sign of group
+alignment. If people have different answers, then the group is not yet aligned,
+and they should discuss the different opinions and try to understand the root
+cause of the misunderstanding.</p>
+
+<p>During larger workshops facilitators can also look for tricky scenarios which
+individual groups could not complete or found confusing, and run feedback
+exercises. This is an excellent way to close a story discussion.</p>
+
+<p>For example, Gojko once worked with a team that was introducing customer
+accounts into their system. One story asked for users to be allowed access to
+billable resources as long as they had enough money in their account, otherwise
+they needed to be sent to the credit card payment page. At the end of a
+discussion, a tester applied exploratory testing heuristics to the structure of
+the discussion results – and came up with a boundary condition for the feedback
+exercise. What if the resource cost  £10, and the customers only had  £9.99 in the
+account? Almost everyone wrote down that the customers should be sent to the
+card payment page, apart from the sales people who wrote that the customers
+should be allowed to access the resource. The feedback exercise quickly showed
+that people understood the ‘enough money in their account’ part of the story
+differently, and opened up a few interesting questions about profit models and
+credit limits, leading to a much better solution at the end.</p>
+
+<h3 id="leanpub-auto-key-benefits-23">Key benefits</h3>
+
+<p>Feedback exercises provide a handy closure mechanism for workshops and story
+discussions. They are the closest thing we’ve found to an objective measurement
+of shared understanding. Instead of workshop facilitators asking if anyone has
+further questions, feedback exercises can provide a good context for
+disagreements to surface.</p>
+
+<p>If the entire group agrees on three to four difficult boundary conditions, they
+have a pretty good alignment on what a user story is supposed to deliver.
+Otherwise, we know that there is still work to be done.</p>
+
+<p>For smaller teams, where diverging and merging wouldn’t be possible, feedback
+exercises are an excellent way to achieve some of the same benefits. By letting
+people think in isolation about a problematic situation, and then comparing the
+results, these exercises help to quickly discover differences in assumptions and
+understanding.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-23">How to make it work</h3>
+
+<p>Feedback exercises are driven by questions, ideally structured around some
+difficult edge cases. It’s very important that while everyone else focuses on
+the boundary conditions in the exercise, the facilitator focuses on the form of
+the questions. Exercises should ideally be driven by questions that do not lead
+people to answers, questions that are as open-ended as possible. For example,
+asking ‘who wins the game?’ already presumes that the scenario causes a game to
+end. A more open-ended question, such as ‘what happens next?’ might reveal that
+one person in the room does not think the game is over yet.</p>
+
+<p>Don’t just ask one question at the end of a discussion, try out a few different
+ones.</p>
+
+<p>An easy way to come up with some good feedback exercises is to wait for the
+structure of scenarios to emerge during a story discussion, and then apply
+standard testing heuristics to input values. If the inputs are numbers, try
+negative values, numbers close together, very small or very large numbers. When
+working with dates, try leap years and dates, end of February, end of year,
+holidays, or some time-zone combinations that might cause problems. When working
+with names or addresses, try names that are too long or too short, east-Asian
+Unicode characters and the like. There are plenty of free test heuristics lists
+online which should inspire you to create useful edge cases. Elisabeth
+Hendrickson’s <a href="http://testobsessed.com/wp-content/uploads/2011/04/testheuristicscheatsheetv1.pdf"><em>Test Heuristics Cheat
+Sheet</em></a>
+is a great start, as is her book <a href="http://www.amazon.com/gp/product/1937785025/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1937785025&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=6B6KUNVU3STHSAMN"><em>Explore
+It</em></a>.</p>
+
+
+</div>
+</body>
+</html>

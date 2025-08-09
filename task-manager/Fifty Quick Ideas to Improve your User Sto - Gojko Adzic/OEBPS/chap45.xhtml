@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Don’t push everything into stories</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-dont-push-everything">Don’t push everything into stories</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----dont_push_001.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>There are plenty of things any software team needs to do which just don’t fit
+into user stories conceptually.  Within one week, people in a team we recently
+worked with were involved in setting up new development machines, rebuilding
+test servers, upgrading to the new version of an infrastructure library,
+automating test log analysis, and speeding up deployments.</p>
+
+<p>Such tasks aren’t stories. They help the delivery team work more efficiently or
+protect against future risks. All these tasks have an indirect value in that
+they help the team deliver software more sustainably in the future, but they
+don’t carry any direct value to end-users or stakeholders. Yet for some insane
+reason, in this particular team all those tasks were turned into fake user
+stories, written in the typical story format. ‘As a QA in order to test faster I
+want automated log error reports’ is not a user story. It might be in a story
+format, but unless you are building software for testers (these people were
+not), there is no good reason why you’d want to capture such tasks as stories.</p>
+
+<p>First, prioritisation of such tasks is pointless. Business stakeholders won’t be
+able to provide any sensible opinion on whether cleaning up a test server is
+more important than upgrading to the latest jQuery version.  Writing such tasks
+as user stories makes them compete with externally valuable work, and they’ll
+always lose.  That is, until the situation becomes unsustainable and the
+auxiliary work has to get done, in which case the prioritisation becomes doubly
+pointless.</p>
+
+<p>Second, keeping such tasks in the backlog is also pointless – unless the person
+in charge of delivery is a statistics-obsessed maniac who wants to account for
+every working hour. Ultimately, all those tasks translate into work hours and
+there are much cheaper ways of discovering how many hours there are in a day and
+how many days there are in a week.</p>
+
+<p>There is a fake argument that it’s good to see everything a team does in a
+single place. But nobody collects stories for tasks such as answering email,
+reviewing CVs of job applicants, investigating quality issues and so on. From a
+story planning perspective, tasks such as setting up servers are no different
+from answering email. They have to happen at some point, and they don’t really
+need to be accounted for any differently.</p>
+
+<p>Lastly, such internally valuable tasks rarely follow the same flow of work as
+customer-centric stories. There doesn’t need to be any formal acceptance
+criteria, there won’t be any meaningful demonstration to stakeholders, and
+people doing the work mostly know on their own if it was done well.</p>
+
+<p>Managing such tasks as stories just for the sake of it is wasteful and
+confusing. Please don’t do it. The only justifiable reason for mixing such tasks
+with user stories is to do short-term capacity planning, to find out how much
+customer-centric work can be taken in. But there is a much simpler solution for
+this. Just decide upfront.  Set a time budget, both an allowance and a limit,
+and just let the team get on with it. Then discount for that budget in
+short-term capacity planning.</p>
+
+<h3 id="leanpub-auto-key-benefits-39">Key benefits</h3>
+
+<p>If the team has a separate, dedicated time budget for incidental work, it can
+build up slack to deal with unexpected interruptions so that both short-term and
+long-term planning actually become more accurate. The team also becomes more
+productive.  Instead of wasting time on writing, estimating and managing fake
+stories, people can focus on getting real work done. This also means that the
+remaining stories are customer-oriented so teams can have more effective
+discussions with stakeholders about genuine user needs. Nobody should ever ask a
+stakeholder about the acceptance criteria for a server clean-up (We’ve seen this
+one unfortunately first hand – the answer was spot on: ‘that it got cleaned
+up’.)</p>
+
+<p>A dedicated time for internal tasks helps to avoid competing priorities.
+Stakeholders are always going to choose externally valuable items over
+internally valuable tasks, until something internal becomes so urgent that it
+has to be done. Because of this, most internal work is done as emergency
+fire-fighting. With a separate allowance for internal work, teams can complete
+internally valuable tasks at a sustainable pace. This also avoids the need to
+explain internal work to people who don’t care about it.</p>
+
+<p>The budget serves as a limit on the impact of internal tasks to customer-centric
+work, and ensures that real user stories don’t suffer.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-39">How to make it work</h3>
+
+<p>Delivery teams should decide on the time budget together with stakeholders and
+review it periodically. Periodic reviews help to adjust for unexpected business
+circumstances or technical issues.</p>
+
+<p>There are several ways of spending the budget, and the right one depends on your
+context. Some teams dedicate a block of time for the entire team, for example
+the first half-hour of every day, or the last four hours each Friday.  Some
+dedicate a person (or people, depending on the allowance) to handle technical
+tasks. In <a href="http://www.amazon.com/gp/product/0596527675/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0596527675&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=RL2MD63ZOXGERGQQ"><em>The Art of Agile
+Development</em></a>,
+Jim Shore advocates having a Batman – a kind of superhero who deals with all
+interruptions while the rest of the team focuses on customer-centric work.
+Introducing this role and rotating it to prevent burnout to any single
+individual was a huge boost to productivity in many teams we worked with over
+the last few years, mainly because the other team members didn’t have to switch
+context or deal with interruptions.</p>
+
+<p>Don’t create two separate backlogs for external and internal items. Every team
+we ever worked with had a list of things they wanted to do and people knew what
+these were intuitively. The delivery team can choose the top priority items for
+internal improvements without a formal tracking mechanism. It’s perfectly OK to
+discuss such items as a group, but full formal backlog management is an
+overkill.</p>
+
+
+</div>
+</body>
+</html>

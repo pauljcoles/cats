@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">When all else fails, slice the hamburger</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-hamburger">When all else fails, slice the hamburger</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----hamburger_001.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>If none of the ideas in this part of the book helps you to break up a larger
+chunk of work into smaller pieces that would iteratively deliver value, then try
+the <em>user story hamburger</em>.</p>
+
+<p>The user story hamburger is a facilitation technique that can help teams start
+to think about value-oriented slices when they are stuck in thinking about
+technical workflows and all-or-nothing use cases. It is based on user story
+mapping, but instead of organising many stories into multiple releases, it
+organises tasks for a single large piece of work into multiple stories. Here is
+how to create a hamburger:</p>
+
+<ol class="numeric">
+  <li>List technical components</li>
+  <li>Define quality attributes</li>
+  <li>List options at different levels of quality</li>
+  <li>Remove unsatisfactory options</li>
+  <li>Remove options that don’t produce useful technical slices</li>
+  <li>Choose a slice</li>
+</ol>
+
+<p>First, get the team to list the technical components and the workflow involved
+in providing the service or the use case that you’re breaking down. For example,
+mailing out an electronic newsletter would involve assembling the list of
+recipients, sending out emails, retrieving the delivery status for each email,
+removing recipients of bounced messages and marking successful deliveries. These
+steps become the vertical layers of the hamburger (think meat, lettuce,
+tomato…). To make the visual metaphor stronger, draw the half-buns on the top
+and the bottom.</p>
+
+<p>After the components are in place, define quality attributes for each level
+separately. For example, quality attributes for assembling the recipient list
+might be volume and performance. For sending out emails, they might be
+personalisation, volume and frequency.</p>
+
+<p>For each of the steps, list options that would support different levels of
+quality. For example, manually sending emails supports very low volumes and
+infrequent sending. Automated batch sending with some manual setup allows higher
+volume, but not high frequency. Fully automated setup and sending would offer
+both high volume and high frequency.</p>
+
+<p>Put the options on the same vertical level as the related technical steps, and
+order them left to right based on the level of quality. Then as a group evaluate
+the options in order from the left and discard the ones that won’t provide any
+useful level of service. For example, sending emails manually might cost too
+much even for the smallest newsletter, so it should be discarded.</p>
+
+<p>Look at the remaining options and eliminate any that would take approximately
+the same or more to deliver than options to their right that provide higher
+quality. These aren’t useful slices.</p>
+
+<p>Now that you have a nice hamburger, decide how deep you want to take the first
+bite. Pretty much any vertical cut of the hamburger should deliver some value to
+a subgroup of users, so it should be a potentially good start for iterative
+releases.</p>
+
+<p>After the first slice is delivered, implementing any subsequent option would
+improve quality at some level. As a team, discuss which step of the process you
+would like to improve, and select the next option on the list for a story.</p>
+
+<h3 id="leanpub-auto-key-benefits-38">Key benefits</h3>
+
+<p>The user story hamburger technique helps groups who are accustomed to think
+about technical workflows and huge use cases to start discussions on multiple
+options, slices and releases while staying in their comfort zone.</p>
+
+<p>By mapping out options in a two-dimensional table, this technique facilitates a
+good discussion on opportunities to fulfil the needs of a subgroup of users
+faster, or to roll out a part of a use case that would still provide value.</p>
+
+<p>By explicitly considering options on different levels of value, the hamburger
+technique helps teams to consider skipping over some potential components and
+steps. For example, manually removing rejected email addresses might be an
+option on the lowest level of quality for marking bounced emails. If a team
+seriously considers slicing a story to include this option, then they can also
+consider having a slice without removal of bounced emails. Delivering
+newsletters without considering previously rejected emails isn’t ideal, but it
+might be perfectly OK for the first two or three weeks of operation.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-38">How to make it work</h3>
+
+<p>Keep workflow steps at a high level. Avoid having more than ten steps, otherwise
+you won’t be able to have a decent discussion about options.</p>
+
+<p>When you are collecting ideas, it’s best to split the team into several smaller
+groups and have them work independently, coming together for a joint discussion,
+similar to diverge and merge.</p>
+
+<p>It’s important to explore unsatisfactory levels of quality because this might
+generate some good ideas, and because the group might discover that it’s OK to
+skip a step. For example, when we worked with a team in a bank on a reporting
+system, we explored an authentication step, and one of the suggestions was ‘no
+authentication’. This was initially discarded as too risky, but then one of the
+team members came up with the idea of generating reports and sending them by
+email to users, which would require no authentication. The number of reports
+they could set up was low, but it would reduce the technical requirements
+significantly, in particular because authentication was handled by a team on a
+different continent. Slicing the hamburger helped this team discover that they
+could quickly fulfil the needs of their five most important business users, then
+generalise the solution later.</p>
+
+
+</div>
+</body>
+</html>

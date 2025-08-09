@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Forget the walking skeleton – put it on crutches</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-skeleton">Forget the walking skeleton – put it on crutches</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----skeleton_crutches_001.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>The walking skeleton has long been our favourite approach for starting a major
+project or a legacy transition. Alistair Cockburn provides a canonical
+definition of this approach in <a href="http://www.amazon.com/gp/product/0201699478/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0201699478&amp;linkCode=as2&amp;tag=swingwiki-20"><em>Crystal
+Clear</em></a>:</p>
+
+<blockquote>
+  <p>A Walking Skeleton is a tiny implementation of the system that performs a
+small end-to-end function. It need not use the final architecture, but it
+should link together the main architectural components. The architecture and
+the functionality can then evolve in parallel.</p>
+</blockquote>
+
+<p>Building on this, Dan North formulated the idea of the <a href="http://qconlondon.com/dl/qcon-london-2012/slides/DanNorth_DecisionsDecisions.pdf">dancing
+skeleton</a>.
+A dancing skeleton not only delivers a small function on the target
+architecture, it also involves an interface for developers to interact with the
+environment and experiment. When the users need a more complex function,
+developers can make the skeleton implementation ‘dance’.</p>
+
+<p>The walking skeleton sets up the main architectural components, and the dancing
+skeleton approach allows experimentation on the target architecture. Both
+approaches allow teams to ship something quickly, and build on it iteratively.</p>
+
+<p>Modern technology and delivery approaches, in particular the push towards
+continuous delivery, enable us to take those approaches even further. We can
+deliver value with an even thinner slice than the basic walking skeleton and
+build the architecture through iterative delivery later. We can start with a
+piece that users can interact with, avoid linking together the architectural
+components, but instead use a simpler and easier back end. We can then
+iteratively connect the user interface to the target platform. In the skeleton
+lingo, don’t worry about making the skeleton walk, put it on crutches and ship
+it out. While users are working with it, build up the muscles and then take away
+the crutches.</p>
+
+<p>The core idea of the skeleton on crutches is to ship out the user interface
+early, and plan for iterative deployments of everything below the user
+interface. The user interaction may change very little, or not at all, while the
+team improves the back end through continuous delivery. With a good deployment
+pipeline, back ends can be updated and reconfigured without even interrupting
+user flow. For example, with MindMup we use multi-versioning when we create
+scripts and APIs, so we can deploy a new version of back-end functionality
+without interrupting any active sessions. Users with open sessions continue to
+use the old functionality until they refresh the page, and they can benefit from
+updated features on their next visit.</p>
+
+<p>Here are some recent examples of skeletons on crutches in the projects we’ve
+been involved in:</p>
+
+<ul>
+  <li>A customer report built with Google Analytics events instead of being hooked
+into a complex back-end database. It wasn’t as comprehensive or accurate as
+the final thing, but the first version was done in two hours, while the final
+version took several weeks to implement because of third-party dependencies.</li>
+  <li>A document uploader which saved directly from users’ browsers to Amazon S3
+file storage, instead of uploading to the customer database. The skeleton was
+not as secure or flexible as the final solution, and did not allow fast
+searching, but was done in a hour.</li>
+  <li>A registration system executed using JotForm, an online forms and workflow
+system which can take payments. This allowed us to start registering users and
+charging for access without even having a database.</li>
+</ul>
+
+<p>All these solutions were not nearly as good as the final versions, but they were
+in production very quickly and allowed users to start getting some value early.
+Some remained in action for a long time, for example we kept registration
+through JotForm in production for three months, because it was good enough and
+there were more important things to do.</p>
+
+<h3 id="leanpub-auto-key-benefits-30">Key benefits</h3>
+
+<p>A major benefit of skeletons on crutches is early delivery of value. A user
+segment starts getting some value almost instantly. None of the examples
+mentioned earlier were particularly difficult to build, but users got value in
+hours instead of weeks.</p>
+
+<p>Early validation is an important consequence of early delivery of value. Instead
+of showing something basic to users and asking them to imagine the final
+fantastic offering, a skeleton on crutches allows them to actually use something
+in real work. This allows product managers to get invaluable feedback on
+features and product ideas early and build that learning into the plans for
+later versions.</p>
+
+<p>For example, the JotForm registration skeleton allowed us to start charging for
+access months before the overall solution was ready, and the fact that users did
+pay provided huge validation and encouragement that we were going in the right
+direction. We were also able to discover some surprising things people would pay
+for, and change the focus of our business plans.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-30">How to make it work</h3>
+
+<p>Aim to deliver the user interface part first, on a very simple architecture. Try
+to skip all back-end components that would slow down delivery, even if for half
+a day. Deliver a user interface part that looks and works as much like the final
+version as possible, to avoid future surprises. Iterate on the interface until
+you confirm that you’re delivering value. Then replace the back end with as few
+changes to the user interface part as possible to avoid surprises. If you must
+change the user interface, consider multi-versioning to support uninterrupted
+usage. Build up capacity, performance, and extend functionality by replacing
+invisible parts with bits of your target architecture iteratively.</p>
+
+<p>If security or corporate policy needs prevent you from using remote crutches,
+then consider using simple components onsite. One of our clients was a team in a
+bank whose corporate procedures required weeks of bureaucracy to deploy an
+application with access to a production database. The team set up a web
+reporting application which executed reports on plain text files, retrieved by
+another application, using Unix command-line tools behind the scenes. This
+allowed them to deploy quickly, but only worked for quite a limited data set.
+While the users were happily using the reports in the first few weeks, the team
+obtained access to the production database and replaced the back end without the
+users noticing anything.</p>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Split UX improvements from consistency work</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-ux-split">Split UX improvements from consistency work</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----ux_split_merdz.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>User experience (UX) design is one of the most difficult activities to absorb
+into user stories. It requires experimentation, contact with test user groups,
+prototyping and frequently proceeds at a completely different pace from product
+delivery. In addition, software delivery groups rarely have UX expertise in
+house, so design work is often contracted out to specialist agencies. This all
+requires UX work to be done well in advance of software implementation,
+otherwise designers end up just putting lipstick on a pig.</p>
+
+<p>UX improvements don’t need small user stories, they need to work at the high
+level of impacts and behaviour changes. The real challenge here is to discover
+what is actually needed, and starting with small user stories would require
+teams to assume a solution. On the other hand, it’s dangerous to ignore UX
+considerations within smaller user stories. Although small stories rarely
+require serious design work, there is a lot of risk of slowly breaking
+consistency.</p>
+
+<p>Because of these two different contexts, integrating UX work into regular user
+story delivery cycles often creates half-baked solutions. For some tasks,
+designers do not have time to properly investigate and test solutions before
+developers start implementation work. For other tasks, designers waste time
+doing obvious stuff, which developers and testers could do on their own with a
+bit of knowledge transfer.</p>
+
+<p>One solution that works well in many contexts is to divide UX work into ongoing
+consistency and significant improvements, and manage the two types of work
+differently. For ongoing consistency, specialists need to teach developers and
+testers how to spot and resolve common issues. For larger improvements,
+designers and developers need to work together in a time box on building
+prototypes to discover what they actually want to deliver later.</p>
+
+<p>One of our clients creates a mini-team consisting of programmers and designers
+for UX research, who work on experimental prototypes in a time box separately
+from the rest of the group. This liberates the mini-team from the constraints of
+regular work, such as release schedules. Developers can support designers by
+quickly building prototypes with relevant and realistic data, to flush out any
+issues with real-world use, while learning at first hand about the key design
+improvements. The output of the mini-team isn’t polished software, it’s mostly
+knowledge about how to give new capabilities to users that should achieve
+expected impacts. After this stage, the developers from the mini-team go back to
+the main group and transfer the knowledge, participating in implementing new
+stories. For maintaining UX consistency, instead of participating in low-level
+user story iteration work, designers help to create checklists. Developers and
+testers consider these checklists for each story. Designers also periodically
+review software to point out potential consistency problems, which helps them to
+improve the checklists.</p>
+
+<p>Dividing improvement research from ongoing implementation work is a nice example
+of splitting learning stories from earning stories, on a high level. The
+time-boxed experimental work can be considered to be a large learning story.
+Ideally, it will contribute towards a good list of list of lower-level earning
+stories that a delivery team can confidently implement.</p>
+
+<h3 id="leanpub-auto-key-benefits-46">Key benefits</h3>
+
+<p>Breaking up improvement research and maintenance of consistency allows teams to
+work on different levels and avoid wasting time. On the one hand, developers and
+testers get the low-level information they need in time to build software that
+provides a great UX. On the other hand, designers don’t waste time repeating the
+same work just because it is needed for each story. They can work ahead of the
+delivery group, either as part of cross-functional mini-teams or even as a
+completely separate organisation.</p>
+
+<p>Instead of doing all the work themselves, by creating good checklists and
+transferring knowledge, designers can avoid becoming bottlenecks. Developers and
+testers get to learn about UX design, which helps them avoid consistency
+problems and build better software.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-46">How to make it work</h3>
+
+<p>After high-level prioritisation using ideas such as picking key impacts,
+consider starting with UX research before deciding on user stories. For major
+changes, it might be worth creating a specialist group to perform customer
+research, build prototypes and validate them with users before proposing
+concrete features for implementation. Ideally, involve some delivery team
+members in the group. If a specialist group is overkill, dedicate a part of the
+normal delivery team to perform the work. Involving developers will avoid the
+need for handing information over between teams and prevent an ‘us and them’
+mindset where designers blame developers for not implementing the design
+solution and developers blame designers for unrealistic and unimplementable
+designs. Make sure to communicate the expectation that design and prototyping
+needs to lead quickly to actionable user stories, not to some unrealistic
+idealistic design documentation.</p>
+
+<p>For ongoing work, involve designers in exploratory testing to detect
+inconsistencies, then prevent such problems in the future by creating a UX
+checklist. The checklist does not need to be particularly comprehensive or
+complex. In fact, complex checklists cause people to avoid them. A good
+checklist acts as a reminder for people to think, not as a replacement for their
+brain. For example, asking ‘Can it be undone?’ is a good replacement for a whole
+set of items such as ‘Warn users about dangerous actions’, ‘Ask for confirmation
+before deleting’, ‘Implement undo on Ctrl+Z for all data changes’ and so on.</p>
+
+<p>A good resource for ideas to put in the checklist is the book <a href="http://www.amazon.com/gp/product/1118185471/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1118185471&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=RVS57Y62O7IWE33X"><em>Usable
+Usability</em></a>
+by Eric Reiss. Finally, a fantastic resource on designing good checklists that
+inspire thinking without overwhelming with information is <a href="http://www.amazon.com/gp/product/B0030V0PEW/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0030V0PEW&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=N6YVURD7BEJK5LRO"><em>The Checklist
+Manifesto</em></a>
+by Atul Gawande.</p>
+
+
+</div>
+</body>
+</html>

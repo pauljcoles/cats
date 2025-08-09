@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Estimate capacity based on analysis time</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-capacity-analysis-time">Estimate capacity based on analysis time</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----measure_capacity_time.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Capacity planning is often an excuse for calculating velocity and requiring
+story points to be numeric, added up and averaged. In many cases, a simpler
+solution based on analysis time can be just as good.</p>
+
+<p>In <a href="http://www.amazon.com/gp/product/0321636406/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321636406&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=FBZRRAAAGETVD2U5"><em>Practices For Scaling Lean and
+Agile</em></a>,
+Craig Larman and Bas Vodde suggest that effective Scrum teams spend five to ten
+percent of each iteration, as a whole team, refining product backlogs. This
+number corresponds well to our experience. Running specification workshops and
+discussions on stories typically takes between an afternoon and a day for a
+two-week iteration. This opens up another possibility for estimating capacity –
+make it proportional to analysis time. For example, time-box the iteration
+refinement and planning session and only take into the iteration what you were
+able to agree on.</p>
+
+<p>For example, a team we recently worked with created a policy to limit the total
+discussion to three hours, and within that time-box, limit each story to two
+diverge and merge cycles of 20 minutes each. Allowing for a small break during
+the three hours, this effectively allows the team to discuss between three and
+six stories for a two-week iteration. By the end of the first 20-minute block,
+they expect to get everyone on the same page about the overall scope and to
+identify key domain modelling questions. If the story is simple and they all
+think that everyone is clear about what they need to do, the team moves on to
+the next story. If the team feels that more analysis is needed for the story,
+they shuffle the teams and analyse the details for another 20 minutes, expecting
+to identify all the key boundary conditions and open questions. If the delivery
+team members still think that the story is too vague after the second block, the
+product owner can choose to split the story or to take it out for detailed
+analysis. The first option is better if the team was able to agree on a part of
+the story that would be beneficial to release separately – for example if the
+main scenarios are clear but exceptions require business clarification. The
+second option is better if the team was not able to discuss yet, or that they
+couldn’t agree on, the parts of the story that introduce business risk so
+significant that there is no point in doing anything before clarification. This
+kind of time-boxing ensures that the team does not get stuck on any particular
+difficult story, and that the other stories get discussed as well.</p>
+
+<p>Estimating capacity based on analysis time works well in contexts where the
+critical complexity of delivery is in understanding the business domain. If the
+majority of your stories are easy to understand from the business perspective,
+but the tricky part is actually making it work technically or fitting it into an
+existing legacy infrastructure, analysis time isn’t a good indicator. That’s why
+this approach won’t work well in contexts where the critical complexity is
+technical.</p>
+
+<h3 id="leanpub-auto-key-benefits-43">Key benefits</h3>
+
+<p>Using analysis time as an indicator of complexity is an alternative to measuring
+story size or counting stories, so it does not require any kind of numeric
+accuracy. It is also significantly faster than other capacity planning methods.
+The delivery team plans capacity at the same time as analysing stories, so the
+time used on guessing numbers can be used for more productive work.</p>
+
+<p>Combined with long-term planning based on cycle time, as suggested in the
+section on avoiding numeric sizing, this approach to capacity planning removes
+the need to publish numerical story estimates (or even have them). Because of
+that, this approach helps teams avoid common problems with using guesswork to
+enforce long-term commitment.</p>
+
+<p>Limiting the total analysis time also prevents teams from overcommitting. When
+story details are difficult to nail down, there is a significant amount of risk
+that the team will discover more unexpected details during delivery. Such
+stories require more time to discuss initially, meaning that fewer stories are
+discussed in total, so this approach works well by reducing the number of
+stories the team commits to in such iterations. In the best-case scenario, the
+team will complete all the work sooner than expected. In the worst-case
+scenario, all stories will turn out to be much more complex and won’t get
+completed on time, but at least the stakeholders didn’t expect a lot of work to
+get done in the first place.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-43">How to make it work</h3>
+
+<p>Time-box story discussions to avoid a single complex item taking too long. For
+example, pause a discussion after 30 minutes and see if it’s worth continuing
+with the analysis or not. If the story is too complex, perhaps the examples
+discussed in the first half hour are a good initial slice. If you couldn’t even
+grasp the story enough to split it in 30 minutes, consider postponing it to the
+next iteration, so allowing time for more detailed analysis.</p>
+
+<p>Facilitating story discussions with diverge and merge cycles is a great way to
+get to good results faster, and also provides good time-boxing. For example, if
+the team is still uncertain about a story after two diverge and merge cycles,
+consider splitting the story or postponing the work completely.</p>
+
+<p>This approach is most applicable to situations where almost any story can be
+postponed slightly or split if it is too vague. If you’re working in a context
+where there is no option to postpone stories, it’s a good idea to do some
+analysis a bit ahead of the start of delivery. In organisations where it’s
+difficult to get key business stakeholders to clarify issues and resolve open
+questions, teams often look into story analysis about two weeks ahead of the
+intended start of development work on the story. Depending on the typical story
+complexity, the entire team can get involved or this preparatory task can be
+delegated to one or two people.</p>
+
+
+</div>
+</body>
+</html>

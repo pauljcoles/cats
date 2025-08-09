@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Approach stories as survivable experiments</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-survivable-experiments">Approach stories as survivable experiments</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----survivable_experiment.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>A common description for stories is that they are small chunks of work that can
+be implemented within an iteration, yet still bring some value. This description
+is likely to be the cause of a range of communication problems between many
+teams and their business users. Because teams primarily aim to create something
+small, instead of something valuable, they end up with a bunch of small stories
+that are too disconnected from what business sponsors care about. Such stories
+are seldom deployable on their own to production, so they rarely provide
+opportunity for serious business feedback. Ultimately, this can lead to business
+users not really caring about individual stories, and waiting for a larger batch
+of work to be ready for testing, undermining the value of iterative delivery.</p>
+
+<p>In
+<a href="http://www.amazon.com/gp/product/B004OA62UO/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B004OA62UO&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=QPIWJYYNGCN6GRDL"><em>Adapt</em></a>,
+a wonderful book on adaptive planning in everything from civil engineering to
+the military and the economy, author Tim Harford explains how linear plans
+rarely work due to influences beyond our control. Today’s IT industry is a
+poster child for most of the problems he describes. Even with the best
+intentions, our plans might not work out as expected – users can often decide
+whether to use, misuse or completely ignore what we deliver, technical or
+business dependencies can make a solution incomplete, changes in external
+circumstances and third party systems can make a proposed solution invalid or
+obsolete.</p>
+
+<p>Instead of bearing the consequences of unexpected changes, Harford suggests
+turning a shifting landscape into a competitive advantage. One of the key
+aspects is to treat plans as series of survivable experiments. Stories are
+potentially a great fit for this approach, but we have to conceptually change
+how we think about them.</p>
+
+<p>Stories shouldn’t be small because they need to fit into an iteration, but
+because the world shouldn’t end just because a story turns out to be wrong.
+Stories are based on assumptions about business value, and those assumptions
+might turn out to be right or wrong. The key questions for story sizing
+shouldn’t be about the iteration length, but about how much business
+stakeholders want to invest in learning whether a proposed change will actually
+give them what they assumed.</p>
+
+<p>In markets with a high degree of certainty, where business sponsors can
+perfectly predict the future, where there is no competition, where the entire
+ecosystem is under strict control and the end-users are a captive audience whose
+personal opinions have no influence on the outcome, iterative delivery simply
+doesn’t bring any business value. If any of these dimensions is not under your
+control, iterative delivery with survivable experiments can be a great way to
+turn unplanned changes in circumstances into competitive advantage. Stories have
+to be small, but fitting into an iteration should be a consequence, not a cause.
+It’s far better to sell them on value instead of size.</p>
+
+<h3 id="leanpub-auto-key-benefits-4">Key benefits</h3>
+
+<p>Small user stories can help product managers discover what really needs to be
+built without rushing too far forward under unvalidated assumptions, and help
+business sponsors manage their investment in software and get the most out of
+it. That’s how we should sell them, not as small chunks of work.</p>
+
+<p>By approaching stories as survivable experiments we can shift the focus from
+technical complexity to expected outcomes and learning. This prevents technical
+stories, stories that are too small to go live and stories that business
+sponsors don’t care about.</p>
+
+<p>Looking at stories as survivable experiments also solves many problems around
+story splitting and sizing. If a story is too big, which effectively means the
+potential cost of the experiment is too high, we can look at alternative ways of
+learning about something instead of just trying to slice the story.</p>
+
+<p>Small, survivable stories help business sponsors manage their investment in
+software and get the most out of it.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-4">How to make it work</h3>
+
+<p>If you have a big chunk of work, identify underlying assumptions and think about
+the easiest way of proving or disproving them. Design experiments around those
+assumptions and turn them into user stories. Use the experiments to build up the
+foundation, so that the rest of the big picture can be delivered with small
+iterative improvements.</p>
+
+<p>For example, launching a completely new mobile application to increase user
+engagement is a huge piece of work. It would depend on a host of third parties
+including mobile networks, application store operators and many others. It would
+depend on discovering and satisfying local user interests, which will differ by
+location. One of the assumptions in such cases is typically that a
+mobile-optimised user interface would keep users engaged for longer compared to
+a desktop-optimised website. A way to prove or disprove that assumption might be
+to direct a small group of customers to a mobile-optimised web homepage when
+they use a mobile device. If this experiment would be too costly, then it can be
+further narrowed down by selecting the test group so that the relevant homepage
+can be generated more easily, for example, users in a single city. If that piece
+of work is still too big, the content can be limited in time. A simple user
+story could deliver a static, manually crafted homepage, limiting access to only
+the chosen location, but with some good analytics that could prove or disprove
+the assumptions. Further user stories can then bring more locations into the
+experiment iteratively (for example, new static homepages for other cities), or
+reduce the maintenance cost for the chosen city (automating content-building).
+The content automation is likely to be a small slice, but will also ultimately
+be useful for the final mobile application. Similar small experiments can be
+planned for other underlying assumptions.</p>
+
+
+</div>
+</body>
+</html>

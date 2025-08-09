@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Split by capacity</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-split-capacity">Split by capacity</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----capacity.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>An initial launch of a product or service is often a major hurdle for iterative
+delivery. Teams often spend months getting all the pieces in place so that they
+can release a system that actually provides useful functions, and then switch
+over to more frequent releases. A common justification for this approach is that
+so many components are necessary for even the first user to start getting
+benefits that it wouldn’t make sense to slice the product into smaller releases.
+Narrowing down user segments is often a good starting point for changing from a
+big batch first release to a sequence of small targeted deployments. If that
+doesn’t help, it is often useful to try slicing the plan to progressively build
+up and improve capacity.</p>
+
+<p>You can easily open up a discussion on smaller slices and faster feedback if you
+view capacity as a dimension that can be progressively delivered. A solution
+that provides less capacity often requires simpler versions of components, and
+might not require some major parts at all. At the same time, it’s likely that
+there are use cases that can be satisfied with less capacity, so even those
+simpler solutions can be shipped to end-users.</p>
+
+<p>For example, when we launched the first version of MindMup, we wanted to allow
+users to store documents using our cloud service. This would have required
+authentication, capacity monitoring, alerts, a database of users, a means of
+registering and so on – too much to be implemented quickly. We could have
+launched without all those features, but then anyone with basic knowledge of
+JavaScript would have been able to see how we uploaded documents, and to abuse
+our system to store gigabytes of data in the cloud for free.</p>
+
+<p>We planned to offer a free service, and letting anyone store any number of huge
+documents would open us to significant financial risk.</p>
+
+<p>We sliced the product by capacity, and in the first version allowed users to
+upload only documents smaller than 100KB. This was enough for basic usage, but
+significantly increased the hassle someone would have to go through to make a
+financial impact on us by abusing the system. Splitting the work this way
+allowed us to skip user registration, authentication, creating a database,
+resetting passwords and most of the other components. Just by limiting the
+initial capacity, the work required to launch and provide users with some real
+value was reduced by probably 99%. We then iteratively added elements that would
+enable us to offer storage of larger documents.</p>
+
+<h3 id="leanpub-auto-key-benefits-33">Key benefits</h3>
+
+<p>Splitting by capacity can reduce technical complexity significantly for the
+first release of a product or service, yield valuable feedback early and provide
+value to some subgroup of users sooner.</p>
+
+<p>Thinking about capacity as a potential dimension of splitting helps to avoid
+‘all or nothing’ plans. Instead of waiting for a few months for all the
+dependencies to be in place, business users can start providing feedback early.
+The team can use the learning from lower capacity releases to improve plans and
+product ideas for higher capacity solutions.</p>
+
+<p>For legacy migrations, splitting releases by capacity allows teams to run both
+the new and the old system in parallel and migrate use cases progressively to
+the new system. This is a useful way of de-risking the migration by supporting
+frequent feedback.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-33">How to make it work</h3>
+
+<p>There are many different types of capacity that can be delivered iteratively, so
+try to consider several dimensions when slicing stories. Some good ideas to
+start with are:</p>
+
+<ul>
+  <li>file size</li>
+  <li>session length</li>
+  <li>total number of users</li>
+  <li>peak usage (concurrent sessions or data volumes)</li>
+  <li>number of items (such as files or resources) available to a single user</li>
+</ul>
+
+<p>Find a dimension where an initial cut would require only a small subset of the
+final architecture or where components could be significantly simplified. Make
+sure to check that progressive increase in capacity would require progressive
+improvement in the architecture and not a complete rewrite.</p>
+
+<p>A dimension that works well for one product or service might not really work for
+some other context. For example, peak usage or session length wouldn’t be a good
+dimension for splitting MindMup stories because session data is stored
+client-side, so those things don’t really impact architecture that much. On the
+other hand, session length and peak usage would probably be a great way to slice
+an online multiplayer game, because a small capacity version could just run on a
+single machine without any clustering, replication, session sharing or session
+persistence.</p>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Split business and technical discussions</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-split-business-tech">Split business and technical discussions</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----split_business.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>There is a lot of software out there built for software developers, but the vast
+majority of development work is driven by business stakeholders, who can’t read
+program code. This means that most teams need to discuss user stories with
+business users. At the same time, user stories often involve technical design
+changes, and those have to be explored and discussed by the delivery team.
+Although it might sound logical to discuss both the business and the technical
+sides of the story at once, in many contexts it’s actually a horrible idea.
+There are two possibilities that can happen if discussions with business users
+involve implementation details. One is that business users view the story
+discussion as a waste of time, go away and never come back. The second option,
+much worse than the first one, is that the next time business users come
+prepared with pseudocode implementations.</p>
+
+<p>Technical discussions are important, but shouldn’t necessarily happen at the
+same time as the conversation about the business perspective of a user story.
+Unless your business users are also programmers, split those two discussions
+into separate, more focused meetings.</p>
+
+<p>Discuss business needs and divide stories according to value with business
+users, then let them go and do their day job while the delivery team looks at
+stories from a technical perspective.</p>
+
+<h3 id="leanpub-auto-key-benefits-26">Key benefits</h3>
+
+<p>Dividing the technical and business discussions allows teams to shorten the
+business conversation, and use the time of their business users more
+efficiently. Staying focused on the business needs during a story discussion
+prevents business users from getting bored. They won’t feel as if the story
+conversations are a waste of their time, and they will be more engaged in future
+discussions.</p>
+
+<p>Dividing technical and business discussions also allows teams to consider a
+whole batch of stories when thinking about design changes. Related stories often
+impact the same functional areas of the underlying software system, so
+considering an entire group of stories at once often leads to shorter technical
+discussions and better design decisions. A focused discussion also prevents
+teams from jumping into implementation details too soon, and instead makes them
+spend more time on really understanding what needs to be done.</p>
+
+<p>Jumping into implementing something that is not actually needed is a sure way to
+waste a lot of precious time. Given that user stories are at best rough ideas
+before the actual discussion, it’s not uncommon for delivery teams to propose
+better, faster or cheaper solutions once they understand what business users are
+trying to achieve.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-26">How to make it work</h3>
+
+<p>If you’re working with a team that often jumps into technical discussions with
+business users, try to agree upfront with the entire team when the
+implementation details should be discussed. For example, have a separate
+technical meeting immediately after the user story refinement sessions. Having a
+clear upfront agreement relieves the pressure to discuss technical concerns
+while agreeing on the business perspective of a story.</p>
+
+<p>If your team has a formal checklist for preparing stories for implementation,
+think about adding a separate item about technical design reviews to the
+checklist. That’s often a good way to get into the routine of splitting
+collaborative requirements analysis from collaborative design sessions.
+Similarly, if your team is using a visual task board, think about splitting the
+analysis column into two separate columns for business and technical design
+reviews.</p>
+
+<p>If some technical implementation has a significant impact on your capability to
+deliver something, such as a subset of features with not-so-good performance
+which could be improved later, by all means talk about it and offer options.
+Choosing between the options is a business decision and stakeholders need to
+understand possible benefits and trade-offs. But watch out for technical
+discussions that do not really help in deciding what should be done.</p>
+
+<p>This doesn’t mean discussing only aspects of your software directly visible to
+users. The key question isn’t how far something is from a real user, but should
+the business users care about it or not.</p>
+
+<p>This applies to the user interface, but also components without an interface.
+For example, building an API to consolidate access to multiple data sources
+might seem purely technical but the situation is likely to be more complex than
+that. Matching and unifying records, handling discrepancies, cleaning up data
+and resolving conflicts should probably be discussed with business users to
+ensure their needs are met. Database schemas, transaction management,
+synchronous or asynchronous parsing, handling multiple updates, ghost data and
+so on are probably best left out of the discussion.</p>
+
+
+</div>
+</body>
+</html>

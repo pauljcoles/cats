@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Watch out for generic roles</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-watch-generic">Watch out for generic roles</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----generic_roles.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>One of the biggest advantages of user stories is getting delivery teams to think
+from the perspectives of users. Instead of purely focusing on how to build
+something, delivery teams consider how their products will be used. This is
+central to the user story technique – hence the name. Yet the vast majority of
+stories we’ve seen in the wild refer to a completely generic customer segment,
+very often starting literally with ‘As a user…’</p>
+
+<p>In a horrible case of mistaken identity, a placeholder on a template became an
+acceptable value, and teams started using a mythical generic user to justify
+scope creep. A generic user role can never provide a useful context for
+discussion. Without considering a particular user segment, it’s impossible to
+decide whether the proposed solution is the right one, or if it’s just
+unnecessary scope creep. Unless we think about a narrow target group, it’s
+impossible to effectively plan releases and measure impacts or even discuss
+completeness.</p>
+
+<p>Using generic roles is often a get-out-of-jail-free card for people who want to
+push in pet features, or unjustified scope. For example, a team we recently
+worked with had a story ‘As a user I want to log in through social networks in
+order not to remember another username and password’. The story checklist
+originally involved Facebook, Twitter, LinkedIn, Google+ and OpenID, and all
+those would become individual stories later on. Because it was not clear who was
+the mythical user, the stakeholders clearly thought that the more networks the
+team could integrate the better. Someone even found a third-party service that
+would allow twenty or so social networks to be integrated instantly. The service
+would be cheap at first, but bring significant cost at scale. It was difficult
+to judge whether using the third party service was a better choice than
+integrating with individual networks, until the team challenged the generic
+role. The two major groups that would really benefit from this story were both
+from the educational world: teachers and students in schools. This pushed the
+discussion towards integrating only with Google accounts. Google accounts
+include Google Apps for Education, very popular in educational institutions, and
+would allow anyone with a Google Mail account to sign in as well. LinkedIn is a
+network for professionals and it wasn’t particularly popular with the newly
+understood target audience. Although Facebook and Twitter are popular with the
+new target group, many schools actually block those sites from school networks,
+so integrating those would probably be a waste of time. By challenging a generic
+user role and considering a concrete customer segment, the team was able to
+significantly reduce unnecessary scope and make important product management
+decisions more easily (no need to buy a third party service).</p>
+
+<p>Avoid ‘as a user’ statements like the plague. Avoid overly generic customer
+segment descriptions of any kind. Don’t just aim to fill in a placeholder in a
+story template, identify and describe user segments that will help you
+facilitate productive discussion of needs and solutions.</p>
+
+<h3 id="leanpub-auto-key-benefits-5">Key benefits</h3>
+
+<p>Focusing stories on a particular customer segment helps to kick-start useful
+conversations about user stories. Clear and accurate descriptions of user roles
+help to identify needs and remove unnecessary complexity. Once you understand
+who will use the product you’re building, it becomes possible to compare
+different solution options, offer alternatives or even discard features that
+won’t fit.</p>
+
+<p>In addition, well-defined user roles are crucial when you want to implement good
+product management and planning strategies, for example splitting stories by
+narrowing down segments, or prioritising impacts on customer groups.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-5">How to make it work</h3>
+
+<p>For internal IT or enterprise projects, try to identify the actual people who
+will be using the target system, and investigate how work is divided. Different
+departments or areas of focus will help you identify useful user segments.</p>
+
+<p>For consumer systems, good starting points are user personae, described in many
+good books including Alan Cooper’s <a href="http://www.amazon.com/gp/product/B000OZ0N62/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000OZ0N62&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=7GGVJK7OYOABY6TG"><em>Inmates are Running the
+Asylum</em></a>.
+Another nice reference is the persona checklist presented by Stephen Wendel in
+<a href="http://www.amazon.com/gp/product/B00GGYNBEQ/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00GGYNBEQ&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=5G3A3R7DLMIM2BVY"><em>Designing for Behavior
+Change</em></a>:</p>
+
+<ul>
+  <li>Prior experience with action</li>
+  <li>Prior experience with similar products and channels</li>
+  <li>Relationship with company or organisation</li>
+  <li>Existing motivation</li>
+  <li>Physical, psychological or economic impediments to action</li>
+</ul>
+
+<p>This checklist is great because it enables teams to identify quickly different
+groups of users based on five important aspects. Note that the term ‘action’ in
+Wendel’s system refers to the activity that is assisted or managed by the
+software product, which maps to the benefit of a story (‘in order to…’).</p>
+
+<p>An alternative approach is to group users by common behaviours. Market research
+is often a good start for defining customer groups, because they structure
+surveys by needs and behaviours. A great example of this is the <a href="http://www.slideshare.net/CellfishInc/bandsintown-reveals-what-makes-live-music-fans-tick-14065294"><em>Anatomy of a
+Live Music
+Fan</em></a>
+survey published by BandsInTown. </p>
+
+
+</div>
+</body>
+</html>

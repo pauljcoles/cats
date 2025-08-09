@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Discuss sliding-scale measurements with QUPER</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-quper">Discuss sliding-scale measurements with QUPER</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----quper.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Many aspects of software systems aren’t related to the presence or absence of a
+particular feature, but to a combination of features that together provide value
+on a sliding scale. Examples of such aspects are performance, capacity, start-up
+times, operational response times and so on. (These are commonly grouped under
+the label <em>non-functional</em>, which we really dislike because they imply quite a
+lot of functionality.)</p>
+
+<p>Such aspects are often challenging for teams to nail down because of their
+continuous nature – they can’t be described easily by a single number. Even
+when the business sponsors come up with something precise, for example 50,000
+concurrent users on the website, the numbers sound arbitrary and do not really
+describe a hard criterion. Why 50,000 and not 45,000 or 55,000? In reality, a
+story involving such numbers is rarely rejected if only 49,999 users are
+supported. At the same time, any such criteria also carry a lot of hidden
+assumptions. Although someone might commit to 50,000 now, they won’t expect that
+a major system rewrite will be required to get to 50,001 tomorrow.</p>
+
+<p>For cases such as these, where value is delivered on a sliding scale, the QUPER
+model is an excellent way to facilitate discussions. The QUPER (QUality
+PERformance) model visualises and exposes two types of information about the
+market need and the proposed architectural solutions: breakpoints and barriers.</p>
+
+<p><em>Breakpoints</em> are thresholds of usefulness for a particular aspect of a system.
+The model requires stakeholders to identify three particular breakpoints:</p>
+
+<ul>
+  <li>The <em>utility</em> breakpoint is the point where a product moves from useless to
+usable.</li>
+  <li>
+<em>Differentiation</em> is where an aspect of the product becomes a competitive
+advantage.</li>
+  <li>
+<em>Saturation</em> is a point after which any improvements are an overkill, and make
+no real difference to users. </li>
+</ul>
+
+<p>Breakpoints are interesting because they do not depend on the actual solution,
+but on the market. They are determined by the expected user needs and the
+competition.</p>
+
+<p>The other type of information used in the model is related to the proposed
+solution. QUPER assumes that for most sliding-scale values, the relationship of
+cost to benefit of potential architectural solutions is similar to an S-curve.
+There is an initial investment required to get any value (startup costs), then
+the benefits scale with low investment, but beyond some point the chosen
+solution no longer applies, and a large investment is required to get more value
+– either a rewrite or a major change to the architecture. For example, starting
+from a point where a website does not support card payments at all, there is a
+significant cost involved in supporting even one transaction: setting up the
+payment gateways, setting up background queues for payments, implementing
+payment options and so on. But once that is done, a single payment gateway can
+probably handle dozens, if not hundreds of payments concurrently. Small
+investments might be needed to optimise work, but nothing major. At some point,
+one payment gateway won’t be enough. To increase the capacity, there will have
+to be a significant investment in re-engineering to support multiple concurrent
+payment gateways, to set up load-balancing among gateways, to install new
+machines and so on. The points where cost-to-benefit ratio changes sharply are
+called <em>barriers</em>, and they are related to particular potential architectural
+solutions.</p>
+
+<p>By visualising breakpoints and barriers, we can expose assumptions and have a
+meaningful discussion about where our solution is compared to the market and
+where we want it to be. We can use breakpoints to start a discussion on which
+area of the model the solution needs to fit into, and define targets for
+different stories, releases or even phases of a project.</p>
+
+<h3 id="leanpub-auto-key-benefits-28">Key benefits</h3>
+
+<p>The QUPER model helps to start discussions on sliding-scale requirements because
+breakpoints are impartial. They do not depend on the delivery organisation or
+business stakeholders, but on the market and the competition. Discussing numbers
+that don’t depend on anyone in the room helps to avoid subjective opinions and
+align expectations from the start.</p>
+
+<p>By clearly listing cost options and discussing future changes, the QUPER model
+also helps to bring out hidden assumptions about future growth. This helps
+delivery teams and business stakeholders choose the right investment in
+architecture so future targets can be easily met by iterative delivery, without
+requiring major rewrites. The discussion helps to avoid over-engineering of
+aspects that need to be just good enough.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-28">How to make it work</h3>
+
+<p>Choose ranges instead of discrete numbers. For example, instead of asking people
+to agree that a card transaction needs to complete in 3.14 seconds, try to get
+an agreement that most transactions need to complete in between 2 and 5 seconds.
+Choosing intervals is much easier because it allows you to group different
+opinions, and also avoid false failures. The person asking for exactly 3.14
+seconds will most likely be happy even if the transaction completes in 3.30
+seconds.</p>
+
+<p>When you are choosing an interval, start with the worst-case scenario. People
+can often agree more easily on a failure condition than on success. For example,
+it’s much easier to get people to think about how many users a website has to
+support in order for it not to be a commercial failure, than to get everyone to
+agree on blue-sky thinking about how many millions of customers they will have
+if the business takes off. Once you have the lower end of the interval, you can
+present options for iterative delivery, similar to the approach described in the
+section on splitting stories by capacity.</p>
+
+<p>For best results, mix this approach with the purpose alignment model to identify
+which part of the QUPER diagram the interval should fall into.</p>
+
+<p>For more information, check out the list of resources at
+<a href="http://quper.org/">quper.org</a>.</p>
+
+
+</div>
+</body>
+</html>

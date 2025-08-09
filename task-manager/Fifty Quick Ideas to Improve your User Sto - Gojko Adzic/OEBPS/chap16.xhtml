@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Set out global concerns at the start of a milestone</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-global-concerns">Set out global concerns at the start of a milestone</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----global_concern.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>User stories generally bring small iterative enhancements, so they are not
+particularly well suited for addressing global cross-cutting concerns such as
+capacity, performance and security. Sure, we can write a user story about
+improving performance, but performance metrics are probably impacted implicitly
+by loads of stories. Likewise, certain aspects such as security and usability
+need to be taken into consideration with every change to a software system, but
+the requirements don’t change that often. Repeating the analysis to surface the
+same requirements for each user story would be a huge waste of time.</p>
+
+<p>A typical work-around for this disconnect between small iterative changes and
+global concerns is to just ignore the big picture. When problems surface, a
+solution is planned as a story. This causes a lot of waste and, of course,
+waiting for problems to be spotted by users isn’t exactly a successful product
+strategy. Agile processes advocate responding to change over following a plan,
+but many take this too far and irresponsibly ignore perfectly predictable
+problems.</p>
+
+<p>The core of the problem is a misalignment of impact: global concerns apply to
+almost all stories, but the related requirements change on a much slower
+timescale. A good strategy for dealing with such issues is to have a separate
+discussion about global concerns once per milestone. This leads to a framework
+which applies to all work during that phase of delivery, so that the issues do
+not need to be individually considered for each story.</p>
+
+<p>A way of facilitating such conversations is to create a FURPS+ mind map. (FURPS
+stands for functionality, usability, reliability, performance, supportability).
+Draw six branches of a mind map, and label five according to the FURPS acronym.
+Label the sixth branch with a plus sign. Then let people brainstorm and extend
+the mind map with their expectations in each area. The sixth (plus) branch is
+for global items that don’t fall into any of the five categories. In <a href="http://www.amazon.com/gp/product/0321636406/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321636406&amp;linkCode=as2&amp;tag=swingwiki-20&amp;linkId=FBZRRAAAGETVD2U5"><em>Practices
+For Scaling Lean and Agile
+Development</em></a>,
+Larman and Vodde suggest that implementation constraints, resource limitations,
+interface constraints, operational requirements and licensing requirements all
+go in this category.</p>
+
+<p>An alternative approach is to create a <a href="http://gojko.net/2012/05/08/redefining-software-quality/">pyramid of
+quality</a> based on
+Maslow’s hierarchy of needs, and add an acceptance criterion to each level. The
+questions that define the pyramid levels (bottom-up) are:</p>
+
+<ul>
+  <li>Does it work? (functionality and deployment)</li>
+  <li>Does it work well? (security, performance, capacity)</li>
+  <li>Is it usable? (usability, design)</li>
+  <li>Is it useful? (behaviour changes, user-level goals)</li>
+  <li>Is it successful? (organisational goals)</li>
+</ul>
+
+<p>As an example, here is the set of cross-cutting concerns we set for the second
+milestone of MindMup:</p>
+
+<ul>
+  <li>People can create and share public mind maps without changes – every change
+results in a new map (functional)</li>
+  <li>Everything is public (security and privacy), and the system works well with
+maps with less than 100 nodes, on 5 to 6 levels, with up to 1000 concurrent
+users (capacity and performance)</li>
+  <li>User interface needs to be clean but nothing fancy. There can’t be any flicker
+or rough transitions (usability)</li>
+  <li>People can quickly knock up a map during a meeting, and share it (user-level
+goals). We expect at least one external user – not us or anyone we know – to
+publish a map. We expect at least one external user to come back within one
+week of creating their first map (behaviour changes).</li>
+  <li>The site runs cheaply, costing less than 50 GBP per month. We can baseline
+user activity to perform marketing tests in future releases (organisational
+goals).</li>
+</ul>
+
+<h3 id="leanpub-auto-key-benefits-13">Key benefits</h3>
+
+<p>Key decision-makers can probably participate in a separate discussion on global
+concerns once per milestone, even if they are too busy to attend every single
+story discussion. This makes it easier to agree on global targets and make a
+list of important cross-cutting concerns. These targets then become design
+constraints that developers always have to consider.</p>
+
+<p>Having a global framework of cross-cutting concerns removes the need to discuss
+the same things over and over, while ensuring that developers and testers keep
+the issues in mind while working on each user story. This means that people can
+prevent problems from ever happening, instead of waiting for users to complain.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-13">How to make it work</h3>
+
+<p>Consider creating a checklist of expectations for global concerns such as
+usability or security. An example security checklist could be:</p>
+
+<ul>
+  <li>No sensitive information (card numbers, passwords) stored unencrypted in
+database</li>
+  <li>No sensitive information printed in logs and audit messages</li>
+  <li>No private information (apart from usernames) on non-authenticated pages  </li>
+  <li>No private information sent using HTTP (only HTTPS)</li>
+  <li>Each outgoing communication has a link back to the main website</li>
+</ul>
+
+<p>Many cross-cutting concerns won’t fit into checklists because they are not about
+discrete features. Examples include peak capacity, operational speed and similar
+sliding-scale aspects. In such cases, try to describe targets as ranges instead
+of a single value. It’s much easier to agree on peak capacity of between 50,000
+and 60,000 users instead of a single discrete value.</p>
+
+<p>If you adopt a hierarchical backlog approach, such as impact maps or story maps,
+hold a separate session to review the global concerns each time a new map is
+introduced. The business goal and measurements in the centre of the impact map
+will help you set new targets for performance and capacity, and recognise any
+need for changes to security or usability policies.</p>
+
+<p>Unlike story discussions, which need to involve the people who will actually
+implement the story, conversations about global concerns need to involve senior
+decision-makers. But make sure to involve a mix of senior technical and business
+people, so you have both perspectives represented. This will help to prevent
+impractical or impossible targets, but also to challenge people’s assumptions.</p>
+
+
+</div>
+</body>
+</html>

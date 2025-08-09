@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Check outcomes with real users</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-check-outcomes">Check outcomes with real users</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----check_outcomes.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>In
+<a href="http://www.amazon.com/gp/product/B001AQ95UY/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B001AQ95UY&amp;linkCode=as2&amp;tag=swingwiki-20"><em>Inspired</em></a>,
+Marty Cagan writes that people with a lot of domain expertise often fall into
+the trap of believing that they can speak for the target customer. This often
+leads to a false sense of success, over-engineering solutions and, consequently,
+bad products. Cagan’s advice for solving the problem is to test ideas on real
+customers:</p>
+
+<blockquote>
+  <p>It is absolutely essential that you test your ideas out with real end-users.
+It is arguably the single most important part of your job.</p>
+</blockquote>
+
+<p>In the product management community this advice is mostly taken in the context
+of working with prototypes. Testing prototypes with real users should ensure
+that the product ideas that will later become specifications actually make
+sense. With user stories and frequent iterative delivery, this idea can and
+should be taken one step further.  After a user story is delivered, check that
+the outcome is as expected with real users.</p>
+
+<p>This was a very painful lesson for us in the first few months of working on
+MindMup. We aimed to create a highly productive mind mapper with a frictionless
+interface. Most of our early stories were aimed at increasing productivity. But
+we never went back to check whether the implemented stories actually made a
+difference. After reading Cagan’s book, we put the idea to the test, and started
+measuring the actual outcomes. We devised some simple indicators that would be
+relevant, reliable and comparable over time and for different types of users. If
+our users were productive, they should have been able to quickly knock up and
+save simple mind maps – say in less than five minutes. One good metric was the
+time it took for someone completely new to do this. Then we began to ask how
+long it was taking for someone to share a map, or even how long it was taking
+for someone completely new to dive in and start creating a mind map.</p>
+
+<p>Gojko started asking random people at conferences to spend a few minutes doing a
+quick test, so we could baseline and measure productivity. In the two months
+that followed, we experimented with many ideas, measuring the outcomes and
+keeping the ones that actually made a difference. For example, we took the four
+typical things users wanted to do, and built them into a welcome splash screen
+for first-time visitors. This reduced the average time to create a new map from
+almost two minutes to one second. As we repeated the tests and revisited the
+design and features, we threw a lot of bad ideas out and replaced them with
+things that actually worked. Novice users were able to complete all the main
+activities quickly and effectively, and we removed many distractions to reduce
+friction.</p>
+
+<p>Every book about user stories ever published talks about how good stories need
+to be testable, but they mostly focus on testing before delivery.  Unit tests,
+acceptance tests, usability tests all prove that the software will deliver the
+capability for end-users to do something. But there is a huge difference between
+software providing the capability for something, and the users actually
+succeeding in doing it. A user story might say that a target customer will be
+able to do something better or differently, but that doesn’t guarantee that
+users will actually do it. The user needs are often outside the zone of control
+of the delivery team, but only in the sphere of influence, where they are
+impacted by other external factors. So even a story that appears to be the best
+in the world might turn out to be useless due to unknown external factors. To
+avoid this trap, write user stories so that they are testable for outcome after
+delivery. And actually go and check with real users that the planned outcomes
+have materialised.</p>
+
+<h3 id="leanpub-auto-key-benefits-48">Key benefits</h3>
+
+<p>Even planning to check the outcome after delivering a story makes teams write
+better stories. It has the same effect as test-driven development does on code.
+It provides focus and clarity, and leads to better solutions. It stops teams
+from over-engineering the software.</p>
+
+<p>There are many reasons why expected outcomes do not materialise. The original
+idea might seem good, but factors beyond our control prevent users from
+achieving the value. Or the story might be incomplete, requiring a few tweaks.
+In any case, actually checking the outcome prevents teams from declaring false
+victories and moving on to new work when they should really be refining existing
+capabilities. This helps to reduce hidden unfinished features that have been
+implemented but are effectively incomplete.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-48">How to make it work</h3>
+
+<p>The most important aspect of making this work is to plan for checking outcomes
+during story discussions. A common complaint we hear from product managers is
+that their user stories can’t really be tested in isolation, since there are too
+many factors influencing outcomes to know if a single feature succeeded or
+failed. Similar comments are often made about unit testing: developers who work
+with monolithic systems complain that automated unit testing is not possible in
+the real world.  But when teams write software with automated unit testing in
+mind, the relevant capabilities are designed in and incredibly complex systems
+become easy to test.  Similarly, when teams write user stories that they intend
+to check with real users after delivery, they naturally build capabilities to
+support such testing.</p>
+
+<p>Usage patterns from production systems are often a good first start for
+measuring outcomes, but they can be misleading as in the MindMup example. Google
+Analytics only tracked what we explicitly looked for, so unexpected factors
+didn’t show. Watching real people work directly avoids that problem.</p>
+
+<p>If a story failed to deliver the expected outcome, you should discuss with the
+key stakeholders whether the features should be completed or redesigned and the
+underlying code changed accordingly, or the code completely removed? Delete
+failed code if possible, as this reduces future maintenance costs.</p>
+
+<p>If you fear the consequences of removing features after they have appeared in
+the wild, a good solution is to do staged releases, where only a small
+percentage of users gets new capabilities. Then rolling back in case of failure
+is not such a big issue.</p>
+
+
+</div>
+</body>
+</html>

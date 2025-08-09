@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Estimate capacity based on rolling number of stories</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-capacity-story-number">Estimate capacity based on rolling number of stories</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----measure_number_of_stories.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Teams who work in time-boxed iterations often use story points to calculate
+velocity, and then plan capacity based on velocity. Although this is good in
+theory, the approach is prone to misuse and suffers from the same problems with
+arithmetic as long-term estimation using story points. Unless the estimates are
+accurate and intervals of confidence are taken into consideration, measuring
+capacity using previous story points gives precise but widely misleading
+targets. Even worse, the meaning of numbers changes over time. A story of size 6
+today might be much smaller or larger than an average size-6 story several
+months ago.</p>
+
+<p>Measuring capacity with story points is dangerous because it stimulates the
+wrong behaviour: cheating to achieve some arbitrary numeric targets. One of our
+clients worked with a large consultancy that had committed to increasing team
+productivity – of course measured in story points. As the process changed, the
+team actually started delivering sooner and better. But story point numbers are
+all relative and the sizing changed over time. On paper, the team was not
+improving as fast as expected, so political pressure and contractual obligations
+got in the way of delivering good software: to increase the number of points,
+the consultants urged the delivery team to skip testing and deliver half-baked
+solutions. Immediate problems in the production environment caused stories to
+come back, but that did not show in project metrics. By the time the consultants
+completed their engagement, with productivity raised in terms of story points,
+there were around 1000 defects in the delivered system. Once the consultants
+left, the delivery team ended up picking up the pieces and having to fight all
+the production issues.</p>
+
+<p>Capacity planning is important, but velocity based on arbitrary numbers isn’t a
+good way of doing it. Two key aspects of preventing velocity misuse are
+simplifying the calculation and shortening the time period during which the
+calculated number is valid.</p>
+
+<p>Averages based on arbitrarily sized stories tend to mislead, but they can be
+quite effective if all stories have similar sizes. Of course, it’s perfectly
+fine to have different sizes of stories planned for future work – in fact
+that’s the only effective way of managing hierarchical backlogs. But stories
+coming into the current iteration can and should be of similar size. Try to
+break larger stories down into similarly sized chunks before considering them
+for an upcoming iteration. When stories have similar sizes, the averages
+actually make sense. This means that the average number of stories delivered
+over the last three to four iterations is a good indicator of how much a team
+will be able to deliver in the next iteration.</p>
+
+<p>Another typical problem is using velocity for long-term trend management, or for
+cross-team comparisons. Use this number only for capacity planning, and
+calculate it based on the rolling average of the previous few iterations. This
+number will change over time as the product matures and business opportunities
+change, but it will be more relevant than some absolute number of story points
+sizes set months ago. Once you only have stories of the same size inside an
+iteration, the velocity is then simply the count of the accepted stories.</p>
+
+<h3 id="leanpub-auto-key-benefits-42">Key benefits</h3>
+
+<p>The total number of similarly sized stories is simpler and easier to calculate
+than an aggregate of some arbitrary numbers. The result will also be more
+accurate. Small differences in sizes cancel out each other to produce a more
+accurate final value than applying numerical operations to inaccurate numbers
+without considering intervals of confidence.</p>
+
+<p>By using a rolling average instead of an absolute number the team can allow for
+learning during delivery and avoid the negative effects of changes to absolute
+sizes over time. As the product matures or the team grows or shrinks, a rolling
+number will only compare capacity to recent events, not the entire history.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-42">How to make it work</h3>
+
+<p>Use the rolling average only inside the team for iteration capacity planning.
+Nobody outside the team needs to know the rolling average.</p>
+
+<p>As consultants, we encountered many Scrum teams who are quite keen on publishing
+and visualising velocity over time, as a way to show process improvement and
+track delivered value. This might help to score some political points but it can
+backfire badly. Velocity is <a href="http://gojko.net/2013/09/12/scrum-velocity-and-driving-down-the-motorway-the-wrong-way/">horribly bad proxy
+metric</a>
+metric for value. Because the meaning of numbers changes over time it’s not a
+good indicator of process improvement over longer periods either. Finding a more
+direct value metric, such as measuring impacts, is a far better approach.</p>
+
+<p>If you want to publish the number, be careful to communicate the fact that the
+capacity is a rolling average and does not compare to capacity over longer time
+periods or across teams. Use the number of stories only for planning the
+capacity of current work, and not for any kind of long-term commitment –
+especially not for measuring process improvement.</p>
+
+<p>Avoid using the number of stories for long-term estimates. The average time it
+takes for a story to go through the pipeline is a far better measurement for
+long-term planning than any kind of story size.</p>
+
+
+</div>
+</body>
+</html>

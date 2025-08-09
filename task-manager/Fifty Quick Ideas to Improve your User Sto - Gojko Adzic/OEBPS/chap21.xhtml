@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Focus milestones on a limited number of user segments</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-choose-segments">Focus milestones on a limited number of user segments</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----choose_segment.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>When business stakeholders aren’t experienced with iterative delivery, plans
+based on user stories often turn into streams of consciousness. Anything goes,
+stories even get reverse-engineered from feature ideas. A common result is that
+stakeholders feel that they constantly get small improvements, but the delivery
+team has no capability of achieving anything big.</p>
+
+<p>Almost always in such situations people first come up with a deliverable (‘I
+want…’) and then justify it with a plausible excuse (‘In order to…’). They
+invent a user segment (‘As a…’) at the end, without a lot of thought. Such
+stories can be easily spotted because they specify a completely generic user
+segment (‘As a user…’) or even a system component (‘As an LDAP server…’).
+Inexperienced teams rarely challenge such stories, and even if they do, the user
+segments are just changed to arbitrary names. A team we recently worked with had
+more than 30 different user segments in their medium-term plan. It’s nearly
+impossible to prioritise effectively if a team is trying to satisfy 30 different
+segments at once, let alone achieve something big.</p>
+
+<p>Working with user personae can help, but it doesn’t completely solve the
+problem. We often meet teams that have defined three or four key personae, stuck
+their descriptions and pictures on a wall, and have still written a load of
+stories for other roles.</p>
+
+<p>If you find yourself in this situation, a good trick is to try to limit the
+number of user segments targeted in a particular milestone. At the start of each
+milestone, let stakeholders pick target segments first, and then you can drive
+prioritisation during the milestone based on those choices.</p>
+
+<p>A team we recently worked with was restructuring the sign-up process for their
+product, allowing users to log on through social media accounts. The
+stakeholders identified Twitter and Facebook users as important segments for
+this milestone, and agreed that everything else could be postponed. During a
+discussion about Twitter users logging in directly, the team ended up with
+acceptance criteria involving several large changes to administrative reports.
+We challenged the scope, arguing that the reports were not there to help Twitter
+users but back-office operators, and split the story into two. Because the
+milestone was about social media users only, it was easy to argue that
+back-office report changes fell into the ‘not now’ category. This allowed the
+team to reduce the scope of the release significantly and push the stories out
+faster. Stakeholders were then given the option to include stories for
+back-office operators in the next milestone. But this turned out to be not as
+important as some other stuff, so the reports actually never got done. Without a
+pre-selected set of roles, it would not have been easy to argue about postponing
+the work which at the end turned out to be unnecessary.</p>
+
+<h3 id="leanpub-auto-key-benefits-18">Key benefits</h3>
+
+<p>Selecting a limited number of target segments for each milestone prevents
+stakeholders from constantly inventing new user roles. This makes people think
+twice when writing stories to justify pet features, and results in better, more
+focused stories.</p>
+
+<p>Forcing people to seriously consider which user segment would benefit from the
+story, if any, helps to avoid generic stories such as ‘As a user’ and completely
+prevents fake stories such as ‘As a remote API’.</p>
+
+<p>For teams working with a large number of stories, pre selecting roles for
+milestones also helps significantly with prioritisation, and allows stakeholders
+to make now/not now decisions more easily.</p>
+
+<p>Lastly, a fixed set of roles helps to reduce the scope of stories and earlier
+delivery of value.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-18">How to make it work</h3>
+
+<p>Think small: instead of a larger milestone that addresses the needs of five
+target user groups, think about five smaller milestones aimed at a single target
+segment each. Is there a group that could bring more value or reduce risk
+significantly if they got their stuff first? Give milestones meaningful names to
+provide focus before choosing target segments.</p>
+
+<p>It’s OK for a milestone to include more than one user segment, particularly if
+they are related. For example, stories dealing with phone customers and customer
+service operators might be interrelated and both required to deliver a
+bigger-picture outcome. However, we’d strongly challenge the need for stories
+involving accountants to be in the same milestone. Don’t reject additional user
+segments outright, discuss and challenge them. For example, in the Twitter
+log-in situation, if the additional functionality is core and central to the
+business, it would be stupid to postpone it even though it helps back-office
+operators. In this particular situation, the reports were in the nice-to-have
+category and the stakeholders preferred to postpone them. Pre-selected roles
+were enough to start a good discussion and allow them to make better decisions.</p>
+
+<p>For teams working with a larger number of stories, it’s useful to have two sets
+of stories going into a milestone. One involves stories for chosen user
+segments, and the other contains all ideas proposed for other segments. All
+stories involving other user segments are effectively postponed, so stakeholders
+should know that they won’t even be available for prioritisation.</p>
+
+<p>Pre-selecting roles for stories doesn’t mean completely ignoring any other
+urgent work, such as critical bug fixes. See the section Don’t push everything
+into stories for some good ideas on how to deal with such work.</p>
+
+
+</div>
+</body>
+</html>

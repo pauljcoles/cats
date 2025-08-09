@@ -1,0 +1,82 @@
+{
+  "colors": {
+    "C001": "Red Metallic",
+    "C002": "Pearl White",
+    "C003": "Midnight Blue",
+    "C004": "Forest Green",
+    "C005": "Sunset Orange"
+  },
+  "packages": {
+    "P001": {
+      "name": "Sport Package",
+      "includes": ["W002", "T002"],
+      "excludes": ["E003"]
+    },
+    "P002": {
+      "name": "Luxury Package",
+      "includes": ["I002", "T003"],
+      "excludes": []
+    },
+    "P003": {
+      "name": "Eco Package",
+      "includes": ["E001"],
+      "excludes": ["E003", "W001"]
+    }
+  },
+  "wheels": {
+    "W001": "Steel Wheels",
+    "W002": "Alloy Wheels",
+    "W003": "Carbon Fiber Wheels"
+  },
+  "trims": {
+    "T001": "Base Trim",
+    "T002": "Sport Trim",
+    "T003": "Luxury Trim"
+  },
+  "engines": {
+    "E001": {
+      "name": "Hybrid",
+      "compatibleWheels": ["W001", "W002"]
+    },
+    "E002": {
+      "name": "V6 Petrol",
+      "compatibleWheels": ["W001", "W002", "W003"]
+    },
+    "E003": {
+      "name": "V10 Performance",
+      "compatibleWheels": ["W002", "W003"],
+      "excludes": ["W001"]
+    }
+  },
+  "interiors": {
+    "I001": "Fabric Black",
+    "I002": "Leather Tan",
+    "I003": "Alcantara Grey"
+  },
+  "constraints": [
+    {
+      "rule": "Engine E003 cannot be selected with Wheel W001",
+      "type": "exclusion",
+      "conflict": {
+        "engine": "E003",
+        "wheel": "W001"
+      }
+    },
+    {
+      "rule": "Package P003 excludes Engine E003",
+      "type": "exclusion",
+      "conflict": {
+        "package": "P003",
+        "engine": "E003"
+      }
+    },
+    {
+      "rule": "Sport Package requires Sport Trim",
+      "type": "requirement",
+      "conflict": {
+        "package": "P001",
+        "requiredTrim": "T002"
+      }
+    }
+  ]
+}

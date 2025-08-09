@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Start with the outputs</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-start-outputs">Start with the outputs</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----output.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>A major rewrite of a legacy system is arguably the most difficult situation for
+slicing deliverables into small valuable pieces with user stories. Big legacy
+rewrites are often a solution of last resort when so many problems have built up
+that to go on maintaining and adding to the old system is no longer viable. Such
+projects often have many ambitious goals, such as to speed up future delivery,
+unlock critical business opportunities, adopt a different architecture that
+allows for growth and reduce costs by consolidating components. People often see
+it as a job for a broadsword, not for a scalpel.</p>
+
+<p>But the problem, always, is that the world does not stop for us. While the
+system rewrite is underway, market opportunities change. It’s difficult for
+business sponsors to resist extending their legacy systems with new features to
+cater for short-term needs. The target keeps moving, and we’ve seen too many
+teams get stuck in a game of catch-up, where unexpected complexities in their
+legacy system cause delays and the new solution takes far longer than expected
+to be completed. They end up operating two systems side by side for a long
+period of time, effectively moving to the new system incrementally instead of by
+flipping a switch. Sometimes the rewrite just never catches up, and receives a
+mercy bullet when someone senior adds up the costs.</p>
+
+<p>The big risk for any incremental rewrite is that it never delivers enough
+functionality for people to start relying on it instead of on the old system.
+This is why the mercy bullet arrives at the end. Most incremental rewrites fail
+for reasons that have a lot more to do with psychology than technology. Because
+it’s easier to think about time linearly, rewrite plans start with the inputs
+into the system – user interaction to let people register, define metadata,
+enter some transactional information and so on. These things are sliced into
+small independent deliverables (via user stories), which are presented to proxy
+product owners who nod their heads at iteration reviews, but the releases never
+get to the live system because the end-users just don’t care. It’s not unusual
+for the new system to become really useful to anyone in a production environment
+only after a few months of delivery.</p>
+
+<p>Chris Matts popularised the idea that the value of an IT system is mostly in the
+outputs it produces, and that the inputs are just means to an end. Instead of
+thinking about workflows linearly, think about the outputs first. Instead of
+thinking about the log-in screen, think about the reports. Instead of slicing
+the future system by inputs, slice it by outputs, and then build up the
+capability to produce these outputs incrementally.</p>
+
+<p>One of our clients started a huge legacy rewrite project that would see them
+divide teams differently, use a new programming language, install a new network
+data grid, consolidate several databases and centralise exception detection and
+processing by replacing a dozen smaller systems around the world, each with
+their own set of rules.  The outputs were exception reports, and the new system
+would deliver them better, faster, cheaper and nicer. The team took one
+exception report that was bad, slow, and ugly, and looked for ways of producing
+something close to the target, while using the old system as much as possible.
+The current reports had too much data in them and, though it was necessary to
+have details for further investigation, it was difficult to see a big picture.
+So the first slice was to provide a new output, the big picture.  The first user
+story was to produce summary reports with links to old reports for detailed
+investigation. The team sliced the story further by choosing only one type of
+activity to report on – the most time-consuming one for exception handling.
+Then they sliced it further by eliminating custom time periods: the first
+version would always report on the last seven days. They sliced again by
+eliminating authentication – although security was generally important, the new
+summary was not too sensitive, and the sensitive trade details were still
+protected by the old system in linked reports. The team sliced the story yet
+further by eliminating on-demand reporting – they would automatically generate
+the new report every morning and distribute it by email. After twenty minutes of
+discussion, the solution was no longer broad-sword butchery, but a scalpel
+operation.  The delivery team had something they could reasonably deliver in
+less than a week, and the business users would get something instantly useful
+and valuable in the new system. It required talking to only two out of twenty
+databases, and did not need the new data grid.</p>
+
+<p>This plan opened the path for making the first report more flexible (and
+valuable) incrementally, and provided a nice template for moving all the other
+reports over incrementally.</p>
+
+<h3 id="leanpub-auto-key-benefits-29">Key benefits</h3>
+
+<p>The key benefit of thinking about outputs first is that it becomes much easier
+to create a sensible incremental delivery plan. Outputs are much easier to slice
+than inputs because they enable users to achieve something concrete, and people
+can have fruitful discussions on them. It is more difficult to get a positive
+answer to ‘Can we let people register without entering an address?’ than to ‘Is
+an exception report that shows only a country of registration and not the street
+name and number useful?’. And even if registration without an address is
+approved, the change is unlikely to reach production and real users. A
+half-complete exception report that flags serious business issues early will
+quickly be embraced even if it’s not the most secure.</p>
+
+<p>Delivering a valuable output quickly also prevents the mercy bullet approach
+later on – a system that serves valuable data in production is not as easy to
+kill as a system that after six months of build-up has great registration forms
+but does not provide useful outputs.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-29">How to make it work</h3>
+
+<p>This strategy is especially successful if there is some critical output that the
+legacy system cannot produce neatly – aim to deliver this first. People who
+would benefit from the output are more likely to turn a blind eye on performance
+problems, an incomplete user interface or temporary workflow issues.</p>
+
+<p>Another key challenge is identifying the right people to involve in the slicing
+discussion. Proxy product owners in large organisations are conduits of
+information, but are often not empowered to make decisions. Try to find the
+people who benefit from an output, who use it for something in their work. They
+can make better decisions on the scale, completeness and performance, and how to
+achieve them gradually.</p>
+
+
+</div>
+</body>
+</html>

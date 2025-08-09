@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Start with dummy, then move to dynamic</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-first-dynamic">Start with dummy, then move to dynamic</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----first_dummy.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Internal enterprise software is often a spaghetti-like mix of databases, remote
+services and obscure systems. In such environments, new software rarely works in
+isolation, and often needs to pull in information from many different places.
+Making it all work together is a major challenge.</p>
+
+<p>Data-entry screens are often the first focus in any software plan, because data
+needs to be put in before it gets processed. It’s rarely easy to connect to all
+the relevant reference data sources, so stories involving data-entry screens
+often get blocked, half-done or postponed. And because teams spend a lot of time
+perfecting data entry, they can’t work on data processing until much later.
+We’ve lost count of iteration demonstrations where developers show a beautiful
+entry screen, and promise that users will eventually be able to use it once
+someone comes back from holiday and explains how to exactly access relevant
+product types. Or the entry screen is done and everyone feels great about it,
+but nothing actually happens once users put the data in – this comes in later
+iterations.</p>
+
+<p>The real value of software is mostly in its outputs, not in its inputs. An
+interesting strategy for splitting stories while preserving most of the value is
+to avoid any work around preparing inputs at first. This particularly applies to
+reference data. Instead of loading such data from the official sources
+dynamically, split the story so that the first part uses hard-coded reference
+data, and subsequent stories connect the input fields to relevant data sources.</p>
+
+<p>When we worked with a financial services organisation, we applied this approach
+for a transaction entry screen. There were many good reasons why the list of
+supported currencies had to be maintained in a single place, but because of slow
+internal IT procedures we couldn’t get access to the main database in time for
+the first release. Rather than being blocked on that problem and releasing
+something useless, we agreed with our end-users to temporarily duplicate the
+data. Our list of currencies was in a text file, which users could easily edit
+if needed. This significantly simplified the work involved in the first version
+of a system for entering trades, and allowed users to benefit from the new
+software sooner.</p>
+
+<p>Theoretically, it opened up potential security risks and long term it could
+create consistency issues, but the first version was released only to a limited
+number of people who could deal with these concerns through internal business
+processes. In the third release, we connected the trade entry software to the
+main database and closed all the risks.</p>
+
+<h3 id="leanpub-auto-key-benefits-34">Key benefits</h3>
+
+<p>Getting access to the right reference data in enterprise systems is frequently a
+task that involves more waiting than effective work. Developers often have to
+wait for authorisation, documentation, and fight with unexpected and
+undocumented quirks of legacy systems. This is why estimates for such tasks
+always carry a huge amount of uncertainty and risk. Splitting stories to work
+with hard-coded data at first improves the predictability of short-term plans
+and enables development to continue while people wait for access or information.</p>
+
+<p>In scenarios where the reference data is difficult or time-consuming to
+retrieve, but is unlikely to change frequently, this approach can significantly
+reduce the work required to put something usable in front of end-users, and let
+them benefit from the new software.</p>
+
+<p>Even if it’s easy to load reference data, but there are many fields on an entry
+screen, hard-coding the data can help to halve the size of a story. Instead of
+perfecting data entry, the team can then deal with the data processing early on.
+This speeds up the delivery of value, and helps to avoid the iteration
+demonstrations where the only thing to show is a beautiful data-entry screen.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-34">How to make it work</h3>
+
+<p>Choosing the right reference fields to hard-code is the key to making this
+technique work well. Ideal candidates are inputs that would significantly
+increase effort or uncertainty if they were loaded dynamically, but change
+infrequently.</p>
+
+<p>Sometimes it’s worth asking users to type information in instead of offering a
+hard-coded list, especially if software is built for internal use and a verbal
+agreement is enough to prevent exceptions. Examples of such fields are country
+codes, currencies, titles and so on.</p>
+
+<p>If the data is expected to change frequently, then make it easy to for users to
+change the reference data. We gave users a text file which they could modify on
+their own. Another client we worked with applied a similar approach to data
+entry, and this simplified their deployment so much that they actually created a
+policy of keeping slow-changing reference data in version-controlled text files
+rather than in databases.</p>
+
+<p>Lastly, don’t forget about the ‘then dynamic’ part of this approach. Hard-coding
+reference data is a trade-off between the speed of delivery of value and a
+potential increase in security and consistency risks. As well as the story that
+uses hard-coded data, you need some follow-up stories to tidy things up.</p>
+
+
+</div>
+</body>
+</html>

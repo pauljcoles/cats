@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Describe the system change</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-describe-system-change">Describe the system change</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----system_change.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Just as every story should describe a behaviour change that represents the
+business value (the ‘why’) of the story, it should also be clear about the
+change a team needs to make to software (the ‘what’) in order to bring about or
+enable that change in user behaviour.</p>
+
+<p>When a story is first proposed, the exact nature of what should be changed in
+the system might be a matter of choice between several design options, and it is
+right and proper to defer commitment on a solution until we are clear about the
+intended outcome. But once we have settled on the best solution, the story
+description should be clear about exactly how the system functionality or
+business rules will differ between now and when the story is implemented. (Note
+that this is not about specifying implementation details in the story, just the
+difference in observable system outputs.)</p>
+
+<p>If we are building a new product, it may be that most stories are about creating
+new features from scratch. But for established products undergoing steady
+evolution and maintenance, most stories are about making changes to existing
+features. Even if a story does add a whole new feature, there are inevitably
+changes to existing system behaviour to weave the new feature into the product.
+In each case, we need to be clear about the scope of all the changes required to
+consider the story done.</p>
+
+<p>Often, the short description of a story leaves a lot of ambiguity about what the
+scope of the change will be.  Even when it is being discussed face to face, it
+may not be clear to everyone what the full implications would be of taking on
+the story. It is important to bottom out the discussions around the specifics of
+how the system behaviour is going to change.</p>
+
+<p>A typical story description includes a clause describing the ‘what’ of the
+story, usually in the ‘I want…’ part of the story template. Even if the
+required system behaviour is accurately described, the amount of work required
+from the team to implement it depends on how much it differs from the current
+system behaviour, and this might not be clear to everyone. In many cases we also
+need an ‘instead of’ clause to follow the ‘I want’.</p>
+
+<p>For example, imagine we had the following story for a financial trading system:
+‘In order to continue trading while not breaching regulations, As a trader, I
+want a warning message when the total volume of trades reaches within 10% of my
+daily trading limit.’ The behaviour change that we want to influence is to have
+traders maximise their trading opportunities without exceeding regulatory
+limits. The feature we need in order to support this behaviour change is a
+warning to the trader when they are getting close to the limit.</p>
+
+<p>However, unless we are very familiar with what the relevant part of the system
+does already, we can’t tell on the face of it whether this is a major change or
+not.  Consider some of these possibilities:</p>
+
+<ul>
+  <li>Is there already any concept of daily volume limits in place? If not, this
+story has to build a lot of new things, and would be relatively complex to
+implement.</li>
+  <li>Does the system already have daily limits which it prevents traders from
+exceeding? If so, much of the existing logic could be reused to trigger the
+required warning, and it would be only a moderate change.</li>
+  <li>Is there already a warning in place, but triggered at a different point?
+Changing the warning threshold to 10% would be a very simple change.</li>
+</ul>
+
+<p>The point is that the description of the required feature alone, even if
+complete and accurate, is not enough to indicate how complex the story is to
+implement. We also need to know how much it differs from the current behaviour.</p>
+
+<h3 id="leanpub-auto-key-benefits-3">Key benefits</h3>
+
+<p>When developers and testers are discussing a story, either to estimate its
+complexity, identify technical implementation tasks or design acceptance test
+cases, it is invaluable to have a concisely expressed description of the
+expected changes. When the scope of the change is clearly delineated, the team
+is more likely to reach a quick agreement on how much work there is to do.</p>
+
+<p>Clarifying the change is a valid and useful step in the refinement of the story.
+In some cases the process of identifying the extent of the change can help in
+splitting larger stories.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-3">How to make it work</h3>
+
+<p>Start the discussion by adding another clause to the story template, starting
+with ‘Whereas currently…’ or ‘Instead of…’. The wording of this phrase
+should make as clear as possible the contrast between what we already have and
+what is needed.</p>
+
+<p>Another option is to follow the ‘I want’ phrase with a verb that highlights the
+new action or behaviour. Test whether the verb is the right one by asking
+negative questions. If the change is expressed as ‘I want to access the reports
+using a mobile device’ you can ask ‘Is it the case that you can’t access the
+reports at the moment?’ If the answer comes back as ‘Well, I can already access
+the reports, but I have to use the website instead of the application’ then the
+verb is the wrong one. It would be better to say ‘I want to use a native
+application when I access the reports’.</p>
+
+<p>In the trading volume example, applying these techniques might result in the
+story being amended as follows: ‘In order to notify traders they are nearing
+trading volume limits, the system will warn traders when the total volume
+reaches within 10% of the daily trading limit, whereas currently there is no
+warning message and trading continues until the daily limit is exceeded at which
+point all trades are blocked’.</p>
+
+
+</div>
+</body>
+</html>

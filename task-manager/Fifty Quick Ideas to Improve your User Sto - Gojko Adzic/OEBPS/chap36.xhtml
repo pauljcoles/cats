@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Narrow down the customer segment</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-narrow-down-segment">Narrow down the customer segment</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----narrow_customer_segment.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>At the beginning of a new project, especially a legacy rewrite, teams often
+claim that a whole underlying infrastructure has to be in place in order to
+provide any value. The first few releases are announced to be mostly about
+building up some perceived basic functionality, often with a huge chunk in the
+must-have category. In these situations it is particularly difficult to slice
+the work into small and valuable chunks, because the discussion on what is a
+must and what is optional often leads to a dead end. One good trick in such
+situations is to avoid the discussion on splitting the deliverables, and instead
+try to narrow down the target customer segment. Don’t give everyone 2% of what
+they need, instead give 2% of users everything they need.</p>
+
+<p>A good example of this is a back-office application at a bank we worked with.
+The initial story about capturing trade messages was too big, and a lot of the
+complexity was around different tax systems. We investigated narrowing down the
+customer segment as a potential way of slicing the story, and discovered that
+two people in the department dealt with UK trades, and that the UK does not
+charge tax on the target transactions. By narrowing the customer segment down
+from the entire department to just those two people, we had a chunk of work that
+we could implement in two weeks. It would bring some value quickly, and would be
+a useful step towards the overall solution.</p>
+
+<p>Another good example is the segmentation we created at the start of MindMup.
+Right from the start, our key target user persona was a tech-savvy professional
+who uses mind maps for planning and needs to knock up a map quickly during a
+meeting. Frictionless idea capture and easy sharing were critical for this, but
+implementing a reasonably powerful interface with all the sharing needs was a
+few months of work. By narrowing down the customer segment to people working on
+open-source or public projects initially, we could disregard security. Such
+information would be public anyway, so we did not have to authenticate viewers
+or provide any kind of content control. We could also pass on the responsibility
+for sharing to the users, instead of building it ourselves. Each map, when
+saved, would become read-only and get a unique URL that people could send easily
+by email. Anyone with the URL would be able to view but not modify the maps.
+Any changes would be saved to a new file, and a new URL. As a result, MindMup
+went live roughly two weeks after we started building it, and enabled a small
+segment of users to perform almost everything they needed. In the months that
+followed, we expanded the feature set for open-source planners, and slowly added
+security, content controls and sharing for the original target persona.</p>
+
+<h3 id="leanpub-auto-key-benefits-31">Key benefits</h3>
+
+<p>The biggest benefit of this approach is that a subset of users starts to use the
+new software quickly. This often isn’t the core of the target market, or even
+the most important group of stakeholders, but someone starts using the new
+software quickly, which provides invaluable real-world feedback for further
+development and puts the foot through the door for the new delivery effort. As
+soon as real users are benefiting from the new software things become a lot
+clearer, future planning becomes easier and business stakeholders learn whether
+their product ideas are working out in the real world.</p>
+
+<p>Depending on the importance or value of the chosen narrow segment, this approach
+can also help a small group of people solve a problem quickly. That can provide
+justification for further investment, win political points for internal projects
+or provide a solid base for A/B testing for consumer products.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-31">How to make it work</h3>
+
+<p>Customer segments can be narrowed down by many dimensions. For consumer
+products, the typical dimensions to consider are territory, age, technical
+proficiency, location (home, work or mobile), language, occupation, needs and so
+on. For internal IT or enterprise systems, interesting segments can be type of
+work, department, their target market (for example selling to small companies or
+to large multinationals) and so on. Consider multiple dimensions and find one
+which allows you to deliver just a small subset of functionality and help the
+targeted users get the information they need or achieve a work objective.</p>
+
+<p>Another thing to consider is that the narrow slice of the target segment does
+not need to be the most important one. Aim for a segment whose members do not
+care about a huge part of the target feature set. If you can make a big business
+impact by selecting a critical subgroup, even better. However any narrow
+customer segment that allows you to put something useful in front of real users
+quickly will provide the benefit of fast realistic feedback, and a path to build
+things up incrementally to increase your segment coverage. In fact, if the
+delivery of the new system introduces significant business risk, choosing a less
+important segment to experiment on might make a lot of business sense.</p>
+
+
+</div>
+</body>
+</html>

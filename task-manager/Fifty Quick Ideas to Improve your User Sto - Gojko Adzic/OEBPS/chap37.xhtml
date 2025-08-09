@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Split by examples of usefulness</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-split-by-example">Split by examples of usefulness</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----split_by_example.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>A particularly challenging situation for story splitting is where there is a
+large technical job to do – for example replacing one database with another, or
+implementing a major internal redesign. Teams often divide the work technically
+and then look for chunks which still have value, but a technical split often
+leads to slices that are too thin to go to production independently, or those
+monstrosities sometimes known as technical stories.</p>
+
+<p>Any useful way of splitting stories has to break down the technical complexity
+somehow so that it can be delivered iteratively. But attacking that complexity
+directly often isn’t the most effective way of story splitting. Instead of
+slicing technical deliverables and then looking for useful chunks of value, try
+to start from the opposite direction: slice value and look for useful technical
+chunks.</p>
+
+<p>One useful way of doing this is to ask for a few examples of how the intended
+deliverable would be useful, and then select those that depend only on a small
+piece of the overall solution. Extract each of these examples into a separate
+user story.</p>
+
+<p>Here is a concrete example. We initially launched MindMup using HTML5 Canvas as
+a visualisation technology, which in retrospect was a mistake. The Canvas
+standard was at the time still under active development, so new browser versions
+often introduced breaking changes. Between Google Chrome browser releases 26 and
+34, four versions of Canvas came out with changes that broke the graphics
+library we used. Though we quickly provided explanations and workarounds such as
+temporarily turning off hardware acceleration, the maintenance cost was
+unsustainable.</p>
+
+<p>We chose to move the visualisation to Scalable Vector Graphics (SVG), an older
+technology that was not much affected by new versions of browsers. At first,
+moving from Canvas to SVG looked like one of those typical all-or-nothing
+migrations. We knew the solution, but it was just too much work and too much
+risk to ship in one chunk. It is possible to mix and match these technologies on
+the same web page, so we could have moved features to SVG incrementally. But the
+goal here was that the new solution would significantly reduce maintenance
+costs, enabling us to focus on building up the system instead of catching up
+with browser development. This is why there would have been no value until the
+very end – when Canvas was turned off. In fact, mixing both technologies on the
+same page during migration would significantly complicate things and increase
+our maintenance costs. To make matters worse, we had spent a lot of time
+tweaking and improving Canvas performance to handle huge maps, so we knew that
+there was no way to tune SVG to the same level quickly.</p>
+
+<p>We investigated examples of usefulness as a way of slicing this monolith, and
+that opened up a way to iteratively ship the changes. One example where SVG
+would be useful was to stop breaking websites that embedded our maps. When
+existing users encountered a problem with a new browser version, they would
+either look at our documentation pages for a workaround, or complain directly to
+us, in which case we could help them. But there was no easy way of helping
+anonymous visitors to sites with embedded maps. By migrating to a more stable
+technology, our users could have more confidence that their visitors wouldn’t be
+surprised. This particular example was an interesting slice which could be
+achieved quickly. Embedded maps are read-only, so the layout could be calculated
+by the current system, and we did not have to worry about browser interactions.
+Users could still create maps using the old technology, but when maps were
+embedded we could just swap over to SVG. This was our first user story.</p>
+
+<p>The next example of usefulness was improving the initial visit experience.
+During their first visit to our site, new users would mostly work on smaller
+maps and use basic functions. To support this, we could significantly reduce
+complexity and focus on basic interactions and just make sure that maps up to a
+hundred nodes worked reasonably well. We published this as an opt-in feature, so
+that users who needed more performance or advanced features could still use the
+old system.</p>
+
+<p>The next example of how SVG would be useful was that it could benefit from
+native browser styling capabilities. SVG objects can be styled using Cascading
+Style Sheets (CSS), a well-known web standard, unlike Canvas where we had to
+program look and feel. Canvas didn’t allow users to style maps easily, so that
+feature wasn’t in the old system at all. However, it was now low-hanging fruit,
+and it would entice users to opt in and turn on the new drawing engine,
+providing valuable feedback and de-risking the rest of the migration for us. So
+the third user story was enabling users to customise the visual style for their
+maps.</p>
+
+<p>After that, we tackled collaboration, larger maps, mobile users, then more
+complex interaction such as image drag-and-drop. Each of these areas was driven
+by some nice examples of usefulness. Instead of building features up until all
+users could be switched over, we enabled a subgroup of our users to get part of
+the value with each story, and provided incentives for opting in.</p>
+
+<h3 id="leanpub-auto-key-benefits-32">Key benefits</h3>
+
+<p>Dividing by value and then looking for useful technical chunks helps to avoid
+the technical trap of a big risky migration at the end. This approach turns
+deliverables into a stream of small changes, each valuable enough so that it can
+go to production and be used by someone. This leads to small, low-risk releases,
+with each release providing real-world feedback.</p>
+
+<p>Even more importantly, slicing stories by examples of usefulness provides value
+much sooner to a subgroup of users. People do not have to wait for months until
+the whole job is done to benefit from specific changes.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-32">How to make it work</h3>
+
+<p>List a bunch of options for how the final technical change would be useful, and
+don’t worry too much if they overlap. Among these examples, look for ones where
+technical delivery would be significantly reduced, where you could reuse large
+parts of the old system or where you would only need to provide part of the
+business workflow. For example, tackling only embedding allowed us to remove all
+interactivity, reuse existing calculations and not worry about performance.</p>
+
+<p>If the larger piece of work is very risky, try to find the first few examples of
+usefulness that are not really on the critical business path. For example,
+embedded maps were used by a very small percentage of our overall users, but
+enough that they could provide useful technical feedback.</p>
+
+
+</div>
+</body>
+</html>

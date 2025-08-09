@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+<title dir="ltr">Play the devil’s advocate</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+<meta charset="utf-8"/>
+</head>
+<body dir="ltr">
+<div>
+<h2 id="idea-devils-advocate">Play the devil’s advocate</h2>
+
+
+<figure class="image center">
+  <img src="images/mobi----devils_advocate.jpg" alt="" />
+  <figcaption></figcaption>
+</figure>
+
+
+<p>Unexpected circumstances are a fact of life for most software delivery teams.
+Adaptive planning is a good way to turn those unexpected changes into
+competitive advantage, because adaptive plans facilitate experimentation and
+help organisations incorporate learning through delivery into future plans. An
+interesting aspect of this is that some user stories turn out to be bad ideas.</p>
+
+<p>Think about it this way: if all your user stories are always good ideas, you
+probably aren’t experimenting enough, which means you’re not using one of the
+major benefits of adaptive planning.</p>
+
+<p>Great user stories facilitate a good conversation, and teams that can discredit
+some stories during an initial discussion get more time for better candidate
+stories. One good way of discovering bad ideas quickly is playing the devil’s
+advocate – intentionally challenging the perceived need addressed by a user
+story.</p>
+
+<p>The devil’s advocate is not just the name of a bad ’90s film, it was also an
+important role in the canonisation process of the Roman Catholic Church. To
+ensure that there was a really strong case for canonisation, the church
+officials would appoint one person to argue against a canonisation candidate,
+even if that meant taking a position that the advocate did not agree with. This
+opened up a more thoughtful discussion. Asking someone to play this role during
+a story conversation is an excellent way to spot bad ideas quickly.</p>
+
+<p>For example, a reader of Gojko’s blog recently posted a question about defining
+the acceptance criteria for the story ‘As a user I want to register so that I
+can log in’. Instead of jumping directly into analysis and trying to nail down
+the acceptance examples, getting someone to argue against the story opens up a
+discussion on what people actually want. A user of a website never wants to
+register. Users will suffer registration if it brings them some benefits, but
+registering, or even logging in, isn’t really high on anyone’s list of
+priorities. In fact, having to remember another username and password
+combination is something people often really hate.</p>
+
+<p>While building MindMup, we had a similar story. Taking the devil’s advocate
+position, we refined the user need into two: continuing to work on a document
+easily and controlling access to sensitive information. We then divided this
+story into two clearer stories, and decided to initially implement only the
+first one. A clearly defined need led us to an alternative solution. We didn’t
+really need to force people to log in and remember another username and password
+just to be able to continue working on a document. We used local browser storage
+to keep the last edited document and automatically opened that the next time a
+user visited. The solution was simpler, provided a better user experience, and
+it was faster to implement.</p>
+
+<p>Alternatively, a similar discussion might lead a team to understand that it’s
+not the end-user that wants to log in, but legal or compliance managers who want
+to protect a system against commercial or regulatory risk. Another possibility
+is that marketing managers want to force people to open accounts so they can
+advertise additional products.</p>
+
+<h3 id="leanpub-auto-key-benefits-24">Key benefits</h3>
+
+<p>A big benefit of this technique is discovering bad ideas earlier, and throwing
+away or refining stories that would just introduce unnecessary complexity into
+software.</p>
+
+<p>The second major benefit is opening up a discussion on the perceived need and
+target user segment, which helps to nail down these aspects of a story before a
+team jumps into defining a solution.</p>
+
+<h3 id="leanpub-auto-how-to-make-it-work-24">How to make it work</h3>
+
+<p>The big risk with this idea is that the discussion degenerates into personal
+arguments. Playing the devil’s advocate is not about being negative, it’s about
+trying to shake things up intentionally to see if a story is solid or not. Two
+good ways of preventing personal arguments are:</p>
+
+<ul>
+  <li>Choose one person to play the role to start with, then rotate the role story
+by story to avoid a single target for negative reactions.</li>
+  <li>Get the whole group to come up with ideas about why a story might be false,
+and take turns to present them.</li>
+</ul>
+
+<p>Discarding a story, or redefining the needs and customer segments, is best done
+before anyone spends too long analysing a solution for the original story.
+That’s why it’s best to play the devil’s advocate at the start of a story
+discussion, or even earlier, when the team collects new story proposals.</p>
+
+<p>Try challenging several aspects of the story:</p>
+
+<ul>
+  <li>Argue that the target user doesn’t really have the need (I don’t want to log
+in)</li>
+  <li>Argue that the target user segment is wrong (someone else wants end-users to
+do that)</li>
+  <li>Argue that the proposed solution is wrong (delivering the solution will not
+provide the benefit)</li>
+</ul>
+
+
+</div>
+</body>
+</html>

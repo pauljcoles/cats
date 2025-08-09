@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="en" unique-identifier="BookId" dir="ltr">
+ <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"
+           xmlns:opf="http://www.idpf.org/2007/opf">
+   <dc:title dir="ltr" id="title">Fifty Quick Ideas to Improve your User Stories</dc:title>
+   <meta refines="#title" property="title-type">main</meta>   
+   <dc:creator id="creator">Gojko Adzic and David Evans</dc:creator>
+   <meta refines="#creator" property="file-as">Gojko Adzic and David Evans</meta>   
+   <meta refines="#creator" property="role" scheme="marc:relators">aut</meta>
+   <dc:language>en</dc:language>
+   <dc:publisher>leanpub.com</dc:publisher>
+   <dc:identifier id="BookId">https://leanpub.com/50quickideas</dc:identifier>
+   <dc:date>2013-12-24</dc:date>
+   <meta property="dcterms:modified">2015-08-17T09:37:58Z</meta>   
+
+   <meta name="cover" content="cover_image" />
+ </metadata>
+ <manifest>
+  <item id="style" href="stylesheet.css" media-type="text/css" />
+  <item id="titlepage" href="title_page.xhtml" media-type="application/xhtml+xml" />
+  <item id="versopage" href="verso_page.xhtml" media-type="application/xhtml+xml" />
+  <item id="toc" href="toc.xhtml" media-type="application/xhtml+xml" properties="nav" />
+  <item id="cover_image" href="images/title_page.jpg" media-type="image/jpeg" properties="cover-image" />
+  <item id="chapter00" href="chap00.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter01" href="chap01.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter02" href="chap02.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter03" href="chap03.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter04" href="chap04.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter05" href="chap05.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter06" href="chap06.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter07" href="chap07.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter08" href="chap08.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter09" href="chap09.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter10" href="chap10.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter11" href="chap11.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter12" href="chap12.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter13" href="chap13.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter14" href="chap14.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter15" href="chap15.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter16" href="chap16.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter17" href="chap17.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter18" href="chap18.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter19" href="chap19.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter20" href="chap20.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter21" href="chap21.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter22" href="chap22.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter23" href="chap23.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter24" href="chap24.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter25" href="chap25.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter26" href="chap26.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter27" href="chap27.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter28" href="chap28.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter29" href="chap29.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter30" href="chap30.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter31" href="chap31.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter32" href="chap32.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter33" href="chap33.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter34" href="chap34.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter35" href="chap35.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter36" href="chap36.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter37" href="chap37.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter38" href="chap38.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter39" href="chap39.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter40" href="chap40.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter41" href="chap41.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter42" href="chap42.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter43" href="chap43.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter44" href="chap44.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter45" href="chap45.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter46" href="chap46.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter47" href="chap47.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter48" href="chap48.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter49" href="chap49.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter50" href="chap50.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter51" href="chap51.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter52" href="chap52.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter53" href="chap53.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter54" href="chap54.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter55" href="chap55.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter56" href="chap56.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter57" href="chap57.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter58" href="chap58.xhtml" media-type="application/xhtml+xml" />
+  <item id="chapter59" href="chap59.xhtml" media-type="application/xhtml+xml" />
+  <item id="img000" href="images/mobi----join_conversation.jpg" media-type="image/jpeg" />
+  <item id="img001" href="images/mobi----tell_stories_dont_write.jpg" media-type="image/jpeg" />
+  <item id="img002" href="images/mobi----story_format.jpg" media-type="image/jpeg" />
+  <item id="img003" href="images/mobi----describe_a_behaviour_change.jpg" media-type="image/jpeg" />
+  <item id="img004" href="images/mobi----system_change.jpg" media-type="image/jpeg" />
+  <item id="img005" href="images/mobi----survivable_experiment.jpg" media-type="image/jpeg" />
+  <item id="img006" href="images/mobi----generic_roles.jpg" media-type="image/jpeg" />
+  <item id="img007" href="images/mobi----control_influence.jpg" media-type="image/jpeg" />
+  <item id="img008" href="images/mobi----best_before_2.jpg" media-type="image/jpeg" />
+  <item id="img009" href="images/mobi----major_risks_3.jpg" media-type="image/jpeg" />
+  <item id="img010" href="images/mobi----hierarchical_backlogs.jpg" media-type="image/jpeg" />
+  <item id="img011" href="images/mobi----funnel_001.jpg" media-type="image/jpeg" />
+  <item id="img012" href="images/mobi----impact_map_001.jpg" media-type="image/jpeg" />
+  <item id="img013" href="images/mobi----create_a_user_story_map.jpg" media-type="image/jpeg" />
+  <item id="img014" href="images/mobi----create_funnel.jpg" media-type="image/jpeg" />
+  <item id="img015" href="images/mobi----global_concern.jpg" media-type="image/jpeg" />
+  <item id="img016" href="images/mobi----stages_growth.jpg" media-type="image/jpeg" />
+  <item id="img017" href="images/mobi----purpose_alignement.jpg" media-type="image/jpeg" />
+  <item id="img018" href="images/mobi----stakeholder_map.jpg" media-type="image/jpeg" />
+  <item id="img019" href="images/mobi----milestones.jpg" media-type="image/jpeg" />
+  <item id="img020" href="images/mobi----choose_segment.jpg" media-type="image/jpeg" />
+  <item id="img021" href="images/mobi----low_tech.jpg" media-type="image/jpeg" />
+  <item id="img022" href="images/mobi----imagine_demonstration.jpg" media-type="image/jpeg" />
+  <item id="img023" href="images/mobi----diverge_merge.jpg" media-type="image/jpeg" />
+  <item id="img024" href="images/mobi----3_amigos.jpg" media-type="image/jpeg" />
+  <item id="img025" href="images/mobi----feedback_excercises.jpg" media-type="image/jpeg" />
+  <item id="img026" href="images/mobi----devils_advocate.jpg" media-type="image/jpeg" />
+  <item id="img027" href="images/mobi----divide_responsibility.jpg" media-type="image/jpeg" />
+  <item id="img028" href="images/mobi----split_business.jpg" media-type="image/jpeg" />
+  <item id="img029" href="images/mobi----multiple_levels.jpg" media-type="image/jpeg" />
+  <item id="img030" href="images/mobi----quper.jpg" media-type="image/jpeg" />
+  <item id="img031" href="images/mobi----output.jpg" media-type="image/jpeg" />
+  <item id="img032" href="images/mobi----skeleton_crutches_001.jpg" media-type="image/jpeg" />
+  <item id="img033" href="images/mobi----narrow_customer_segment.jpg" media-type="image/jpeg" />
+  <item id="img034" href="images/mobi----split_by_example.jpg" media-type="image/jpeg" />
+  <item id="img035" href="images/mobi----capacity.jpg" media-type="image/jpeg" />
+  <item id="img036" href="images/mobi----first_dummy.jpg" media-type="image/jpeg" />
+  <item id="img037" href="images/mobi----simplify.jpg" media-type="image/jpeg" />
+  <item id="img038" href="images/mobi----split_earning_and_learning.jpg" media-type="image/jpeg" />
+  <item id="img039" href="images/mobi----extract_basic_utility.jpg" media-type="image/jpeg" />
+  <item id="img040" href="images/mobi----hamburger_001.jpg" media-type="image/jpeg" />
+  <item id="img041" href="images/mobi----dont_push_001.jpg" media-type="image/jpeg" />
+  <item id="img042" href="images/mobi----budeget_estimating.jpg" media-type="image/jpeg" />
+  <item id="img043" href="images/mobi----avoid_numeric_sizing.jpg" media-type="image/jpeg" />
+  <item id="img044" href="images/mobi----measure_number_of_stories.jpg" media-type="image/jpeg" />
+  <item id="img045" href="images/mobi----measure_capacity_time.jpg" media-type="image/jpeg" />
+  <item id="img046" href="images/mobi----pick_impacts.jpg" media-type="image/jpeg" />
+  <item id="img047" href="images/mobi----not_now.jpg" media-type="image/jpeg" />
+  <item id="img048" href="images/mobi----ux_split_merdz.jpg" media-type="image/jpeg" />
+  <item id="img049" href="images/mobi----opt_ux.jpg" media-type="image/jpeg" />
+  <item id="img050" href="images/mobi----check_outcomes.jpg" media-type="image/jpeg" />
+  <item id="img051" href="images/mobi----throw_stories_away.jpg" media-type="image/jpeg" />
+  <item id="img052" href="images/mobi----reklama.jpg" media-type="image/jpeg" />
+  <item id="publisher-logo" href="images/leanpub-logo.png" media-type="image/png" />
+  <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+ </manifest>
+ <spine toc="ncx" page-progression-direction="ltr">
+  <itemref idref="titlepage" />
+  <itemref idref="versopage" />
+  <itemref idref="toc" />
+  <itemref idref="chapter00" />
+  <itemref idref="chapter01" />
+  <itemref idref="chapter02" />
+  <itemref idref="chapter03" />
+  <itemref idref="chapter04" />
+  <itemref idref="chapter05" />
+  <itemref idref="chapter06" />
+  <itemref idref="chapter07" />
+  <itemref idref="chapter08" />
+  <itemref idref="chapter09" />
+  <itemref idref="chapter10" />
+  <itemref idref="chapter11" />
+  <itemref idref="chapter12" />
+  <itemref idref="chapter13" />
+  <itemref idref="chapter14" />
+  <itemref idref="chapter15" />
+  <itemref idref="chapter16" />
+  <itemref idref="chapter17" />
+  <itemref idref="chapter18" />
+  <itemref idref="chapter19" />
+  <itemref idref="chapter20" />
+  <itemref idref="chapter21" />
+  <itemref idref="chapter22" />
+  <itemref idref="chapter23" />
+  <itemref idref="chapter24" />
+  <itemref idref="chapter25" />
+  <itemref idref="chapter26" />
+  <itemref idref="chapter27" />
+  <itemref idref="chapter28" />
+  <itemref idref="chapter29" />
+  <itemref idref="chapter30" />
+  <itemref idref="chapter31" />
+  <itemref idref="chapter32" />
+  <itemref idref="chapter33" />
+  <itemref idref="chapter34" />
+  <itemref idref="chapter35" />
+  <itemref idref="chapter36" />
+  <itemref idref="chapter37" />
+  <itemref idref="chapter38" />
+  <itemref idref="chapter39" />
+  <itemref idref="chapter40" />
+  <itemref idref="chapter41" />
+  <itemref idref="chapter42" />
+  <itemref idref="chapter43" />
+  <itemref idref="chapter44" />
+  <itemref idref="chapter45" />
+  <itemref idref="chapter46" />
+  <itemref idref="chapter47" />
+  <itemref idref="chapter48" />
+  <itemref idref="chapter49" />
+  <itemref idref="chapter50" />
+  <itemref idref="chapter51" />
+  <itemref idref="chapter52" />
+  <itemref idref="chapter53" />
+  <itemref idref="chapter54" />
+  <itemref idref="chapter55" />
+  <itemref idref="chapter56" />
+  <itemref idref="chapter57" />
+  <itemref idref="chapter58" />
+  <itemref idref="chapter59" />
+ </spine>
+
+<guide>
+  <reference href="title_page.xhtml" type="cover" title="Cover" />
+  <reference href="toc.xhtml" type="toc" title="Table of Contents" />
+  <reference href="chap00.xhtml" type="text" title="Start" />
+</guide>
+</package>
