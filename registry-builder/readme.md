@@ -1,5 +1,51 @@
 https://devaradise.com/react-example-projects/
 
+
+```mermaid
+graph TD
+    subgraph UI Layer
+        React[React Components]
+    end
+
+    subgraph Registry Layer
+        Registry[Registry Builder]
+        SemanticMap[Semantic Mapping Engine]
+        Confidence[Confidence Scoring]
+    end
+
+    subgraph Automation Layer
+        WDIO[WDIO Page Objects]
+    end
+
+    subgraph Test Logic Layer
+        Cucumber[Cucumber Steps]
+        Features[Feature Files]
+    end
+
+    subgraph Orchestration Layer
+        TaskManager[Task Manager]
+    end
+
+    React --> Registry
+    Registry --> SemanticMap
+    SemanticMap --> Confidence
+    Confidence --> WDIO
+    WDIO --> Cucumber
+    Cucumber --> Features
+    TaskManager --> Features
+    TaskManager --> WDIO
+    TaskManager --> Registry
+
+    Registry -->|Detects missing| WDIO
+    Registry -->|Generates locators| WDIO
+    TaskManager -->|Auto-generates tests| Features
+    React -->|Change detected| Registry
+    Registry -->|Propagates update| WDIO
+    WDIO -->|Triggers regeneration| Features
+```
+
+
+
 # Page Scanner - Interactive Element Finder for Test Automation 🚀
 
 **Scan React/Vue codebases and generate ready-to-use page objects for multiple test frameworks**
