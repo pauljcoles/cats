@@ -1,326 +1,411 @@
-# Page Scanner CLI - Framework Best Practices 🚀
+# 🎯 Test Automation Framework Registry Builder
 
-**Scan React/Vue codebases and generate framework-specific page objects with bidirectional mapping**
+A comprehensive tool for scanning web applications, generating page objects, and analyzing test automation coverage with bidirectional mapping between UI elements and existing tests.
 
-## 🎯 What It Does
+## ✨ Features
 
-- **Scans codebases** → Finds interactive elements with `data-testid` attributes
-- **Generates page objects** → Following each framework's official best practices
-- **Bidirectional mapping** → Maps relationships between scanned elements, generated page objects, existing page objects, and test files
-- **Multiple frameworks** → Playwright, WebdriverIO, Cypress, Selenium
-- **Multiple languages** → TypeScript, JavaScript, Python
+### 🔍 **Intelligent Element Scanning**
+- **Multi-framework support**: Playwright, WebdriverIO, Cypress, Selenium
+- **User-first detection**: Prioritizes "what the user sees" - visible text, placeholders, ARIA labels
+- **Page-aware analysis**: Organizes elements by page for better structure
+- **Contextual confidence scoring**: Rates element reliability based on semantic meaning
+- **Accessibility-focused**: ARIA attributes and semantic selectors get priority
 
-## ⚡ Quick Start
+### 🏗️ **Automated Page Object Generation**
+- **Framework-specific syntax**: Generates correct code for your chosen framework
+- **TypeScript support**: Strongly-typed page objects with proper imports
+- **Smart naming**: Converts element names to proper camelCase properties
+- **Class organization**: Creates separate page objects per page
+- **Index file generation**: Provides convenient imports for all page objects
+
+### 📊 **Advanced Coverage Analysis**
+- **Bidirectional mapping**: Links scanned elements to existing test locators
+- **Page-aware matching**: Ensures elements match on correct pages only
+- **Confidence-based scoring**: Intelligent matching with similarity detection
+- **Coverage metrics**: Detailed statistics on test automation coverage
+- **Gap identification**: Highlights missing page object methods
+
+### 🌐 **Interactive HTML Reports**
+- **Page selector**: Filter elements by specific pages
+- **Dynamic filtering**: Show all, covered, or new elements
+- **Implementation guides**: Ready-to-copy code for missing elements
+- **Framework-specific examples**: Shows only relevant framework code
+- **Copy-to-clipboard**: One-click code copying for implementation
+- **Visual indicators**: Clear status of matches and coverage
+
+### 📄 **Registry JSON Output**
+- **Machine-readable format**: Perfect for CI/CD integration
+- **Complete element catalog**: All scanned elements with metadata
+- **Match relationships**: Detailed mapping between elements and tests
+- **Coverage statistics**: Quantified metrics for reporting
+- **Bidirectional links**: Shows which tests use which elements
+
+## 🎯 Philosophy: User-First Element Detection
+
+### **Why "What the User Sees" Matters**
+
+Traditional test automation tools often prioritize technical attributes like `data-testid` or CSS selectors. This tool takes a **user-centric approach**:
+
+#### **🎯 User-Visible Elements Get Priority**
+- `button=Login` is better than `[data-testid="login-btn"]` because users see "Login"
+- `input[placeholder="Enter email"]` is better than `[data-testid="email"]` because users see the placeholder
+- `link=View Products` is better than `[data-testid="products-link"]` because users see the link text
+
+#### **♿ Accessibility-First Approach**
+- ARIA labels and roles get high confidence because they improve accessibility
+- Semantic HTML elements are prioritized over generic divs and spans
+- Screen readers and assistive technologies benefit from semantic selectors
+
+#### **🔧 Contextual data-testid Usage**
+- `data-testid` gets **10/10 confidence** on non-semantic elements (forms, divs, containers)
+- `data-testid` gets **8/10 confidence** on semantic elements (buttons, links) because better alternatives exist
+- This encourages developers to use semantic HTML while still supporting test attributes
+
+#### **🎨 Benefits of This Approach**
+- **More maintainable tests**: User-visible text changes less frequently than internal IDs
+- **Better accessibility**: Encourages semantic HTML and ARIA attributes
+- **Easier debugging**: When tests fail, you can easily find elements by their visible text
+- **Team alignment**: Developers, testers, and designers all understand user-visible elements
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
-# Install dependencies  
-npm install
-
-# Basic scan - app and tests in same directory
-
-# Separate app and test directories with bidirectional mapping
-npx ts-node src/cli.ts --scan ./frontend-app --tests ./e2e-tests --framework playwright --registry
+npm install -g taf-registry-builder
 ```
 
-## 🏗️ Framework Best Practices
-
-Each framework follows its official best practices and conventions:
-
-### **Playwright** - Semantic Selectors
-- Uses `getByRole`, `getByText`, `getByLabel`, etc.
-- Readonly `Locator` properties
-- Follows [Playwright Best Practices](https://playwright.dev/docs/best-practices)
+### Basic Usage
 
 ```bash
-npx ts-node src/cli.ts --scan ./src --framework playwright --registry
+# Scan a React app and generate Playwright page objects
+npx ts-node src/element-cli.ts --scan ./src --framework playwright --output ./page-objects
+
+# Analyze test coverage with existing tests
+npx ts-node src/element-cli.ts --scan ./src --framework playwright --tests ./tests --registry
+
+# Generate WebdriverIO page objects
+npx ts-node src/element-cli.ts --scan ./src --framework webdriverio --output ./page-objects
 ```
 
-### **WebdriverIO** - Getter Methods
-- Getter methods with `$` selectors
-- Accessibility-first selector strategy
-- Follows [WebdriverIO Best Practices](https://webdriver.io/docs/bestpractices/)
+## 📖 Detailed Usage
+
+### Command Line Options
 
 ```bash
-npx ts-node src/cli.ts --scan ./src --tests ./test --framework webdriverio --registry
-```
-
-### **Cypress** - Data Attributes
-- Prefers `data-cy` attributes
-- Method chaining pattern
-- Follows Cypress best practices
-
-```bash
-npx ts-node src/cli.ts --scan ./src --tests ./cypress --framework cypress --registry
-```
-
-### **Selenium** - ID/Name Locators
-- ID/name locators preferred
-- Proper WebDriverWait usage
-- By.* locator strategies
-
-```bash
-npx ts-node src/cli.ts --scan ./app --tests ./tests --framework selenium --language python --registry
-```
-
-## 📊 CLI Options
-
-```bash
-npx ts-node src/cli.ts [options]
+npx ts-node src/element-cli.ts [options]
 
 Options:
-  --scan <directory>     Directory to scan for pages (required)
-  --tests <directory>    Directory containing tests and page objects (optional)
-  --framework <name>     Target framework (required)
-                         Options: playwright, webdriverio, cypress, selenium
-  --language <lang>      Output language (default: typescript)
-                         Options: typescript, javascript, python
-  --output <directory>   Output directory (default: <scan>/scan-results/page-objects)
-  --registry             Generate registry data with bidirectional mapping
-  --help                 Show help message
+  --scan <path>        Path to scan for React/HTML files
+  --framework <name>   Testing framework (playwright|webdriverio|cypress|selenium)
+  --output <path>      Output directory for page objects
+  --tests <path>       Path to existing test files for coverage analysis
+  --registry           Generate registry JSON and HTML reports
+  --help              Show help information
 ```
 
-## 🔗 Bidirectional Mapping
+### Framework Support
 
-The `--registry` flag creates comprehensive mapping between:
-
-### **What Gets Mapped**
-- **Scanned Elements** → Interactive elements with `data-testid` attributes
-- **Generated Page Objects** → New page objects created from scanned elements
-- **Existing Page Objects** → Found in `tests/pages/` directory
-- **Test Files** → Found as `.spec.ts` files in tests directory
-
-### **Relationship Types**
-- **GENERATES**: Scanned elements → Generated page objects
-- **COULD_BE_USED_BY**: Generated page objects → Existing tests (by name similarity)
-- **USES**: Existing tests → Existing page objects (by imports/usage patterns)
-- **DUPLICATES**: Generated page objects → Existing page objects (coverage analysis)
-
-### **Output Files**
-```
-<scan-dir>/scan-results/registry-output/
-├── bidirectional-registry.json    # Complete mapping with nodes and relationships
-└── page-scan-results.json         # Raw scan results
-```
-
-## 📈 Example Output
-
-### **Scan Results**
-```
-🚀 Page Scanner - PLAYWRIGHT Best Practices
-
-📂 Scanning: ./frontend-app
-✅ Found 9 pages with 22 interactive elements
-
-📄 LoginPage (no route)
-   button    loginButton          ★★★★★ [data-testid="login-btn"]
-   input     emailInput           ★★★★★ [data-testid="email-input"]
-   input     passwordInput        ★★★★★ [data-testid="password-input"]
-
-📄 ProductPage (/products/:id)
-   button    addToCartButton      ★★★★★ [data-testid="add-to-cart"]
-   button    buyNowButton         ★★★★★ [data-testid="buy-now"]
-
-🏗️  Generating playwright page objects following best practices...
-
-✅ playwright page objects generated in ./frontend-app/scan-results/page-objects
-
-📊 Generating Registry Data...
-  📊 Bidirectional registry: ./scan-results/registry-output/bidirectional-registry.json
-  📄 Scan results: ./scan-results/registry-output/page-scan-results.json
-  🔗 45 relationships mapped
-  📈 22 elements → page objects
-  🧪 8 page objects → potential tests
-  📋 12 tests → existing page objects
-```
-
-### **Generated Playwright Page Object**
+#### **Playwright**
 ```typescript
-import { Page, Locator } from '@playwright/test';
-
+// Generated page object
 export class LoginPage {
-  readonly page: Page;
-  readonly loginButton: Locator;
-  readonly emailInput: Locator;
+  readonly usernameInput: Locator;
   readonly passwordInput: Locator;
+  readonly loginButton: Locator;
 
-  constructor(page: Page) {
-    this.page = page;
-    this.loginButton = page.getByTestId('login-btn');
-    this.emailInput = page.getByTestId('email-input');
-    this.passwordInput = page.getByTestId('password-input');
-  }
-
-  async login(email: string, password: string): Promise<void> {
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
-    await this.loginButton.click();
+  constructor(private page: Page) {
+    this.usernameInput = page.locator('[data-testid="username"]');
+    this.passwordInput = page.locator('[data-testid="password"]');
+    this.loginButton = page.locator('[data-testid="login-btn"]');
   }
 }
+
+// Usage in tests
+const loginPage = new LoginPage(page);
+await loginPage.loginButton.click();
 ```
 
-### **Generated WebdriverIO Page Object**
+#### **WebdriverIO**
 ```typescript
+// Generated page object
 export class LoginPage {
-  /**
-   * Get loginButton element
-   * button - testid (confidence: 10/10)
-   */
+  get usernameInput() {
+    return $('[data-testid="username"]');
+  }
+
+  get passwordInput() {
+    return $('[data-testid="password"]');
+  }
+
   get loginButton() {
     return $('[data-testid="login-btn"]');
   }
+}
 
-  /**
-   * Get emailInput element
-   * input - testid (confidence: 10/10)
-   */
-  get emailInput() {
-    return $('[data-testid="email-input"]');
+// Usage in tests
+const loginPage = new LoginPage();
+await loginPage.loginButton.click();
+```
+
+#### **Cypress**
+```typescript
+// Generated page object
+export class LoginPage {
+  get usernameInput() {
+    return cy.get('[data-testid="username"]');
   }
 
-  async login(email: string, password: string): Promise<void> {
-    await this.emailInput.setValue(email);
-    await this.passwordInput.setValue(password);
-    await this.loginButton.click();
+  get passwordInput() {
+    return cy.get('[data-testid="password"]');
   }
+
+  get loginButton() {
+    return cy.get('[data-testid="login-btn"]');
+  }
+}
+
+// Usage in tests
+const loginPage = new LoginPage();
+loginPage.loginButton.click();
+```
+
+## 📊 Coverage Analysis
+
+### HTML Report Features
+
+The interactive HTML report provides:
+
+- **📄 Page Selector**: Filter elements by specific pages
+- **🔍 Smart Filtering**: Show all, covered, or new elements
+- **📊 Static Summary Cards**: Overall project statistics that don't change with filters
+- **🎯 Implementation Guides**: Complete code examples for missing elements
+- **📋 Copy-to-Clipboard**: One-click copying of implementation code
+- **🌍 Filter Status**: Clear indication of current view
+- **📅 Date Format**: dd/mm/yyyy format for international compatibility
+
+### Registry JSON Structure
+
+```json
+{
+  "metadata": {
+    "framework": "playwright",
+    "generatedAt": "10/08/2025 23:12:40",
+    "version": "1.0.0"
+  },
+  "summary": {
+    "total": 57,
+    "exact": 27,
+    "similar": 0,
+    "none": 30,
+    "coverage": 47.4
+  },
+  "elements": [
+    {
+      "name": "login_button",
+      "page": "Login",
+      "locator": "[data-testid=\"login-btn\"]",
+      "locatorType": "testid",
+      "confidence": 10,
+      "matchType": "exact",
+      "existingLocator": {
+        "className": "LoginPage",
+        "method": "loginButton",
+        "filePath": "tests/pages/LoginPage.ts",
+        "framework": "playwright"
+      }
+    }
+  ]
 }
 ```
 
-## 🎯 Key Features
+## 🎯 Advanced Features
 
-### **Enhanced Element Detection**
-- Detects elements with `data-testid` attributes regardless of HTML tag type
-- Handles custom components (divs, spans) with test attributes
-- Highest confidence score (10/10) for `testid` locator type
-- Skips traditional noise elements without test attributes
+### Page-Aware Element Matching
 
-### **Smart Class Name Generation**
-- Handles invalid JavaScript identifiers
-- Transforms `404` → `Page404Page`
-- Transforms `media.tests` → `MediaTestsPage`
-- Prefixes number-starting identifiers with "element"
+The tool intelligently matches elements to existing page objects based on:
 
-### **Framework-Specific Best Practices**
-- **Playwright**: Semantic selectors with readonly Locator properties
-- **WebdriverIO**: Getter methods with accessibility-first selectors
-- **Cypress**: data-cy attributes with method chaining
-- **Selenium**: ID/name locators with proper waits
+- **Page context**: Elements only match if they're on the correct page
+- **Locator similarity**: Compares actual selectors used
+- **Confidence scoring**: Rates match quality from 0-100%
+- **Framework compatibility**: Ensures matches use the same testing framework
 
-### **Duplicate-Safe Generation**
-- Generated property and method names use counters for uniqueness
-- Handles multiple elements with similar names gracefully
+### Smart Element Detection
 
-## 🔧 Advanced Usage
+Elements are detected using a **"user-first"** strategy that prioritizes what users actually see and interact with:
 
-### **Separate Codebases**
-Perfect for microservices or separate frontend/test repositories:
+#### **🎯 Highest Confidence (10/10 - ★★★★★)**: 
+- **Semantic selectors with visible text**: `button=Login`, `link=View Products`
+- **data-testid on non-semantic elements**: `div[data-testid="modal"]`, `form[data-testid="checkout"]`
+
+#### **⭐ High Confidence (9/10 - ★★★★)**: 
+- **User-visible placeholders**: `input[placeholder="Enter email"]`
+- **ARIA labels**: `[aria-label="Close dialog"]`
+
+#### **📍 Good Confidence (8/10 - ★★★★)**: 
+- **data-testid on semantic elements**: `button[data-testid="submit"]` (lower because semantic alternative exists)
+- **ARIA roles**: `[role="button"]`
+- **Input names**: `input[name="username"]`
+
+#### **🔍 Medium Confidence (7/10 - ★★★)**: 
+- **Input types**: `input[type="email"]`
+- **ID selectors**: `#login-form`
+
+#### **⚠️ Low Confidence (3/10 - ★)**: 
+- **CSS fallbacks**: `button`, `div`, `form`
+
+### **Why This Approach?**
+
+1. **🎯 User-Centric**: Tests should interact with elements the way users do
+2. **🔍 Maintainable**: Visible text is less likely to change than internal IDs
+3. **♿ Accessible**: Prioritizes ARIA attributes and semantic HTML
+4. **🎨 Contextual**: `data-testid` gets full confidence only when semantic alternatives don't exist
+
+### Bidirectional Registry
+
+The registry provides complete bidirectional mapping:
+
+- **Elements → Tests**: Which tests use each scanned element
+- **Tests → Elements**: Which elements are used by each test file
+- **Page Objects → Elements**: Which elements belong to each page object
+- **Coverage Gaps**: Which elements need page object methods
+
+### Interactive HTML Report
+
+The HTML report includes:
+
+- **Framework-specific implementation**: Shows only code for your chosen framework
+- **Copy-to-clipboard functionality**: One-click copying of implementation code
+- **Page filtering**: View elements by specific pages
+- **Coverage filtering**: Show all, covered, or new elements only
+- **Static summary cards**: Overall statistics that don't change with filters
+- **Implementation guides**: Step-by-step code examples for new elements
+
+## 🛠️ Development
+
+### Building from Source
 
 ```bash
-# React frontend + separate E2E test repository
-npx ts-node src/cli.ts --scan ./frontend-app --tests ./e2e-tests --framework playwright --registry
-
-# Vue app + separate Cypress tests
-npx ts-node src/cli.ts --scan ./vue-app --tests ./cypress-tests --framework cypress --registry
-
-# Multiple test frameworks from same codebase
-npx ts-node src/cli.ts --scan ./app --tests ./tests/playwright --framework playwright --registry
-npx ts-node src/cli.ts --scan ./app --tests ./tests/webdriverio --framework webdriverio --registry
+git clone <repository-url>
+cd taf-registry-builder
+npm install
+npm run build
 ```
 
-### **Registry Analysis**
-The bidirectional registry provides insights for:
+### Running Tests
 
-- **Coverage gaps**: Generated page objects without existing duplicates
-- **Test integration**: Which generated page objects could be used by existing tests
-- **Refactoring opportunities**: Existing page objects that duplicate generated ones
-- **Usage tracking**: Which tests use which page objects
-
-### **Selector Priority Order**
-Each framework follows its recommended selector priority:
-
-- **Playwright**: `getByRole > getByText > getByLabel > getByPlaceholder > getByTestId > CSS`
-- **WebdriverIO**: `aria-label > role > data-testid > placeholder > CSS`
-- **Cypress**: `data-cy > data-testid > aria-label > CSS`
-- **Selenium**: `ID > name > data-testid > CSS`
-
-## 📁 Project Structure
-
-```
-registry-builder/
-├── src/
-│   ├── cli.ts                      # Main CLI with bidirectional mapping
-│   ├── page-scanner.ts             # Enhanced element detection
-│   ├── best-practices-generator.ts # Framework-specific generators
-│   └── registry-builder.ts         # Legacy complex registry builder
-├── README.md                       # This file
-├── README-old.md                   # Previous README backup
-└── scan-results/                   # Generated outputs
-    ├── page-objects/               # Framework-specific page objects
-    └── registry-output/            # Bidirectional mapping data
+```bash
+npm test                    # Run all tests
+npm test -- --watch        # Run tests in watch mode
+npm run test:coverage       # Run tests with coverage
 ```
 
-## 🚀 Integration Examples
+### Project Structure
 
-### **Playwright Test**
-```typescript
-import { test, expect } from '@playwright/test';
-import { LoginPage } from './scan-results/page-objects/LoginPage';
+```
+src/
+├── element-cli.ts          # Main CLI interface
+├── element-scanner.ts      # Element detection logic
+├── element-matcher.ts      # Coverage analysis engine
+├── page-object-generator.ts # Code generation
+└── types.ts               # TypeScript definitions
 
-test('user login', async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  
-  await page.goto('/login');
-  await loginPage.login('user@example.com', 'password123');
-  
-  await expect(page).toHaveURL('/dashboard');
-});
+test/
+├── unit/                  # Unit tests
+└── fixtures/              # Test data
 ```
 
-### **WebdriverIO Test**
-```javascript
-import { LoginPage } from './scan-results/page-objects/LoginPage';
+## 📈 Use Cases
 
-describe('Login Flow', () => {
-  const loginPage = new LoginPage();
+### 🎯 **Test Automation Setup**
+- Generate page objects for new projects
+- Standardize element selectors across teams
+- Create consistent page object patterns
 
-  it('should login successfully', async () => {
-    await browser.url('/login');
-    await loginPage.login('user@example.com', 'password123');
-    await expect(browser).toHaveUrl(expect.stringContaining('/dashboard'));
-  });
-});
+### 📊 **Coverage Analysis**
+- Identify gaps in test automation coverage
+- Track progress of automation efforts
+- Generate reports for stakeholders
+
+### 🔄 **Maintenance & Refactoring**
+- Find unused page object methods
+- Identify duplicate element definitions
+- Update selectors across multiple files
+
+### 🚀 **CI/CD Integration**
+- Automated coverage reporting
+- Quality gates based on coverage metrics
+- Continuous monitoring of test automation health
+
+## 🎨 Example Outputs
+
+### Console Output
+```
+🎯 PLAYWRIGHT Element Analysis
+
+🔍 Scanning ./test for interactive elements...
+✅ Found 5 pages with 57 interactive elements
+
+📄 Test (/testpage)
+   button   button_submit_form   ★★★★★ button=Submit Form
+   input    input_enter_email    ★★★★ input[placeholder="Enter email"]
+   button   button_add_to_cart   ★★★★★ button=Add to Cart
+   ... and 12 more
+
+📄 Checkout (/checkoutpage)
+   form     form_checkout        ★★★★★ [data-testid="shipping-form"]
+   input    input_first_name     ★★★★ input[placeholder="First Name"]
+   input    input_address        ★★★★ input[placeholder="Address"]
+   ... and 9 more
+
+🏗️  Generating playwright page objects in typescript...
+   ✅ TestPage.ts (17 elements)
+   ✅ CheckoutPage.ts (14 elements)
+   ✅ HomePage.ts (9 elements)
+
+🔍 Analyzing playwright test coverage...
+   📊 57 total elements scanned
+   ✅ 27 elements already covered
+   🆕 30 elements need page object methods
+   📈 47.4% test coverage
+
+🌐 Coverage analysis: test/scan-results/registry/element-matches.html
+📄 Registry JSON: test/scan-results/registry/registry.json
 ```
 
-## 🔍 What Makes This Different
-
-### **From Previous Registry Builder**
-- **Simplified CLI**: Two parameters instead of complex configuration
-- **Framework focus**: Generates ready-to-use page objects, not raw JSON
-- **Best practices**: Each framework follows its official conventions
-- **Bidirectional mapping**: Shows relationships between all components
-
-### **From Generic Scrapers**
-- **Test-focused**: Only elements with `data-testid` attributes
-- **High confidence**: 10/10 confidence for test attributes
-- **Framework-specific**: Tailored output for each automation framework
-- **Clean naming**: Meaningful names like `loginButton` not `button_element`
+### Generated Files Structure
+```
+scan-results/
+├── page-objects/
+│   ├── TestPage.ts
+│   ├── CheckoutPage.ts
+│   ├── HomePage.ts
+│   ├── ProductPage.ts
+│   ├── LoginPage.ts
+│   └── index.ts
+└── registry/
+    ├── element-matches.html
+    └── registry.json
+```
 
 ## 🤝 Contributing
 
-1. **Core scanning logic**: `page-scanner.ts`
-2. **Framework generators**: `best-practices-generator.ts`
-3. **CLI interface**: `cli.ts`
-4. **Add new frameworks**: Extend the generator with framework-specific patterns
-
-## 📄 Requirements
-
-- **Node.js** 16+ with TypeScript support
-- **npm** for dependencies
-- **Source code** with `data-testid` attributes on interactive elements
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-Open source - build amazing automation tools! 🎉
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built for modern test automation frameworks
+- Inspired by the need for better test coverage visibility
+- Designed to reduce manual page object maintenance
 
 ---
 
-**Page Scanner CLI** - From codebase to framework-specific page objects with bidirectional mapping ⚡
+**🎯 Ready to supercharge your test automation? Get started with the Test Automation Framework Registry Builder today!**

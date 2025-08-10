@@ -19,3 +19,4 @@ registry-builder/node_modules
   # Development files
   *.log
 .DS_Store
+registry-builder/package-lock.json

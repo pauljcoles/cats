@@ -1,0 +1,1612 @@
+{
+  "metadata": {
+    "framework": "playwright",
+    "generatedAt": "10/08/2025 23:12:40",
+    "version": "1.0.0"
+  },
+  "summary": {
+    "total": 57,
+    "exact": 27,
+    "similar": 0,
+    "none": 30,
+    "coverage": 47.368421052631575
+  },
+  "elements": [
+    {
+      "scanned": {
+        "name": "button_submit_form",
+        "page": "Test",
+        "tagName": "button",
+        "locator": "[data-testid=\"submit-btn\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_enter_email",
+        "page": "Test",
+        "tagName": "input",
+        "locator": "[data-testid=\"email-input\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_add_to_cart",
+        "page": "Test",
+        "tagName": "button",
+        "locator": "button=Add to Cart",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": {
+        "locator": "button=Add to Cart",
+        "locatorType": "role",
+        "method": "addToCartButton",
+        "className": "TestPage",
+        "pageName": "test",
+        "filePath": "pages/TestPage.ts",
+        "framework": "playwright",
+        "lineNumber": 19
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_buy_now",
+        "page": "Test",
+        "tagName": "button",
+        "locator": "button=Buy Now",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": {
+        "locator": "button=Buy Now",
+        "locatorType": "role",
+        "method": "name",
+        "className": "TestFile",
+        "pageName": "unknown",
+        "filePath": "tests/form-interactions.spec.ts",
+        "framework": "playwright",
+        "lineNumber": 29
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "a_view_products",
+        "page": "Test",
+        "tagName": "a",
+        "locator": "link=View Products",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_search_products",
+        "page": "Test",
+        "tagName": "input",
+        "locator": "input[placeholder=\"Search products...\"]",
+        "locatorType": "attribute",
+        "confidence": 7,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0.7,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_enter_password",
+        "page": "Test",
+        "tagName": "input",
+        "locator": "input[placeholder=\"Enter password\"]",
+        "locatorType": "attribute",
+        "confidence": 7,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_",
+        "page": "Test",
+        "tagName": "button",
+        "locator": "button=×",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "select_select_country",
+        "page": "Test",
+        "tagName": "select",
+        "locator": "[aria-label=\"Select country\"]",
+        "locatorType": "attribute",
+        "confidence": 8,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": {
+        "locator": "[aria-label=\"Select country\"]",
+        "locatorType": "aria-label",
+        "method": "unknown",
+        "className": "TestFile",
+        "pageName": "unknown",
+        "filePath": "tests/form-interactions.spec.ts",
+        "framework": "playwright",
+        "lineNumber": 18
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_username",
+        "page": "Test",
+        "tagName": "input",
+        "locator": "input[name=\"username\"]",
+        "locatorType": "attribute",
+        "confidence": 8,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "select_test",
+        "page": "Test",
+        "tagName": "select",
+        "locator": "select",
+        "locatorType": "fallback",
+        "confidence": 3,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_save",
+        "page": "Test",
+        "tagName": "button",
+        "locator": "button=Save",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": {
+        "locator": "button=Save",
+        "locatorType": "role",
+        "method": "name",
+        "className": "TestFile",
+        "pageName": "unknown",
+        "filePath": "tests/form-interactions.spec.ts",
+        "framework": "playwright",
+        "lineNumber": 19
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_text",
+        "page": "Test",
+        "tagName": "input",
+        "locator": "input[type=\"text\"]",
+        "locatorType": "attribute",
+        "confidence": 6,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_generic_button_1",
+        "page": "Test",
+        "tagName": "button",
+        "locator": "button=Generic Button 1",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": {
+        "locator": "button=Generic Button 1",
+        "locatorType": "role",
+        "method": "name",
+        "className": "TestFile",
+        "pageName": "unknown",
+        "filePath": "tests/form-interactions.spec.ts",
+        "framework": "playwright",
+        "lineNumber": 9
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_generic_button_2",
+        "page": "Test",
+        "tagName": "button",
+        "locator": "button=Generic Button 2",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_text",
+        "page": "Test",
+        "tagName": "input",
+        "locator": "input[type=\"text\"]",
+        "locatorType": "attribute",
+        "confidence": 6,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "select_test",
+        "page": "Test",
+        "tagName": "select",
+        "locator": "select",
+        "locatorType": "fallback",
+        "confidence": 3,
+        "filePath": "test-app/src/pages/TestPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "form_checkout",
+        "page": "Checkout",
+        "tagName": "form",
+        "locator": "[data-testid=\"shipping-form\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_first_name",
+        "page": "Checkout",
+        "tagName": "input",
+        "locator": "[data-testid=\"first-name\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"first-name\"]",
+        "locatorType": "testid",
+        "method": "firstNameInput",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 22
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_last_name",
+        "page": "Checkout",
+        "tagName": "input",
+        "locator": "[data-testid=\"last-name\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"last-name\"]",
+        "locatorType": "testid",
+        "method": "lastNameInput",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 23
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_address",
+        "page": "Checkout",
+        "tagName": "input",
+        "locator": "[data-testid=\"address\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"address\"]",
+        "locatorType": "testid",
+        "method": "addressInput",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 24
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_city",
+        "page": "Checkout",
+        "tagName": "input",
+        "locator": "[data-testid=\"city\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"city\"]",
+        "locatorType": "testid",
+        "method": "cityInput",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 25
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "select_state",
+        "page": "Checkout",
+        "tagName": "select",
+        "locator": "[data-testid=\"state-select\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"state-select\"]",
+        "locatorType": "testid",
+        "method": "stateSelect",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 26
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_zip_code",
+        "page": "Checkout",
+        "tagName": "input",
+        "locator": "[data-testid=\"zip-code\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"zip-code\"]",
+        "locatorType": "testid",
+        "method": "zipCodeInput",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 27
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "form_checkout",
+        "page": "Checkout",
+        "tagName": "form",
+        "locator": "[data-testid=\"payment-form\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_card_number",
+        "page": "Checkout",
+        "tagName": "input",
+        "locator": "[data-testid=\"card-number\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"card-number\"]",
+        "locatorType": "testid",
+        "method": "cardNumberInput",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 28
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_mmyy",
+        "page": "Checkout",
+        "tagName": "input",
+        "locator": "[data-testid=\"expiry\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"expiry\"]",
+        "locatorType": "testid",
+        "method": "expiryInput",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 29
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_cvv",
+        "page": "Checkout",
+        "tagName": "input",
+        "locator": "[data-testid=\"cvv\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"cvv\"]",
+        "locatorType": "testid",
+        "method": "cvvInput",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 30
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_place_order",
+        "page": "Checkout",
+        "tagName": "button",
+        "locator": "[data-testid=\"place-order\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"place-order\"]",
+        "locatorType": "testid",
+        "method": "placeOrderButton",
+        "className": "CheckoutPage",
+        "pageName": "checkout",
+        "filePath": "pages/CheckoutPage.ts",
+        "framework": "playwright",
+        "lineNumber": 31
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_back_to_cart",
+        "page": "Checkout",
+        "tagName": "button",
+        "locator": "button=Back to Cart",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "a_edit_cart",
+        "page": "Checkout",
+        "tagName": "a",
+        "locator": "link=Edit Cart",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/CheckoutPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_menu",
+        "page": "Home",
+        "tagName": "button",
+        "locator": "[data-testid=\"menu-btn\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"menu-btn\"]",
+        "locatorType": "testid",
+        "method": "menuButton",
+        "className": "HomePage",
+        "pageName": "home",
+        "filePath": "pages/HomePage.ts",
+        "framework": "playwright",
+        "lineNumber": 16
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_search",
+        "page": "Home",
+        "tagName": "input",
+        "locator": "[data-testid=\"search-input\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"search-input\"]",
+        "locatorType": "testid",
+        "method": "searchInput",
+        "className": "HomePage",
+        "pageName": "home",
+        "filePath": "pages/HomePage.ts",
+        "framework": "playwright",
+        "lineNumber": 17
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_search",
+        "page": "Home",
+        "tagName": "button",
+        "locator": "[data-testid=\"search-btn\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"search-btn\"]",
+        "locatorType": "testid",
+        "method": "searchButton",
+        "className": "HomePage",
+        "pageName": "home",
+        "filePath": "pages/HomePage.ts",
+        "framework": "playwright",
+        "lineNumber": 18
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_get_started",
+        "page": "Home",
+        "tagName": "button",
+        "locator": "button=Get Started",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": {
+        "locator": "button=Get Started",
+        "locatorType": "role",
+        "method": "getStartedButton",
+        "className": "HomePage",
+        "pageName": "home",
+        "filePath": "pages/HomePage.ts",
+        "framework": "playwright",
+        "lineNumber": 19
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_learn_more",
+        "page": "Home",
+        "tagName": "button",
+        "locator": "button=Learn More",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "a_view_products",
+        "page": "Home",
+        "tagName": "a",
+        "locator": "link=View Products",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "a_about_us",
+        "page": "Home",
+        "tagName": "a",
+        "locator": "link=About Us",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "select_country",
+        "page": "Home",
+        "tagName": "select",
+        "locator": "[aria-label=\"Country\"]",
+        "locatorType": "attribute",
+        "confidence": 8,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_subscribe",
+        "page": "Home",
+        "tagName": "button",
+        "locator": "button=Subscribe",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/HomePage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_add_to_cart",
+        "page": "Product",
+        "tagName": "button",
+        "locator": "[data-testid=\"add-to-cart\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"add-to-cart\"]",
+        "locatorType": "testid",
+        "method": "addToCartButton",
+        "className": "ProductPage",
+        "pageName": "product",
+        "filePath": "pages/ProductPage.ts",
+        "framework": "playwright",
+        "lineNumber": 17
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_buy_now",
+        "page": "Product",
+        "tagName": "button",
+        "locator": "[data-testid=\"buy-now\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"buy-now\"]",
+        "locatorType": "testid",
+        "method": "buyNowButton",
+        "className": "ProductPage",
+        "pageName": "product",
+        "filePath": "pages/ProductPage.ts",
+        "framework": "playwright",
+        "lineNumber": 18
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_add_to_wishlist",
+        "page": "Product",
+        "tagName": "button",
+        "locator": "button=Add to Wishlist",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "form_product",
+        "page": "Product",
+        "tagName": "form",
+        "locator": "form",
+        "locatorType": "fallback",
+        "confidence": 3,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "select_size",
+        "page": "Product",
+        "tagName": "select",
+        "locator": "[data-testid=\"size-select\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"size-select\"]",
+        "locatorType": "testid",
+        "method": "sizeSelect",
+        "className": "ProductPage",
+        "pageName": "product",
+        "filePath": "pages/ProductPage.ts",
+        "framework": "playwright",
+        "lineNumber": 19
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "select_color",
+        "page": "Product",
+        "tagName": "select",
+        "locator": "[data-testid=\"color-select\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"color-select\"]",
+        "locatorType": "testid",
+        "method": "colorSelect",
+        "className": "ProductPage",
+        "pageName": "product",
+        "filePath": "pages/ProductPage.ts",
+        "framework": "playwright",
+        "lineNumber": 20
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_number",
+        "page": "Product",
+        "tagName": "input",
+        "locator": "[data-testid=\"quantity-input\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"quantity-input\"]",
+        "locatorType": "testid",
+        "method": "quantityInput",
+        "className": "ProductPage",
+        "pageName": "product",
+        "filePath": "pages/ProductPage.ts",
+        "framework": "playwright",
+        "lineNumber": 21
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_write_review",
+        "page": "Product",
+        "tagName": "button",
+        "locator": "button=Write Review",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "a_view_all_reviews",
+        "page": "Product",
+        "tagName": "a",
+        "locator": "link=View All Reviews",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/ProductPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "form_login",
+        "page": "Login",
+        "tagName": "form",
+        "locator": "form",
+        "locatorType": "fallback",
+        "confidence": 3,
+        "filePath": "test-app/src/pages/LoginPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_username",
+        "page": "Login",
+        "tagName": "input",
+        "locator": "[data-testid=\"username-input\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/LoginPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"username-input\"]",
+        "locatorType": "testid",
+        "method": "usernameField",
+        "className": "LoginPage",
+        "pageName": "login",
+        "filePath": "pages/LoginPage.ts",
+        "framework": "playwright",
+        "lineNumber": 15
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_password",
+        "page": "Login",
+        "tagName": "input",
+        "locator": "[data-testid=\"password-input\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/LoginPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"password-input\"]",
+        "locatorType": "testid",
+        "method": "passwordField",
+        "className": "LoginPage",
+        "pageName": "login",
+        "filePath": "pages/LoginPage.ts",
+        "framework": "playwright",
+        "lineNumber": 16
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_login",
+        "page": "Login",
+        "tagName": "button",
+        "locator": "[data-testid=\"login-btn\"]",
+        "locatorType": "testid",
+        "confidence": 10,
+        "filePath": "test-app/src/pages/LoginPage.tsx"
+      },
+      "existing": {
+        "locator": "[data-testid=\"login-btn\"]",
+        "locatorType": "testid",
+        "method": "loginButton",
+        "className": "LoginPage",
+        "pageName": "login",
+        "filePath": "pages/LoginPage.ts",
+        "framework": "playwright",
+        "lineNumber": 17
+      },
+      "match": {
+        "type": "exact",
+        "confidence": 1,
+        "pageMatch": true
+      }
+    },
+    {
+      "scanned": {
+        "name": "button_forgot_password",
+        "page": "Login",
+        "tagName": "button",
+        "locator": "button=Forgot Password",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/LoginPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "a_create_account",
+        "page": "Login",
+        "tagName": "a",
+        "locator": "link=Create Account",
+        "locatorType": "semantic",
+        "confidence": 9,
+        "filePath": "test-app/src/pages/LoginPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "select_language",
+        "page": "Login",
+        "tagName": "select",
+        "locator": "[aria-label=\"Language\"]",
+        "locatorType": "attribute",
+        "confidence": 8,
+        "filePath": "test-app/src/pages/LoginPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    },
+    {
+      "scanned": {
+        "name": "input_checkbox",
+        "page": "Login",
+        "tagName": "input",
+        "locator": "input[type=\"checkbox\"]",
+        "locatorType": "attribute",
+        "confidence": 6,
+        "filePath": "test-app/src/pages/LoginPage.tsx"
+      },
+      "existing": null,
+      "match": {
+        "type": "none",
+        "confidence": 0,
+        "pageMatch": false
+      }
+    }
+  ],
+  "pages": {
+    "Test": {
+      "name": "Test",
+      "totalElements": 17,
+      "coveredElements": 5,
+      "newElements": 12,
+      "elements": [
+        {
+          "name": "button_submit_form",
+          "locator": "[data-testid=\"submit-btn\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "input_enter_email",
+          "locator": "[data-testid=\"email-input\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "button_add_to_cart",
+          "locator": "button=Add to Cart",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_buy_now",
+          "locator": "button=Buy Now",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "a_view_products",
+          "locator": "link=View Products",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "input_search_products",
+          "locator": "input[placeholder=\"Search products...\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "input_enter_password",
+          "locator": "input[placeholder=\"Enter password\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "button_",
+          "locator": "button=×",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "select_select_country",
+          "locator": "[aria-label=\"Select country\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_username",
+          "locator": "input[name=\"username\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "select_test",
+          "locator": "select",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "button_save",
+          "locator": "button=Save",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_text",
+          "locator": "input[type=\"text\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "button_generic_button_1",
+          "locator": "button=Generic Button 1",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_generic_button_2",
+          "locator": "button=Generic Button 2",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "input_text",
+          "locator": "input[type=\"text\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "select_test",
+          "locator": "select",
+          "matchType": "none",
+          "covered": false
+        }
+      ]
+    },
+    "Checkout": {
+      "name": "Checkout",
+      "totalElements": 14,
+      "coveredElements": 10,
+      "newElements": 4,
+      "elements": [
+        {
+          "name": "form_checkout",
+          "locator": "[data-testid=\"shipping-form\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "input_first_name",
+          "locator": "[data-testid=\"first-name\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_last_name",
+          "locator": "[data-testid=\"last-name\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_address",
+          "locator": "[data-testid=\"address\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_city",
+          "locator": "[data-testid=\"city\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "select_state",
+          "locator": "[data-testid=\"state-select\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_zip_code",
+          "locator": "[data-testid=\"zip-code\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "form_checkout",
+          "locator": "[data-testid=\"payment-form\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "input_card_number",
+          "locator": "[data-testid=\"card-number\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_mmyy",
+          "locator": "[data-testid=\"expiry\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_cvv",
+          "locator": "[data-testid=\"cvv\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_place_order",
+          "locator": "[data-testid=\"place-order\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_back_to_cart",
+          "locator": "button=Back to Cart",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "a_edit_cart",
+          "locator": "link=Edit Cart",
+          "matchType": "none",
+          "covered": false
+        }
+      ]
+    },
+    "Home": {
+      "name": "Home",
+      "totalElements": 9,
+      "coveredElements": 4,
+      "newElements": 5,
+      "elements": [
+        {
+          "name": "button_menu",
+          "locator": "[data-testid=\"menu-btn\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_search",
+          "locator": "[data-testid=\"search-input\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_search",
+          "locator": "[data-testid=\"search-btn\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_get_started",
+          "locator": "button=Get Started",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_learn_more",
+          "locator": "button=Learn More",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "a_view_products",
+          "locator": "link=View Products",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "a_about_us",
+          "locator": "link=About Us",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "select_country",
+          "locator": "[aria-label=\"Country\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "button_subscribe",
+          "locator": "button=Subscribe",
+          "matchType": "none",
+          "covered": false
+        }
+      ]
+    },
+    "Product": {
+      "name": "Product",
+      "totalElements": 9,
+      "coveredElements": 5,
+      "newElements": 4,
+      "elements": [
+        {
+          "name": "button_add_to_cart",
+          "locator": "[data-testid=\"add-to-cart\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_buy_now",
+          "locator": "[data-testid=\"buy-now\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_add_to_wishlist",
+          "locator": "button=Add to Wishlist",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "form_product",
+          "locator": "form",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "select_size",
+          "locator": "[data-testid=\"size-select\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "select_color",
+          "locator": "[data-testid=\"color-select\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_number",
+          "locator": "[data-testid=\"quantity-input\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_write_review",
+          "locator": "button=Write Review",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "a_view_all_reviews",
+          "locator": "link=View All Reviews",
+          "matchType": "none",
+          "covered": false
+        }
+      ]
+    },
+    "Login": {
+      "name": "Login",
+      "totalElements": 8,
+      "coveredElements": 3,
+      "newElements": 5,
+      "elements": [
+        {
+          "name": "form_login",
+          "locator": "form",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "input_username",
+          "locator": "[data-testid=\"username-input\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "input_password",
+          "locator": "[data-testid=\"password-input\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_login",
+          "locator": "[data-testid=\"login-btn\"]",
+          "matchType": "exact",
+          "covered": true
+        },
+        {
+          "name": "button_forgot_password",
+          "locator": "button=Forgot Password",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "a_create_account",
+          "locator": "link=Create Account",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "select_language",
+          "locator": "[aria-label=\"Language\"]",
+          "matchType": "none",
+          "covered": false
+        },
+        {
+          "name": "input_checkbox",
+          "locator": "input[type=\"checkbox\"]",
+          "matchType": "none",
+          "covered": false
+        }
+      ]
+    }
+  }
+}

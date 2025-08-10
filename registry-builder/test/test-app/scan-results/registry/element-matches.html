@@ -1,0 +1,4289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Coverage Analysis - playwright</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            background: white;
+            padding: 1.5rem;
+            margin: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .page-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .page-selector label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .page-selector select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            min-width: 200px;
+        }
+        
+        .page-selector select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .filter-btn:hover {
+            border-color: #667eea;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .summary-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-card.total h3 { color: #4299e1; }
+        .summary-card.covered h3 { color: #48bb78; }
+        .summary-card.new h3 { color: #ed8936; }
+        .summary-card.coverage h3 { color: #9f7aea; }
+        
+        .page-info {
+            background: white;
+            margin: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .page-info-header {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .page-info-header h2 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .filter-status {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .filter-status.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .page-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .page-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .page-stat-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .page-stat-icon.covered { background: #48bb78; }
+        .page-stat-icon.new { background: #ed8936; }
+        
+        .elements-container {
+            padding: 1.5rem;
+        }
+        
+        .element-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .element-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .element-card.covered {
+            border-left: 4px solid #48bb78;
+            background: #f0fff4;
+        }
+        
+        .element-card.new {
+            border-left: 4px solid #ed8936;
+            background: #fffaf0;
+        }
+        
+        .element-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .element-name {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1rem;
+        }
+        
+        .element-tag {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .element-locator {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        
+        .match-info {
+            background: #e6fffa;
+            border-left: 4px solid #38b2ac;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .match-info.new {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+        
+        .implementation-info {
+            margin-top: 1rem;
+        }
+        
+        .source-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border-left: 3px solid #6c757d;
+        }
+        
+        .implementation-guide h4 {
+            color: #495057;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .code-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .code-section strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+        }
+        
+        .code-block.suggested-name {
+            background: #e7f3ff;
+            border-color: #0066cc;
+            color: #0066cc;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .code-block.playwright-code {
+            background: #f0f8f0;
+            border-color: #28a745;
+        }
+        
+        .code-block.webdriverio-code {
+            background: #fff3e0;
+            border-color: #ff9800;
+        }
+        
+        .code-block.cypress-code {
+            background: #f0f8ff;
+            border-color: #17a2b8;
+        }
+        
+        .code-block.selenium-code {
+            background: #fff8f0;
+            border-color: #6f42c1;
+        }
+        
+        .code-block.usage-example {
+            background: #e8f4fd;
+            border-color: #17a2b8;
+        }
+        
+        .code-header {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .code-block code {
+            background: none;
+            padding: 0;
+            font-size: inherit;
+            color: inherit;
+        }
+        
+        .copy-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .copy-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: #0056b3;
+        }
+        
+        .copy-btn:active {
+            background: #004085;
+        }
+        
+        .copy-btn.copied {
+            background: #28a745;
+        }
+        
+        .match-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .match-detail {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .match-detail strong {
+            color: #2d3748;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .match-detail span {
+            color: #4a5568;
+            font-size: 0.85rem;
+        }
+        
+        .confidence-bar {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            transition: width 0.3s ease;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #718096;
+        }
+        
+        .no-results h3 {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .match-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 Element Coverage Analysis</h1>
+        <p>Framework: PLAYWRIGHT | Generated: 10/08/2025 23:12:40</p>
+    </div>
+    
+    <div class="controls">
+        <div class="page-selector">
+            <label for="pageSelect">📄 Select Page:</label>
+            <select id="pageSelect">
+                <option value="all">All Pages</option>
+                <option value="Checkout">Checkout Page</option>
+                <option value="Home">Home Page</option>
+                <option value="Login">Login Page</option>
+                <option value="Product">Product Page</option>
+                <option value="Test">Test Page</option>
+            </select>
+        </div>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Elements</button>
+            <button class="filter-btn" data-filter="covered">✅ Covered</button>
+            <button class="filter-btn" data-filter="new">🆕 New</button>
+        </div>
+    </div>
+    
+    <div class="summary-cards" id="summaryCards">
+        
+        <div class="summary-card total">
+            <h3>57</h3>
+            <p>Total Elements</p>
+        </div>
+        <div class="summary-card covered">
+            <h3>27</h3>
+            <p>Covered Elements</p>
+        </div>
+        <div class="summary-card new">
+            <h3>30</h3>
+            <p>New Elements</p>
+        </div>
+        <div class="summary-card coverage">
+            <h3>47.4%</h3>
+            <p>Coverage</p>
+        </div>
+    
+    </div>
+    
+    <div class="page-info" id="pageInfo">
+        <div class="page-info-header">
+            <h2 id="pageTitle">All Pages</h2>
+            <div class="filter-status" id="filterStatus">
+                Showing all elements
+            </div>
+            <div class="page-stats" id="pageStats">
+                <div class="page-stat">
+                    <div class="page-stat-icon covered"></div>
+                    <span id="coveredCount">27 covered elements</span>
+                </div>
+                <div class="page-stat">
+                    <div class="page-stat-icon new"></div>
+                    <span id="newCount">30 new elements</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="elements-container" id="elementsContainer">
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_submit_form</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="submit-btn"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> testid<br>
+                  <strong>⭐ Confidence:</strong> 10/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      submitFormButton
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-button_submit_form">readonly submitFormButton: Locator;
+
+constructor(page: Page) {
+  this.submitFormButton = page.locator('[data-testid="submit-btn"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_submit_form">// In your test file
+const testPage = new TestPage(page);
+await testPage.submitFormButton.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_submit_form', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_submit_form', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">input_enter_email</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="email-input"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> input<br>
+                  <strong>🎯 Locator Type:</strong> testid<br>
+                  <strong>⭐ Confidence:</strong> 10/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      enterEmailInput
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-input_enter_email">readonly enterEmailInput: Locator;
+
+constructor(page: Page) {
+  this.enterEmailInput = page.locator('[data-testid="email-input"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-input_enter_email">// In your test file
+const testPage = new TestPage(page);
+await testPage.enterEmailInput.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-input_enter_email', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-input_enter_email', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Test" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_add_to_cart</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Add to Cart</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> TestPage (playwright)<br>
+              <strong>📄 Page Match:</strong> test ✅<br>
+              <strong>📁 File:</strong> pages/TestPage.ts<br>
+              <strong>🔧 Method:</strong> addToCartButton<br>
+              <strong>🎯 Existing Locator:</strong> button=Add to Cart
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>19</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Test" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_buy_now</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Buy Now</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> TestFile (playwright)<br>
+              <strong>📄 Page Match:</strong> unknown ❌<br>
+              <strong>📁 File:</strong> tests/form-interactions.spec.ts<br>
+              <strong>🔧 Method:</strong> name<br>
+              <strong>🎯 Existing Locator:</strong> button=Buy Now
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>29</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">a_view_products</div>
+            <div class="element-tag">a</div>
+          </div>
+          
+          <div class="element-locator">link=View Products</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> a<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      viewProductsLink
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-a_view_products">readonly viewProductsLink: Locator;
+
+constructor(page: Page) {
+  this.viewProductsLink = page.locator('link=View Products');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-a_view_products">// In your test file
+const testPage = new TestPage(page);
+await testPage.viewProductsLink.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-a_view_products', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-a_view_products', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">input_search_products</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">input[placeholder="Search products..."]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> input<br>
+                  <strong>🎯 Locator Type:</strong> attribute<br>
+                  <strong>⭐ Confidence:</strong> 7/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      searchProductsInput
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-input_search_products">readonly searchProductsInput: Locator;
+
+constructor(page: Page) {
+  this.searchProductsInput = page.locator('input[placeholder="Search products..."]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-input_search_products">// In your test file
+const testPage = new TestPage(page);
+await testPage.searchProductsInput.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-input_search_products', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-input_search_products', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">input_enter_password</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">input[placeholder="Enter password"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> input<br>
+                  <strong>🎯 Locator Type:</strong> attribute<br>
+                  <strong>⭐ Confidence:</strong> 7/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      enterPasswordInput
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-input_enter_password">readonly enterPasswordInput: Locator;
+
+constructor(page: Page) {
+  this.enterPasswordInput = page.locator('input[placeholder="Enter password"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-input_enter_password">// In your test file
+const testPage = new TestPage(page);
+await testPage.enterPasswordInput.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-input_enter_password', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-input_enter_password', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=×</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      Button
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-button_">readonly Button: Locator;
+
+constructor(page: Page) {
+  this.Button = page.locator('button=×');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_">// In your test file
+const testPage = new TestPage(page);
+await testPage.Button.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Test" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">select_select_country</div>
+            <div class="element-tag">select</div>
+          </div>
+          
+          <div class="element-locator">[aria-label="Select country"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> TestFile (playwright)<br>
+              <strong>📄 Page Match:</strong> unknown ❌<br>
+              <strong>📁 File:</strong> tests/form-interactions.spec.ts<br>
+              <strong>🔧 Method:</strong> unknown<br>
+              <strong>🎯 Existing Locator:</strong> [aria-label="Select country"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>18</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">input_username</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">input[name="username"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> input<br>
+                  <strong>🎯 Locator Type:</strong> attribute<br>
+                  <strong>⭐ Confidence:</strong> 8/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      usernameInput
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-input_username">readonly usernameInput: Locator;
+
+constructor(page: Page) {
+  this.usernameInput = page.locator('input[name="username"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-input_username">// In your test file
+const testPage = new TestPage(page);
+await testPage.usernameInput.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-input_username', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-input_username', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">select_test</div>
+            <div class="element-tag">select</div>
+          </div>
+          
+          <div class="element-locator">select</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> select<br>
+                  <strong>🎯 Locator Type:</strong> fallback<br>
+                  <strong>⭐ Confidence:</strong> 3/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      testSelect
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-select_test">readonly testSelect: Locator;
+
+constructor(page: Page) {
+  this.testSelect = page.locator('select');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-select_test">// In your test file
+const testPage = new TestPage(page);
+await testPage.testSelect.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-select_test', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-select_test', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Test" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_save</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Save</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> TestFile (playwright)<br>
+              <strong>📄 Page Match:</strong> unknown ❌<br>
+              <strong>📁 File:</strong> tests/form-interactions.spec.ts<br>
+              <strong>🔧 Method:</strong> name<br>
+              <strong>🎯 Existing Locator:</strong> button=Save
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>19</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">input_text</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">input[type="text"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> input<br>
+                  <strong>🎯 Locator Type:</strong> attribute<br>
+                  <strong>⭐ Confidence:</strong> 6/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      textInput
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-input_text">readonly textInput: Locator;
+
+constructor(page: Page) {
+  this.textInput = page.locator('input[type="text"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-input_text">// In your test file
+const testPage = new TestPage(page);
+await testPage.textInput.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-input_text', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-input_text', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Test" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_generic_button_1</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Generic Button 1</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> TestFile (playwright)<br>
+              <strong>📄 Page Match:</strong> unknown ❌<br>
+              <strong>📁 File:</strong> tests/form-interactions.spec.ts<br>
+              <strong>🔧 Method:</strong> name<br>
+              <strong>🎯 Existing Locator:</strong> button=Generic Button 1
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>9</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_generic_button_2</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Generic Button 2</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      genericButton2Button
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-button_generic_button_2">readonly genericButton2Button: Locator;
+
+constructor(page: Page) {
+  this.genericButton2Button = page.locator('button=Generic Button 2');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_generic_button_2">// In your test file
+const testPage = new TestPage(page);
+await testPage.genericButton2Button.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_generic_button_2', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_generic_button_2', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">input_text</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">input[type="text"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> input<br>
+                  <strong>🎯 Locator Type:</strong> attribute<br>
+                  <strong>⭐ Confidence:</strong> 6/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      textInput
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-input_text">readonly textInput: Locator;
+
+constructor(page: Page) {
+  this.textInput = page.locator('input[type="text"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-input_text">// In your test file
+const testPage = new TestPage(page);
+await testPage.textInput.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-input_text', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-input_text', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Test" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">select_test</div>
+            <div class="element-tag">select</div>
+          </div>
+          
+          <div class="element-locator">select</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Test<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/TestPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> select<br>
+                  <strong>🎯 Locator Type:</strong> fallback<br>
+                  <strong>⭐ Confidence:</strong> 3/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/TestPage.ts<br>
+                      <strong>Class:</strong> TestPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      testSelect
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to TestPage class:</div>
+                      <pre><code id="playwright-select_test">readonly testSelect: Locator;
+
+constructor(page: Page) {
+  this.testSelect = page.locator('select');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-select_test">// In your test file
+const testPage = new TestPage(page);
+await testPage.testSelect.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-select_test', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-select_test', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Checkout" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">form_checkout</div>
+            <div class="element-tag">form</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="shipping-form"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Checkout<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/CheckoutPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> form<br>
+                  <strong>🎯 Locator Type:</strong> testid<br>
+                  <strong>⭐ Confidence:</strong> 10/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/CheckoutPage.ts<br>
+                      <strong>Class:</strong> CheckoutPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      checkoutForm
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to CheckoutPage class:</div>
+                      <pre><code id="playwright-form_checkout">readonly checkoutForm: Locator;
+
+constructor(page: Page) {
+  this.checkoutForm = page.locator('[data-testid="shipping-form"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-form_checkout">// In your test file
+const checkoutPage = new CheckoutPage(page);
+await checkoutPage.checkoutForm.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-form_checkout', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-form_checkout', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_first_name</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="first-name"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> firstNameInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="first-name"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>22</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_last_name</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="last-name"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> lastNameInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="last-name"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>23</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_address</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="address"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> addressInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="address"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>24</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_city</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="city"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> cityInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="city"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>25</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">select_state</div>
+            <div class="element-tag">select</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="state-select"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> stateSelect<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="state-select"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>26</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_zip_code</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="zip-code"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> zipCodeInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="zip-code"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>27</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Checkout" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">form_checkout</div>
+            <div class="element-tag">form</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="payment-form"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Checkout<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/CheckoutPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> form<br>
+                  <strong>🎯 Locator Type:</strong> testid<br>
+                  <strong>⭐ Confidence:</strong> 10/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/CheckoutPage.ts<br>
+                      <strong>Class:</strong> CheckoutPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      checkoutForm
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to CheckoutPage class:</div>
+                      <pre><code id="playwright-form_checkout">readonly checkoutForm: Locator;
+
+constructor(page: Page) {
+  this.checkoutForm = page.locator('[data-testid="payment-form"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-form_checkout">// In your test file
+const checkoutPage = new CheckoutPage(page);
+await checkoutPage.checkoutForm.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-form_checkout', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-form_checkout', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_card_number</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="card-number"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> cardNumberInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="card-number"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>28</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_mmyy</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="expiry"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> expiryInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="expiry"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>29</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_cvv</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="cvv"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> cvvInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="cvv"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>30</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Checkout" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_place_order</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="place-order"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> CheckoutPage (playwright)<br>
+              <strong>📄 Page Match:</strong> checkout ✅<br>
+              <strong>📁 File:</strong> pages/CheckoutPage.ts<br>
+              <strong>🔧 Method:</strong> placeOrderButton<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="place-order"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>31</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Checkout" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_back_to_cart</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Back to Cart</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Checkout<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/CheckoutPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/CheckoutPage.ts<br>
+                      <strong>Class:</strong> CheckoutPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      backToCartButton
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to CheckoutPage class:</div>
+                      <pre><code id="playwright-button_back_to_cart">readonly backToCartButton: Locator;
+
+constructor(page: Page) {
+  this.backToCartButton = page.locator('button=Back to Cart');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_back_to_cart">// In your test file
+const checkoutPage = new CheckoutPage(page);
+await checkoutPage.backToCartButton.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_back_to_cart', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_back_to_cart', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Checkout" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">a_edit_cart</div>
+            <div class="element-tag">a</div>
+          </div>
+          
+          <div class="element-locator">link=Edit Cart</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Checkout<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/CheckoutPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> a<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/CheckoutPage.ts<br>
+                      <strong>Class:</strong> CheckoutPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      editCartLink
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to CheckoutPage class:</div>
+                      <pre><code id="playwright-a_edit_cart">readonly editCartLink: Locator;
+
+constructor(page: Page) {
+  this.editCartLink = page.locator('link=Edit Cart');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-a_edit_cart">// In your test file
+const checkoutPage = new CheckoutPage(page);
+await checkoutPage.editCartLink.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-a_edit_cart', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-a_edit_cart', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Home" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_menu</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="menu-btn"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> HomePage (playwright)<br>
+              <strong>📄 Page Match:</strong> home ✅<br>
+              <strong>📁 File:</strong> pages/HomePage.ts<br>
+              <strong>🔧 Method:</strong> menuButton<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="menu-btn"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>16</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Home" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_search</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="search-input"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> HomePage (playwright)<br>
+              <strong>📄 Page Match:</strong> home ✅<br>
+              <strong>📁 File:</strong> pages/HomePage.ts<br>
+              <strong>🔧 Method:</strong> searchInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="search-input"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>17</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Home" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_search</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="search-btn"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> HomePage (playwright)<br>
+              <strong>📄 Page Match:</strong> home ✅<br>
+              <strong>📁 File:</strong> pages/HomePage.ts<br>
+              <strong>🔧 Method:</strong> searchButton<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="search-btn"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>18</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Home" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_get_started</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Get Started</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> HomePage (playwright)<br>
+              <strong>📄 Page Match:</strong> home ✅<br>
+              <strong>📁 File:</strong> pages/HomePage.ts<br>
+              <strong>🔧 Method:</strong> getStartedButton<br>
+              <strong>🎯 Existing Locator:</strong> button=Get Started
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>19</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Home" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_learn_more</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Learn More</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Home<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/HomePage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/HomePage.ts<br>
+                      <strong>Class:</strong> HomePage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      learnMoreButton
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to HomePage class:</div>
+                      <pre><code id="playwright-button_learn_more">readonly learnMoreButton: Locator;
+
+constructor(page: Page) {
+  this.learnMoreButton = page.locator('button=Learn More');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_learn_more">// In your test file
+const homePage = new HomePage(page);
+await homePage.learnMoreButton.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_learn_more', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_learn_more', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Home" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">a_view_products</div>
+            <div class="element-tag">a</div>
+          </div>
+          
+          <div class="element-locator">link=View Products</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Home<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/HomePage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> a<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/HomePage.ts<br>
+                      <strong>Class:</strong> HomePage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      viewProductsLink
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to HomePage class:</div>
+                      <pre><code id="playwright-a_view_products">readonly viewProductsLink: Locator;
+
+constructor(page: Page) {
+  this.viewProductsLink = page.locator('link=View Products');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-a_view_products">// In your test file
+const homePage = new HomePage(page);
+await homePage.viewProductsLink.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-a_view_products', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-a_view_products', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Home" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">a_about_us</div>
+            <div class="element-tag">a</div>
+          </div>
+          
+          <div class="element-locator">link=About Us</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Home<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/HomePage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> a<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/HomePage.ts<br>
+                      <strong>Class:</strong> HomePage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      aboutUsLink
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to HomePage class:</div>
+                      <pre><code id="playwright-a_about_us">readonly aboutUsLink: Locator;
+
+constructor(page: Page) {
+  this.aboutUsLink = page.locator('link=About Us');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-a_about_us">// In your test file
+const homePage = new HomePage(page);
+await homePage.aboutUsLink.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-a_about_us', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-a_about_us', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Home" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">select_country</div>
+            <div class="element-tag">select</div>
+          </div>
+          
+          <div class="element-locator">[aria-label="Country"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Home<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/HomePage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> select<br>
+                  <strong>🎯 Locator Type:</strong> attribute<br>
+                  <strong>⭐ Confidence:</strong> 8/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/HomePage.ts<br>
+                      <strong>Class:</strong> HomePage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      countrySelect
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to HomePage class:</div>
+                      <pre><code id="playwright-select_country">readonly countrySelect: Locator;
+
+constructor(page: Page) {
+  this.countrySelect = page.locator('[aria-label="Country"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-select_country">// In your test file
+const homePage = new HomePage(page);
+await homePage.countrySelect.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-select_country', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-select_country', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Home" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_subscribe</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Subscribe</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Home<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/HomePage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/HomePage.ts<br>
+                      <strong>Class:</strong> HomePage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      subscribeButton
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to HomePage class:</div>
+                      <pre><code id="playwright-button_subscribe">readonly subscribeButton: Locator;
+
+constructor(page: Page) {
+  this.subscribeButton = page.locator('button=Subscribe');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_subscribe">// In your test file
+const homePage = new HomePage(page);
+await homePage.subscribeButton.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_subscribe', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_subscribe', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Product" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_add_to_cart</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="add-to-cart"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> ProductPage (playwright)<br>
+              <strong>📄 Page Match:</strong> product ✅<br>
+              <strong>📁 File:</strong> pages/ProductPage.ts<br>
+              <strong>🔧 Method:</strong> addToCartButton<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="add-to-cart"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>17</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Product" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_buy_now</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="buy-now"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> ProductPage (playwright)<br>
+              <strong>📄 Page Match:</strong> product ✅<br>
+              <strong>📁 File:</strong> pages/ProductPage.ts<br>
+              <strong>🔧 Method:</strong> buyNowButton<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="buy-now"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>18</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Product" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_add_to_wishlist</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Add to Wishlist</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Product<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/ProductPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/ProductPage.ts<br>
+                      <strong>Class:</strong> ProductPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      addToWishlistButton
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to ProductPage class:</div>
+                      <pre><code id="playwright-button_add_to_wishlist">readonly addToWishlistButton: Locator;
+
+constructor(page: Page) {
+  this.addToWishlistButton = page.locator('button=Add to Wishlist');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_add_to_wishlist">// In your test file
+const productPage = new ProductPage(page);
+await productPage.addToWishlistButton.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_add_to_wishlist', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_add_to_wishlist', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Product" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">form_product</div>
+            <div class="element-tag">form</div>
+          </div>
+          
+          <div class="element-locator">form</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Product<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/ProductPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> form<br>
+                  <strong>🎯 Locator Type:</strong> fallback<br>
+                  <strong>⭐ Confidence:</strong> 3/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/ProductPage.ts<br>
+                      <strong>Class:</strong> ProductPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      productForm
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to ProductPage class:</div>
+                      <pre><code id="playwright-form_product">readonly productForm: Locator;
+
+constructor(page: Page) {
+  this.productForm = page.locator('form');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-form_product">// In your test file
+const productPage = new ProductPage(page);
+await productPage.productForm.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-form_product', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-form_product', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Product" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">select_size</div>
+            <div class="element-tag">select</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="size-select"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> ProductPage (playwright)<br>
+              <strong>📄 Page Match:</strong> product ✅<br>
+              <strong>📁 File:</strong> pages/ProductPage.ts<br>
+              <strong>🔧 Method:</strong> sizeSelect<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="size-select"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>19</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Product" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">select_color</div>
+            <div class="element-tag">select</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="color-select"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> ProductPage (playwright)<br>
+              <strong>📄 Page Match:</strong> product ✅<br>
+              <strong>📁 File:</strong> pages/ProductPage.ts<br>
+              <strong>🔧 Method:</strong> colorSelect<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="color-select"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>20</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Product" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_number</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="quantity-input"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> ProductPage (playwright)<br>
+              <strong>📄 Page Match:</strong> product ✅<br>
+              <strong>📁 File:</strong> pages/ProductPage.ts<br>
+              <strong>🔧 Method:</strong> quantityInput<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="quantity-input"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>21</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Product" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_write_review</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Write Review</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Product<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/ProductPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/ProductPage.ts<br>
+                      <strong>Class:</strong> ProductPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      writeReviewButton
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to ProductPage class:</div>
+                      <pre><code id="playwright-button_write_review">readonly writeReviewButton: Locator;
+
+constructor(page: Page) {
+  this.writeReviewButton = page.locator('button=Write Review');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_write_review">// In your test file
+const productPage = new ProductPage(page);
+await productPage.writeReviewButton.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_write_review', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_write_review', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Product" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">a_view_all_reviews</div>
+            <div class="element-tag">a</div>
+          </div>
+          
+          <div class="element-locator">link=View All Reviews</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Product<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/ProductPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> a<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/ProductPage.ts<br>
+                      <strong>Class:</strong> ProductPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      viewAllReviewsLink
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to ProductPage class:</div>
+                      <pre><code id="playwright-a_view_all_reviews">readonly viewAllReviewsLink: Locator;
+
+constructor(page: Page) {
+  this.viewAllReviewsLink = page.locator('link=View All Reviews');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-a_view_all_reviews">// In your test file
+const productPage = new ProductPage(page);
+await productPage.viewAllReviewsLink.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-a_view_all_reviews', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-a_view_all_reviews', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Login" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">form_login</div>
+            <div class="element-tag">form</div>
+          </div>
+          
+          <div class="element-locator">form</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Login<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/LoginPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> form<br>
+                  <strong>🎯 Locator Type:</strong> fallback<br>
+                  <strong>⭐ Confidence:</strong> 3/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/LoginPage.ts<br>
+                      <strong>Class:</strong> LoginPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      loginForm
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to LoginPage class:</div>
+                      <pre><code id="playwright-form_login">readonly loginForm: Locator;
+
+constructor(page: Page) {
+  this.loginForm = page.locator('form');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-form_login">// In your test file
+const loginPage = new LoginPage(page);
+await loginPage.loginForm.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-form_login', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-form_login', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Login" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_username</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="username-input"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> LoginPage (playwright)<br>
+              <strong>📄 Page Match:</strong> login ✅<br>
+              <strong>📁 File:</strong> pages/LoginPage.ts<br>
+              <strong>🔧 Method:</strong> usernameField<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="username-input"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>15</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Login" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">input_password</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="password-input"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> LoginPage (playwright)<br>
+              <strong>📄 Page Match:</strong> login ✅<br>
+              <strong>📁 File:</strong> pages/LoginPage.ts<br>
+              <strong>🔧 Method:</strong> passwordField<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="password-input"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>16</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card covered" 
+             data-page="Login" 
+             data-match-type="exact">
+          <div class="element-header">
+            <div class="element-name">button_login</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">[data-testid="login-btn"]</div>
+          
+          
+            <div class="match-info">
+              <strong>📍 Found in:</strong> LoginPage (playwright)<br>
+              <strong>📄 Page Match:</strong> login ✅<br>
+              <strong>📁 File:</strong> pages/LoginPage.ts<br>
+              <strong>🔧 Method:</strong> loginButton<br>
+              <strong>🎯 Existing Locator:</strong> [data-testid="login-btn"]
+              
+              <div class="match-details">
+                <div class="match-detail">
+                  <strong>Match Type:</strong>
+                  <span>EXACT</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Confidence:</strong>
+                  <span>100.0%</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Framework:</strong>
+                  <span>playwright</span>
+                </div>
+                <div class="match-detail">
+                  <strong>Line:</strong>
+                  <span>17</span>
+                </div>
+              </div>
+              
+              <div class="confidence-bar">
+                <div class="confidence-fill" style="width: 100%"></div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Login" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">button_forgot_password</div>
+            <div class="element-tag">button</div>
+          </div>
+          
+          <div class="element-locator">button=Forgot Password</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Login<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/LoginPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> button<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/LoginPage.ts<br>
+                      <strong>Class:</strong> LoginPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      forgotPasswordButton
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to LoginPage class:</div>
+                      <pre><code id="playwright-button_forgot_password">readonly forgotPasswordButton: Locator;
+
+constructor(page: Page) {
+  this.forgotPasswordButton = page.locator('button=Forgot Password');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-button_forgot_password">// In your test file
+const loginPage = new LoginPage(page);
+await loginPage.forgotPasswordButton.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-button_forgot_password', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-button_forgot_password', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Login" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">a_create_account</div>
+            <div class="element-tag">a</div>
+          </div>
+          
+          <div class="element-locator">link=Create Account</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Login<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/LoginPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> a<br>
+                  <strong>🎯 Locator Type:</strong> semantic<br>
+                  <strong>⭐ Confidence:</strong> 9/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/LoginPage.ts<br>
+                      <strong>Class:</strong> LoginPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      createAccountLink
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to LoginPage class:</div>
+                      <pre><code id="playwright-a_create_account">readonly createAccountLink: Locator;
+
+constructor(page: Page) {
+  this.createAccountLink = page.locator('link=Create Account');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-a_create_account">// In your test file
+const loginPage = new LoginPage(page);
+await loginPage.createAccountLink.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-a_create_account', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-a_create_account', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Login" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">select_language</div>
+            <div class="element-tag">select</div>
+          </div>
+          
+          <div class="element-locator">[aria-label="Language"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Login<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/LoginPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> select<br>
+                  <strong>🎯 Locator Type:</strong> attribute<br>
+                  <strong>⭐ Confidence:</strong> 8/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/LoginPage.ts<br>
+                      <strong>Class:</strong> LoginPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      languageSelect
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to LoginPage class:</div>
+                      <pre><code id="playwright-select_language">readonly languageSelect: Locator;
+
+constructor(page: Page) {
+  this.languageSelect = page.locator('[aria-label="Language"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-select_language">// In your test file
+const loginPage = new LoginPage(page);
+await loginPage.languageSelect.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-select_language', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-select_language', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+            
+        <div class="element-card new" 
+             data-page="Login" 
+             data-match-type="none">
+          <div class="element-header">
+            <div class="element-name">input_checkbox</div>
+            <div class="element-tag">input</div>
+          </div>
+          
+          <div class="element-locator">input[type="checkbox"]</div>
+          
+          
+            <div class="match-info new">
+              <strong>🆕 New Element - Ready to Implement</strong><br>
+              <em>This element needs to be added to your page objects</em>
+              
+              <div class="implementation-info">
+                <div class="source-info">
+                  <strong>📄 Found on Page:</strong> Login<br>
+                  <strong>📁 Source File:</strong> test-app/src/pages/LoginPage.tsx<br>
+                  <strong>🏷️ Element Type:</strong> input<br>
+                  <strong>🎯 Locator Type:</strong> attribute<br>
+                  <strong>⭐ Confidence:</strong> 6/10
+                </div>
+                
+                <div class="implementation-guide">
+                  <h4>📋 Implementation Guide:</h4>
+                  
+                  <div class="code-section">
+                    <strong>1️⃣ Target Page Object:</strong>
+                    <div class="code-block">
+                      <strong>File:</strong> pages/LoginPage.ts<br>
+                      <strong>Class:</strong> LoginPage
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>2️⃣ Property Name:</strong>
+                    <div class="code-block suggested-name">
+                      checkboxInput
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>3️⃣ Playwright Implementation:</strong>
+                    <div class="code-block playwright-code">
+                      <div class="code-header">Add to LoginPage class:</div>
+                      <pre><code id="playwright-input_checkbox">readonly checkboxInput: Locator;
+
+constructor(page: Page) {
+  this.checkboxInput = page.locator('input[type="checkbox"]');
+}</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="code-section">
+                    <strong>4️⃣ Usage Example:</strong>
+                    <div class="code-block usage-example">
+                      <pre><code id="usage-input_checkbox">// In your test file
+const loginPage = new LoginPage(page);
+await loginPage.checkboxInput.click();</code></pre>
+                    </div>
+                  </div>
+                  
+                  <div class="copy-buttons">
+                    <button class="copy-btn" onclick="copyCodeToClipboard('playwright-input_checkbox', this)">
+                      📋 Copy Playwright Code
+                    </button>
+                    <button class="copy-btn" onclick="copyCodeToClipboard('usage-input_checkbox', this)">
+                      📋 Copy Usage Example
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+        </div>
+    </div>
+    
+    <script>
+        
+        const allElements = [{"scannedElement":{"name":"button_submit_form","tagName":"button","locator":"[data-testid=\"submit-btn\"]","locatorType":"testid","confidence":10,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"input_enter_email","tagName":"input","locator":"[data-testid=\"email-input\"]","locatorType":"testid","confidence":10,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"button_add_to_cart","tagName":"button","locator":"button=Add to Cart","locatorType":"semantic","confidence":9,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"button=Add to Cart","locatorType":"role","method":"addToCartButton","className":"TestPage","filePath":"pages/TestPage.ts","framework":"playwright","lineNumber":19,"pageName":"test"}},{"scannedElement":{"name":"button_buy_now","tagName":"button","locator":"button=Buy Now","locatorType":"semantic","confidence":9,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"button=Buy Now","locatorType":"role","method":"name","className":"TestFile","filePath":"tests/form-interactions.spec.ts","framework":"playwright","lineNumber":29,"pageName":"unknown"}},{"scannedElement":{"name":"a_view_products","tagName":"a","locator":"link=View Products","locatorType":"semantic","confidence":9,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"input_search_products","tagName":"input","locator":"input[placeholder=\"Search products...\"]","locatorType":"attribute","confidence":7,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0.7},{"scannedElement":{"name":"input_enter_password","tagName":"input","locator":"input[placeholder=\"Enter password\"]","locatorType":"attribute","confidence":7,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"button_","tagName":"button","locator":"button=×","locatorType":"semantic","confidence":9,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"select_select_country","tagName":"select","locator":"[aria-label=\"Select country\"]","locatorType":"attribute","confidence":8,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[aria-label=\"Select country\"]","locatorType":"aria-label","method":"unknown","className":"TestFile","filePath":"tests/form-interactions.spec.ts","framework":"playwright","lineNumber":18,"pageName":"unknown"}},{"scannedElement":{"name":"input_username","tagName":"input","locator":"input[name=\"username\"]","locatorType":"attribute","confidence":8,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"select_test","tagName":"select","locator":"select","locatorType":"fallback","confidence":3,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"button_save","tagName":"button","locator":"button=Save","locatorType":"semantic","confidence":9,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"button=Save","locatorType":"role","method":"name","className":"TestFile","filePath":"tests/form-interactions.spec.ts","framework":"playwright","lineNumber":19,"pageName":"unknown"}},{"scannedElement":{"name":"input_text","tagName":"input","locator":"input[type=\"text\"]","locatorType":"attribute","confidence":6,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"button_generic_button_1","tagName":"button","locator":"button=Generic Button 1","locatorType":"semantic","confidence":9,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"button=Generic Button 1","locatorType":"role","method":"name","className":"TestFile","filePath":"tests/form-interactions.spec.ts","framework":"playwright","lineNumber":9,"pageName":"unknown"}},{"scannedElement":{"name":"button_generic_button_2","tagName":"button","locator":"button=Generic Button 2","locatorType":"semantic","confidence":9,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"input_text","tagName":"input","locator":"input[type=\"text\"]","locatorType":"attribute","confidence":6,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"select_test","tagName":"select","locator":"select","locatorType":"fallback","confidence":3,"page":"Test","filePath":"test-app/src/pages/TestPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"form_checkout","tagName":"form","locator":"[data-testid=\"shipping-form\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"input_first_name","tagName":"input","locator":"[data-testid=\"first-name\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"first-name\"]","locatorType":"testid","method":"firstNameInput","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":22,"pageName":"checkout"}},{"scannedElement":{"name":"input_last_name","tagName":"input","locator":"[data-testid=\"last-name\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"last-name\"]","locatorType":"testid","method":"lastNameInput","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":23,"pageName":"checkout"}},{"scannedElement":{"name":"input_address","tagName":"input","locator":"[data-testid=\"address\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"address\"]","locatorType":"testid","method":"addressInput","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":24,"pageName":"checkout"}},{"scannedElement":{"name":"input_city","tagName":"input","locator":"[data-testid=\"city\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"city\"]","locatorType":"testid","method":"cityInput","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":25,"pageName":"checkout"}},{"scannedElement":{"name":"select_state","tagName":"select","locator":"[data-testid=\"state-select\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"state-select\"]","locatorType":"testid","method":"stateSelect","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":26,"pageName":"checkout"}},{"scannedElement":{"name":"input_zip_code","tagName":"input","locator":"[data-testid=\"zip-code\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"zip-code\"]","locatorType":"testid","method":"zipCodeInput","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":27,"pageName":"checkout"}},{"scannedElement":{"name":"form_checkout","tagName":"form","locator":"[data-testid=\"payment-form\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"input_card_number","tagName":"input","locator":"[data-testid=\"card-number\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"card-number\"]","locatorType":"testid","method":"cardNumberInput","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":28,"pageName":"checkout"}},{"scannedElement":{"name":"input_mmyy","tagName":"input","locator":"[data-testid=\"expiry\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"expiry\"]","locatorType":"testid","method":"expiryInput","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":29,"pageName":"checkout"}},{"scannedElement":{"name":"input_cvv","tagName":"input","locator":"[data-testid=\"cvv\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"cvv\"]","locatorType":"testid","method":"cvvInput","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":30,"pageName":"checkout"}},{"scannedElement":{"name":"button_place_order","tagName":"button","locator":"[data-testid=\"place-order\"]","locatorType":"testid","confidence":10,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"place-order\"]","locatorType":"testid","method":"placeOrderButton","className":"CheckoutPage","filePath":"pages/CheckoutPage.ts","framework":"playwright","lineNumber":31,"pageName":"checkout"}},{"scannedElement":{"name":"button_back_to_cart","tagName":"button","locator":"button=Back to Cart","locatorType":"semantic","confidence":9,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"a_edit_cart","tagName":"a","locator":"link=Edit Cart","locatorType":"semantic","confidence":9,"page":"Checkout","filePath":"test-app/src/pages/CheckoutPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"button_menu","tagName":"button","locator":"[data-testid=\"menu-btn\"]","locatorType":"testid","confidence":10,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"menu-btn\"]","locatorType":"testid","method":"menuButton","className":"HomePage","filePath":"pages/HomePage.ts","framework":"playwright","lineNumber":16,"pageName":"home"}},{"scannedElement":{"name":"input_search","tagName":"input","locator":"[data-testid=\"search-input\"]","locatorType":"testid","confidence":10,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"search-input\"]","locatorType":"testid","method":"searchInput","className":"HomePage","filePath":"pages/HomePage.ts","framework":"playwright","lineNumber":17,"pageName":"home"}},{"scannedElement":{"name":"button_search","tagName":"button","locator":"[data-testid=\"search-btn\"]","locatorType":"testid","confidence":10,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"search-btn\"]","locatorType":"testid","method":"searchButton","className":"HomePage","filePath":"pages/HomePage.ts","framework":"playwright","lineNumber":18,"pageName":"home"}},{"scannedElement":{"name":"button_get_started","tagName":"button","locator":"button=Get Started","locatorType":"semantic","confidence":9,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"button=Get Started","locatorType":"role","method":"getStartedButton","className":"HomePage","filePath":"pages/HomePage.ts","framework":"playwright","lineNumber":19,"pageName":"home"}},{"scannedElement":{"name":"button_learn_more","tagName":"button","locator":"button=Learn More","locatorType":"semantic","confidence":9,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"a_view_products","tagName":"a","locator":"link=View Products","locatorType":"semantic","confidence":9,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"a_about_us","tagName":"a","locator":"link=About Us","locatorType":"semantic","confidence":9,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"select_country","tagName":"select","locator":"[aria-label=\"Country\"]","locatorType":"attribute","confidence":8,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"button_subscribe","tagName":"button","locator":"button=Subscribe","locatorType":"semantic","confidence":9,"page":"Home","filePath":"test-app/src/pages/HomePage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"button_add_to_cart","tagName":"button","locator":"[data-testid=\"add-to-cart\"]","locatorType":"testid","confidence":10,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"add-to-cart\"]","locatorType":"testid","method":"addToCartButton","className":"ProductPage","filePath":"pages/ProductPage.ts","framework":"playwright","lineNumber":17,"pageName":"product"}},{"scannedElement":{"name":"button_buy_now","tagName":"button","locator":"[data-testid=\"buy-now\"]","locatorType":"testid","confidence":10,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"buy-now\"]","locatorType":"testid","method":"buyNowButton","className":"ProductPage","filePath":"pages/ProductPage.ts","framework":"playwright","lineNumber":18,"pageName":"product"}},{"scannedElement":{"name":"button_add_to_wishlist","tagName":"button","locator":"button=Add to Wishlist","locatorType":"semantic","confidence":9,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"form_product","tagName":"form","locator":"form","locatorType":"fallback","confidence":3,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"select_size","tagName":"select","locator":"[data-testid=\"size-select\"]","locatorType":"testid","confidence":10,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"size-select\"]","locatorType":"testid","method":"sizeSelect","className":"ProductPage","filePath":"pages/ProductPage.ts","framework":"playwright","lineNumber":19,"pageName":"product"}},{"scannedElement":{"name":"select_color","tagName":"select","locator":"[data-testid=\"color-select\"]","locatorType":"testid","confidence":10,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"color-select\"]","locatorType":"testid","method":"colorSelect","className":"ProductPage","filePath":"pages/ProductPage.ts","framework":"playwright","lineNumber":20,"pageName":"product"}},{"scannedElement":{"name":"input_number","tagName":"input","locator":"[data-testid=\"quantity-input\"]","locatorType":"testid","confidence":10,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"quantity-input\"]","locatorType":"testid","method":"quantityInput","className":"ProductPage","filePath":"pages/ProductPage.ts","framework":"playwright","lineNumber":21,"pageName":"product"}},{"scannedElement":{"name":"button_write_review","tagName":"button","locator":"button=Write Review","locatorType":"semantic","confidence":9,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"a_view_all_reviews","tagName":"a","locator":"link=View All Reviews","locatorType":"semantic","confidence":9,"page":"Product","filePath":"test-app/src/pages/ProductPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"form_login","tagName":"form","locator":"form","locatorType":"fallback","confidence":3,"page":"Login","filePath":"test-app/src/pages/LoginPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"input_username","tagName":"input","locator":"[data-testid=\"username-input\"]","locatorType":"testid","confidence":10,"page":"Login","filePath":"test-app/src/pages/LoginPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"username-input\"]","locatorType":"testid","method":"usernameField","className":"LoginPage","filePath":"pages/LoginPage.ts","framework":"playwright","lineNumber":15,"pageName":"login"}},{"scannedElement":{"name":"input_password","tagName":"input","locator":"[data-testid=\"password-input\"]","locatorType":"testid","confidence":10,"page":"Login","filePath":"test-app/src/pages/LoginPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"password-input\"]","locatorType":"testid","method":"passwordField","className":"LoginPage","filePath":"pages/LoginPage.ts","framework":"playwright","lineNumber":16,"pageName":"login"}},{"scannedElement":{"name":"button_login","tagName":"button","locator":"[data-testid=\"login-btn\"]","locatorType":"testid","confidence":10,"page":"Login","filePath":"test-app/src/pages/LoginPage.tsx"},"matchType":"exact","confidence":1,"existingLocator":{"locator":"[data-testid=\"login-btn\"]","locatorType":"testid","method":"loginButton","className":"LoginPage","filePath":"pages/LoginPage.ts","framework":"playwright","lineNumber":17,"pageName":"login"}},{"scannedElement":{"name":"button_forgot_password","tagName":"button","locator":"button=Forgot Password","locatorType":"semantic","confidence":9,"page":"Login","filePath":"test-app/src/pages/LoginPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"a_create_account","tagName":"a","locator":"link=Create Account","locatorType":"semantic","confidence":9,"page":"Login","filePath":"test-app/src/pages/LoginPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"select_language","tagName":"select","locator":"[aria-label=\"Language\"]","locatorType":"attribute","confidence":8,"page":"Login","filePath":"test-app/src/pages/LoginPage.tsx"},"matchType":"none","confidence":0},{"scannedElement":{"name":"input_checkbox","tagName":"input","locator":"input[type=\"checkbox\"]","locatorType":"attribute","confidence":6,"page":"Login","filePath":"test-app/src/pages/LoginPage.tsx"},"matchType":"none","confidence":0}];
+        const allSummary = {"total":57,"exact":27,"similar":0,"none":30,"coverage":47.368421052631575};
+        
+        // Current filter state
+        let currentPageFilter = 'all';
+        let currentTypeFilter = 'all';
+        
+        // Page selector functionality
+        document.getElementById('pageSelect').addEventListener('change', function(e) {
+            currentPageFilter = e.target.value;
+            applyFilters();
+        });
+        
+        // Filter button functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                currentTypeFilter = e.target.dataset.filter;
+                
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Apply combined filters
+                applyFilters();
+            });
+        });
+        
+        function applyFilters() {
+            const elements = document.querySelectorAll('.element-card');
+            const pageTitle = document.getElementById('pageTitle');
+            const coveredCount = document.getElementById('coveredCount');
+            const newCount = document.getElementById('newCount');
+            
+            let visibleElements = [];
+            let covered = 0;
+            let newElements = 0;
+            
+            elements.forEach(element => {
+                const elementPage = element.dataset.page;
+                const matchType = element.dataset.matchType;
+                
+                // Check page filter
+                const pageMatch = currentPageFilter === 'all' || elementPage === currentPageFilter;
+                
+                // Check type filter
+                let typeMatch = false;
+                if (currentTypeFilter === 'all') {
+                    typeMatch = true;
+                } else if (currentTypeFilter === 'covered') {
+                    typeMatch = matchType === 'exact' || matchType === 'similar';
+                } else if (currentTypeFilter === 'new') {
+                    typeMatch = matchType === 'none';
+                }
+                
+                // Show element only if both filters match
+                if (pageMatch && typeMatch) {
+                    element.style.display = 'block';
+                    visibleElements.push(element);
+                    
+                    if (matchType === 'exact' || matchType === 'similar') {
+                        covered++;
+                    } else {
+                        newElements++;
+                    }
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+            
+            // Update page title and stats
+            updatePageTitle(currentPageFilter);
+            updateFilterStatus(); // Show what's currently filtered
+            updatePageStats(covered, newElements);
+            keepSummaryCardsStatic(); // Always show overall totals
+            checkForResults(visibleElements);
+        }
+        
+        function updatePageTitle(page) {
+            const pageTitle = document.getElementById('pageTitle');
+            if (page === 'all') {
+                pageTitle.textContent = 'All Pages';
+            } else {
+                pageTitle.textContent = `${page} Page`;
+            }
+        }
+        
+        function updateFilterStatus() {
+            const filterStatus = document.getElementById('filterStatus');
+            let statusText = '';
+            let isActive = false;
+            
+            if (currentPageFilter !== 'all' || currentTypeFilter !== 'all') {
+                isActive = true;
+                const pageText = currentPageFilter === 'all' ? 'all pages' : `${currentPageFilter} page`;
+                const typeText = currentTypeFilter === 'all' ? 'all elements' : 
+                                currentTypeFilter === 'covered' ? 'covered elements' : 'new elements';
+                statusText = `Showing ${typeText} from ${pageText}`;
+            } else {
+                statusText = 'Showing all elements';
+            }
+            
+            filterStatus.textContent = statusText;
+            if (isActive) {
+                filterStatus.classList.add('active');
+            } else {
+                filterStatus.classList.remove('active');
+            }
+        }
+        
+        function updatePageStats(covered, newElements) {
+            const coveredCount = document.getElementById('coveredCount');
+            const newCount = document.getElementById('newCount');
+            
+            coveredCount.textContent = `${covered} covered elements`;
+            newCount.textContent = `${newElements} new elements`;
+        }
+        
+        // Keep summary cards static - they should always show overall totals
+        function keepSummaryCardsStatic() {
+            const summaryCards = document.getElementById('summaryCards');
+            summaryCards.innerHTML = `
+                <div class="summary-card total">
+                    <h3>${allSummary.total}</h3>
+                    <p>Total Elements</p>
+                </div>
+                <div class="summary-card covered">
+                    <h3>${allSummary.exact + allSummary.similar}</h3>
+                    <p>Covered Elements</p>
+                </div>
+                <div class="summary-card new">
+                    <h3>${allSummary.none}</h3>
+                    <p>New Elements</p>
+                </div>
+                <div class="summary-card coverage">
+                    <h3>${allSummary.coverage.toFixed(1)}%</h3>
+                    <p>Coverage</p>
+                </div>
+            `;
+        }
+        
+        function checkForResults(visibleElements) {
+            const container = document.getElementById('elementsContainer');
+            
+            if (visibleElements.length === 0) {
+                // Find existing element cards and hide them
+                const existingCards = container.querySelectorAll('.element-card');
+                existingCards.forEach(card => card.style.display = 'none');
+                
+                // Show no results message
+                let noResultsDiv = container.querySelector('.no-results');
+                if (!noResultsDiv) {
+                    noResultsDiv = document.createElement('div');
+                    noResultsDiv.className = 'no-results';
+                    container.appendChild(noResultsDiv);
+                }
+                
+                noResultsDiv.innerHTML = `
+                    <h3>No elements found</h3>
+                    <p>Try adjusting your filters or selecting a different page.</p>
+                    <p><strong>Current filters:</strong> Page: ${currentPageFilter === 'all' ? 'All Pages' : currentPageFilter + ' Page'}, Type: ${currentTypeFilter === 'all' ? 'All Elements' : currentTypeFilter === 'covered' ? 'Covered Elements' : 'New Elements'}</p>
+                `;
+                noResultsDiv.style.display = 'block';
+            } else {
+                // Hide no results message if it exists
+                const noResultsDiv = container.querySelector('.no-results');
+                if (noResultsDiv) {
+                    noResultsDiv.style.display = 'none';
+                }
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial state
+            currentPageFilter = 'all';
+            currentTypeFilter = 'all';
+            applyFilters();
+        });
+        
+        // Copy to clipboard functionality
+        function copyCodeToClipboard(elementId, buttonElement) {
+            const codeElement = document.getElementById(elementId);
+            if (!codeElement) return;
+            
+            const textToCopy = codeElement.textContent;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess(buttonElement);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopySuccess(buttonElement);
+            });
+        }
+        
+        function showCopySuccess(buttonElement) {
+            const originalText = buttonElement.textContent;
+            buttonElement.textContent = '✅ Copied!';
+            buttonElement.classList.add('copied');
+            
+            setTimeout(() => {
+                buttonElement.textContent = originalText;
+                buttonElement.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // Make functions available globally
+        window.copyCodeToClipboard = copyCodeToClipboard;
+    
+    </script>
+</body>
+</html>

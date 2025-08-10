@@ -9,6 +9,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { PageScanner } from './page-scanner';
 import { PageObjectGenerator, Framework, Language } from './page-object-generator';
+import { ElementMatcher, ScannedElement, ElementMatch } from './element-matcher';
 
 interface CLIOptions {
   scan?: string;
@@ -80,30 +81,53 @@ class MatchBasedCLI {
     const registryDir = path.join(path.dirname(outputDir), 'registry-output');
     fs.mkdirSync(registryDir, { recursive: true });
 
-    // Detect existing page objects and tests
+    // Convert scan result to ScannedElement format
+    const scannedElements: ScannedElement[] = [];
+    for (const page of scanResult.pages) {
+      for (const element of page.elements) {
+        scannedElements.push({
+          name: element.name,
+          tagName: element.tagName,
+          locator: element.locator,
+          locatorType: element.locatorType || 'css',
+          confidence: element.confidence,
+          page: page.name,
+          filePath: page.filePath || `${page.name}.tsx`
+        });
+      }
+    }
+
+    // Perform element-level matching
+    const matcher = new ElementMatcher();
+    const elementMatches = await matcher.matchElements(scannedElements, [testsDir]);
+    const matchSummary = matcher.generateMatchSummary(elementMatches);
+
+    console.log(`   🎯 Element-level analysis:`);
+    console.log(`      📊 ${matchSummary.total} total elements`);
+    console.log(`      ✅ ${matchSummary.exact} exact matches`);
+    console.log(`      🔗 ${matchSummary.similar} similar matches`);
+    console.log(`      🆕 ${matchSummary.none} new elements`);
+    console.log(`      📈 ${matchSummary.coverage.toFixed(1)}% coverage`);
+
+    // Still detect existing page objects and tests for context
     const existingPageObjects = await this.detectExistingPageObjects(testsDir);
     const testFiles = await this.detectTestFiles(testsDir);
 
     console.log(`   📄 Found ${existingPageObjects.length} existing page objects`);
     console.log(`   🧪 Found ${testFiles.length} test files`);
 
-    // Analyze matches
-    const matches = this.analyzeMatches(scanResult, existingPageObjects, testFiles);
-    
-    console.log(`   🎯 Found ${matches.exactMatches} exact matches`);
-    console.log(`   🔗 Found ${matches.potentialMatches} potential matches`);
-
-    // Generate match-based HTML viewer
-    await this.generateMatchBasedHtmlViewer(registryDir, {
+    // Generate element-level HTML viewer
+    await this.generateElementMatchHtmlViewer(registryDir, {
       scanResult,
+      elementMatches,
+      matchSummary,
       existingPageObjects,
       testFiles,
-      matches,
       framework,
       generatedAt: new Date().toISOString()
     });
 
-    console.log(`   🌐 Match analysis: ${path.join(registryDir, 'match-analysis.html')}`);
+    console.log(`   🌐 Element match analysis: ${path.join(registryDir, 'element-matches.html')}`);
   }
 
   private analyzeMatches(scanResult: any, existingPageObjects: any[], testFiles: any[]) {
@@ -263,8 +287,219 @@ class MatchBasedCLI {
     fs.writeFileSync(htmlFile, htmlContent);
   }
 
+  private async generateElementMatchHtmlViewer(outputDir: string, data: any): Promise<void> {
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element-Level Match Analysis - ${data.framework}</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 30px; text-align: center; }
+        .header h1 { margin: 0; font-size: 2.5em; font-weight: 300; }
+        .header p { margin: 10px 0 0 0; opacity: 0.9; font-size: 1.1em; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; padding: 30px; background: #f8f9fa; }
+        .stat-card { background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .stat-number { font-size: 2.5em; font-weight: bold; margin-bottom: 5px; }
+        .stat-label { color: #666; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
+        .exact { color: #28a745; }
+        .similar { color: #ffc107; }
+        .none { color: #dc3545; }
+        .coverage { color: #17a2b8; }
+        .content { padding: 30px; }
+        .section { margin-bottom: 40px; }
+        .section h2 { color: #333; border-bottom: 2px solid #28a745; padding-bottom: 10px; margin-bottom: 20px; }
+        .element-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); gap: 20px; }
+        .element-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; background: white; transition: transform 0.2s, box-shadow 0.2s; }
+        .element-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .match-type { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .exact-match { background: #d4edda; color: #155724; }
+        .similar-match { background: #fff3cd; color: #856404; }
+        .no-match { background: #f8d7da; color: #721c24; }
+        .element-name { font-size: 1.2em; font-weight: bold; color: #333; margin-bottom: 8px; }
+        .element-details { font-size: 0.9em; color: #555; margin-bottom: 10px; }
+        .locator-code { background: #f8f9fa; padding: 8px 12px; border-radius: 4px; font-family: 'Monaco', 'Consolas', monospace; font-size: 0.85em; margin: 8px 0; border-left: 3px solid #28a745; }
+        .match-info { background: #e9ecef; padding: 8px 12px; border-radius: 4px; font-size: 0.85em; margin-top: 10px; }
+        .framework-badge { background: #6f42c1; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; }
+        .confidence-bar { width: 100%; height: 6px; background: #e9ecef; border-radius: 3px; margin: 8px 0; overflow: hidden; }
+        .confidence-fill { height: 100%; transition: width 0.3s ease; }
+        .filters { margin-bottom: 20px; }
+        .filter-btn { padding: 8px 16px; margin: 0 5px 5px 0; border: 1px solid #ddd; background: white; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+        .filter-btn.active { background: #28a745; color: white; border-color: #28a745; }
+        .filter-btn:hover { background: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Element-Level Match Analysis</h1>
+            <p>Framework: ${data.framework} | Generated: ${new Date(data.generatedAt).toLocaleString()}</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">${data.matchSummary.total}</div>
+                <div class="stat-label">Total Elements</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number exact">${data.matchSummary.exact}</div>
+                <div class="stat-label">Exact Matches</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number similar">${data.matchSummary.similar}</div>
+                <div class="stat-label">Similar Matches</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number none">${data.matchSummary.none}</div>
+                <div class="stat-label">New Elements</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number coverage">${data.matchSummary.coverage.toFixed(1)}%</div>
+                <div class="stat-label">Coverage</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>🔍 Element Match Results</h2>
+                
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterElements('all')">All Elements</button>
+                    <button class="filter-btn" onclick="filterElements('exact')">Exact Matches</button>
+                    <button class="filter-btn" onclick="filterElements('similar')">Similar Matches</button>
+                    <button class="filter-btn" onclick="filterElements('none')">New Elements</button>
+                </div>
+
+                <div class="element-grid" id="elementGrid">
+                    ${this.generateElementMatchCards(data.elementMatches)}
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📄 Context: Existing Page Objects</h2>
+                <div class="element-grid">
+                    ${data.existingPageObjects.map((po: any) => `
+                        <div class="element-card">
+                            <div class="match-type exact-match">📄 Page Object</div>
+                            <div class="element-name">${po.className}</div>
+                            <div class="element-details">
+                                <span class="framework-badge">${po.framework}</span>
+                                <span style="margin-left: 10px;">${po.methods.length} methods</span>
+                            </div>
+                            <div style="font-size: 0.8em; color: #666; margin-top: 8px;">
+                                📁 ${po.filePath}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🧪 Context: Test Files</h2>
+                <div class="element-grid">
+                    ${data.testFiles.map((tf: any) => `
+                        <div class="element-card">
+                            <div class="match-type similar-match">🧪 Test File</div>
+                            <div class="element-name">${tf.name}</div>
+                            <div class="element-details">
+                                <span class="framework-badge">${tf.framework}</span>
+                                <span style="margin-left: 10px;">${tf.testCount} tests</span>
+                            </div>
+                            <div style="font-size: 0.8em; color: #666; margin-top: 8px;">
+                                📁 ${tf.filePath}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterElements(type) {
+            const cards = document.querySelectorAll('#elementGrid .element-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                const matchType = card.dataset.matchType;
+                if (type === 'all' || matchType === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>`;
+
+    const htmlFile = path.join(outputDir, 'element-matches.html');
+    fs.writeFileSync(htmlFile, htmlContent);
+  }
+
+  private generateElementMatchCards(elementMatches: ElementMatch[]): string {
+    return elementMatches.map((match: ElementMatch) => {
+      const element = match.scannedElement;
+      const existing = match.existingLocator;
+      const matchTypeClass = match.matchType === 'exact' ? 'exact-match' : 
+                            match.matchType === 'similar' ? 'similar-match' : 'no-match';
+      const matchTypeIcon = match.matchType === 'exact' ? '✅' : 
+                           match.matchType === 'similar' ? '🔗' : '🆕';
+      const matchTypeText = match.matchType === 'exact' ? 'Exact Match' : 
+                           match.matchType === 'similar' ? 'Similar Match' : 'New Element';
+      
+      const confidencePercent = Math.round(match.confidence * 100);
+      const confidenceColor = match.confidence >= 0.9 ? '#28a745' : 
+                             match.confidence >= 0.6 ? '#ffc107' : '#dc3545';
+
+      return `
+        <div class="element-card" data-match-type="${match.matchType}">
+          <div class="match-type ${matchTypeClass}">${matchTypeIcon} ${matchTypeText}</div>
+          <div class="element-name">${element.name}</div>
+          <div class="element-details">
+            <strong>Page:</strong> ${element.page} | 
+            <strong>Tag:</strong> ${element.tagName} | 
+            <strong>Type:</strong> ${element.locatorType}
+          </div>
+          
+          <div class="locator-code">
+            <strong>Scanned Locator:</strong><br>
+            ${element.locator}
+          </div>
+          
+          ${existing ? `
+            <div class="match-info">
+              <strong>📍 Found in:</strong> ${existing.className} (${existing.framework})<br>
+              <strong>📁 File:</strong> ${existing.filePath}<br>
+              <strong>🔧 Method:</strong> ${existing.method}<br>
+              <strong>🎯 Existing Locator:</strong> ${existing.locator}
+            </div>
+          ` : `
+            <div class="match-info" style="background: #fff3cd; border-left-color: #ffc107;">
+              <strong>🆕 New Element:</strong> Not found in existing tests<br>
+              <em>This element could be added to your page objects</em>
+            </div>
+          `}
+          
+          <div class="confidence-bar">
+            <div class="confidence-fill" style="width: ${confidencePercent}%; background-color: ${confidenceColor};"></div>
+          </div>
+          <div style="font-size: 0.8em; color: #666; text-align: center;">
+            Confidence: ${confidencePercent}%
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
   private generateMatchCards(data: any): string {
-    return data.scanResult.pages.map((page: any) => {
       const pageName = page.name.toLowerCase();
       
       // Check for exact match

@@ -231,42 +231,70 @@ class PageScanner {
     type: 'semantic' | 'testid' | 'attribute' | 'fallback';
     confidence: number;
   } {
-    // 1. Test ID attributes (highest confidence)
-    for (const testAttr of this.testAttributes) {
-      if (attributes[testAttr]) {
-        return {
-          locator: `[${testAttr}="${attributes[testAttr]}"]`,
-          type: 'testid',
-          confidence: 10
-        };
-      }
-    }
-
-    // 2. Semantic locators for buttons/links
+    // 1. SEMANTIC LOCATORS FIRST - "What the user sees"
+    
+    // Buttons with visible text (highest priority)
     if (tagName === 'button') {
       const text = attributes['textContent'] || attributes['title'] || attributes['aria-label'];
       if (text) {
         return {
           locator: `button=${text}`,
           type: 'semantic',
-          confidence: 9
+          confidence: 10  // Highest confidence for user-visible text
         };
       }
     }
 
+    // Links with visible text
     if (tagName === 'a') {
       const text = attributes['textContent'] || attributes['aria-label'];
       if (text) {
         return {
           locator: `link=${text}`,
           type: 'semantic',
-          confidence: 9
+          confidence: 10  // Highest confidence for user-visible text
         };
       }
     }
 
-    // 3. Input types with names
+    // 2. ARIA ATTRIBUTES - Accessibility-first approach
+    if (attributes['aria-label']) {
+      return {
+        locator: `[aria-label="${attributes['aria-label']}"]`,
+        type: 'attribute',
+        confidence: 9  // High confidence for accessibility attributes
+      };
+    }
+
+    if (attributes['role']) {
+      const role = attributes['role'];
+      const ariaLabel = attributes['aria-label'];
+      if (ariaLabel) {
+        return {
+          locator: `[role="${role}"][aria-label="${ariaLabel}"]`,
+          type: 'attribute',
+          confidence: 9
+        };
+      }
+      return {
+        locator: `[role="${role}"]`,
+        type: 'attribute',
+        confidence: 8
+      };
+    }
+
+    // 3. SEMANTIC INPUT ATTRIBUTES
     if (tagName === 'input') {
+      // Placeholder text (user-visible)
+      if (attributes['placeholder']) {
+        return {
+          locator: `input[placeholder="${attributes['placeholder']}"]`,
+          type: 'attribute',
+          confidence: 9  // High confidence for user-visible placeholder
+        };
+      }
+      
+      // Name attribute
       if (attributes['name']) {
         return {
           locator: `input[name="${attributes['name']}"]`,
@@ -274,32 +302,32 @@ class PageScanner {
           confidence: 8
         };
       }
-      if (attributes['placeholder']) {
-        return {
-          locator: `input[placeholder="${attributes['placeholder']}"]`,
-          type: 'attribute',
-          confidence: 7
-        };
-      }
+      
+      // Type attribute
       if (attributes['type']) {
         return {
           locator: `input[type="${attributes['type']}"]`,
           type: 'attribute',
-          confidence: 6
+          confidence: 7
         };
       }
     }
 
-    // 4. ARIA labels
-    if (attributes['aria-label']) {
-      return {
-        locator: `[aria-label="${attributes['aria-label']}"]`,
-        type: 'attribute',
-        confidence: 8
-      };
+    // 4. TEST ID ATTRIBUTES - Only high confidence for non-semantic elements
+    for (const testAttr of this.testAttributes) {
+      if (attributes[testAttr]) {
+        // Check if this is a semantic element (button, a, input with visible attributes)
+        const isSemanticElement = this.isSemanticElement(tagName, attributes);
+        
+        return {
+          locator: `[${testAttr}="${attributes[testAttr]}"]`,
+          type: 'testid',
+          confidence: isSemanticElement ? 8 : 10  // Lower confidence if semantic alternatives exist
+        };
+      }
     }
 
-    // 5. ID or unique attributes
+    // 5. ID attributes
     if (attributes['id']) {
       return {
         locator: `#${attributes['id']}`,
@@ -314,6 +342,28 @@ class PageScanner {
       type: 'fallback',
       confidence: 3
     };
+  }
+
+  private isSemanticElement(tagName: string, attributes: Record<string, string>): boolean {
+    // Elements that have semantic meaning or user-visible content
+    if (tagName === 'button' && (attributes['textContent'] || attributes['aria-label'])) {
+      return true;
+    }
+    
+    if (tagName === 'a' && (attributes['textContent'] || attributes['aria-label'])) {
+      return true;
+    }
+    
+    if (tagName === 'input' && (attributes['placeholder'] || attributes['aria-label'])) {
+      return true;
+    }
+    
+    // Elements with ARIA labels are semantic
+    if (attributes['aria-label'] || attributes['role']) {
+      return true;
+    }
+    
+    return false;
   }
 
   private isReallyInteractive(element: InteractiveElement): boolean {
