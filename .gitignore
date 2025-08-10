@@ -18,3 +18,4 @@ registry-builder/node_modules
 
   # Development files
   *.log
+.DS_Store
