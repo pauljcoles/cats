@@ -17,7 +17,6 @@
 npm install
 
 # Basic scan - app and tests in same directory
-cd
 
 # Separate app and test directories with bidirectional mapping
 npx ts-node src/cli.ts --scan ./frontend-app --tests ./e2e-tests --framework playwright --registry

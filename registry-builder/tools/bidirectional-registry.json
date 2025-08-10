@@ -1,0 +1,564 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-10T19:02:32.275Z",
+    "nodeCount": 21,
+    "relationshipCount": 18,
+    "tool": "best-practices-page-scanner",
+    "version": "2.0.0",
+    "features": [
+      "bidirectional-mapping",
+      "coverage-analysis",
+      "usage-tracking"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "Test_button_submit_form_button",
+      "type": "InteractiveElement",
+      "name": "button_submit_form",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "button",
+        "locator": "[data-testid=\"submit-btn\"]",
+        "locatorType": "testid",
+        "attributes": {
+          "data-testid": "submit-btn",
+          "textContent": "Submit Form"
+        },
+        "confidence": 10,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_input_enter_email_input",
+      "type": "InteractiveElement",
+      "name": "input_enter_email",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "input",
+        "locator": "[data-testid=\"email-input\"]",
+        "locatorType": "testid",
+        "attributes": {
+          "data-testid": "email-input",
+          "type": "email",
+          "placeholder": "Enter email"
+        },
+        "confidence": 10,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_button_add_to_cart_button",
+      "type": "InteractiveElement",
+      "name": "button_add_to_cart",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "button",
+        "locator": "button=Add to Cart",
+        "locatorType": "semantic",
+        "attributes": {
+          "textContent": "Add to Cart"
+        },
+        "confidence": 9,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_button_buy_now_button",
+      "type": "InteractiveElement",
+      "name": "button_buy_now",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "button",
+        "locator": "button=Buy Now",
+        "locatorType": "semantic",
+        "attributes": {
+          "textContent": "Buy Now"
+        },
+        "confidence": 9,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_a_view_products_a",
+      "type": "InteractiveElement",
+      "name": "a_view_products",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "a",
+        "locator": "link=View Products",
+        "locatorType": "semantic",
+        "attributes": {
+          "href": "/products",
+          "textContent": "View Products"
+        },
+        "confidence": 9,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_input_search_products_input",
+      "type": "InteractiveElement",
+      "name": "input_search_products",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "input",
+        "locator": "input[placeholder=\"Search products...\"]",
+        "locatorType": "attribute",
+        "attributes": {
+          "type": "text",
+          "placeholder": "Search products..."
+        },
+        "confidence": 7,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_input_enter_password_input",
+      "type": "InteractiveElement",
+      "name": "input_enter_password",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "input",
+        "locator": "input[placeholder=\"Enter password\"]",
+        "locatorType": "attribute",
+        "attributes": {
+          "type": "password",
+          "placeholder": "Enter password"
+        },
+        "confidence": 7,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_button__button",
+      "type": "InteractiveElement",
+      "name": "button_",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "button",
+        "locator": "button=×",
+        "locatorType": "semantic",
+        "attributes": {
+          "aria-label": "Close dialog",
+          "textContent": "×"
+        },
+        "confidence": 9,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_select_select_country_select",
+      "type": "InteractiveElement",
+      "name": "select_select_country",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "select",
+        "locator": "[aria-label=\"Select country\"]",
+        "locatorType": "attribute",
+        "attributes": {
+          "aria-label": "Select country"
+        },
+        "confidence": 8,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_input_username_input",
+      "type": "InteractiveElement",
+      "name": "input_username",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "input",
+        "locator": "input[name=\"username\"]",
+        "locatorType": "attribute",
+        "attributes": {
+          "type": "text",
+          "name": "username"
+        },
+        "confidence": 8,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_select_test_select",
+      "type": "InteractiveElement",
+      "name": "select_test",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "select",
+        "locator": "select",
+        "locatorType": "fallback",
+        "attributes": {
+          "name": "category"
+        },
+        "confidence": 3,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_button_save_button",
+      "type": "InteractiveElement",
+      "name": "button_save",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "button",
+        "locator": "button=Save",
+        "locatorType": "semantic",
+        "attributes": {
+          "id": "save-button",
+          "textContent": "Save"
+        },
+        "confidence": 9,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_input_text_input",
+      "type": "InteractiveElement",
+      "name": "input_text",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "input",
+        "locator": "input[type=\"text\"]",
+        "locatorType": "attribute",
+        "attributes": {
+          "type": "text",
+          "id": "search-field"
+        },
+        "confidence": 6,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_button_generic_button_1_button",
+      "type": "InteractiveElement",
+      "name": "button_generic_button_1",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "button",
+        "locator": "button=Generic Button 1",
+        "locatorType": "semantic",
+        "attributes": {
+          "textContent": "Generic Button 1"
+        },
+        "confidence": 9,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_button_generic_button_2_button",
+      "type": "InteractiveElement",
+      "name": "button_generic_button_2",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "button",
+        "locator": "button=Generic Button 2",
+        "locatorType": "semantic",
+        "attributes": {
+          "textContent": "Generic Button 2"
+        },
+        "confidence": 9,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_input_text_input",
+      "type": "InteractiveElement",
+      "name": "input_text",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "input",
+        "locator": "input[type=\"text\"]",
+        "locatorType": "attribute",
+        "attributes": {
+          "type": "text"
+        },
+        "confidence": 6,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "Test_select_test_select",
+      "type": "InteractiveElement",
+      "name": "select_test",
+      "filePath": "test-app/src/pages/TestPage.tsx",
+      "metadata": {
+        "tagName": "select",
+        "locator": "select",
+        "locatorType": "fallback",
+        "attributes": {},
+        "confidence": 3,
+        "page": "Test",
+        "route": "/testpage"
+      }
+    },
+    {
+      "id": "generated_TestPage",
+      "type": "GeneratedPageObject",
+      "name": "TestPage",
+      "filePath": "test-app/scan-results/page-objects/TestPage.ts",
+      "metadata": {
+        "originalPageName": "Test",
+        "route": "/testpage",
+        "elementCount": 17,
+        "generatedFrom": "test-app/src/pages/TestPage.tsx"
+      }
+    },
+    {
+      "id": "test_form-interactions",
+      "type": "TestFile",
+      "name": "form-interactions",
+      "filePath": "test-app-tests/tests/form-interactions.spec.ts",
+      "metadata": {
+        "name": "form-interactions",
+        "filePath": "test-app-tests/tests/form-interactions.spec.ts",
+        "tests": [
+          "should handle search functionality",
+          "should handle country selection",
+          "should handle username input"
+        ],
+        "pageObjectImports": [],
+        "type": "spec"
+      }
+    },
+    {
+      "id": "test_login",
+      "type": "TestFile",
+      "name": "login",
+      "filePath": "test-app-tests/tests/login.spec.ts",
+      "metadata": {
+        "name": "login",
+        "filePath": "test-app-tests/tests/login.spec.ts",
+        "tests": [
+          "should login with valid credentials",
+          "should show error for invalid credentials"
+        ],
+        "pageObjectImports": [
+          "test",
+          "expect"
+        ],
+        "type": "spec"
+      }
+    },
+    {
+      "id": "test_test-page",
+      "type": "TestFile",
+      "name": "test-page",
+      "filePath": "test-app-tests/tests/test-page.spec.ts",
+      "metadata": {
+        "name": "test-page",
+        "filePath": "test-app-tests/tests/test-page.spec.ts",
+        "tests": [
+          "should submit form successfully",
+          "should add item to cart",
+          "should handle form validation"
+        ],
+        "pageObjectImports": [
+          "test",
+          "expect"
+        ],
+        "type": "spec"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "source": "Test_button_submit_form_button",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element button_submit_form is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_input_enter_email_input",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element input_enter_email is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_button_add_to_cart_button",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element button_add_to_cart is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_button_buy_now_button",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element button_buy_now is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_a_view_products_a",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element a_view_products is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_input_search_products_input",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element input_search_products is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_input_enter_password_input",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element input_enter_password is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_button__button",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element button_ is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_select_select_country_select",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element select_select_country is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_input_username_input",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element input_username is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_select_test_select",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element select_test is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_button_save_button",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element button_save is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_input_text_input",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element input_text is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_button_generic_button_1_button",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element button_generic_button_1 is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_button_generic_button_2_button",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element button_generic_button_2 is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_input_text_input",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element input_text is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "Test_select_test_select",
+      "target": "generated_TestPage",
+      "type": "GENERATES",
+      "confidence": 1,
+      "metadata": {
+        "description": "Element select_test is included in generated page object TestPage"
+      }
+    },
+    {
+      "source": "generated_TestPage",
+      "target": "test_test-page",
+      "type": "COULD_BE_USED_BY",
+      "confidence": 0.7,
+      "metadata": {
+        "description": "Generated page object TestPage could be used by test test-page",
+        "matchType": "name_similarity"
+      }
+    }
+  ],
+  "summary": {
+    "scannedPages": 1,
+    "interactiveElements": 17,
+    "generatedPageObjects": 1,
+    "existingPageObjects": 0,
+    "testFiles": 3,
+    "relationshipTypes": {
+      "GENERATES": 17,
+      "COULD_BE_USED_BY": 1,
+      "USES": 0,
+      "DUPLICATES": 0
+    }
+  },
+  "mappingAnalysis": {
+    "generatedObjectsWithPotentialTests": 1,
+    "existingObjectsWithTests": 0,
+    "coverageGaps": 1
+  }
+}
