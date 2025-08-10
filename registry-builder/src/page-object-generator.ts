@@ -277,15 +277,18 @@ ${methods}`;
   private generateWdioTypeScriptPageObject(page: PageInfo): string {
     const className = `${page.name}Page`;
     
-    // Generate WDIO getters
+    // Generate WDIO getters with enhanced selectors
     const getters = page.elements
-      .map(el => `  /**
+      .map(el => {
+        const enhancedSelector = this.getEnhancedWdioSelector(el);
+        return `  /**
    * Get ${el.name} element
    * ${el.tagName} - ${el.locatorType} (confidence: ${el.confidence}/10)
    */
   get ${el.name}() {
-    return $('${el.locator}');
-  }`)
+    return ${enhancedSelector};
+  }`;
+      })
       .join('\n\n');
 
     // Generate action methods for high-confidence elements
@@ -603,5 +606,64 @@ from selenium.webdriver.support.ui import Select`;
 
   private capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  private getEnhancedWdioSelector(element: InteractiveElement): string {
+    // WebdriverIO enhanced selector with accessibility-first priority
+    // Priority: aria-label > ID > name > text content > placeholder > data-testid > semantic
+    
+    // Check for aria-label first (accessibility first!)
+    if (element.attributes && element.attributes['aria-label']) {
+      return `$('[aria-label="${element.attributes['aria-label']}"]')`;
+    }
+
+    // Check for id (most specific)
+    if (element.attributes && element.attributes['id']) {
+      return `$('#${element.attributes['id']}')`;
+    }
+
+    // Check for name attribute (semantic meaning)
+    if (element.attributes && element.attributes['name']) {
+      return `$('[name="${element.attributes['name']}"]')`;
+    }
+
+    // Use text content for buttons and links (semantic)
+    if (element.attributes && element.attributes['textContent']) {
+      const text = element.attributes['textContent'].trim();
+      if (text && text.length < 50) {
+        if (element.tagName.toLowerCase() === 'button') {
+          return `$('button*=${text}')`;
+        } else if (element.tagName.toLowerCase() === 'a') {
+          return `$('a*=${text}')`;
+        }
+      }
+    }
+
+    // Check for placeholder (specific for inputs)
+    if (element.attributes && element.attributes['placeholder']) {
+      return `$('[placeholder="${element.attributes['placeholder']}"]')`;
+    }
+
+    // Check for test-id (lower priority - test-specific)
+    if (element.attributes && element.attributes['data-testid']) {
+      return `$('[data-testid="${element.attributes['data-testid']}"]')`;
+    }
+
+    // Use semantic selectors with chaining for disambiguation
+    if (element.tagName.toLowerCase() === 'button') {
+      return `$('button').first()`;
+    } else if (element.tagName.toLowerCase() === 'input') {
+      const type = element.attributes?.['type'] || 'text';
+      return `$('input[type="${type}"]').first()`;
+    } else if (element.tagName.toLowerCase() === 'select') {
+      return `$('select').first()`;
+    } else if (element.tagName.toLowerCase() === 'textarea') {
+      return `$('textarea').first()`;
+    } else if (element.tagName.toLowerCase() === 'a') {
+      return `$('a').first()`;
+    }
+
+    // Fall back to CSS selector with chaining
+    return `$('${element.locator}').first()`;
   }
 }

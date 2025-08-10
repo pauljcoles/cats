@@ -13,7 +13,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Analysis Commands
 - `npm run analyze [path]` - Build and run registry analysis on specified path
+- `npm run analyze <app-path> <test-path>` - Build and run analysis on separate app and test codebases
 - `npm run analyze-watch` - Watch files and re-run analysis on changes
+
+### Multi-Path Support
+The registry builder now supports scanning separate codebases:
+- **Single codebase**: `npm run analyze ./my-monorepo` (traditional usage)
+- **Separate codebases**: `npm run analyze ./frontend-app ./e2e-automation`
+
+This is useful for corporate environments where:
+- Frontend application code lives in one repository
+- Test automation (page objects, features, steps) lives in another repository
 
 ### Quality Assurance
 - `npm run test` - Run Jest tests

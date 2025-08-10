@@ -73,18 +73,43 @@ interface ComponentAnalysis {
   framework: 'react' | 'vue';
   elements: SemanticElement[];
   childComponents: string[];
+  routes: RouteInfo[];
   accessibility: {
     issues: string[];
     recommendations: string[];
   };
 }
 
+interface RouteInfo {
+  path: string;
+  method: 'exact' | 'pattern' | 'inferred';
+  source: 'router' | 'filename' | 'directory';
+  confidence: number;
+}
+
+interface ScanPaths {
+  appCodePath: string;      // Where the React/Vue app code lives
+  testCodePath?: string;    // Where the TAF code lives (optional, defaults to appCodePath)
+}
+
 class AutomatedRegistryBuilder {
   private nodes: Map<string, RegistryNode> = new Map();
-  private projectRoot: string;
+  private scanPaths: ScanPaths;
   
-  constructor(projectRoot: string = process.cwd()) {
-    this.projectRoot = path.resolve(projectRoot);
+  constructor(config: string | ScanPaths = process.cwd()) {
+    if (typeof config === 'string') {
+      // Single path - traditional usage
+      this.scanPaths = {
+        appCodePath: path.resolve(config),
+        testCodePath: path.resolve(config)
+      };
+    } else {
+      // Multi-path configuration
+      this.scanPaths = {
+        appCodePath: path.resolve(config.appCodePath),
+        testCodePath: path.resolve(config.testCodePath || config.appCodePath)
+      };
+    }
   }
 
   /**
@@ -92,7 +117,8 @@ class AutomatedRegistryBuilder {
    */
   async buildRegistry(): Promise<void> {
     console.log('🚀 Starting automated registry build...');
-    console.log(`📁 Project root: ${this.projectRoot}`);
+    console.log(`📁 App code path: ${this.scanPaths.appCodePath}`);
+    console.log(`📁 Test code path: ${this.scanPaths.testCodePath}`);
 
     try {
       // Phase 1: Discovery
@@ -121,37 +147,92 @@ class AutomatedRegistryBuilder {
   private async discoverFiles(): Promise<void> {
     console.log('\n📂 Phase 1: File Discovery');
     
-    const patterns = {
-      pageObjects: ['**/*Page.ts', '**/*Module.ts', '**/page-objects/**/*.ts'],
-      testData: ['**/*test_data*.json', '**/*test-data*.json', '**/data/**/*.json'],
-      stepDefinitions: ['**/*.steps.ts', '**/step-definitions/**/*.ts'],
-      featureFiles: ['**/*.feature', '**/features/**/*.feature'],
+    // TAF patterns - scan test code path
+    const tafPatterns = {
+      pageObjects: [
+        '**/*Page.ts', '**/*Module.ts', '**/page-objects/**/*.ts',
+        '**/pages/**/*.ts', '**/tests/pages/**/*.ts', // Playwright patterns
+        '**/*page.ts', '**/*Page.js', '**/pages/**/*.js'
+      ],
+      testData: [
+        '**/*test_data*.json', '**/*test-data*.json', '**/data/**/*.json',
+        '**/fixtures/**/*.json', '**/test-data/**/*.json'
+      ],
+      stepDefinitions: [
+        '**/*.steps.ts', '**/step-definitions/**/*.ts',
+        '**/steps/**/*.ts', '**/*steps.ts'
+      ],
+      featureFiles: [
+        '**/*.feature', '**/features/**/*.feature',
+        '**/e2e/**/*.feature'
+      ],
+      testSelectors: [
+        '**/*selectors.d.ts', '**/*selectors.ts', '**/test-ids.ts',
+        '**/fixtures/**/*.ts', '**/support/**/*.ts'
+      ]
+    };
+    
+    // App patterns - scan app code path
+    const appPatterns = {
       reactComponents: ['**/*.tsx', '**/*.jsx'],
       vueComponents: ['**/*.vue'],
-      testSelectors: ['**/*selectors.d.ts', '**/*selectors.ts', '**/*test-ids.ts'],
       translationFiles: ['**/*i18n*.json', '**/locales/**/*.json', '**/translations/**/*.json']
     };
 
-    for (const [type, globPatterns] of Object.entries(patterns)) {
-      const files = await this.findFiles(globPatterns);
-      console.log(`  ${type}: ${files.length} files found`);
-      
-      for (const file of files) {
-        const nodeId = this.generateNodeId(file);
-        const node: RegistryNode = {
-          id: nodeId,
-          type: this.getNodeType(file),
-          name: path.basename(file, path.extname(file)),
-          filePath: file,
-          metadata: { fileType: type },
-          relationships: []
-        };
-        
-        this.nodes.set(nodeId, node);
-      }
+    // Scan TAF files
+    console.log('  🧪 Scanning TAF files...');
+    for (const [type, globPatterns] of Object.entries(tafPatterns)) {
+      const files = await this.findFilesInPath(globPatterns, this.scanPaths.testCodePath!);
+      console.log(`    ${type}: ${files.length} files found`);
+      this.createNodesFromFiles(files, type);
+    }
+
+    // Scan app files  
+    console.log('  ⚛️ Scanning app component files...');
+    for (const [type, globPatterns] of Object.entries(appPatterns)) {
+      const files = await this.findFilesInPath(globPatterns, this.scanPaths.appCodePath);
+      console.log(`    ${type}: ${files.length} files found`);
+      this.createNodesFromFiles(files, type);
     }
     
     console.log(`📊 Total nodes discovered: ${this.nodes.size}`);
+  }
+  
+  /**
+   * Find files matching patterns in a specific path
+   */
+  private async findFilesInPath(patterns: string[], basePath: string): Promise<string[]> {
+    const files = new Set<string>();
+    
+    for (const pattern of patterns) {
+      const found = await glob(pattern, {
+        cwd: basePath,
+        absolute: true,
+        ignore: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/.git/**']
+      });
+      found.forEach(file => files.add(file));
+    }
+    
+    return Array.from(files);
+  }
+  
+  /**
+   * Create registry nodes from discovered files
+   */
+  private createNodesFromFiles(files: string[], type: string): void {
+    for (const file of files) {
+      const nodeId = this.generateNodeId(file);
+      const node: RegistryNode = {
+        id: nodeId,
+        type: this.getNodeType(file),
+        name: path.basename(file, path.extname(file)),
+        filePath: file,
+        metadata: { fileType: type },
+        relationships: []
+      };
+      
+      this.nodes.set(nodeId, node);
+    }
   }
 
   /**
@@ -375,7 +456,7 @@ class AutomatedRegistryBuilder {
       true
     );
 
-    const analysis = this.analyzeReactComponent(sourceFile, node.name);
+    const analysis = this.analyzeReactComponent(sourceFile, node.name, node.filePath);
     const elements = analysis.elements;
     
     // Create semantic element nodes
@@ -410,7 +491,8 @@ class AutomatedRegistryBuilder {
       elementsCount: elements.length,
       semanticElements: elements.filter(e => e.selectorPriority === 'always').length,
       accessibilityIssues: analysis.accessibility.issues,
-      childComponents: analysis.childComponents
+      childComponents: analysis.childComponents,
+      routes: analysis.routes
     };
   }
 
@@ -419,7 +501,7 @@ class AutomatedRegistryBuilder {
    */
   private async parseVueComponent(node: RegistryNode): Promise<void> {
     const sourceCode = fs.readFileSync(node.filePath, 'utf8');
-    const analysis = this.analyzeVueComponent(sourceCode, node.name);
+    const analysis = this.analyzeVueComponent(sourceCode, node.name, node.filePath);
     const elements = analysis.elements;
     
     // Create semantic element nodes
@@ -454,7 +536,8 @@ class AutomatedRegistryBuilder {
       elementsCount: elements.length,
       semanticElements: elements.filter(e => e.selectorPriority === 'always').length,
       accessibilityIssues: analysis.accessibility.issues,
-      childComponents: analysis.childComponents
+      childComponents: analysis.childComponents,
+      routes: analysis.routes
     };
   }
 
@@ -591,7 +674,7 @@ class AutomatedRegistryBuilder {
   private async generateOutputs(): Promise<void> {
     console.log('\n📄 Phase 4: Generating Outputs');
     
-    const outputDir = path.join(this.projectRoot, 'registry-output');
+    const outputDir = path.join(this.scanPaths.appCodePath, 'scan-results', 'registry-output');
     await fs.promises.mkdir(outputDir, { recursive: true });
 
     // 1. Generate complete registry JSON
@@ -621,6 +704,18 @@ class AutomatedRegistryBuilder {
 
     // 5. Generate semantic analysis report
     await this.generateSemanticAnalysisReport(outputDir);
+
+    // 6. Generate automation summary
+    await this.generateAutomationSummary(outputDir);
+
+    // 7. Generate HTML dashboard
+    await this.generateHtmlDashboard(outputDir);
+
+    // 8. Generate bidirectional mapping JSON
+    await this.generateBidirectionalMapping(outputDir);
+
+    // 9. Generate enhanced missing mappings report
+    await this.generateEnhancedMissingMappingsReport(outputDir);
 
     console.log(`📁 Outputs generated in: ${outputDir}`);
   }
@@ -961,7 +1056,7 @@ class AutomatedRegistryBuilder {
   /**
    * Analyze React component and extract semantic elements
    */
-  private analyzeReactComponent(sourceFile: ts.SourceFile, componentName: string): ComponentAnalysis {
+  private analyzeReactComponent(sourceFile: ts.SourceFile, componentName: string, filePath: string = ''): ComponentAnalysis {
     const elements: SemanticElement[] = [];
     const childComponents: string[] = [];
     const accessibilityIssues: string[] = [];
@@ -992,11 +1087,15 @@ class AutomatedRegistryBuilder {
 
     visitNode(sourceFile);
 
+    // Detect routes for this component
+    const routes = this.detectComponentRoutes(sourceFile, componentName, filePath);
+
     return {
       componentName,
       framework: 'react',
       elements,
       childComponents: [...new Set(childComponents)], // Remove duplicates
+      routes,
       accessibility: {
         issues: accessibilityIssues,
         recommendations: this.generateAccessibilityRecommendations(elements)
@@ -1005,9 +1104,125 @@ class AutomatedRegistryBuilder {
   }
 
   /**
+   * Detect routes associated with a React component
+   */
+  private detectComponentRoutes(sourceFile: ts.SourceFile, componentName: string, filePath: string): RouteInfo[] {
+    const routes: RouteInfo[] = [];
+    
+    // 1. Look for React Router Route definitions
+    const visitNode = (node: ts.Node): void => {
+      if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+        const tagName = this.getJsxTagName(node);
+        if (tagName === 'Route') {
+          const pathAttr = this.getJsxAttributeValue(node, 'path');
+          if (pathAttr) {
+            routes.push({
+              path: pathAttr,
+              method: 'exact',
+              source: 'router',
+              confidence: 10
+            });
+          }
+        }
+      }
+      ts.forEachChild(node, visitNode);
+    };
+    visitNode(sourceFile);
+    
+    // 2. Look for string literals that look like routes
+    const sourceText = sourceFile.text;
+    const routePatterns = [
+      /['"`](\/[a-zA-Z0-9\-_\/\:]+)['"`]/g,  // '/path/to/route'
+      /path\s*[:=]\s*['"`](\/[^'"`]+)['"`]/g, // path: '/route'
+    ];
+    
+    routePatterns.forEach(pattern => {
+      let match;
+      while ((match = pattern.exec(sourceText)) !== null) {
+        const potentialRoute = match[1];
+        if (this.looksLikeRoute(potentialRoute)) {
+          routes.push({
+            path: potentialRoute,
+            method: 'pattern',
+            source: 'router',
+            confidence: 7
+          });
+        }
+      }
+    });
+    
+    // 3. Infer from file path
+    const inferredRoute = this.inferRouteFromFilePath(filePath, componentName);
+    if (inferredRoute) {
+      routes.push(inferredRoute);
+    }
+    
+    // Remove duplicates and sort by confidence
+    const uniqueRoutes = routes.filter((route, index) => 
+      routes.findIndex(r => r.path === route.path) === index
+    );
+    
+    return uniqueRoutes.sort((a, b) => b.confidence - a.confidence);
+  }
+  
+  /**
+   * Check if a string looks like a route path
+   */
+  private looksLikeRoute(str: string): boolean {
+    return str.startsWith('/') && 
+           str.length > 1 && 
+           !str.includes(' ') &&
+           /^\/[a-zA-Z0-9\-_\/\:]*$/.test(str);
+  }
+  
+  /**
+   * Infer route from file path and component name
+   */
+  private inferRouteFromFilePath(filePath: string, componentName: string): RouteInfo | null {
+    // Handle pages directory structure
+    if (filePath.includes('/pages/')) {
+      const pathPart = filePath.split('/pages/')[1];
+      const route = '/' + pathPart
+        .replace(/\.(tsx?|vue)$/, '')
+        .replace(/\/index$/, '')
+        .replace(/([A-Z])/g, (match, letter, index) => 
+          index > 0 ? '-' + letter.toLowerCase() : letter.toLowerCase()
+        );
+      
+      return {
+        path: route === '/' ? '/' : route,
+        method: 'inferred',
+        source: 'directory',
+        confidence: 5
+      };
+    }
+    
+    // Handle component names that suggest routes
+    const lowerName = componentName.toLowerCase();
+    if (lowerName.includes('page') || lowerName.includes('view')) {
+      const routeName = lowerName
+        .replace(/page$|view$/, '')
+        .replace(/([A-Z])/g, (match, letter, index) => 
+          index > 0 ? '-' + letter.toLowerCase() : letter.toLowerCase()
+        );
+      
+      if (routeName) {
+        return {
+          path: '/' + routeName,
+          method: 'inferred',
+          source: 'filename',
+          confidence: 3
+        };
+      }
+    }
+    
+    return null;
+  }
+
+  /**
    * Analyze Vue component and extract semantic elements
    */
-  private analyzeVueComponent(sourceCode: string, componentName: string): ComponentAnalysis {
+  private analyzeVueComponent(sourceCode: string, componentName: string, filePath: string = ''): ComponentAnalysis {
     const elements: SemanticElement[] = [];
     const childComponents: string[] = [];
     const accessibilityIssues: string[] = [];
@@ -1033,16 +1248,80 @@ class AutomatedRegistryBuilder {
       }
     }
 
+    // Detect routes for Vue component
+    const routes = this.detectVueComponentRoutes(sourceCode, componentName, filePath);
+
     return {
       componentName,
       framework: 'vue',
       elements,
       childComponents: [...new Set(childComponents)],
+      routes,
       accessibility: {
         issues: accessibilityIssues,
         recommendations: this.generateAccessibilityRecommendations(elements)
       }
     };
+  }
+  
+  /**
+   * Detect routes associated with a Vue component
+   */
+  private detectVueComponentRoutes(sourceCode: string, componentName: string, filePath: string): RouteInfo[] {
+    const routes: RouteInfo[] = [];
+    
+    // Look for Vue Router route definitions in template and script
+    const routePatterns = [
+      /to=['"`](\/[^'"`]+)['"`]/g,  // router-link to="/path"
+      /path\s*:\s*['"`](\/[^'"`]+)['"`]/g, // path: '/route'
+      /['"`](\/[a-zA-Z0-9\-_\/\:]+)['"`]/g,  // any route-like string
+    ];
+    
+    routePatterns.forEach(pattern => {
+      let match;
+      while ((match = pattern.exec(sourceCode)) !== null) {
+        const potentialRoute = match[1];
+        if (this.looksLikeRoute(potentialRoute)) {
+          routes.push({
+            path: potentialRoute,
+            method: 'pattern',
+            source: 'router',
+            confidence: 7
+          });
+        }
+      }
+    });
+    
+    // Infer from file path
+    const inferredRoute = this.inferRouteFromFilePath(filePath, componentName);
+    if (inferredRoute) {
+      routes.push(inferredRoute);
+    }
+    
+    // Remove duplicates and sort by confidence
+    const uniqueRoutes = routes.filter((route, index) => 
+      routes.findIndex(r => r.path === route.path) === index
+    );
+    
+    return uniqueRoutes.sort((a, b) => b.confidence - a.confidence);
+  }
+  
+  /**
+   * Get JSX attribute value
+   */
+  private getJsxAttributeValue(node: ts.JsxElement | ts.JsxSelfClosingElement, attributeName: string): string | null {
+    const attributesArray = ts.isJsxElement(node) 
+      ? node.openingElement.attributes.properties 
+      : node.attributes.properties;
+    
+    for (const attr of attributesArray) {
+      if (ts.isJsxAttribute(attr) && ts.isIdentifier(attr.name) && attr.name.text === attributeName) {
+        if (attr.initializer && ts.isStringLiteral(attr.initializer)) {
+          return attr.initializer.text;
+        }
+      }
+    }
+    return null;
   }
 
   private extractSemanticElementFromJsx(jsxNode: ts.JsxElement | ts.JsxSelfClosingElement): SemanticElement | null {
@@ -1201,7 +1480,7 @@ class AutomatedRegistryBuilder {
     jsxAttributes.properties.forEach(prop => {
       if (ts.isJsxAttribute(prop) && ts.isIdentifier(prop.name)) {
         const name = prop.name.text;
-        const value = prop.initializer ? this.getJsxAttributeValue(prop.initializer) : '';
+        const value = prop.initializer ? this.getJsxExpressionValue(prop.initializer) : '';
         attributes[name] = value;
       }
     });
@@ -1209,7 +1488,7 @@ class AutomatedRegistryBuilder {
     return attributes;
   }
 
-  private getJsxAttributeValue(initializer: ts.Expression): string {
+  private getJsxExpressionValue(initializer: ts.Expression): string {
     if (ts.isStringLiteral(initializer)) {
       return initializer.text;
     }
@@ -1250,16 +1529,20 @@ class AutomatedRegistryBuilder {
     const files: string[] = [];
     for (const pattern of patterns) {
       const matches = await glob(pattern, { 
-        cwd: this.projectRoot,
+        cwd: this.scanPaths.appCodePath,
         ignore: ['**/node_modules/**', '**/dist/**', '**/*.d.ts']
       });
-      files.push(...matches.map(f => path.resolve(this.projectRoot, f)));
+      files.push(...matches.map(f => path.resolve(this.scanPaths.appCodePath, f)));
     }
     return [...new Set(files)]; // Remove duplicates
   }
 
   private generateNodeId(filePath: string): string {
-    return path.relative(this.projectRoot, filePath).replace(/[/\\]/g, '_').replace(/\.[^.]*$/, '');
+    // Use the appropriate base path depending on which codebase the file is in
+    const basePath = filePath.startsWith(this.scanPaths.testCodePath!) 
+      ? this.scanPaths.testCodePath! 
+      : this.scanPaths.appCodePath;
+    return path.relative(basePath, filePath).replace(/[/\\]/g, '_').replace(/\.[^.]*$/, '');
   }
 
   private getNodeType(filePath: string): RegistryNode['type'] {
@@ -1738,17 +2021,838 @@ class AutomatedRegistryBuilder {
     
     return recommendations;
   }
+
+  /**
+   * Generate automation-focused summary for test engineers
+   */
+  private async generateAutomationSummary(outputDir: string): Promise<void> {
+    const components = Array.from(this.nodes.values()).filter(n => n.type === 'ReactComponent' || n.type === 'VueComponent');
+    const semanticElements = Array.from(this.nodes.values()).filter(n => n.type === 'SemanticElement');
+    
+    // Filter to only automation-relevant elements
+    const automationElements = semanticElements.filter(e => {
+      const elementData = e.metadata as SemanticElement;
+      return elementData.automationPriority && elementData.automationPriority !== 'none';
+    });
+    
+    // Calculate statistics
+    const totalInteractiveElements = automationElements.length;
+    const highPriorityElements = automationElements.filter(e => 
+      (e.metadata as SemanticElement).automationPriority === 'high'
+    ).length;
+    
+    const elementsWithTestIds = automationElements.filter(e => {
+      const elementData = e.metadata as SemanticElement;
+      return elementData.automationAnalysis?.testAttributes && elementData.automationAnalysis.testAttributes.length > 0;
+    }).length;
+    
+    const automationCoverage = totalInteractiveElements > 0 
+      ? Math.round((elementsWithTestIds / totalInteractiveElements) * 100) 
+      : 0;
+    
+    // Analyze by page/component
+    const pageAnalysis = components.map(component => {
+      const componentElements = automationElements.filter(e => 
+        e.metadata['parentComponent'] === component.name
+      );
+      
+      const interactiveCount = componentElements.length;
+      const highPriorityCount = componentElements.filter(e => 
+        (e.metadata as SemanticElement).automationPriority === 'high'
+      ).length;
+      const missingTestIds = componentElements.filter(e => {
+        const elementData = e.metadata as SemanticElement;
+        return !elementData.automationAnalysis?.testAttributes || elementData.automationAnalysis.testAttributes.length === 0;
+      }).length;
+      
+      // Get route information
+      const routes = component.metadata['routes'] || [];
+      
+      return {
+        component: component.name,
+        routes: routes.map((r: RouteInfo) => r.path),
+        filePath: component.filePath,
+        interactiveElements: interactiveCount,
+        highPriority: highPriorityCount,
+        missingTestIds,
+        automationReadiness: interactiveCount > 0 
+          ? Math.round(((interactiveCount - missingTestIds) / interactiveCount) * 100)
+          : 100,
+        elements: componentElements.map(e => {
+          const elementData = e.metadata as SemanticElement;
+          return {
+            name: `${elementData.tagName}_${elementData.recommendedSelector.replace(/[^a-zA-Z0-9]/g, '_')}`,
+            tagName: elementData.tagName,
+            locator: elementData.recommendedSelector,
+            priority: elementData.automationPriority,
+            hasTestId: elementData.automationAnalysis?.testAttributes && elementData.automationAnalysis.testAttributes.length > 0,
+            confidence: elementData.automationAnalysis?.identifierScore || 0
+          };
+        })
+      };
+    }).filter(page => page.interactiveElements > 0) // Only include pages with interactive elements
+      .sort((a, b) => b.interactiveElements - a.interactiveElements); // Sort by most interactive first
+    
+    // Generate actionable recommendations
+    const recommendations: string[] = [];
+    const missingTestIdCount = totalInteractiveElements - elementsWithTestIds;
+    if (missingTestIdCount > 0) {
+      recommendations.push(`Add data-testid to ${missingTestIdCount} high-priority interactive elements`);
+    }
+    
+    const lowAccessibilityElements = automationElements.filter(e => {
+      const elementData = e.metadata as SemanticElement;
+      return elementData.accessibilityIssues?.length > 0;
+    }).length;
+    
+    if (lowAccessibilityElements > 0) {
+      recommendations.push(`Improve accessibility labels on ${lowAccessibilityElements} elements`);
+    }
+    
+    const summary = {
+      summary: {
+        totalInteractiveElements,
+        highPriorityElements,
+        elementsWithTestIds,
+        automationCoverage: `${automationCoverage}%`,
+        automationReadiness: automationCoverage >= 70 ? 'Good' : automationCoverage >= 50 ? 'Moderate' : 'Needs Improvement'
+      },
+      pageAnalysis,
+      recommendations,
+      routeToComponentMapping: this.generateRouteMapping(components),
+      generatedAt: new Date().toISOString()
+    };
+
+    await fs.promises.writeFile(
+      path.join(outputDir, 'automation-summary.json'),
+      JSON.stringify(summary, null, 2)
+    );
+  }
+  
+  /**
+   * Generate route to component mapping for easy lookup
+   */
+  private generateRouteMapping(components: RegistryNode[]): Record<string, string[]> {
+    const routeMapping: Record<string, string[]> = {};
+    
+    components.forEach(component => {
+      const routes = component.metadata['routes'] || [];
+      routes.forEach((routeInfo: RouteInfo) => {
+        if (!routeMapping[routeInfo.path]) {
+          routeMapping[routeInfo.path] = [];
+        }
+        routeMapping[routeInfo.path].push(component.name);
+      });
+    });
+    
+    return routeMapping;
+  }
+
+  /**
+   * Generate simple HTML dashboard for easy visualization
+   */
+  private async generateHtmlDashboard(outputDir: string): Promise<void> {
+    const components = Array.from(this.nodes.values()).filter(n => n.type === 'ReactComponent' || n.type === 'VueComponent');
+    const routeMapping = this.generateRouteMapping(components);
+    
+    // Get page objects (TAF data)
+    const pageObjects = Array.from(this.nodes.values()).filter(n => n.type === 'PageObject');
+    
+    // Prepare data for the dashboard
+    const dashboardData = {
+      routes: Object.keys(routeMapping).sort(),
+      components: components.map(c => ({
+        name: c.name,
+        routes: (c.metadata['routes'] || []).map((r: RouteInfo) => r.path),
+        filePath: c.filePath,
+        framework: c.metadata['framework'] || 'unknown',
+        elementCount: c.metadata['elementsCount'] || 0
+      })).sort((a, b) => a.name.localeCompare(b.name)),
+      pageObjects: pageObjects.map(p => ({
+        name: p.name,
+        filePath: p.filePath,
+        methods: p.metadata['methods'] || [],
+        selectors: p.metadata['selectors'] || []
+      })).sort((a, b) => a.name.localeCompare(b.name)),
+      routeToComponentMapping: routeMapping
+    };
+
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAF Registry Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .dropdown {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .dropdown:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .results {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            min-height: 100px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        
+        .route-info {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        
+        .component-info {
+            background: #f3e5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        
+        .page-object-info {
+            background: #e8f5e8;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .mapping-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .mapping-table th,
+        .mapping-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .mapping-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        .no-results {
+            color: #999;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 TAF Registry Dashboard</h1>
+            <p>Interactive exploration of your Test Automation Framework registry</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalRoutes">${dashboardData.routes.length}</div>
+                <div class="stat-label">Routes Detected</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalComponents">${dashboardData.components.length}</div>
+                <div class="stat-label">Components</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPageObjects">${dashboardData.pageObjects.length}</div>
+                <div class="stat-label">Page Objects</div>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="card">
+                <h2>🛣️ Route Lookup</h2>
+                <p>Select a route to see which components handle it:</p>
+                <select class="dropdown" id="routeSelect" onchange="showRouteInfo()">
+                    <option value="">Choose a route...</option>
+                    ${dashboardData.routes.map(route => `<option value="${route}">${route}</option>`).join('')}
+                </select>
+                <div class="results" id="routeResults">
+                    <div class="no-results">Select a route to see details</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>⚛️ Component Lookup</h2>
+                <p>Select a component to see its routes and details:</p>
+                <select class="dropdown" id="componentSelect" onchange="showComponentInfo()">
+                    <option value="">Choose a component...</option>
+                    ${dashboardData.components.map(comp => `<option value="${comp.name}">${comp.name} (${comp.framework})</option>`).join('')}
+                </select>
+                <div class="results" id="componentResults">
+                    <div class="no-results">Select a component to see details</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card full-width">
+            <h2>📄 Page Objects</h2>
+            <p>Select a page object to see its methods and selectors:</p>
+            <select class="dropdown" id="pageObjectSelect" onchange="showPageObjectInfo()">
+                <option value="">Choose a page object...</option>
+                ${dashboardData.pageObjects.map(po => `<option value="${po.name}">${po.name}</option>`).join('')}
+            </select>
+            <div class="results" id="pageObjectResults">
+                <div class="no-results">Select a page object to see details</div>
+            </div>
+        </div>
+        
+        <div class="card full-width">
+            <h2>🗺️ Complete Route Mapping</h2>
+            <table class="mapping-table">
+                <thead>
+                    <tr>
+                        <th>Route</th>
+                        <th>Components</th>
+                        <th>Page Objects Available</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${dashboardData.routes.map(route => `
+                        <tr>
+                            <td><strong>${route}</strong></td>
+                            <td>${(dashboardData.routeToComponentMapping[route] || []).join(', ') || 'None detected'}</td>
+                            <td>${dashboardData.pageObjects.length > 0 ? dashboardData.pageObjects.map(po => po.name).join(', ') : 'None found'}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const data = ${JSON.stringify(dashboardData, null, 2)};
+        
+        function showRouteInfo() {
+            const select = document.getElementById('routeSelect');
+            const results = document.getElementById('routeResults');
+            const route = select.value;
+            
+            if (!route) {
+                results.innerHTML = '<div class="no-results">Select a route to see details</div>';
+                return;
+            }
+            
+            const components = data.routeToComponentMapping[route] || [];
+            
+            if (components.length === 0) {
+                results.innerHTML = '<div class="no-results">No components found for this route</div>';
+                return;
+            }
+            
+            let html = \`<div class="route-info">
+                <strong>Route:</strong> \${route}
+                <br><strong>Components:</strong>
+            </div>\`;
+            
+            components.forEach(compName => {
+                const comp = data.components.find(c => c.name === compName);
+                if (comp) {
+                    html += \`<div class="component-info">
+                        <strong>\${comp.name}</strong> (\${comp.framework})
+                        <br>📁 \${comp.filePath}
+                        <br>🎯 \${comp.elementCount} interactive elements
+                    </div>\`;
+                }
+            });
+            
+            results.innerHTML = html;
+        }
+        
+        function showComponentInfo() {
+            const select = document.getElementById('componentSelect');
+            const results = document.getElementById('componentResults');
+            const componentName = select.value;
+            
+            if (!componentName) {
+                results.innerHTML = '<div class="no-results">Select a component to see details</div>';
+                return;
+            }
+            
+            const comp = data.components.find(c => c.name === componentName);
+            if (!comp) {
+                results.innerHTML = '<div class="no-results">Component not found</div>';
+                return;
+            }
+            
+            let html = \`<div class="component-info">
+                <strong>\${comp.name}</strong> (\${comp.framework})
+                <br>📁 \${comp.filePath}
+                <br>🎯 \${comp.elementCount} interactive elements
+                <br><strong>Routes:</strong> \${comp.routes.length > 0 ? comp.routes.join(', ') : 'None detected'}
+            </div>\`;
+            
+            results.innerHTML = html;
+        }
+        
+        function showPageObjectInfo() {
+            const select = document.getElementById('pageObjectSelect');
+            const results = document.getElementById('pageObjectResults');
+            const pageObjectName = select.value;
+            
+            if (!pageObjectName) {
+                results.innerHTML = '<div class="no-results">Select a page object to see details</div>';
+                return;
+            }
+            
+            const po = data.pageObjects.find(p => p.name === pageObjectName);
+            if (!po) {
+                results.innerHTML = '<div class="no-results">Page object not found</div>';
+                return;
+            }
+            
+            let html = \`<div class="page-object-info">
+                <strong>\${po.name}</strong>
+                <br>📁 \${po.filePath}
+                <br><strong>Methods:</strong> \${po.methods.length > 0 ? po.methods.join(', ') : 'None detected'}
+                <br><strong>Selectors:</strong> \${po.selectors.length > 0 ? po.selectors.join(', ') : 'None detected'}
+            </div>\`;
+            
+            results.innerHTML = html;
+        }
+        
+        // Initialize
+        console.log('TAF Registry Dashboard loaded with data:', data);
+    </script>
+</body>
+</html>`;
+
+    await fs.promises.writeFile(
+      path.join(outputDir, 'dashboard.html'),
+      htmlContent
+    );
+  }
+
+  /**
+   * Generate bidirectional mapping for easy task manager integration
+   */
+  private async generateBidirectionalMapping(outputDir: string): Promise<void> {
+    const components = Array.from(this.nodes.values()).filter(n => n.type === 'ReactComponent' || n.type === 'VueComponent');
+    const pageObjects = Array.from(this.nodes.values()).filter(n => n.type === 'PageObject');
+    
+    // Route → Components mapping
+    const routeToComponents: Record<string, Array<{name: string, filePath: string, framework: string}>> = {};
+    
+    // Component → Routes mapping
+    const componentToRoutes: Record<string, Array<{path: string, confidence: number, source: string}>> = {};
+    
+    // Page Object → Components potential mapping (based on naming similarity)
+    const pageObjectToComponents: Record<string, string[]> = {};
+    const componentToPageObjects: Record<string, string[]> = {};
+    
+    // Build route mappings
+    components.forEach(component => {
+      const routes = component.metadata['routes'] || [];
+      componentToRoutes[component.name] = routes;
+      
+      routes.forEach((routeInfo: RouteInfo) => {
+        if (!routeToComponents[routeInfo.path]) {
+          routeToComponents[routeInfo.path] = [];
+        }
+        routeToComponents[routeInfo.path].push({
+          name: component.name,
+          filePath: component.filePath,
+          framework: component.metadata['framework'] || 'unknown'
+        });
+      });
+    });
+    
+    // Build page object to component mappings based on naming similarity
+    pageObjects.forEach(pageObject => {
+      const poName = pageObject.name.toLowerCase().replace(/page|object/gi, '');
+      const matchingComponents: string[] = [];
+      
+      components.forEach(component => {
+        const compName = component.name.toLowerCase();
+        
+        // Check for naming similarity
+        if (compName.includes(poName) || poName.includes(compName.replace(/page|component/gi, ''))) {
+          matchingComponents.push(component.name);
+          
+          // Reverse mapping
+          if (!componentToPageObjects[component.name]) {
+            componentToPageObjects[component.name] = [];
+          }
+          componentToPageObjects[component.name].push(pageObject.name);
+        }
+      });
+      
+      if (matchingComponents.length > 0) {
+        pageObjectToComponents[pageObject.name] = matchingComponents;
+      }
+    });
+    
+    const mappingData = {
+      metadata: {
+        generatedAt: new Date().toISOString(),
+        totalRoutes: Object.keys(routeToComponents).length,
+        totalComponents: components.length,
+        totalPageObjects: pageObjects.length,
+        mappingConfidence: {
+          routes: 'High - based on code analysis',
+          pageObjects: 'Medium - based on naming similarity'
+        }
+      },
+      routeToComponents,
+      componentToRoutes,
+      pageObjectToComponents,
+      componentToPageObjects,
+      
+      // Quick lookup functions for task manager
+      lookupHelpers: {
+        getComponentsByRoute: 'routeToComponents[route]',
+        getRoutesByComponent: 'componentToRoutes[component]',
+        getPageObjectsByComponent: 'componentToPageObjects[component]',
+        getComponentsByPageObject: 'pageObjectToComponents[pageObject]'
+      },
+      
+      // Summary stats for task manager decision making
+      coverage: {
+        routesWithComponents: Object.keys(routeToComponents).length,
+        componentsWithRoutes: Object.keys(componentToRoutes).length,
+        pageObjectsWithComponents: Object.keys(pageObjectToComponents).length,
+        componentsWithPageObjects: Object.keys(componentToPageObjects).length
+      }
+    };
+
+    await fs.promises.writeFile(
+      path.join(outputDir, 'bidirectional-mapping.json'),
+      JSON.stringify(mappingData, null, 2)
+    );
+  }
+
+  /**
+   * Generate enhanced missing mappings report with actionable recommendations
+   */
+  private async generateEnhancedMissingMappingsReport(outputDir: string): Promise<void> {
+    const components = Array.from(this.nodes.values()).filter(n => n.type === 'ReactComponent' || n.type === 'VueComponent');
+    const pageObjects = Array.from(this.nodes.values()).filter(n => n.type === 'PageObject');
+    const semanticElements = Array.from(this.nodes.values()).filter(n => n.type === 'SemanticElement');
+    
+    // Find components without routes
+    const componentsWithoutRoutes = components.filter(c => {
+      const routes = c.metadata['routes'] || [];
+      return routes.length === 0;
+    });
+    
+    // Find routes with low confidence
+    const lowConfidenceRoutes: Array<{component: string, route: string, confidence: number}> = [];
+    components.forEach(component => {
+      const routes = component.metadata['routes'] || [];
+      routes.forEach((routeInfo: RouteInfo) => {
+        if (routeInfo.confidence <= 5) {
+          lowConfidenceRoutes.push({
+            component: component.name,
+            route: routeInfo.path,
+            confidence: routeInfo.confidence
+          });
+        }
+      });
+    });
+    
+    // Find components without corresponding page objects
+    const componentsWithoutPageObjects = components.filter(component => {
+      const compName = component.name.toLowerCase();
+      const hasMatchingPageObject = pageObjects.some(po => {
+        const poName = po.name.toLowerCase().replace(/page|object/gi, '');
+        return compName.includes(poName) || poName.includes(compName.replace(/page|component/gi, ''));
+      });
+      return !hasMatchingPageObject;
+    });
+    
+    // Find page objects without corresponding components
+    const pageObjectsWithoutComponents = pageObjects.filter(pageObject => {
+      const poName = pageObject.name.toLowerCase().replace(/page|object/gi, '');
+      const hasMatchingComponent = components.some(component => {
+        const compName = component.name.toLowerCase();
+        return compName.includes(poName) || poName.includes(compName.replace(/page|component/gi, ''));
+      });
+      return !hasMatchingComponent;
+    });
+    
+    // Find interactive elements without test IDs
+    const elementsWithoutTestIds = semanticElements.filter(e => {
+      const elementData = e.metadata as SemanticElement;
+      return elementData.automationPriority === 'high' && 
+             (!elementData.automationAnalysis?.testAttributes || 
+              elementData.automationAnalysis.testAttributes.length === 0);
+    });
+    
+    // Generate actionable recommendations
+    const recommendations: Array<{
+      category: string;
+      priority: 'High' | 'Medium' | 'Low';
+      issue: string;
+      solution: string;
+      impact: string;
+      items?: any[];
+    }> = [];
+    
+    if (componentsWithoutRoutes.length > 0) {
+      recommendations.push({
+        category: 'Route Detection',
+        priority: 'Medium',
+        issue: `${componentsWithoutRoutes.length} components have no detected routes`,
+        solution: 'Add route definitions in component files or improve route detection patterns',
+        impact: 'Task manager cannot map these components to application pages',
+        items: componentsWithoutRoutes.map(c => ({
+          component: c.name,
+          filePath: c.filePath,
+          suggestion: 'Add route prop or path comment in component'
+        }))
+      });
+    }
+    
+    if (lowConfidenceRoutes.length > 0) {
+      recommendations.push({
+        category: 'Route Confidence',
+        priority: 'Low',
+        issue: `${lowConfidenceRoutes.length} routes have low confidence mapping`,
+        solution: 'Use explicit route definitions instead of inferred paths',
+        impact: 'Potential incorrect route-to-component associations',
+        items: lowConfidenceRoutes
+      });
+    }
+    
+    if (componentsWithoutPageObjects.length > 0) {
+      recommendations.push({
+        category: 'Page Object Coverage',
+        priority: 'High',
+        issue: `${componentsWithoutPageObjects.length} components lack corresponding page objects`,
+        solution: 'Create page objects with similar naming or improve naming conventions',
+        impact: 'Automation tests cannot easily target these components',
+        items: componentsWithoutPageObjects.map(c => ({
+          component: c.name,
+          filePath: c.filePath,
+          suggestedPageObjectName: c.name.replace(/Component$/, 'Page'),
+          automationElements: c.metadata['elementsCount'] || 0
+        }))
+      });
+    }
+    
+    if (pageObjectsWithoutComponents.length > 0) {
+      recommendations.push({
+        category: 'Unused Page Objects',
+        priority: 'Medium',
+        issue: `${pageObjectsWithoutComponents.length} page objects have no matching components`,
+        solution: 'Review page object naming or remove obsolete page objects',
+        impact: 'Maintenance overhead from unused automation code',
+        items: pageObjectsWithoutComponents.map(po => ({
+          pageObject: po.name,
+          filePath: po.filePath,
+          suggestion: 'Check if component was renamed or removed'
+        }))
+      });
+    }
+    
+    if (elementsWithoutTestIds.length > 0) {
+      const elementsGroupedByComponent: Record<string, any[]> = {};
+      elementsWithoutTestIds.forEach(e => {
+        const parentComponent = e.metadata['parentComponent'];
+        if (!elementsGroupedByComponent[parentComponent]) {
+          elementsGroupedByComponent[parentComponent] = [];
+        }
+        elementsGroupedByComponent[parentComponent].push({
+          element: (e.metadata as SemanticElement).tagName,
+          selector: (e.metadata as SemanticElement).recommendedSelector,
+          priority: (e.metadata as SemanticElement).automationPriority
+        });
+      });
+      
+      recommendations.push({
+        category: 'Test Automation',
+        priority: 'High',
+        issue: `${elementsWithoutTestIds.length} high-priority elements lack test IDs`,
+        solution: 'Add data-testid attributes to improve automation reliability',
+        impact: 'Fragile automation tests that may break with UI changes',
+        items: Object.entries(elementsGroupedByComponent).map(([component, elements]) => ({
+          component,
+          missingTestIds: elements.length,
+          elements
+        }))
+      });
+    }
+    
+    const report = {
+      metadata: {
+        generatedAt: new Date().toISOString(),
+        totalRecommendations: recommendations.length,
+        highPriorityIssues: recommendations.filter(r => r.priority === 'High').length,
+        coverageAnalysis: {
+          componentRouteMapping: `${components.length - componentsWithoutRoutes.length}/${components.length}`,
+          componentPageObjectMapping: `${components.length - componentsWithoutPageObjects.length}/${components.length}`,
+          automationReadiness: `${semanticElements.length - elementsWithoutTestIds.length}/${semanticElements.length}`
+        }
+      },
+      summary: {
+        criticalGaps: recommendations.filter(r => r.priority === 'High').length,
+        totalGaps: recommendations.length,
+        overallHealth: recommendations.filter(r => r.priority === 'High').length === 0 ? 'Good' : 
+                      recommendations.filter(r => r.priority === 'High').length <= 2 ? 'Fair' : 'Needs Attention'
+      },
+      recommendations: recommendations.sort((a, b) => {
+        const priorityOrder = { 'High': 3, 'Medium': 2, 'Low': 1 };
+        return priorityOrder[b.priority] - priorityOrder[a.priority];
+      }),
+      actionPlan: [
+        'Focus on High priority issues first for maximum impact',
+        'Create missing page objects for components with interactive elements',
+        'Add data-testid attributes to high-priority automation elements',
+        'Review route detection patterns for better component mapping',
+        'Establish naming conventions for page objects and components'
+      ]
+    };
+
+    await fs.promises.writeFile(
+      path.join(outputDir, 'enhanced-missing-mappings.json'),
+      JSON.stringify(report, null, 2)
+    );
+  }
 }
 
 // CLI interface
 async function main() {
-  const projectRoot = process.argv[2] || process.cwd();
-  
   console.log('🤖 TAF Automated Registry Builder');
   console.log('=====================================');
   
+  const args = process.argv.slice(2);
+  let config: string | ScanPaths;
+  
+  if (args.length === 0) {
+    // No arguments - scan current directory
+    config = process.cwd();
+    console.log('📁 Single-path mode: scanning current directory');
+  } else if (args.length === 1) {
+    // Single argument - traditional single path
+    config = args[0];
+    console.log('📁 Single-path mode: scanning specified directory');
+  } else if (args.length === 2) {
+    // Two arguments - app code and test code paths
+    config = {
+      appCodePath: args[0],
+      testCodePath: args[1]
+    };
+    console.log('📁 Multi-path mode: separate app and test codebases');
+  } else {
+    console.error('❌ Usage:');
+    console.error('  Single codebase:  npm run analyze [path]');
+    console.error('  Separate codebases: npm run analyze <app-code-path> <test-code-path>');
+    console.error('');
+    console.error('Examples:');
+    console.error('  npm run analyze ./my-app');
+    console.error('  npm run analyze ./frontend-app ./e2e-tests');
+    process.exit(1);
+  }
+  
   try {
-    const builder = new AutomatedRegistryBuilder(projectRoot);
+    const builder = new AutomatedRegistryBuilder(config);
     await builder.buildRegistry();
     
     console.log('\n🎉 Success! Check the registry-output directory for results.');
@@ -1764,4 +2868,4 @@ if (require.main === module) {
   main().catch(console.error);
 }
 
-export { AutomatedRegistryBuilder };
+export { AutomatedRegistryBuilder, ScanPaths };

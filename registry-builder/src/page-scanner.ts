@@ -143,22 +143,31 @@ class PageScanner {
   }
 
   private analyzeVueFile(sourceCode: string): InteractiveElement[] {
-    // Simple Vue template extraction
+    // Enhanced Vue template extraction
     const templateMatch = sourceCode.match(/<template[^>]*>([\s\S]*?)<\/template>/);
     if (!templateMatch) return [];
 
     const template = templateMatch[1];
     const elements: InteractiveElement[] = [];
 
-    // Basic regex-based parsing for Vue (could be enhanced with proper Vue parser)
-    const elementRegex = /<(\w+)([^>]*)(?:\/>|>[\s\S]*?<\/\1>)/g;
+    // Enhanced regex-based parsing for Vue with better attribute and text extraction
+    const elementRegex = /<(\w+)([^>]*?)(?:\s*\/>|>([\s\S]*?)<\/\1>)/g;
     let match;
 
     while ((match = elementRegex.exec(template)) !== null) {
-      const [, tagName, attributesStr] = match;
+      const [, tagName, attributesStr, textContent] = match;
       
-      if (this.interactiveTagNames.has(tagName)) {
+      if (this.shouldIncludeElementByTag(tagName, attributesStr)) {
         const attributes = this.parseAttributes(attributesStr);
+        
+        // Add text content if available
+        if (textContent) {
+          const cleanText = textContent.replace(/<[^>]*>/g, '').trim();
+          if (cleanText && cleanText.length < 100) {
+            attributes['textContent'] = cleanText;
+          }
+        }
+        
         const element = this.createElementFromAttributes(tagName, attributes);
         if (element) {
           elements.push(element);
@@ -169,14 +178,38 @@ class PageScanner {
     return elements;
   }
 
+  private shouldIncludeElementByTag(tagName: string, attributesStr: string): boolean {
+    // Include if it's an interactive element
+    if (this.interactiveTagNames.has(tagName)) {
+      return true;
+    }
+
+    // Include if it has test attributes (even non-interactive elements)
+    return this.testAttributes.some(attr => attributesStr.includes(attr));
+  }
+
   private extractElementFromJsx(node: ts.JsxElement | ts.JsxSelfClosingElement): InteractiveElement | null {
     const tagName = this.getJsxTagName(node);
-    if (!tagName || !this.interactiveTagNames.has(tagName)) {
+    if (!tagName) return null;
+
+    const attributes = this.getJsxAttributes(node);
+    
+    // Include element if it's interactive OR has test attributes
+    if (!this.shouldIncludeElement(tagName, attributes)) {
       return null;
     }
 
-    const attributes = this.getJsxAttributes(node);
     return this.createElementFromAttributes(tagName, attributes);
+  }
+
+  private shouldIncludeElement(tagName: string, attributes: Record<string, string>): boolean {
+    // Always include elements with test attributes (even divs, spans, etc.)
+    if (this.testAttributes.some(attr => attributes[attr])) {
+      return true;
+    }
+
+    // Include standard interactive elements
+    return this.interactiveTagNames.has(tagName);
   }
 
   private createElementFromAttributes(tagName: string, attributes: Record<string, string>): InteractiveElement | null {
@@ -377,24 +410,75 @@ class PageScanner {
           if (ts.isStringLiteral(attr.initializer)) {
             value = attr.initializer.text;
           } else if (ts.isJsxExpression(attr.initializer)) {
-            value = attr.initializer.getText();
+            // Try to extract simple values from expressions
+            const expression = attr.initializer.expression;
+            if (expression && ts.isStringLiteral(expression)) {
+              value = expression.text;
+            } else if (expression && ts.isIdentifier(expression)) {
+              value = expression.text;
+            } else {
+              value = attr.initializer.getText().replace(/[{}]/g, '');
+            }
           }
+        } else if (name === 'disabled' || name === 'checked' || name === 'required') {
+          // Boolean attributes
+          value = 'true';
         }
 
         attributes[name] = value;
       }
     });
 
+    // Try to extract text content from JSX element
+    if (ts.isJsxElement(node)) {
+      const textContent = this.extractTextContent(node);
+      if (textContent) {
+        attributes['textContent'] = textContent;
+      }
+    }
+
     return attributes;
+  }
+
+  private extractTextContent(node: ts.JsxElement): string {
+    let textContent = '';
+    
+    node.children.forEach(child => {
+      if (ts.isJsxText(child)) {
+        textContent += child.text.trim();
+      } else if (ts.isJsxExpression(child) && child.expression) {
+        if (ts.isStringLiteral(child.expression)) {
+          textContent += child.expression.text;
+        } else if (ts.isIdentifier(child.expression)) {
+          // For simple variables, use the variable name as hint
+          textContent += child.expression.text;
+        }
+      }
+    });
+
+    return textContent.trim();
   }
 
   private parseAttributes(attributesStr: string): Record<string, string> {
     const attributes: Record<string, string> = {};
-    const attrRegex = /(\w+)=["']([^"']+)["']/g;
+    
+    // Enhanced regex to handle various attribute formats including Vue syntax
+    const attrRegex = /(\w+(?:-\w+)*)(?:=["']([^"']+)["']|=([^"'\s]+)|(?=\s|$))/g;
     let match;
 
     while ((match = attrRegex.exec(attributesStr)) !== null) {
-      attributes[match[1]] = match[2];
+      const [, name, quotedValue, unquotedValue] = match;
+      let value = quotedValue || unquotedValue || 'true';
+      
+      // Handle Vue directives and bindings
+      if (name.startsWith('v-') || name.startsWith(':') || name.startsWith('@')) {
+        // For Vue directives, keep the binding expression as hint
+        if (quotedValue && !quotedValue.includes('{')) {
+          value = quotedValue;
+        }
+      }
+      
+      attributes[name] = value;
     }
 
     return attributes;
@@ -418,7 +502,7 @@ class PageScanner {
   }
 }
 
-// CLI interface
+// CLI interface - simple dev mode that automatically generates page objects
 async function main() {
   const args = process.argv.slice(2);
   const rootPath = args[0] || '.';
@@ -428,10 +512,15 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('🚀 Page Scanner - Find Interactive Elements for Automation\n');
+  console.log('🚀 Page Scanner - Auto-generating Page Objects for Automation\n');
 
   const scanner = new PageScanner();
   const result = await scanner.scanDirectory(rootPath);
+
+  if (result.pages.length === 0) {
+    console.log('ℹ️  No interactive elements found. Make sure you\'re scanning a React/Vue project with page components.');
+    return;
+  }
 
   // Output results
   console.log('\n📄 PAGES FOUND:\n');
@@ -452,10 +541,31 @@ async function main() {
   console.log(`   Interactive Elements: ${result.summary.totalElements}`);
   console.log('   Elements by type:', result.summary.elementsByType);
 
+  // Auto-generate page objects in structured output
+  console.log('\n🏗️  Auto-generating Page Objects...\n');
+  const { PageObjectGenerator } = await import('./page-object-generator');
+  
+  const outputDir = path.join(rootPath, 'scan-results', 'page-objects');
+  const generator = new PageObjectGenerator();
+  
+  await generator.generatePageObjects(result.pages, {
+    framework: 'playwright', // Default to Playwright
+    language: 'typescript',
+    outputDir
+  });
+
   // Save detailed results
-  const outputPath = path.join(rootPath, 'page-scan-results.json');
+  const resultsDir = path.join(rootPath, 'scan-results');
+  fs.mkdirSync(resultsDir, { recursive: true });
+  const outputPath = path.join(resultsDir, 'page-scan-results.json');
   fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
-  console.log(`\n💾 Detailed results saved to: ${outputPath}`);
+  
+  console.log(`\n✅ Page objects generated in: ${outputDir}`);
+  console.log(`📊 Detailed results saved to: ${outputPath}`);
+  console.log('\n🎯 Next steps:');
+  console.log('   1. Review generated page objects');
+  console.log('   2. Run registry analysis: npm run analyze');
+  console.log('   3. Open scan-results/registry-output/dashboard.html');
 }
 
 if (require.main === module) {
