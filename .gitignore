@@ -1,0 +1,20 @@
+movie-clone
+ecom
+trelloapp-vue-vite-ts
+registry-builder/node_modules
+
+# Generated output directories
+  registry-output/
+  page-objects/
+  wdio-pages/
+  wdio-pages-js/
+  cypress-pages/
+  dist/
+
+  # Generated analysis files
+  tools/complete-registry.json
+  tools/output/
+  tools/server.log
+
+  # Development files
+  *.log

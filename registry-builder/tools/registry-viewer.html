@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registry Viewer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .filters { margin-bottom: 20px; padding: 15px; background: #f5f5f5; }
+        .element { border: 1px solid #ddd; margin: 10px 0; padding: 15px; }
+        .high-priority { border-left: 4px solid #ff4444; }
+        .medium-priority { border-left: 4px solid #ffaa00; }
+        .low-priority { border-left: 4px solid #44ff44; }
+        .code { background: #f0f0f0; padding: 5px; font-family: monospace; }
+        .stats { display: flex; gap: 20px; margin-bottom: 20px; }
+        .stat-card { padding: 15px; background: #e3f2fd; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Test Automation Registry Viewer</h1>
+    
+    <div class="stats" id="stats"></div>
+    
+    <div class="filters">
+        <label>Priority: 
+            <select id="priorityFilter">
+                <option value="">All</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+        </label>
+        
+        <label>Component: 
+            <select id="componentFilter">
+                <option value="">All</option>
+            </select>
+        </label>
+        
+        <label>
+            <input type="checkbox" id="testIdFilter"> Only elements with test IDs
+        </label>
+        
+        <button onclick="exportPageObject()">Export Page Object</button>
+    </div>
+    
+    <div id="elements"></div>
+    
+    <script>
+        let registryData = null;
+        let allElements = [];
+        
+        // Load registry data
+        async function loadRegistry() {
+            try {
+                const response = await fetch('./complete-registry.json');
+                registryData = await response.json();
+                
+                allElements = registryData.nodes.filter(node => node.type === 'SemanticElement');
+                populateFilters();
+                updateStats();
+                renderElements();
+            } catch (error) {
+                document.getElementById('elements').innerHTML = 
+                    '<p>Error loading registry. Make sure complete-registry.json is in the same directory.</p>';
+            }
+        }
+        
+        function populateFilters() {
+            const components = [...new Set(allElements.map(el => el.metadata.parentComponent))].sort();
+            const componentFilter = document.getElementById('componentFilter');
+            
+            components.forEach(comp => {
+                const option = document.createElement('option');
+                option.value = comp;
+                option.textContent = comp;
+                componentFilter.appendChild(option);
+            });
+        }
+        
+        function updateStats() {
+            const stats = {
+                total: allElements.length,
+                high: allElements.filter(el => el.metadata.automationPriority === 'high').length,
+                medium: allElements.filter(el => el.metadata.automationPriority === 'medium').length,
+                withTestIds: allElements.filter(el => el.metadata.automationAnalysis?.testAttributes?.length > 0).length
+            };
+            
+            document.getElementById('stats').innerHTML = `
+                <div class="stat-card">
+                    <h3>${stats.total}</h3>
+                    <p>Total Elements</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${stats.high}</h3>
+                    <p>High Priority</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${stats.medium}</h3>
+                    <p>Medium Priority</p>
+                </div>
+                <div class="stat-card">
+                    <h3>${stats.withTestIds}</h3>
+                    <p>With Test IDs</p>
+                </div>
+            `;
+        }
+        
+        function renderElements() {
+            const priorityFilter = document.getElementById('priorityFilter').value;
+            const componentFilter = document.getElementById('componentFilter').value;
+            const testIdFilter = document.getElementById('testIdFilter').checked;
+            
+            let filtered = allElements;
+            
+            if (priorityFilter) {
+                filtered = filtered.filter(el => el.metadata.automationPriority === priorityFilter);
+            }
+            
+            if (componentFilter) {
+                filtered = filtered.filter(el => el.metadata.parentComponent === componentFilter);
+            }
+            
+            if (testIdFilter) {
+                filtered = filtered.filter(el => el.metadata.automationAnalysis?.testAttributes?.length > 0);
+            }
+            
+            const elementsHtml = filtered.map(element => {
+                const meta = element.metadata;
+                const priority = meta.automationPriority || 'unknown';
+                const testAttrs = meta.automationAnalysis?.testAttributes || [];
+                
+                return `
+                    <div class="element ${priority}-priority">
+                        <h3>${meta.parentComponent} → ${meta.tagName}</h3>
+                        <p><strong>Priority:</strong> ${priority} | <strong>Score:</strong> ${meta.automationAnalysis?.identifierScore || 0}</p>
+                        <div class="code">${meta.recommendedSelector}</div>
+                        ${testAttrs.length > 0 ? `<p><strong>Test Attributes:</strong> ${testAttrs.join(', ')}</p>` : ''}
+                        <p><strong>File:</strong> ${element.filePath}</p>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('elements').innerHTML = elementsHtml || '<p>No elements match the filters.</p>';
+        }
+        
+        function exportPageObject() {
+            const componentFilter = document.getElementById('componentFilter').value;
+            if (!componentFilter) {
+                alert('Please select a component first');
+                return;
+            }
+            
+            const elements = allElements.filter(el => 
+                el.metadata.parentComponent === componentFilter && 
+                el.metadata.automationPriority !== 'none'
+            );
+            
+            const pageObject = generatePageObjectCode(componentFilter, elements);
+            
+            const blob = new Blob([pageObject], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${componentFilter}Page.js`;
+            a.click();
+        }
+        
+        function generatePageObjectCode(componentName, elements) {
+            const selectors = elements.map(el => {
+                const name = generateElementName(el.metadata);
+                const selector = el.metadata.recommendedSelector;
+                return `  ${name}: '${selector}',`;
+            }).join('\n');
+            
+            return `// ${componentName} Page Object
+class ${componentName}Page {
+  constructor(page) {
+    this.page = page;
+  }
+  
+  selectors = {
+${selectors}
+  };
+  
+  // Add your page methods here
+}
+
+module.exports = ${componentName}Page;
+`;
+        }
+        
+        function generateElementName(meta) {
+            const tag = meta.tagName;
+            const selectors = meta.semanticSelectors || {};
+            
+            if (selectors.textContent) {
+                return `${tag}_${selectors.textContent.toLowerCase().replace(/\s+/g, '_')}`;
+            } else if (selectors.title) {
+                return `${tag}_${selectors.title.toLowerCase().replace(/\s+/g, '_')}`;
+            }
+            return `${tag}_element`;
+        }
+        
+        // Event listeners
+        document.getElementById('priorityFilter').addEventListener('change', renderElements);
+        document.getElementById('componentFilter').addEventListener('change', renderElements);
+        document.getElementById('testIdFilter').addEventListener('change', renderElements);
+        
+        // Load data on page load
+        loadRegistry();
+    </script>
+</body>
+</html>

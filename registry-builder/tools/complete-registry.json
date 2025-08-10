@@ -1,0 +1,4506 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-09T21:04:16.879Z",
+    "nodeCount": 132,
+    "relationshipCount": 103
+  },
+  "nodes": [
+    {
+      "id": "simple-react-ecommerce_src_main",
+      "type": "ReactComponent",
+      "name": "main",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/main.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "BrowserRouter",
+          "App"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_App",
+      "type": "ReactComponent",
+      "name": "App",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/App.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "Provider",
+          "Navbar",
+          "Routes",
+          "Route",
+          "Home",
+          "AllProducts",
+          "AllCategories",
+          "SingleProduct",
+          "SingleCategory",
+          "ProtectedRoute",
+          "Wishlist",
+          "Profile",
+          "Toaster",
+          "Footer",
+          "Cart",
+          "LoginModal",
+          "ScrollToTopButton",
+          "BannerPopup"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Wishlist",
+      "type": "ReactComponent",
+      "name": "Wishlist",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Wishlist.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "ProductList"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct",
+      "type": "ReactComponent",
+      "name": "SingleProduct",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 16,
+        "semanticElements": 0,
+        "accessibilityIssues": [
+          "button element missing accessible label",
+          "button element missing accessible label",
+          "button element missing accessible label"
+        ],
+        "childComponents": [
+          "RatingStar",
+          "PriceSection",
+          "AiOutlineShoppingCart",
+          "FaHandHoldingDollar",
+          "MdFavoriteBorder",
+          "Reviews",
+          "ProductList"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_h2_a08ecmmdc",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_table_75b22mqba",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "table"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_tbody_gutq0kneu",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tbody"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_tr_hby0hifp5",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_td_922cvn5z1",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_td_kz1t7qcs0",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_tr_12ph57rc9",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_td_z6wor9d0s",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_td_xf2jdi0ta",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_tr_ztp3da526",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_td_8uzy4gm33",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_td_zb10qsgwu",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_h2_rkzi9yb8s",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_button_ap3lsv4de",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "button"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_button_s5lf1that",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "button"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_SingleProduct_element_button_0zeg1ruob",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "button"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleCategory",
+      "type": "ReactComponent",
+      "name": "SingleCategory",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleCategory.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "ProductCard"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile",
+      "type": "ReactComponent",
+      "name": "Profile",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 35,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": []
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_h1_j5ocrwn2p",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h1"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_table_k8c8mweuf",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "table"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tbody_4t5iqdl35",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tbody"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_kdvzld73i",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_4l0ewzl7i",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_za9uninki",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_nvpc56dwg",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_fn6j2cdbi",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_r04jsg0jx",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_2x3vl3641",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_gn7utkfnf",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_yq65q5l00",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_1r5xftsbq",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_lhfv8jc0b",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_sx0ncsdh5",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_3iy1titzn",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_z0i9r5ic0",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_ez7pw6kna",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_akmwcttdb",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_228s5syht",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_d4f8knt3s",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_xbzteywpp",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_3hqz55euy",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_cgyle78ie",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_jbtenhens",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_i2q1fzugk",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_j96mqxa0v",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_0uc6yh0hc",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_drbv807pe",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_sn34pf8xx",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_tr_8olig8w9u",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_l5980wfhu",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_td_dy0fk8g0q",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_h1_avgequrd9",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h1"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_pages_Profile_element_h1_6rct56gsc",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Home",
+      "type": "ReactComponent",
+      "name": "Home",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Home.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "HeroSection",
+          "Features",
+          "TrendingProducts",
+          "Banner",
+          "LatestProducts"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_AllProducts",
+      "type": "ReactComponent",
+      "name": "AllProducts",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/AllProducts.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 1,
+        "semanticElements": 0,
+        "accessibilityIssues": [
+          "select element missing accessible label"
+        ],
+        "childComponents": [
+          "ProductCard"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_pages_AllProducts_element_select_wni2s4z1b",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "select"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_AllCategories",
+      "type": "ReactComponent",
+      "name": "AllCategories",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/AllCategories.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "Link"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_TrendingProducts",
+      "type": "ReactComponent",
+      "name": "TrendingProducts",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/TrendingProducts.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "ProductList"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ScrollToTopButton",
+      "type": "ReactComponent",
+      "name": "ScrollToTopButton",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ScrollToTopButton.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 1,
+        "semanticElements": 0,
+        "accessibilityIssues": [
+          "button element missing accessible label"
+        ],
+        "childComponents": [
+          "IoIosArrowUp"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_ScrollToTopButton_element_button_qkqmklpf2",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "button"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Reviews",
+      "type": "ReactComponent",
+      "name": "Reviews",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Reviews.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 3,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "RatingStar"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_Reviews_element_h1_g6dtbg0ow",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h1"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Reviews_element_div_ou6wyr8q3",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Reviews_element_h3_upzzah3ow",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_RatingStar",
+      "type": "ReactComponent",
+      "name": "RatingStar",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/RatingStar.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "AiFillStar",
+          "AiOutlineStar"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ProtectedRoute",
+      "type": "ReactComponent",
+      "name": "ProtectedRoute",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ProtectedRoute.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "Outlet",
+          "Navigate"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ProductList",
+      "type": "ReactComponent",
+      "name": "ProductList",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ProductList.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 2,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "ProductCard"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_ProductList_element_h2_34rgq5124",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_ProductList_element_div_9sq1oyqrv",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ProductCard",
+      "type": "ReactComponent",
+      "name": "ProductCard",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ProductCard.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 2,
+        "semanticElements": 0,
+        "accessibilityIssues": [
+          "button element missing accessible label"
+        ],
+        "childComponents": [
+          "Link",
+          "RatingStar",
+          "PriceSection",
+          "AiOutlineShoppingCart"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_ProductCard_element_div_3s8c6v4b7",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_ProductCard_element_button_8rwa7dg9m",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "button"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_PriceSection",
+      "type": "ReactComponent",
+      "name": "PriceSection",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/PriceSection.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 2,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": []
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_PriceSection_element_h2_b0aasoxqo",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_PriceSection_element_h2_a0zsx3dod",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Navbar",
+      "type": "ReactComponent",
+      "name": "Navbar",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Navbar.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 4,
+        "semanticElements": 1,
+        "accessibilityIssues": [
+          "input element missing accessible label"
+        ],
+        "childComponents": [
+          "Link",
+          "BsSearch",
+          "FaUser",
+          "CustomPopup",
+          "AiOutlineShoppingCart",
+          "MdOutlineLightMode",
+          "MdOutlineDarkMode"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_Navbar_element_input_a12dub7rc",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "input"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Navbar_element_span_8ib1s986b",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "span"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Navbar_element_div_j7s8shknt",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Navbar_element_div_x18wmpgu9",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LoginModal",
+      "type": "ReactComponent",
+      "name": "LoginModal",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LoginModal.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 7,
+        "semanticElements": 3,
+        "accessibilityIssues": [
+          "input element missing accessible label",
+          "input element missing accessible label",
+          "input element missing accessible label"
+        ],
+        "childComponents": [
+          "RxCross1",
+          "GiArchiveRegister",
+          "FaUnlock",
+          "RiUser3Fill",
+          "RiLockPasswordFill"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_LoginModal_element_div_khbpcy2y1",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_LoginModal_element_h3_w0w3c0ghc",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h3"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_LoginModal_element_h3_cbu1lf694",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h3"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_LoginModal_element_form_9d3uy9ijh",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "form"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_LoginModal_element_input_s05l0gy94",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "input"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_LoginModal_element_input_hsxa1xj0z",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "input"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_LoginModal_element_input_gz8clt85x",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "input"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LatestProducts",
+      "type": "ReactComponent",
+      "name": "LatestProducts",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LatestProducts.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "ProductList"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_HeroSection",
+      "type": "ReactComponent",
+      "name": "HeroSection",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/HeroSection.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 2,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "Link"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_HeroSection_element_h2_ruwhircyu",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_HeroSection_element_h3_ck0d3hz8v",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Footer",
+      "type": "ReactComponent",
+      "name": "Footer",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Footer.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "Link"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Features",
+      "type": "ReactComponent",
+      "name": "Features",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Features.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 0,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "TbTruckDelivery",
+          "RiRefund2Fill",
+          "TbDiscount2",
+          "MdSupportAgent",
+          "FeatureCard"
+        ]
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_FeatureCard",
+      "type": "ReactComponent",
+      "name": "FeatureCard",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/FeatureCard.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 1,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": []
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_FeatureCard_element_h2_g84qtr8xb",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup",
+      "type": "ReactComponent",
+      "name": "CustomPopup",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 13,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "MdOutlineAccountCircle",
+          "Link",
+          "MdFavoriteBorder",
+          "MdOutlineLogout"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_div_4l6and6eo",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_div_l0wk563a6",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_table_s5ohtmufg",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "table"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_tbody_qug62amvf",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tbody"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_tr_z66g4bepm",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_td_a2ojcemhn",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_td_7c2x4ejuq",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_tr_p12i9r8c3",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_td_ce0e4bmav",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_td_vo5e72e7a",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_tr_tqs49vod7",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "tr"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_td_ceh741mgn",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CustomPopup_element_td_v03o3tyxl",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "td"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CartRow",
+      "type": "ReactComponent",
+      "name": "CartRow",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CartRow.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 4,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "IoIosRemoveCircleOutline",
+          "IoIosAddCircleOutline",
+          "RiDeleteBin6Line"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_CartRow_element_h3_lfpsgmj2e",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h3"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CartRow_element_h3_laljbndir",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h3"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CartRow_element_span_7ud66pwh2",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "span"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_CartRow_element_span_97jde82aa",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "span"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Cart",
+      "type": "ReactComponent",
+      "name": "Cart",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Cart.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 7,
+        "semanticElements": 1,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "RxCross1",
+          "CartRow"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_Cart_element_h1_0da8piy2x",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h1"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Cart_element_span_19n7ku0ze",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "span"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Cart_element_div_70h8p8oym",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "div"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Cart_element_h3_x2am1wvlq",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h3"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Cart_element_h2_kvx5kcq0k",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Cart_element_h2_utc2vj94t",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Cart_element_button_v5ivvmlw0",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "button"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_BannerPopup",
+      "type": "ReactComponent",
+      "name": "BannerPopup",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/BannerPopup.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 1,
+        "semanticElements": 1,
+        "accessibilityIssues": [],
+        "childComponents": []
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_BannerPopup_element_button_9ileu1foi",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "button"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Banner",
+      "type": "ReactComponent",
+      "name": "Banner",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Banner.tsx",
+      "metadata": {
+        "fileType": "reactComponents",
+        "framework": "react",
+        "elementsCount": 2,
+        "semanticElements": 0,
+        "accessibilityIssues": [],
+        "childComponents": [
+          "Link"
+        ]
+      },
+      "relationships": [
+        {
+          "targetId": "simple-react-ecommerce_src_components_Banner_element_h1_svin5oqrg",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h1"
+          }
+        },
+        {
+          "targetId": "simple-react-ecommerce_src_components_Banner_element_h2_ef8mros6n",
+          "type": "CONTAINS",
+          "confidence": 1,
+          "metadata": {
+            "elementType": "h2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_h2_a08ecmmdc",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "text-2xl"
+        },
+        "semanticSelectors": {
+          "textContent": "PROP_TITLE"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "product?.title"
+        ],
+        "hasPropsContent": true,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_table_75b22mqba",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: table",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "table",
+        "attributes": {
+          "className": "mt-2"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: table",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_tbody_gutq0kneu",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tbody",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "tbody",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tbody",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_tr_hby0hifp5",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_td_922cvn5z1",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "pr-2 font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Brand"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_td_kz1t7qcs0",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "product?.brand"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_tr_12ph57rc9",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_td_z6wor9d0s",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "pr-2 font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Category"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_td_xf2jdi0ta",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "product?.category"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_tr_ztp3da526",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_td_8uzy4gm33",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "pr-2 font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Stock"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_td_zb10qsgwu",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "product?.stock"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_h2_rkzi9yb8s",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "About the product"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_button_ap3lsv4de",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "button",
+        "attributes": {
+          "type": "button",
+          "className": "flex space-x-1 items-center mr-2 mb-2 hover:bg-pink-700 text-white py-2 px-4 rounded bg-pink-500",
+          "onClick": "",
+          "title": "ADD TO CART"
+        },
+        "semanticSelectors": {
+          "type": "button",
+          "title": "ADD TO CART"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [
+            "title"
+          ],
+          "behaviorAttributes": [],
+          "identifierScore": 7
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_button_s5lf1that",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "button",
+        "attributes": {
+          "type": "button",
+          "className": "flex space-x-1 items-center mr-2 mb-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700",
+          "onClick": "",
+          "title": "BUY NOW"
+        },
+        "semanticSelectors": {
+          "type": "button",
+          "title": "BUY NOW"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [
+            "title"
+          ],
+          "behaviorAttributes": [],
+          "identifierScore": 7
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_SingleProduct_element_button_0zeg1ruob",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/SingleProduct.tsx",
+      "metadata": {
+        "tagName": "button",
+        "attributes": {
+          "type": "button",
+          "className": "flex space-x-1 items-center mb-2 bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-700",
+          "onClick": "",
+          "title": "ADD TO WISHLIST"
+        },
+        "semanticSelectors": {
+          "type": "button",
+          "title": "ADD TO WISHLIST"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [
+            "title"
+          ],
+          "behaviorAttributes": [],
+          "identifierScore": 7
+        },
+        "parentComponent": "SingleProduct"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_h1_j5ocrwn2p",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "h1",
+        "attributes": {
+          "className": "text-4xl p-4 font-bold font-lora"
+        },
+        "semanticSelectors": {
+          "textContent": "Your Account"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_table_k8c8mweuf",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: table",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "table",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: table",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tbody_4t5iqdl35",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tbody",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tbody",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tbody",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_kdvzld73i",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_4l0ewzl7i",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Username"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_za9uninki",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.username"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_nvpc56dwg",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_fn6j2cdbi",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "First Name"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_r04jsg0jx",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.firstName"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_2x3vl3641",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_gn7utkfnf",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Last Name"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_yq65q5l00",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.lastName"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_1r5xftsbq",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_lhfv8jc0b",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold w-32"
+        },
+        "semanticSelectors": {
+          "textContent": "Maiden Name"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_sx0ncsdh5",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.maidenName"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_3iy1titzn",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_z0i9r5ic0",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Email"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_ez7pw6kna",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.email"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_akmwcttdb",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_228s5syht",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Phone"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_d4f8knt3s",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.phone"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_xbzteywpp",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_3hqz55euy",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "University"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_cgyle78ie",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.university"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_jbtenhens",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_i2q1fzugk",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Age"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_j96mqxa0v",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.age"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_0uc6yh0hc",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_drbv807pe",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Gender"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_sn34pf8xx",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.gender"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_tr_8olig8w9u",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_l5980wfhu",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Blood Group"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_td_dy0fk8g0q",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "info?.bloodGroup"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_h1_avgequrd9",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "h1",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Address"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_Profile_element_h1_6rct56gsc",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/Profile.tsx",
+      "metadata": {
+        "tagName": "h1",
+        "attributes": {
+          "className": "font-bold"
+        },
+        "semanticSelectors": {
+          "textContent": "Company"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Profile"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_pages_AllProducts_element_select_wni2s4z1b",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: select",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/pages/AllProducts.tsx",
+      "metadata": {
+        "tagName": "select",
+        "attributes": {
+          "ref": "",
+          "className": "border border-black dark:border-white rounded p-1 dark:text-white dark:bg-slate-600",
+          "onChange": ""
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: select",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "AllProducts"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ScrollToTopButton_element_button_qkqmklpf2",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ScrollToTopButton.tsx",
+      "metadata": {
+        "tagName": "button",
+        "attributes": {
+          "onClick": "",
+          "className": "bg-gray-800 dark:bg-white text-white dark:text-slate-800 rounded-full h-10 w-10 shadow-md hover:bg-gray-700 transition-opacity duration-300 opacity-50 hover:opacity-100"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "ScrollToTopButton"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Reviews_element_h1_g6dtbg0ow",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Reviews.tsx",
+      "metadata": {
+        "tagName": "h1",
+        "attributes": {
+          "className": "text-2xl font-semibold mb-2"
+        },
+        "semanticSelectors": {
+          "textContent": "Reviews"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Reviews"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Reviews_element_div_ou6wyr8q3",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-element\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Reviews.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "key": "",
+          "className": "leading-4",
+          "data-test": "review-item"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "[data-testid=\"div-element\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "Reviews"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Reviews_element_h3_upzzah3ow",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Reviews.tsx",
+      "metadata": {
+        "tagName": "h3",
+        "attributes": {
+          "className": "font-semibold text-md"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "username"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Reviews"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ProductList_element_h2_34rgq5124",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ProductList.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "text-4xl font-medium font-lora dark:text-white"
+        },
+        "semanticSelectors": {
+          "textContent": "PROP_TITLE"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "title"
+        ],
+        "hasPropsContent": true,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "ProductList"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ProductList_element_div_9sq1oyqrv",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-prop_title\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ProductList.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "className": "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4",
+          "data-test": "product-list-container"
+        },
+        "semanticSelectors": {
+          "textContent": "PROP_TITLE"
+        },
+        "recommendedSelector": "[data-testid=\"div-prop_title\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "products?.map((product) => (\n        <ProductCard\n          key={product.id}\n          id={product.id}\n          category={product.category}\n          title={product.title}\n          price={product.price}\n          thumbnail={product.thumbnail}\n          rating={product.rating}\n          discountPercentage={product.discountPercentage}\n        />\n      ))"
+        ],
+        "hasPropsContent": true,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "ProductList"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ProductCard_element_div_3s8c6v4b7",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-element\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ProductCard.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "className": "border border-gray-200 font-lato",
+          "data-test": "product-card"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "[data-testid=\"div-element\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "ProductCard"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_ProductCard_element_button_8rwa7dg9m",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/ProductCard.tsx",
+      "metadata": {
+        "tagName": "button",
+        "attributes": {
+          "type": "button",
+          "className": "flex items-center space-x-2 hover:bg-blue-500 text-white py-2 px-4 rounded bg-pink-500",
+          "onClick": "",
+          "data-test": "add-cart-btn",
+          "title": "ADD TO CART"
+        },
+        "semanticSelectors": {
+          "type": "button",
+          "title": "ADD TO CART"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: button",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [
+            "title"
+          ],
+          "behaviorAttributes": [],
+          "identifierScore": 17
+        },
+        "parentComponent": "ProductCard"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_PriceSection_element_h2_b0aasoxqo",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/PriceSection.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "font-medium text-blue-500 text-xl"
+        },
+        "semanticSelectors": {
+          "textContent": "$"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "price"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "PriceSection"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_PriceSection_element_h2_a0zsx3dod",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/PriceSection.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "font-medium text-blue-500 text-xl"
+        },
+        "semanticSelectors": {
+          "textContent": "$"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "result.toFixed(2)"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "PriceSection"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Navbar_element_input_a12dub7rc",
+      "type": "SemanticElement",
+      "name": "input[type=\"text\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Navbar.tsx",
+      "metadata": {
+        "tagName": "input",
+        "attributes": {
+          "type": "text",
+          "placeholder": "Search for a product...",
+          "className": "border-2 border-blue-500 px-6 py-2 w-full dark:text-white dark:bg-slate-800"
+        },
+        "semanticSelectors": {
+          "placeholder": "Search for a product...",
+          "type": "text"
+        },
+        "recommendedSelector": "input[type=\"text\"]",
+        "selectorPriority": "always",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 6
+        },
+        "parentComponent": "Navbar"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Navbar_element_span_8ib1s986b",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"span-login\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Navbar.tsx",
+      "metadata": {
+        "tagName": "span",
+        "attributes": {
+          "className": "cursor-pointer hover:opacity-85 dark:text-white",
+          "onClick": "",
+          "data-test": "login-btn"
+        },
+        "semanticSelectors": {
+          "textContent": "Login"
+        },
+        "recommendedSelector": "[data-testid=\"span-login\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "Navbar"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Navbar_element_div_j7s8shknt",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-element\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Navbar.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "className": "text-gray-500 text-[32px] relative hover:cursor-pointer hover:opacity-80",
+          "onClick": "",
+          "data-test": "cart-btn"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "[data-testid=\"div-element\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "Navbar"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Navbar_element_div_x18wmpgu9",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-element\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Navbar.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "className": "absolute top-[-15px] right-[-10px] bg-red-600 w-[25px] h-[25px] rounded-full text-white text-[14px] grid place-items-center",
+          "data-test": "cart-item-count"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "[data-testid=\"div-element\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "cartCount"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "Navbar"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LoginModal_element_div_khbpcy2y1",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-prop_text\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LoginModal.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "className": "relative border shadow rounded p-8 bg-white max-w-md w-full z-40 dark:bg-slate-800 dark:text-white",
+          "data-test": "login-container"
+        },
+        "semanticSelectors": {
+          "textContent": "PROP_TEXT"
+        },
+        "recommendedSelector": "[data-testid=\"div-prop_text\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "clicked ? (\n            <>\n              <div className=\"flex mb-2 space-x-2 justify-center items-center\">\n                <GiArchiveRegister />\n                <h3 className=\"font-bold text-center text-xl\">Register</h3>\n                <GiArchiveRegister />\n              </div>\n              <p className=\"leading-4\">\n                This is a hobby project for development purpose only. No well\n                suited backend has been used here. Please use <b>atuny0</b> as\n                username & <b>9uQFF1Lh</b> as password. You can find these\n                credentials in the placeholder also.{\" \"}\n                <span\n                  className=\"text-blue-500 cursor-pointer hover:underline\"\n                  onClick={() => setClicked(false)}\n                >\n                  Go to login\n                </span>\n              </p>\n            </>\n          ) : (\n            <>\n              <div className=\"flex mb-2 space-x-2 justify-center items-center\">\n                <FaUnlock />\n                <h3 className=\"font-bold text-center text-2xl\">Login</h3>\n                <FaUnlock />\n              </div>\n              <form onSubmit={submitForm} className=\"flex flex-col space-y-3\">\n                <div className=\"relative\">\n                  <input\n                    data-test=\"input-username\"\n                    type=\"text\"\n                    placeholder=\"Your username here... (atuny0)\"\n                    className=\"border w-full border-black py-2 px-8 rounded dark:bg-slate-600\"\n                    value={username}\n                    onChange={(e) => setUsername(e.target.value)}\n                  />\n                  <RiUser3Fill className=\"absolute top-3 left-2 text-lg\" />\n                </div>\n                <div className=\"relative\">\n                  <input\n                    data-test=\"input-password\"\n                    value={password}\n                    onChange={(e) => setPassword(e.target.value)}\n                    type=\"password\"\n                    placeholder=\"Your password here... (9uQFF1Lh)\"\n                    className=\"border w-full border-black py-2 px-8 rounded dark:bg-slate-600\"\n                  />\n                  <RiLockPasswordFill className=\"absolute top-3 left-2 text-lg\" />\n                </div>\n                <input\n                  data-test=\"input-submit\"\n                  type=\"submit\"\n                  value=\"Submit\"\n                  className=\"bg-blue-500 text-white rounded p-2 hover:bg-blue-700 cursor-pointer\"\n                />\n              </form>\n              <p className=\"text-center mt-1\">\n                No Account?{\" \"}\n                <span\n                  className=\"text-blue-500 cursor-pointer\"\n                  onClick={() => setClicked(true)}\n                >\n                  Register\n                </span>\n              </p>\n            </>\n          )"
+        ],
+        "hasPropsContent": true,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "LoginModal"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LoginModal_element_h3_w0w3c0ghc",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LoginModal.tsx",
+      "metadata": {
+        "tagName": "h3",
+        "attributes": {
+          "className": "font-bold text-center text-xl"
+        },
+        "semanticSelectors": {
+          "textContent": "Register"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "LoginModal"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LoginModal_element_h3_cbu1lf694",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LoginModal.tsx",
+      "metadata": {
+        "tagName": "h3",
+        "attributes": {
+          "className": "font-bold text-center text-2xl"
+        },
+        "semanticSelectors": {
+          "textContent": "Login"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "LoginModal"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LoginModal_element_form_9d3uy9ijh",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: form",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LoginModal.tsx",
+      "metadata": {
+        "tagName": "form",
+        "attributes": {
+          "onSubmit": "",
+          "className": "flex flex-col space-y-3"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: form",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "LoginModal"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LoginModal_element_input_s05l0gy94",
+      "type": "SemanticElement",
+      "name": "input[type=\"text\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LoginModal.tsx",
+      "metadata": {
+        "tagName": "input",
+        "attributes": {
+          "data-test": "input-username",
+          "type": "text",
+          "placeholder": "Your username here... (atuny0)",
+          "className": "border w-full border-black py-2 px-8 rounded dark:bg-slate-600",
+          "value": "",
+          "onChange": ""
+        },
+        "semanticSelectors": {
+          "placeholder": "Your username here... (atuny0)",
+          "type": "text"
+        },
+        "recommendedSelector": "input[type=\"text\"]",
+        "selectorPriority": "always",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 16
+        },
+        "parentComponent": "LoginModal"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LoginModal_element_input_hsxa1xj0z",
+      "type": "SemanticElement",
+      "name": "input[type=\"password\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LoginModal.tsx",
+      "metadata": {
+        "tagName": "input",
+        "attributes": {
+          "data-test": "input-password",
+          "value": "",
+          "onChange": "",
+          "type": "password",
+          "placeholder": "Your password here... (9uQFF1Lh)",
+          "className": "border w-full border-black py-2 px-8 rounded dark:bg-slate-600"
+        },
+        "semanticSelectors": {
+          "placeholder": "Your password here... (9uQFF1Lh)",
+          "type": "password"
+        },
+        "recommendedSelector": "input[type=\"password\"]",
+        "selectorPriority": "always",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 16
+        },
+        "parentComponent": "LoginModal"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_LoginModal_element_input_gz8clt85x",
+      "type": "SemanticElement",
+      "name": "input[type=\"submit\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/LoginModal.tsx",
+      "metadata": {
+        "tagName": "input",
+        "attributes": {
+          "data-test": "input-submit",
+          "type": "submit",
+          "value": "Submit",
+          "className": "bg-blue-500 text-white rounded p-2 hover:bg-blue-700 cursor-pointer"
+        },
+        "semanticSelectors": {
+          "type": "submit"
+        },
+        "recommendedSelector": "input[type=\"submit\"]",
+        "selectorPriority": "always",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 15
+        },
+        "parentComponent": "LoginModal"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_HeroSection_element_h2_ruwhircyu",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/HeroSection.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "text-black font-bold text-4xl md:text-5xl dark:text-white"
+        },
+        "semanticSelectors": {
+          "textContent": "The best notebook collection 2024"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "HeroSection"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_HeroSection_element_h3_ck0d3hz8v",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/HeroSection.tsx",
+      "metadata": {
+        "tagName": "h3",
+        "attributes": {
+          "className": "text-2xl dark:text-white"
+        },
+        "semanticSelectors": {
+          "textContent": "Exclusive offer"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "HeroSection"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_FeatureCard_element_h2_g84qtr8xb",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/FeatureCard.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "font-medium text-xl dark:text-white"
+        },
+        "semanticSelectors": {
+          "textContent": "PROP_TITLE"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "title"
+        ],
+        "hasPropsContent": true,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "FeatureCard"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_div_4l6and6eo",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-element\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "className": "inline-block cursor-pointer hover:opacity-85 dark:text-white",
+          "onClick": "",
+          "data-test": "username-popup"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "[data-testid=\"div-element\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "username"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_div_l0wk563a6",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-element\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "className": "absolute p-4 left-[-50px] w-40 z-50 mt-2 rounded-md shadow-2xl bg-white ring-1 transition-all ring-black ring-opacity-5 focus:outline-none dark:bg-slate-600 dark:text-white",
+          "data-test": "popup-content-list"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "[data-testid=\"div-element\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_table_s5ohtmufg",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: table",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "table",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: table",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_tbody_qug62amvf",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tbody",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "tbody",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tbody",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_tr_z66g4bepm",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_td_a2ojcemhn",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "text-center"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_td_7c2x4ejuq",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "hover:underline cursor-pointer text-lg pl-2"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_tr_p12i9r8c3",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_td_ce0e4bmav",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "text-center"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_td_vo5e72e7a",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "hover:underline cursor-pointer text-lg pl-2",
+          "data-test": "wishlist-container"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_tr_tqs49vod7",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "tr",
+        "attributes": {},
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: tr",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_td_ceh741mgn",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "text-center"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CustomPopup_element_td_v03o3tyxl",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CustomPopup.tsx",
+      "metadata": {
+        "tagName": "td",
+        "attributes": {
+          "className": "hover:underline cursor-pointer text-lg pl-2",
+          "onClick": "",
+          "data-test": "logout-btn"
+        },
+        "semanticSelectors": {
+          "textContent": "Logout"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: td",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "CustomPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CartRow_element_h3_lfpsgmj2e",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CartRow.tsx",
+      "metadata": {
+        "tagName": "h3",
+        "attributes": {
+          "className": "font-bold leading-4"
+        },
+        "semanticSelectors": {
+          "textContent": "PROP_TITLE"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "title"
+        ],
+        "hasPropsContent": true,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CartRow"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CartRow_element_h3_laljbndir",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CartRow.tsx",
+      "metadata": {
+        "tagName": "h3",
+        "attributes": {
+          "className": "font-semibold"
+        },
+        "semanticSelectors": {
+          "textContent": "$"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "result.toFixed(2)"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "CartRow"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CartRow_element_span_7ud66pwh2",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"span-element\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CartRow.tsx",
+      "metadata": {
+        "tagName": "span",
+        "attributes": {
+          "data-test": "cart-item-quantity"
+        },
+        "semanticSelectors": {},
+        "recommendedSelector": "[data-testid=\"span-element\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "quantity"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "CartRow"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_CartRow_element_span_97jde82aa",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"span-$\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/CartRow.tsx",
+      "metadata": {
+        "tagName": "span",
+        "attributes": {
+          "data-test": "cart-item-price"
+        },
+        "semanticSelectors": {
+          "textContent": "$"
+        },
+        "recommendedSelector": "[data-testid=\"span-$\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "(result * quantity).toFixed(2)"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "CartRow"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Cart_element_h1_0da8piy2x",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Cart.tsx",
+      "metadata": {
+        "tagName": "h1",
+        "attributes": {
+          "className": "font-bold text-xl mb-1"
+        },
+        "semanticSelectors": {
+          "textContent": "Checkout"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Cart"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Cart_element_span_19n7ku0ze",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"span-confirm\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Cart.tsx",
+      "metadata": {
+        "tagName": "span",
+        "attributes": {
+          "className": "w-1/2 border border-gray-500 rounded cursor-pointer text-center py-1",
+          "onClick": "",
+          "data-test": "confirm-order-btn"
+        },
+        "semanticSelectors": {
+          "textContent": "Confirm"
+        },
+        "recommendedSelector": "[data-testid=\"span-confirm\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "Cart"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Cart_element_div_70h8p8oym",
+      "type": "SemanticElement",
+      "name": "[data-testid=\"div-prop_text\"]",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Cart.tsx",
+      "metadata": {
+        "tagName": "div",
+        "attributes": {
+          "className": "max-w-[400px] w-full min-h-full bg-white absolute right-0 top-0 p-6 font-karla dark:bg-slate-600 dark:text-white",
+          "data-test": "cart-container"
+        },
+        "semanticSelectors": {
+          "textContent": "PROP_TEXT"
+        },
+        "recommendedSelector": "[data-testid=\"div-prop_text\"]",
+        "selectorPriority": "good",
+        "requiresTestId": true,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "items?.length > 0 && (\n              <>\n                <div className=\"flex items-center justify-between p-2\">\n                  <h2 className=\"font-bold text-2xl\">Total</h2>\n                  <h2 className=\"font-bold text-2xl\">${calculateTotal()}</h2>\n                </div>\n                <button\n                  type=\"button\"\n                  data-test=\"checkout-btn\"\n                  onClick={() => setCheckout(true)}\n                  className=\"w-full text-center text-white bg-blue-500 py-2 my-4 rounded font-bold text-xl hover:bg-blue-700\"\n                >\n                  CHECKOUT\n                </button>\n              </>\n            )"
+        ],
+        "hasPropsContent": true,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 10
+        },
+        "parentComponent": "Cart"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Cart_element_h3_x2am1wvlq",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Cart.tsx",
+      "metadata": {
+        "tagName": "h3",
+        "attributes": {
+          "className": "font-semibold text-2xl"
+        },
+        "semanticSelectors": {
+          "textContent": "Your Cart"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h3",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Cart"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Cart_element_h2_kvx5kcq0k",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Cart.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "font-bold text-2xl"
+        },
+        "semanticSelectors": {
+          "textContent": "Total"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Cart"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Cart_element_h2_utc2vj94t",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Cart.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "font-bold text-2xl"
+        },
+        "semanticSelectors": {
+          "textContent": "$"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [
+          "calculateTotal()"
+        ],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Cart"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Cart_element_button_v5ivvmlw0",
+      "type": "SemanticElement",
+      "name": "button=CHECKOUT",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Cart.tsx",
+      "metadata": {
+        "tagName": "button",
+        "attributes": {
+          "type": "button",
+          "data-test": "checkout-btn",
+          "onClick": "",
+          "className": "w-full text-center text-white bg-blue-500 py-2 my-4 rounded font-bold text-xl hover:bg-blue-700"
+        },
+        "semanticSelectors": {
+          "textContent": "CHECKOUT",
+          "type": "button"
+        },
+        "recommendedSelector": "button=CHECKOUT",
+        "selectorPriority": "always",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [
+            "data-test"
+          ],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 13
+        },
+        "parentComponent": "Cart"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_BannerPopup_element_button_9ileu1foi",
+      "type": "SemanticElement",
+      "name": "button=✖",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/BannerPopup.tsx",
+      "metadata": {
+        "tagName": "button",
+        "attributes": {
+          "onClick": "",
+          "className": "absolute top-0 right-0 m-2 bg-white rounded-full p-2"
+        },
+        "semanticSelectors": {
+          "textContent": "✖"
+        },
+        "recommendedSelector": "button=✖",
+        "selectorPriority": "always",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "high",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "BannerPopup"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Banner_element_h1_svin5oqrg",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Banner.tsx",
+      "metadata": {
+        "tagName": "h1",
+        "attributes": {
+          "className": "text-4xl font-bold mb-1"
+        },
+        "semanticSelectors": {
+          "textContent": "Don't miss the offer"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h1",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Banner"
+      },
+      "relationships": []
+    },
+    {
+      "id": "simple-react-ecommerce_src_components_Banner_element_h2_ef8mros6n",
+      "type": "SemanticElement",
+      "name": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+      "filePath": "/home/pauljcoles/code/cats/ecom/simple-react-ecommerce/src/components/Banner.tsx",
+      "metadata": {
+        "tagName": "h2",
+        "attributes": {
+          "className": "text-3xl font-semibold mb-4"
+        },
+        "semanticSelectors": {
+          "textContent": "Grab it now"
+        },
+        "recommendedSelector": "⚠️ NEEDS_SEMANTIC_SELECTOR: h2",
+        "selectorPriority": "never",
+        "requiresTestId": false,
+        "accessibilityIssues": [],
+        "propPatterns": [],
+        "hasPropsContent": false,
+        "automationPriority": "medium",
+        "automationAnalysis": {
+          "testAttributes": [],
+          "accessibilityAttributes": [],
+          "behaviorAttributes": [],
+          "identifierScore": 0
+        },
+        "parentComponent": "Banner"
+      },
+      "relationships": []
+    }
+  ],
+  "summary": {
+    "pageObjects": 0,
+    "tafSelectors": 0,
+    "testScenarios": 0,
+    "stepDefinitions": 0,
+    "featureFiles": 0,
+    "pageElements": 0,
+    "reactComponents": 29,
+    "vueComponents": 0,
+    "semanticElements": 103,
+    "mappedSelectors": 0,
+    "unmappedSelectors": 0
+  }
+}

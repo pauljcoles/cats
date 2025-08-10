@@ -22,9 +22,9 @@
 
 ## Proof of Concept: Does This Actually Work?
 
-In Part 2, I discovered that gold standards work better than rulebooks and lazy loading prevents Context Rot. Part 3 proves it works in practice - with real BMW vs Mercedes examples and an honest assessment of what actually happens when the cats meet reality.
+In Part 2, I discovered that gold standards work better than rulebooks and lazy loading prevents Context Rot. Part 3 proves it works in practice - with real fake examples and an honest assessment of what actually happens when the cats meet reality.
 
-## The Universal BDD Vision: BMW vs Mercedes Principle
+## The Universal BDD Vision: Two Car Companies Principle
 
 ### The Core Philosophy
 
@@ -60,25 +60,6 @@ Scenario: M Sport Package selection triggers pricing recalculation
   Then the PricingCalculatorService should return updated totals
   And the frontend should display BMW-specific pricing components
   And the ConfiguratorState should persist to BMW backend systems
-
-## 🐾 Series Navigation
-
-- **Part 1: Why AI Starts Making Stuff Up**  
-  *The cat has opinions — and your postcode formatting rules aren't one of them.*  
-  [Read it →](link-to-part-1)
-
-- **Part 2: Show, Don’t Tell: Teaching AI with Better Examples**  
-  *Bribing the cat with gold standards and smaller piles of paper.*  
-  *(← You are here)*
-
-- **Part 3: How I Made My AI Stop Guessing**  
-  *Teaching the cat one trick at a time with task-focused training.*  
-  *(Coming soon)*
-
-- **Part 4: The More You Say, the Less It Learns**  
-  *When you talk too much, the cat stops listening — and invents new requirements instead.*  
-  **Coming soon**
-
 
 # Mercedes contaminated approach  
 Feature: Mercedes MBUX Configurator Integration [SPEC-MB-456]
@@ -155,7 +136,22 @@ Behind the scenes, each company uses their specific domain configuration:
 }
 ```
 
-**The same universal scenarios get different domain implementations**, but testers can understand both instantly because they focus on universal human behavior, not technical complexity.
+**The same universal scenarios get different domain implementations** testers can understand both instantly because they focus on universal human behavior, not technical complexity.
+
+## Garbage in and Garbage out
+
+Something that because aparant was that some of our tickets were not so good. They're written in a given, when, then format, but, it's in a table and full of bullet points. So, rather than just writing bullet points, it's a mix of syntax and will have 10 compound results in 'then' some of which contradict each other.
+
+From this I made the tool evaluate the ticket before we could let the AI try and make scenarios from it.
+
+  - read it
+  - assess it
+  - apply rules
+  - Let the user decide what to do
+    - Accept the badness
+    - See what the scenarios would look like
+    - Rewrite them using the single responsibility principal
+    - Stop
 
 ## The Complete Workflow: From Jira Ticket to Executable Tests
 
@@ -238,7 +234,7 @@ Scenario: Premium package selection updates pricing
 
 **The agent gets you 80-90% of the way there, then humans add the final details.**
 
-## The State Diagram Breakthrough
+## Using State Diagrams so you and it can know what it does
 
 ### The Problem: AI Doesn't Know Your Application States
 
@@ -261,7 +257,44 @@ graph TD
 
 **These diagrams revealed missing state transitions** that weren't clear in Jira stories but were visible in Figma designs. The AI became better at identifying incomplete workflows and suggesting additional test scenarios.
 
+### Making the tasks self documenting
+
+I was much like a university student writing their software plan after the code. I had this amazing system, but only I knew what it did, and I'd only remember this for a while. So, I asked the AI to produce flow charts using Mermaid again.
+
+This allows others to understand what it does without reading a bunch of pseudo code. It also allows me to follow the paths through and debug problems. It became immediately of value when I noticed I was loading the domain, checking it, making a descision, then loading the domain again and checking it even more throughly :rolleyes:
+
 ## Honest Assessment: What Actually Works
+
+### It's all new to me
+
+I've kind of gone into this blind, I'll talk more about this in part 4. The first version was a mess, but it worked and it proved that it could be done. When we needed to look at rolling it out, I found that I couldn't. I learnt what worked as I went along.
+
+We went live with what I'll call version 2. This is domain aware and has the context loading, however it had some bugs reported early on, one of which was the ticket assessment would always fail. This means it wasn't loading the domain context. It really was a 'it works on my machine' kind of problem.
+
+I tried stengthening the wording, but, I know this can only go so far. The AI doesn't read things like us, it reads everything as one sentence, and with how they work, more recent things have more importance.
+
+I needed to make a change to how the tasks were executed. In V3 everything is pseudo code, to be honest I'm kind of thinking the entire thing can be actual code, with a simple markdown file the AI uses. Perhaps in V4.
+
+### Making an F1 car
+
+I'm a big fan of F1, more of the design and off track stuff; the races can be pretty dull. What's really clear is that if you change the front wing, then it has effect to other areas of the car.
+
+Making the domain loading perfect had the issue of the AI treating it as an overide for garbage tickets. It would allow terrible tickets though because it thought the extra domain made them better. It didn't it just meant were nonsense with the correct names.
+
+The domain stuff is seasoning on your pasta.
+
+So, the assessment had to change to pseudo code so that it understood the rules. I did try putting rule 5 before rule 4 (changed the numbers and everything), but the AI just ignored it!
+
+After doing this it wouldn't allow any tickets to be processed, in a perfect world this wouldn't happen, everyone would write perfect scenarios. So I had to make it optional. There's something that the system has to adhere to - The human has to make the descisions. It's why the test cases aren't limited, they are in priority order, but it makes everything. When something goes wrong the AI won't be the one being told off.
+
+So, that's where the options I mentioned earlier came from.
+
+After this, rather than mess around, all the other tasks were changed to pseudo code.
+
+### I'm not that clever
+
+I was testing all these changes manually, like a chump. So, I got the AI to make some unit tests, it took good, bad and tickets not from my domain, generated the expectations and made repeatable tests. Now, when the rules change we can run this and see if anything is broken. We also recreate the mermaid diagrams and know if the flow makes sense.
+
 
 ### The Wins ✅
 
@@ -277,15 +310,13 @@ graph TD
 
 ### The Ongoing Challenges ⚠️
 
-**Domain Drift**: Rules pick up domain specifics over time. You have to actively monitor and clean generic patterns to prevent contamination from creeping back in.
+**Domain Drift**: The AI loves to just go for it, before you know it there's a bunch of domain things where they shouldn't be.
 
 **Edge Case Handling**: Still needs human review for unusual scenarios. The AI excels at common patterns but struggles with genuinely unique business logic.
 
 **Context Maintenance**: Domain configurations need regular updates. As products evolve, the mappings between universal patterns and specific implementations require ongoing care.
 
 ### What It Doesn't Fix ❌
-
-**Bad Requirements**: Garbage in, garbage out still applies. I added a rule for this after wondering what would happen - it wasn't great. I made it worse by giving it state diagrams with insufficient context.
 
 **Process Problems**: Technical solutions don't fix workflow issues. If your requirements are unclear, arrive late, or change constantly, AI won't solve those basic communication problems.
 
