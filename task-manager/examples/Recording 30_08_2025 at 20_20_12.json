@@ -1,0 +1,320 @@
+{
+    "title": "Recording 30/08/2025 at 20:20:12",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 1163,
+            "height": 1276,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "https://www.renault.co.uk/electric-vehicles/r5-e-tech-electric.html",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://www.renault.co.uk/electric-vehicles/r5-e-tech-electric.html",
+                    "title": "Renault 5 - Fully electric city car by Renault"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div.ContentZone__submenu button"
+                ],
+                [
+                    "xpath///*[@id=\"Page\"]/div[2]/div/div/div[2]/div/div[2]/div[1]/button"
+                ],
+                [
+                    "pierce/div.ContentZone__submenu button"
+                ]
+            ],
+            "offsetY": 28,
+            "offsetX": 47.640625
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#engines > div.RadioGroupButton > div:nth-of-type(2) span"
+                ],
+                [
+                    "xpath///*[@id=\"engines\"]/div[3]/div[2]/div/label/span"
+                ],
+                [
+                    "pierce/#engines > div.RadioGroupButton > div:nth-of-type(2) span"
+                ],
+                [
+                    "text/150 hp"
+                ]
+            ],
+            "offsetY": 26.8125,
+            "offsetX": 47.796875
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#grades > div.RadioGroupButton > div:nth-of-type(2) span"
+                ],
+                [
+                    "xpath///*[@id=\"grades\"]/div[3]/div[2]/div/label/span"
+                ],
+                [
+                    "pierce/#grades > div.RadioGroupButton > div:nth-of-type(2) span"
+                ],
+                [
+                    "text/iconic five"
+                ]
+            ],
+            "offsetY": 13.828125,
+            "offsetX": 55.578125
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div.RadioGroupButton > div:nth-of-type(3) span"
+                ],
+                [
+                    "xpath///*[@id=\"grades\"]/div[3]/div[3]/div/label/span"
+                ],
+                [
+                    "pierce/div.RadioGroupButton > div:nth-of-type(3) span"
+                ],
+                [
+                    "text/Roland Garros"
+                ]
+            ],
+            "offsetY": 16.828125,
+            "offsetX": 98.5
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div.OneConfig__mainContainer li:nth-of-type(8) div"
+                ],
+                [
+                    "xpath///*[@id=\"CATCOLORS1\"]/div[2]/div[2]/ul/li[8]/span/button/div"
+                ],
+                [
+                    "pierce/div.OneConfig__mainContainer li:nth-of-type(8) div"
+                ]
+            ],
+            "offsetY": 23.765625,
+            "offsetX": 25
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#PC01 li:nth-of-type(4) div"
+                ],
+                [
+                    "xpath///*[@id=\"PC01\"]/div[2]/div[2]/ul/li[4]/span/button/div"
+                ],
+                [
+                    "pierce/#PC01 li:nth-of-type(4) div"
+                ]
+            ],
+            "offsetY": 38.1875,
+            "offsetX": 49
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#accessories > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(1) div.Checkbox"
+                ],
+                [
+                    "xpath///*[@id=\"accessories\"]/div[2]/div/div/div/div/div[1]/button[2]/div/div[1]"
+                ],
+                [
+                    "pierce/#accessories > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(1) div.Checkbox"
+                ]
+            ],
+            "offsetY": 30.453125,
+            "offsetX": 21
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#accessories > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(2) label"
+                ],
+                [
+                    "xpath///*[@id=\"accessories\"]/div[2]/div/div/div/div/div[2]/button[2]/div/div[1]/div/label"
+                ],
+                [
+                    "pierce/#accessories > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(2) label"
+                ]
+            ],
+            "offsetY": 15.453125,
+            "offsetX": 47
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Add a touch of originality to your interior thanks to this large storage box with this 3D printed lid. You will only have to slide your hand to access your belongings. Opt for this blue number5 pattern which features the emblematic number 5. blue numbeR5 lid for large central storage compartment £34"
+                ],
+                [
+                    "div:nth-of-type(11) > button.OneConfigEquipmentCard__trigger"
+                ],
+                [
+                    "xpath///*[@id=\"accessories\"]/div[2]/div/div/div/div/div[11]/button[2]"
+                ],
+                [
+                    "pierce/div:nth-of-type(11) > button.OneConfigEquipmentCard__trigger"
+                ]
+            ],
+            "offsetY": 175.453125,
+            "offsetX": 82
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/EXTERIOR",
+                    "aria/[role=\"generic\"]"
+                ],
+                [
+                    "div:nth-of-type(3) > button > span"
+                ],
+                [
+                    "xpath///*[@id=\"accessories\"]/div[3]/button/span"
+                ],
+                [
+                    "pierce/div:nth-of-type(3) > button > span"
+                ]
+            ],
+            "offsetY": 5.046875,
+            "offsetX": 128
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/TRANSPORT AND PROTECTION",
+                    "aria/[role=\"generic\"]"
+                ],
+                [
+                    "#accessories > div:nth-of-type(4) > button > span"
+                ],
+                [
+                    "xpath///*[@id=\"accessories\"]/div[4]/button/span"
+                ],
+                [
+                    "pierce/#accessories > div:nth-of-type(4) > button > span"
+                ],
+                [
+                    "text/TRANSPORT AND"
+                ]
+            ],
+            "offsetY": 5.046875,
+            "offsetX": 182
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/DESIGN & STYLING",
+                    "aria/[role=\"generic\"]"
+                ],
+                [
+                    "div:nth-of-type(5) > button > span"
+                ],
+                [
+                    "xpath///*[@id=\"accessories\"]/div[5]/button/span"
+                ],
+                [
+                    "pierce/div:nth-of-type(5) > button > span"
+                ],
+                [
+                    "text/DESIGN & STYLING"
+                ]
+            ],
+            "offsetY": 0.046875,
+            "offsetX": 140
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "#accessories > div:nth-of-type(5) div.Checkbox__boxContainer"
+                ],
+                [
+                    "xpath///*[@id=\"accessories\"]/div[5]/div/div/div/div/div/button[2]/div/div[1]/div/label/div[1]"
+                ],
+                [
+                    "pierce/#accessories > div:nth-of-type(5) div.Checkbox__boxContainer"
+                ]
+            ],
+            "offsetY": 19.453125,
+            "offsetX": 9
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div.OneConfigReceiptCta > button"
+                ],
+                [
+                    "xpath///*[@id=\"Page\"]/div[1]/div[1]/div[2]/div[2]/div/div[8]/div[2]/button"
+                ],
+                [
+                    "pierce/div.OneConfigReceiptCta > button"
+                ]
+            ],
+            "offsetY": 22,
+            "offsetX": 189
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/login to My Renault"
+                ],
+                [
+                    "div.Dialog button.is-cta-primary"
+                ],
+                [
+                    "xpath//html/body/div[5]/div/div[2]/div[2]/button[2]"
+                ],
+                [
+                    "pierce/div.Dialog button.is-cta-primary"
+                ]
+            ],
+            "offsetY": 17.328125,
+            "offsetX": 84.78125,
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "https://msedgedevtools.microsoft.com/serve_file/@5d3aeaf5858265d2abfe75156d5fa33dce393873/third_party/webhint/worker_frame.html",
+                    "title": "ID Connect Renaultgroup"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,153 @@
+{
+  "colors": {
+    "C001": "Alpine White III",
+    "C002": "Jet Black",
+    "C003": "Storm Bay", 
+    "C004": "Mineral Grey Metallic",
+    "C005": "Barcelona Blue Metallic"
+  },
+  "grades": {
+    "G001": {
+      "name": "SE",
+      "includes": ["T001", "W001"],
+      "basePrice": 0
+    },
+    "G002": {
+      "name": "Sport",
+      "includes": ["T002", "W002", "sport-suspension"],
+      "basePrice": 2500
+    },
+    "G003": {
+      "name": "M Sport",
+      "includes": ["T003", "W003", "m-sport-package"],
+      "basePrice": 4200
+    },
+    "G004": {
+      "name": "M Performance",
+      "includes": ["T004", "W004", "m-performance-parts"],
+      "basePrice": 8500,
+      "requiresEngine": ["E003", "E004"]
+    }
+  },
+  "engines": {
+    "E001": {
+      "name": "318i",
+      "power": "156 hp",
+      "fuel": "Petrol",
+      "compatibleGrades": ["G001", "G002", "G003"]
+    },
+    "E002": {
+      "name": "320i",
+      "power": "184 hp", 
+      "fuel": "Petrol",
+      "compatibleGrades": ["G001", "G002", "G003"]
+    },
+    "E003": {
+      "name": "M340i xDrive",
+      "power": "374 hp",
+      "fuel": "Petrol",
+      "compatibleGrades": ["G003", "G004"],
+      "requiresGrade": "G003"
+    },
+    "E004": {
+      "name": "330e",
+      "power": "292 hp total",
+      "fuel": "Plug-in Hybrid",
+      "electricRange": "57-61 km",
+      "compatibleGrades": ["G001", "G002", "G003"]
+    }
+  },
+  "wheels": {
+    "W001": "17-inch Style 486",
+    "W002": "18-inch Style 790M Sport",
+    "W003": "19-inch Style 791M",
+    "W004": "20-inch M Performance"
+  },
+  "trims": {
+    "T001": "Standard Interior",
+    "T002": "Sport Interior",
+    "T003": "M Sport Interior", 
+    "T004": "M Performance Interior"
+  },
+  "packages": {
+    "P001": {
+      "name": "Convenience Pack",
+      "includes": ["heated-seats", "auto-tailgate", "park-assist"],
+      "price": 1100
+    },
+    "P002": {
+      "name": "Technology Pack",
+      "includes": ["live-cockpit-pro", "wireless-charging", "harman-kardon"],
+      "price": 1800
+    },
+    "P003": {
+      "name": "M Sport Pro Pack",
+      "includes": ["adaptive-suspension", "m-sport-brakes", "shadowline-trim"],
+      "price": 2400,
+      "requiresGrade": ["G003", "G004"]
+    },
+    "P004": {
+      "name": "Driving Assistant Professional", 
+      "includes": ["active-cruise", "steering-assist", "side-collision"],
+      "price": 1600
+    }
+  },
+  "interiors": {
+    "I001": "Standard Cloth Black",
+    "I002": "Dakota Leather Black", 
+    "I003": "Vernasca Leather Cognac",
+    "I004": "M Sport Leather Alcantara"
+  },
+  "constraints": [
+    {
+      "rule": "M340i engine requires minimum M Sport grade",
+      "type": "requirement",
+      "conflict": {
+        "engine": "E003",
+        "requiredGrade": "G003"
+      }
+    },
+    {
+      "rule": "M Performance grade requires performance engine",
+      "type": "requirement",
+      "conflict": {
+        "grade": "G004", 
+        "requiredEngines": ["E003"]
+      }
+    },
+    {
+      "rule": "M Sport Pro Pack requires M Sport grade minimum",
+      "type": "requirement",
+      "conflict": {
+        "package": "P003",
+        "requiredGrades": ["G003", "G004"]
+      }
+    }
+  ],
+  "regionalVariations": {
+    "UK": {
+      "availableEngines": ["E001", "E002", "E003", "E004"],
+      "restrictedColors": [],
+      "additionalPackages": ["cold-weather-package"]
+    },
+    "US": {
+      "availableEngines": ["E002", "E003"],
+      "restrictedColors": ["C003"],
+      "additionalPackages": ["premium-package"]
+    }
+  },
+  "pricingRules": {
+    "metallic-paint-premium": 680,
+    "bmw-individual-paint": 2900,
+    "leather-interior-upgrade": 1400,
+    "xdrive-premium": 2200,
+    "seasonal-promotions": {
+      "q1": {
+        "graduate-discount": -750
+      },
+      "q4": {
+        "year-end-bonus": -1500
+      }
+    }
+  }
+}

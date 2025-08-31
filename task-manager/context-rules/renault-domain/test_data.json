@@ -1,0 +1,171 @@
+{
+  "colors": {
+    "C001": "Pearl White",
+    "C002": "Diamond Black",
+    "C003": "Flame Red", 
+    "C004": "Highland Grey",
+    "C005": "Valencia Orange",
+    "C006": "Ocean Blue",
+    "C007": "Forest Green",
+    "C008": "Midnight Blue"
+  },
+  "grades": {
+    "G001": {
+      "name": "Evolution",
+      "includes": ["T001", "W001"],
+      "basePrice": 0
+    },
+    "G002": {
+      "name": "techno",
+      "includes": ["T002", "W002", "tech-package"],
+      "basePrice": 2000
+    },
+    "G003": {
+      "name": "iconic five", 
+      "includes": ["T002", "W002", "retro-package"],
+      "basePrice": 2800
+    },
+    "G004": {
+      "name": "Roland Garros",
+      "includes": ["T003", "W003", "rg-package"],
+      "basePrice": 3500,
+      "limitedEdition": true
+    }
+  },
+  "engines": {
+    "E001": {
+      "name": "95 hp",
+      "power": "95 hp",
+      "type": "Electric",
+      "battery": "40 kWh",
+      "range": "300 km"
+    },
+    "E002": {
+      "name": "150 hp", 
+      "power": "150 hp",
+      "type": "Electric",
+      "battery": "52 kWh", 
+      "range": "410 km"
+    }
+  },
+  "wheels": {
+    "W001": "18-inch Aero wheels",
+    "W002": "18-inch Iconic wheels",
+    "W003": "18-inch Roland Garros wheels"
+  },
+  "trims": {
+    "T001": "Evolution Interior",
+    "T002": "techno Interior",
+    "T003": "Roland Garros Interior"
+  },
+  "accessories": {
+    "interior": {
+      "A001": {
+        "name": "Floor mats - tailored",
+        "price": 89,
+        "category": "interior"
+      },
+      "A002": {
+        "name": "Storage organizer",
+        "price": 45,
+        "category": "interior"
+      },
+      "A003": {
+        "name": "blue numbeR5 lid for large central storage compartment",
+        "price": 34,
+        "category": "interior",
+        "special": true
+      }
+    },
+    "exterior": {
+      "A101": {
+        "name": "Roof bars",
+        "price": 320,
+        "category": "exterior"
+      },
+      "A102": {
+        "name": "Side protection strips",
+        "price": 95,
+        "category": "exterior"
+      }
+    },
+    "transport": {
+      "A201": {
+        "name": "Boot liner",
+        "price": 75,
+        "category": "transport"
+      },
+      "A202": {
+        "name": "Bike carrier",
+        "price": 450,
+        "category": "transport"
+      }
+    },
+    "styling": {
+      "A301": {
+        "name": "Chrome door handles",
+        "price": 125,
+        "category": "styling"
+      },
+      "A302": {
+        "name": "Body-colored mirrors",
+        "price": 85,
+        "category": "styling"
+      }
+    }
+  },
+  "packages": {
+    "P001": {
+      "name": "Winter Pack",
+      "includes": ["heated-seats", "heated-steering", "winter-tyres"],
+      "price": 680
+    },
+    "P002": {
+      "name": "Comfort Pack",
+      "includes": ["keyless", "auto-lights", "rain-sensor"],
+      "price": 520
+    }
+  },
+  "constraints": [
+    {
+      "rule": "Roland Garros grade is limited edition",
+      "type": "availability",
+      "conflict": {
+        "grade": "G004",
+        "limitation": "limited-production"
+      }
+    },
+    {
+      "rule": "Roland Garros wheels only with Roland Garros grade",
+      "type": "requirement",
+      "conflict": {
+        "wheel": "W003",
+        "requiredGrade": "G004"
+      }
+    }
+  ],
+  "chargingInfo": {
+    "chargingTypes": ["AC", "DC"],
+    "maxChargingPower": {
+      "AC": "22 kW",
+      "DC": "100 kW"
+    },
+    "chargingTimes": {
+      "10-80%": "42 minutes (DC fast)",
+      "0-100%": "4 hours (AC 22kW)"
+    }
+  },
+  "pricingRules": {
+    "metallic-paint-premium": 495,
+    "special-paint-premium": 995,
+    "limited-edition-premium": 1200,
+    "government-grants": {
+      "UK": {
+        "electric-vehicle-grant": -2500
+      },
+      "FR": {
+        "bonus-ecologique": -5000
+      }
+    }
+  }
+}

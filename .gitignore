@@ -20,3 +20,26 @@ registry-builder/node_modules
   *.log
 .DS_Store
 registry-builder/package-lock.json
+/knowledge
+
+# Python virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Eval system generated files
+task-manager/traces/
+task-manager/annotations/
+task-manager/eval_exports/
+*.csv

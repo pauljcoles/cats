@@ -1,0 +1,143 @@
+{
+  "colors": {
+    "C001": "Polar White",
+    "C002": "Obsidian Black Metallic", 
+    "C003": "Brilliant Blue Metallic",
+    "C004": "Emerald Green Metallic",
+    "C005": "Designo Cardinal Red Metallic"
+  },
+  "grades": {
+    "G001": {
+      "name": "Standard",
+      "includes": ["T001", "W001"],
+      "basePrice": 0
+    },
+    "G002": {
+      "name": "AMG Line",
+      "includes": ["T002", "W002", "E001"],
+      "basePrice": 3500,
+      "excludes": []
+    },
+    "G003": {
+      "name": "AMG",
+      "includes": ["T003", "W003", "E002"],
+      "basePrice": 12000,
+      "excludes": ["P003"]
+    }
+  },
+  "engines": {
+    "E001": {
+      "name": "200 Petrol",
+      "power": "184 hp",
+      "compatibleGrades": ["G001", "G002"]
+    },
+    "E002": {
+      "name": "300 Petrol", 
+      "power": "258 hp",
+      "compatibleGrades": ["G001", "G002"]
+    },
+    "E003": {
+      "name": "AMG 63 S",
+      "power": "630 hp",
+      "compatibleGrades": ["G003"],
+      "requiresGrade": "G003"
+    },
+    "E004": {
+      "name": "300e Hybrid",
+      "power": "313 hp total",
+      "compatibleGrades": ["G001", "G002"],
+      "electricRange": "54 km"
+    }
+  },
+  "wheels": {
+    "W001": "17-inch alloy wheels",
+    "W002": "18-inch AMG alloy wheels", 
+    "W003": "20-inch AMG forged wheels",
+    "W004": "19-inch multi-spoke wheels"
+  },
+  "trims": {
+    "T001": "Standard Interior",
+    "T002": "AMG Line Interior",
+    "T003": "AMG Performance Interior"
+  },
+  "packages": {
+    "P001": {
+      "name": "Comfort Package",
+      "includes": ["heated-seats", "memory-function", "ambient-lighting"],
+      "price": 1500
+    },
+    "P002": {
+      "name": "Premium Package", 
+      "includes": ["panoramic-roof", "premium-audio", "wireless-charging"],
+      "price": 2800
+    },
+    "P003": {
+      "name": "Night Package",
+      "includes": ["black-trim", "dark-wheels", "tinted-lights"],
+      "price": 800,
+      "requiresGrade": ["G002", "G003"]
+    },
+    "P004": {
+      "name": "Driving Assistance Package",
+      "includes": ["adaptive-cruise", "lane-assist", "parking-assist"],
+      "price": 2200
+    }
+  },
+  "interiors": {
+    "I001": "Black MB-Tex",
+    "I002": "Beige Artico Leather",
+    "I003": "Black Nappa Leather",
+    "I004": "AMG Nappa Leather Red/Black"
+  },
+  "constraints": [
+    {
+      "rule": "AMG 63 S engine requires AMG grade",
+      "type": "requirement",
+      "conflict": {
+        "engine": "E003",
+        "requiredGrade": "G003"
+      }
+    },
+    {
+      "rule": "Night Package requires minimum AMG Line grade",
+      "type": "requirement", 
+      "conflict": {
+        "package": "P003",
+        "requiredGrades": ["G002", "G003"]
+      }
+    },
+    {
+      "rule": "AMG grade excludes Comfort Package",
+      "type": "exclusion",
+      "conflict": {
+        "grade": "G003",
+        "excludedPackage": "P001"
+      }
+    }
+  ],
+  "regionalVariations": {
+    "UK": {
+      "availableEngines": ["E001", "E002", "E003", "E004"],
+      "restrictedColors": [],
+      "additionalPackages": ["cold-weather-package"]
+    },
+    "DE": {
+      "availableEngines": ["E001", "E002", "E003", "E004"],
+      "restrictedColors": [],
+      "additionalPackages": ["autobahn-package"]
+    }
+  },
+  "pricingRules": {
+    "metallic-paint-premium": 795,
+    "designo-paint-premium": 3950,
+    "premium-interior-upgrade": 1200,
+    "seasonal-discounts": {
+      "summer": {
+        "cabriolet-discount": -2000
+      },
+      "winter": {
+        "4matic-promotion": -800
+      }
+    }
+  }
+}
