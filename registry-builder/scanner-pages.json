@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "test-app/src/pages/LoginPage.tsx",
+    "test-app/src/pages/ProductListPage.tsx",
+    "test-app/src/pages/UserProfilePage.tsx",
+    "test-app/src/containers/DashboardContainer.tsx"
+  ],
+  "aliases": {
+    "@": "./test-app/src",
+    "@components": "./test-app/src/components",
+    "@pages": "./test-app/src/pages",
+    "@utils": "./test-app/src/utils",
+    "@routes": "./test-app/src/routes"
+  },
+  "output": {
+    "registry": "./page-module-registry.json",
+    "pageObjects": "./generated-page-objects/"
+  },
+  "evaluation": {
+    "maxDepth": 6,
+    "followDynamicImports": true,
+    "resolveCallExpressions": true
+  },
+  "modules": {
+    "componentDirs": [
+      "test-app/src/components",
+      "test-app/src/layouts"
+    ],
+    "sharedPatterns": [
+      "**/components/**/*.tsx",
+      "**/layouts/**/*.tsx",
+      "**/hocs/**/*.tsx"
+    ]
+  }
+}

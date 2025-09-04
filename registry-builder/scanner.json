@@ -1,0 +1,37 @@
+{
+  "routes": [
+    "test-app/src/index.ts",
+    "test-app/src/App.tsx",
+    "test-app/src/pages/**/*.tsx",
+    "test-app/src/containers/**/*.tsx",
+    "test-app/src/layouts/**/*.tsx",
+    "test-app/src/components/SimpleButton.tsx"
+  ],
+  "includePatterns": [
+    "test-app/**/*.tsx",
+    "test-app/**/*.ts",
+    "test-app/src/hocs/**/*.tsx",
+    "test-app/src/components/**/*.tsx"
+  ],
+  "excludePatterns": [
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/node_modules/**"
+  ],
+  "aliases": {
+    "@": "./test-app/src",
+    "@components": "./test-app/src/components",
+    "@pages": "./test-app/src/pages",
+    "@utils": "./test-app/src/utils",
+    "@routes": "./test-app/src/routes"
+  },
+  "output": {
+    "registry": "./page-registry.json",
+    "pageObjects": "./generated-page-objects/"
+  },
+  "evaluation": {
+    "maxDepth": 6,
+    "followDynamicImports": true,
+    "resolveCallExpressions": true
+  }
+}

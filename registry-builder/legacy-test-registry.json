@@ -1,0 +1,1168 @@
+{
+  "pages": {},
+  "modules": {},
+  "orphanedElements": [
+    {
+      "type": "interactive",
+      "component": "App_<",
+      "selectors": {
+        "byTestId": "app-container"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/App.tsx",
+        "line": 8,
+        "column": 5,
+        "length": 49
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "App_<",
+      "selectors": {
+        "byTestId": "app-header"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/App.tsx",
+        "line": 9,
+        "column": 7,
+        "length": 56
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "App_<",
+      "selectors": {
+        "byRole": "main",
+        "byTestId": "app-main"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/App.tsx",
+        "line": 13,
+        "column": 7,
+        "length": 62
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "App_<",
+      "selectors": {
+        "byTestId": "demo-pages"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/App.tsx",
+        "line": 17,
+        "column": 9,
+        "length": 53
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "App_<",
+      "selectors": {
+        "byRole": "contentinfo",
+        "byTestId": "app-footer"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/App.tsx",
+        "line": 23,
+        "column": 7,
+        "length": 75
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "AppRoutes_<",
+      "selectors": {
+        "byTestId": "app-routes-container"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/routes/AppRoutes.tsx",
+        "line": 48,
+        "column": 5,
+        "length": 63
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "AppRoutes_<",
+      "selectors": {
+        "byTestId": "main-nav"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/routes/AppRoutes.tsx",
+        "line": 50,
+        "column": 7,
+        "length": 56
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "AppRoutes_<",
+      "selectors": {
+        "byRole": "menuitem"
+      },
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`nav-link-${route.name.toLowerCase()}`",
+          "resolved": "nav-link-${route.name.toLowerCase()}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`Navigate to ${route.name}`",
+          "resolved": "Navigate to ${route.name}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/routes/AppRoutes.tsx",
+        "line": 54,
+        "column": 15,
+        "length": 211
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {},
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 61,
+        "column": 5,
+        "length": 66
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {},
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 63,
+        "column": 9,
+        "length": 38
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {},
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 64,
+        "column": 9,
+        "length": 40
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {
+        "byLabelText": "[aria-labelledby=\"login-title\"]"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 67,
+        "column": 7,
+        "length": 157
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {
+        "byPlaceholderText": "Enter your email"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 73,
+        "column": 9,
+        "length": 271
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {
+        "byPlaceholderText": "Enter your password"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 84,
+        "column": 9,
+        "length": 284
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {},
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 96,
+        "column": 11,
+        "length": 140
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "function-call",
+          "original": "generateTestId('forgot-password', 'link')",
+          "resolved": "{forgot-password}-link",
+          "confidence": "medium"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 105,
+        "column": 11,
+        "length": 149
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "LoginPage_<",
+      "selectors": {
+        "byLabelText": "Create a new account"
+      },
+      "dynamicExpressions": [
+        {
+          "type": "function-call",
+          "original": "generateTestId('signup', 'link')",
+          "resolved": "{signup}-link",
+          "confidence": "medium"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/LoginPage.tsx",
+        "line": 118,
+        "column": 11,
+        "length": 148
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "Button_<",
+      "selectors": {},
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/Button.tsx",
+        "line": 24,
+        "column": 5,
+        "length": 204
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "FormField_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`${fieldId}-error`",
+          "resolved": "${fieldId}-error",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/FormField.tsx",
+        "line": 36,
+        "column": 9,
+        "length": 330
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "FormField_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`${fieldId}-error`",
+          "resolved": "${fieldId}-error",
+          "confidence": "low"
+        },
+        {
+          "type": "variable-reference",
+          "original": "{type}",
+          "resolved": [
+            "button",
+            "submit",
+            "reset"
+          ],
+          "confidence": "medium"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/FormField.tsx",
+        "line": 58,
+        "column": 7,
+        "length": 364
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "FormField_<",
+      "selectors": {
+        "byRole": "alert"
+      },
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`${fieldId}-error`",
+          "resolved": "${fieldId}-error",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`${testId}-error`",
+          "resolved": "${testId}-error",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/FormField.tsx",
+        "line": 82,
+        "column": 9,
+        "length": 151
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byRole": "status",
+        "byLabelText": "Loading products",
+        "byTestId": "products-loading"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 70,
+        "column": 7,
+        "length": 151
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byTestId": "product-list-container"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 82,
+        "column": 5,
+        "length": 72
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byTestId": "cart-summary"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 85,
+        "column": 9,
+        "length": 57
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byTestId": "view-cart-btn"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 89,
+        "column": 11,
+        "length": 115
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byTestId": "filters-container"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 99,
+        "column": 7,
+        "length": 65
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byPlaceholderText": "Search by product name..."
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 100,
+        "column": 9,
+        "length": 215
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "variable-reference",
+          "original": "{CATEGORIES}",
+          "resolved": "['Electronics', 'Clothing', 'Books', 'Home & Garden']",
+          "confidence": "medium"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 109,
+        "column": 9,
+        "length": 205
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "variable-reference",
+          "original": "{SORT_OPTIONS}",
+          "resolved": "['name', 'price', 'category']",
+          "confidence": "medium"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 118,
+        "column": 9,
+        "length": 184
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byTestId": "clear-filters-btn"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 127,
+        "column": 9,
+        "length": 228
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byRole": "region",
+        "byLabelText": "Products",
+        "byTestId": "products-grid"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 140,
+        "column": 7,
+        "length": 95
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byRole": "status",
+        "byTestId": "no-products-message"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 142,
+        "column": 11,
+        "length": 126
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`product-card-${product.id}`",
+          "resolved": "product-card-${product.id}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`product-title-${product.id}`",
+          "resolved": "product-title-${product.id}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 151,
+        "column": 13,
+        "length": 212
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`product-title-${product.id}`",
+          "resolved": "product-title-${product.id}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`product-title-${product.id}`",
+          "resolved": "product-title-${product.id}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 158,
+        "column": 17,
+        "length": 137
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`product-price-${product.id}`",
+          "resolved": "product-price-${product.id}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`Price: $${product.price}`",
+          "resolved": "Price: $${product.price}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 164,
+        "column": 17,
+        "length": 185
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`product-category-${product.id}`",
+          "resolved": "product-category-${product.id}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 171,
+        "column": 17,
+        "length": 133
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {
+        "byRole": "status"
+      },
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`stock-status ${product.inStock ? 'in-stock' : 'out-of-stock'}`",
+          "resolved": "stock-status ${product.inStock ? 'in-stock' : 'out-of-stock'}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`stock-status-${product.id}`",
+          "resolved": "stock-status-${product.id}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 177,
+        "column": 17,
+        "length": 210
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`add-to-cart-${product.id}`",
+          "resolved": "add-to-cart-${product.id}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`Add ${product.name} to cart`",
+          "resolved": "Add ${product.name} to cart",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 188,
+        "column": 19,
+        "length": 248
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`remove-from-cart-${product.id}`",
+          "resolved": "remove-from-cart-${product.id}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`Remove ${product.name} from cart`",
+          "resolved": "Remove ${product.name} from cart",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 199,
+        "column": 19,
+        "length": 262
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "ProductListPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`notify-restock-${product.id}`",
+          "resolved": "notify-restock-${product.id}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`Notify when ${product.name} is back in stock`",
+          "resolved": "Notify when ${product.name} is back in stock",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/ProductListPage.tsx",
+        "line": 210,
+        "column": 19,
+        "length": 241
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "PageLayout_<",
+      "selectors": {
+        "byTestId": "page-layout"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/layouts/PageLayout.tsx",
+        "line": 22,
+        "column": 5,
+        "length": 55
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "PageLayout_<",
+      "selectors": {
+        "byTestId": "page-title"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/layouts/PageLayout.tsx",
+        "line": 31,
+        "column": 11,
+        "length": 52
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "Header_<",
+      "selectors": {
+        "byTestId": "main-header"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/Header.tsx",
+        "line": 8,
+        "column": 5,
+        "length": 58
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "Navigation_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`nav-link nav-link-${item.id}`",
+          "resolved": "nav-link nav-link-${item.id}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`nav-${item.id}`",
+          "resolved": "nav-${item.id}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`Navigate to ${item.label}`",
+          "resolved": "Navigate to ${item.label}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/Navigation.tsx",
+        "line": 24,
+        "column": 13,
+        "length": 208
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "Link_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`link ${className}`",
+          "resolved": "link ${className}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/Link.tsx",
+        "line": 21,
+        "column": 5,
+        "length": 144
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "AdminPage_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`admin-${section}`",
+          "resolved": "admin-${section}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/pages/AdminPage.tsx",
+        "line": 41,
+        "column": 7,
+        "length": 64
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "UserProfileContainer_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`user-profile-${userId}`",
+          "resolved": "user-profile-${userId}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/containers/UserProfileContainer.tsx",
+        "line": 20,
+        "column": 5,
+        "length": 79
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "SimpleButton_<",
+      "selectors": {
+        "byLabelText": "Clear form data",
+        "byTestId": "clear-button"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/SimpleButton.tsx",
+        "line": 7,
+        "column": 7,
+        "length": 115
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "SimpleButton_<",
+      "selectors": {
+        "byRole": "button",
+        "byLabelText": "Get help with this form",
+        "byTestId": "help-link"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/SimpleButton.tsx",
+        "line": 16,
+        "column": 7,
+        "length": 131
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "SimpleButton_<",
+      "selectors": {
+        "byLabelText": "Search input",
+        "byPlaceholderText": "Enter your search term",
+        "byTestId": "search-input"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/SimpleButton.tsx",
+        "line": 26,
+        "column": 7,
+        "length": 149
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "SimpleButton_<",
+      "selectors": {
+        "byAltText": "Company Logo",
+        "byTitle": "Our Company",
+        "byTestId": "company-logo"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/SimpleButton.tsx",
+        "line": 34,
+        "column": 7,
+        "length": 128
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "SimpleButton_<",
+      "selectors": {
+        "byLabelText": "Choose your country",
+        "byTestId": "country-select"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/SimpleButton.tsx",
+        "line": 42,
+        "column": 7,
+        "length": 94
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "withAuth_<",
+      "selectors": {
+        "byTestId": "auth-required"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/hocs/withAuth.tsx",
+        "line": 34,
+        "column": 9,
+        "length": 59
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "withAuth_<",
+      "selectors": {
+        "byLabelText": "Log in to continue",
+        "byTestId": "login-button"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/hocs/withAuth.tsx",
+        "line": 37,
+        "column": 11,
+        "length": 166
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "withAuth_<",
+      "selectors": {
+        "byTestId": "insufficient-permissions"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/hocs/withAuth.tsx",
+        "line": 51,
+        "column": 9,
+        "length": 81
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "withAuth_<",
+      "selectors": {
+        "byTestId": "upgrade-button"
+      },
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`Upgrade to ${requiredRole} access`",
+          "resolved": "Upgrade to ${requiredRole} access",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/hocs/withAuth.tsx",
+        "line": 54,
+        "column": 11,
+        "length": 189
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "DataProvider_<",
+      "selectors": {
+        "byTestId": "data-provider"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/providers/DataProvider.tsx",
+        "line": 50,
+        "column": 5,
+        "length": 59
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "DataProvider_<",
+      "selectors": {
+        "byRole": "alert",
+        "byTestId": "error-banner"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/providers/DataProvider.tsx",
+        "line": 52,
+        "column": 9,
+        "length": 70
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "DataProvider_<",
+      "selectors": {
+        "byLabelText": "Retry loading data",
+        "byTestId": "retry-button"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/providers/DataProvider.tsx",
+        "line": 54,
+        "column": 11,
+        "length": 186
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "DataTable_<",
+      "selectors": {
+        "byTestId": "table-loading"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/compound/DataTable.tsx",
+        "line": 51,
+        "column": 7,
+        "length": 64
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "DataTable_<",
+      "selectors": {
+        "byTestId": "data-table"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/compound/DataTable.tsx",
+        "line": 58,
+        "column": 5,
+        "length": 63
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "DataTable_<",
+      "selectors": {
+        "byRole": "columnheader"
+      },
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`table-header ${column.sortable ? 'sortable' : ''}`",
+          "resolved": "table-header ${column.sortable ? 'sortable' : ''}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`table-header-${String(column.key)}`",
+          "resolved": "table-header-${String(column.key)}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/compound/DataTable.tsx",
+        "line": 63,
+        "column": 15,
+        "length": 587
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "DataTable_<",
+      "selectors": {},
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`sort-${String(column.key)}`",
+          "resolved": "sort-${String(column.key)}",
+          "confidence": "low"
+        },
+        {
+          "type": "template-literal",
+          "original": "`Sort by ${column.label}`",
+          "resolved": "Sort by ${column.label}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/compound/DataTable.tsx",
+        "line": 79,
+        "column": 21,
+        "length": 229
+      }
+    },
+    {
+      "type": "interactive",
+      "component": "DataTable_<",
+      "selectors": {
+        "byTestId": "table-empty"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/compound/DataTable.tsx",
+        "line": 96,
+        "column": 15,
+        "length": 146
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "DataTable_<",
+      "selectors": {
+        "byRole": "row"
+      },
+      "dynamicExpressions": [
+        {
+          "type": "template-literal",
+          "original": "`table-row ${onRowClick ? 'clickable' : ''}`",
+          "resolved": "table-row ${onRowClick ? 'clickable' : ''}",
+          "confidence": "low"
+        }
+      ],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/compound/DataTable.tsx",
+        "line": 106,
+        "column": 15,
+        "length": 258
+      }
+    },
+    {
+      "type": "skeleton",
+      "component": "DataTable_<",
+      "selectors": {
+        "byRole": "cell"
+      },
+      "dynamicExpressions": [],
+      "location": {
+        "filePath": "/home/pauljcoles/code/cats/registry-builder/test-app/src/components/compound/DataTable.tsx",
+        "line": 114,
+        "column": 19,
+        "length": 226
+      }
+    }
+  ],
+  "statistics": {
+    "totalFiles": 20,
+    "totalElements": 66,
+    "totalPages": 0,
+    "totalModules": 0,
+    "scannedAt": "2025-09-04T19:46:24.404Z",
+    "confidence": 0.8
+  }
+}

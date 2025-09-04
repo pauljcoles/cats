@@ -1,4 +1,4 @@
-import { ElementMatcher, ScannedElement, ExistingLocator, ElementMatch } from '../../src/element-matcher';
+import { ElementMatcher, ScannedElement, ExistingLocator, ElementMatch } from '../../src/old/element-matcher';
 import * as fs from 'fs';
 import * as path from 'path';
 
