@@ -1,0 +1,933 @@
+{
+  "meta": {
+    "source": "Fifty Quick Ideas to Improve your User Stories - Gojko Adzic",
+    "purpose": "LLM analysis patterns for hybrid requirement validation",
+    "confidence_range": "0.75-0.85",
+    "integration_points": ["multiple_behaviors", "contextual_vagueness", "complex_conditionals"]
+  },
+  
+  "llm_trigger_patterns": {
+    "context_dependent_terms": {
+      "description": "Terms that need contextual judgment to determine vagueness",
+      "patterns": [
+        "clear", "good", "valid", "correct", "accurate", "complete", 
+        "successful", "effective", "efficient", "appropriate", "suitable",
+        "proper", "reasonable", "intuitive", "user-friendly", "easy"
+      ],
+      "gojko_insight": "Stories should describe behavior change, not subjective qualities",
+      "llm_analysis_focus": "Does this term have measurable criteria in this specific context?"
+    },
+    
+    "table_structures": {
+      "description": "Complex tabular requirements needing LLM understanding",
+      "patterns": ["||", "multiple |", "wiki markup"],
+      "gojko_insight": "Complex formats often hide multiple behaviors",
+      "llm_analysis_focus": "Are these separate testable behaviors disguised as a table?"
+    },
+    
+    "complex_conditionals": {
+      "description": "Conditional logic requiring testability assessment",
+      "patterns": ["if", "when", "unless", "depending on", "based on"],
+      "gojko_insight": "Stories should be survivable experiments with clear outcomes",
+      "llm_analysis_focus": "Are conditions specific enough to be testable experiments?"
+    }
+  },
+  
+  "multiple_behaviors_analysis": {
+    "description": "LLM check for compound behaviors violating Single Responsibility",
+    "gojko_principles": {
+      "behavior_change_focus": "Each story should describe one specific behavior change",
+      "independent_value": "Stories should be independently valuable and testable",
+      "avoid_technical_stories": "Don't split by technical implementation, split by user value"
+    },
+    
+    "detection_patterns": {
+      "compound_conjunctions": {
+        "indicators": ["and also", "and then", "as well as", "in addition to"],
+        "confidence": 0.85,
+        "reasoning": "Multiple outcomes suggest multiple behaviors"
+      },
+      
+      "sequential_then_clauses": {
+        "indicators": ["then X and Y", "then X, and also Y"],
+        "confidence": 0.80,
+        "reasoning": "Multiple Then outcomes usually indicate separate testable behaviors"
+      },
+      
+      "different_validation_types": {
+        "indicators": ["validate and update", "save and notify", "check and display"],
+        "confidence": 0.82,
+        "reasoning": "Different system responses should be tested separately"
+      }
+    },
+    
+    "splitting_strategies": {
+      "by_user_value": "Split based on what user can observe and value",
+      "by_testability": "Each behavior should be independently testable",
+      "by_failure_modes": "Different behaviors can fail independently"
+    }
+  },
+  
+  "contextual_vagueness_analysis": {
+    "description": "LLM assessment of context-dependent vague terms",
+    "gojko_principles": {
+      "measurable_outcomes": "Stories should have measurable, observable outcomes",
+      "avoid_subjective_quality": "Replace subjective terms with specific criteria",
+      "testable_experiments": "Each story should be a testable experiment"
+    },
+    
+    "vagueness_categories": {
+      "subjective_quality": {
+        "terms": ["good", "clear", "clean", "nice", "beautiful"],
+        "analysis": "Does this have objective measurement criteria?",
+        "confidence": 0.78
+      },
+      
+      "implementation_assumptions": {
+        "terms": ["appropriate", "suitable", "proper", "correct"],
+        "analysis": "Are the appropriateness criteria defined?",
+        "confidence": 0.80
+      },
+      
+      "performance_vagueness": {
+        "terms": ["fast", "quick", "efficient", "responsive"],
+        "analysis": "Are there specific performance thresholds?",
+        "confidence": 0.85
+      },
+      
+      "user_experience_vagueness": {
+        "terms": ["intuitive", "user-friendly", "easy", "seamless"],
+        "analysis": "Are there measurable usability criteria?",
+        "confidence": 0.75
+      }
+    },
+    
+    "context_evaluation": {
+      "domain_specific_terms": "Some terms may be well-defined within specific domains",
+      "business_process_clarity": "Terms may be clear within established business processes",
+      "measurement_availability": "Consider if measurement criteria exist elsewhere"
+    }
+  },
+  
+  "complex_conditionals_analysis": {
+    "description": "LLM assessment of conditional logic clarity and testability",
+    "gojko_principles": {
+      "survivable_experiments": "Each condition should be a testable experiment",
+      "clear_outcomes": "Expected behaviors for each condition must be specific",
+      "avoid_generic_conditions": "Conditions should be specific to user context"
+    },
+    
+    "conditional_complexity_indicators": {
+      "nested_conditions": {
+        "patterns": ["if X and if Y", "when X, unless Y"],
+        "analysis": "Are nested conditions independently testable?",
+        "confidence": 0.82
+      },
+      
+      "vague_conditional_triggers": {
+        "patterns": ["if appropriate", "when needed", "if possible"],
+        "analysis": "Are trigger conditions objectively determinable?",
+        "confidence": 0.85
+      },
+      
+      "multiple_outcome_paths": {
+        "patterns": ["then X or Y", "then either X or Y depending on Z"],
+        "analysis": "Are all outcome paths clearly defined and testable?",
+        "confidence": 0.78
+      },
+      
+      "business_rule_complexity": {
+        "patterns": ["based on business rules", "according to policy"],
+        "analysis": "Are referenced rules explicitly defined?",
+        "confidence": 0.80
+      }
+    },
+    
+    "testability_assessment": {
+      "condition_specificity": "Can QA determine when condition is met?",
+      "outcome_measurability": "Can expected behavior be objectively verified?",
+      "edge_case_coverage": "Are boundary conditions clearly defined?"
+    }
+  },
+  
+  "confidence_weighting": {
+    "description": "How to weight LLM analysis confidence based on Gojko's principles",
+    
+    "high_confidence_scenarios": {
+      "range": "0.82-0.87",
+      "conditions": [
+        "Clear violation of behavior change principle",
+        "Obvious compound behaviors with 'and'",
+        "Subjective quality terms without criteria",
+        "Vague conditional triggers"
+      ]
+    },
+    
+    "medium_confidence_scenarios": {
+      "range": "0.75-0.82", 
+      "conditions": [
+        "Context-dependent terms that might be domain-specific",
+        "Complex conditionals that might be well-defined",
+        "Sequential behaviors that might be single workflow"
+      ]
+    },
+    
+    "transparency_reporting": {
+      "show_gojko_principle": "Reference which principle was applied",
+      "explain_reasoning": "Show step-by-step analysis process",
+      "suggest_improvements": "Provide specific splitting or clarification suggestions"
+    }
+  },
+  
+  "invest_criteria_analysis": {
+    "description": "LLM analysis using INVEST criteria (Bill Wake) for user story quality",
+    "framework_source": "Bill Wake - INVEST criteria for user stories",
+    "confidence_range": "0.78-0.88",
+    
+    "invest_principles": {
+      "independent": "Stories should not depend on other stories for implementation or testing",
+      "negotiable": "Stories should be open to discussion, not over-specified contracts", 
+      "valuable": "Stories should deliver clear value to users or business",
+      "estimable": "Stories should be concrete enough for development estimation",
+      "small": "Stories should be completable in one iteration",
+      "testable": "Stories should have clear, verifiable acceptance criteria"
+    },
+    
+    "independence_analysis": {
+      "description": "LLM check for story dependencies that prevent independent development/testing",
+      "violation_indicators": {
+        "explicit_dependencies": {
+          "patterns": ["depends on", "requires story", "after completion of", "building on"],
+          "confidence": 0.88,
+          "reasoning": "Explicit dependency statements violate Independence"
+        },
+        "sequential_assumptions": {
+          "patterns": ["following the previous", "continuing from", "next step after"],
+          "confidence": 0.85,
+          "reasoning": "Sequential language suggests dependency on other stories"
+        },
+        "shared_components": {
+          "patterns": ["using the same", "shared component", "common service"],
+          "confidence": 0.75,
+          "reasoning": "Shared implementation may create dependencies"
+        }
+      },
+      "analysis_focus": "Can this story be developed, tested, and delivered independently?"
+    },
+    
+    "negotiability_analysis": {
+      "description": "LLM check for over-specification that prevents negotiation",
+      "violation_indicators": {
+        "implementation_prescription": {
+          "patterns": ["must use", "shall implement", "required to use", "will be built with"],
+          "confidence": 0.86,
+          "reasoning": "Prescriptive language prevents negotiation of implementation approach"
+        },
+        "ui_micro_management": {
+          "patterns": ["button must be", "color shall be", "font size exactly", "pixel perfect"],
+          "confidence": 0.83,
+          "reasoning": "UI micro-management leaves no room for design negotiation"
+        },
+        "technical_constraints": {
+          "patterns": ["using React", "with Redux", "via REST API", "in the database"],
+          "confidence": 0.82,
+          "reasoning": "Technical constraints limit implementation negotiation"
+        }
+      },
+      "analysis_focus": "Does this leave room for discussion and implementation alternatives?"
+    },
+    
+    "value_analysis": {
+      "description": "LLM assessment of user/business value delivery",
+      "violation_indicators": {
+        "technical_tasks": {
+          "patterns": ["refactor", "upgrade library", "optimize performance", "fix technical debt"],
+          "confidence": 0.85,
+          "reasoning": "Pure technical tasks may not deliver direct user value"
+        },
+        "process_stories": {
+          "patterns": ["update documentation", "create test plan", "setup environment"],
+          "confidence": 0.80,
+          "reasoning": "Process tasks don't deliver end-user value"
+        },
+        "unclear_beneficiary": {
+          "patterns": ["system needs", "application requires", "platform must"],
+          "confidence": 0.78,
+          "reasoning": "No clear user or business beneficiary identified"
+        }
+      },
+      "analysis_focus": "Who benefits from this story and how?"
+    },
+    
+    "estimability_analysis": {
+      "description": "LLM check if story is concrete enough for development estimation",
+      "violation_indicators": {
+        "vague_scope": {
+          "patterns": ["improve", "enhance", "optimize", "better", "more efficient"],
+          "confidence": 0.84,
+          "reasoning": "Vague improvement language prevents accurate estimation"
+        },
+        "undefined_boundaries": {
+          "patterns": ["all relevant", "various", "multiple", "several", "appropriate"],
+          "confidence": 0.81,
+          "reasoning": "Undefined scope boundaries make estimation impossible"
+        },
+        "research_disguised": {
+          "patterns": ["investigate", "explore", "research", "spike", "proof of concept"],
+          "confidence": 0.79,
+          "reasoning": "Research tasks have inherently uncertain scope"
+        }
+      },
+      "analysis_focus": "Can developers estimate the effort required?"
+    },
+    
+    "size_analysis": {
+      "description": "LLM assessment of story size for single iteration completion",
+      "violation_indicators": {
+        "epic_indicators": {
+          "patterns": ["complete system", "entire workflow", "full integration", "end-to-end"],
+          "confidence": 0.87,
+          "reasoning": "Epic-scale language suggests story is too large"
+        },
+        "multiple_personas": {
+          "patterns": ["admin and user", "customer and staff", "all user types"],
+          "confidence": 0.84,
+          "reasoning": "Multiple personas suggest story should be split"
+        },
+        "compound_features": {
+          "patterns": ["create and edit", "search and filter", "validate and save"],
+          "confidence": 0.82,
+          "reasoning": "Multiple feature combinations suggest oversized story"
+        }
+      },
+      "analysis_focus": "Can this be completed in one iteration?"
+    },
+    
+    "testability_analysis": {
+      "description": "LLM assessment of acceptance criteria clarity and verifiability", 
+      "violation_indicators": {
+        "subjective_criteria": {
+          "patterns": ["looks good", "feels right", "user-friendly", "intuitive", "clean"],
+          "confidence": 0.86,
+          "reasoning": "Subjective criteria cannot be objectively tested"
+        },
+        "missing_acceptance_criteria": {
+          "patterns": ["no clear criteria", "see requirements", "as discussed"],
+          "confidence": 0.88,
+          "reasoning": "Missing or external criteria prevent testing"
+        },
+        "unmeasurable_outcomes": {
+          "patterns": ["improved", "optimized", "enhanced", "better performance"],
+          "confidence": 0.83,
+          "reasoning": "Unmeasurable outcomes cannot be verified"
+        }
+      },
+      "analysis_focus": "Can QA verify when this story is complete?"
+    }
+  },
+  
+  "three_cs_framework_analysis": {
+    "description": "LLM analysis using 3 C's Framework (Ron Jeffries) - Card, Conversation, Confirmation",
+    "framework_source": "Ron Jeffries - 3 C's of User Stories",
+    "confidence_range": "0.76-0.85",
+    
+    "three_cs_principles": {
+      "card": "Story should be brief reminder, not detailed specification",
+      "conversation": "Details emerge through ongoing conversation with stakeholders",
+      "confirmation": "Acceptance criteria confirm shared understanding"
+    },
+    
+    "card_analysis": {
+      "description": "LLM check if story is appropriate reminder vs over-detailed specification",
+      "violation_indicators": {
+        "specification_creep": {
+          "patterns": ["detailed workflow", "step-by-step process", "complete specification", "full requirements"],
+          "confidence": 0.84,
+          "reasoning": "Card should be reminder, not detailed specification"
+        },
+        "ui_specifications": {
+          "patterns": ["button layout", "screen mockup", "exact positioning", "detailed design"],
+          "confidence": 0.82,
+          "reasoning": "UI details belong in conversation, not card"
+        },
+        "technical_implementation": {
+          "patterns": ["database schema", "API endpoints", "technical architecture", "code structure"],
+          "confidence": 0.85,
+          "reasoning": "Implementation details violate Card principle"
+        }
+      },
+      "analysis_focus": "Is this a brief reminder or over-detailed specification?"
+    },
+    
+    "conversation_analysis": {
+      "description": "LLM assessment of whether story enables productive conversation",
+      "violation_indicators": {
+        "conversation_blockers": {
+          "patterns": ["no further discussion", "as specified", "exact requirements", "non-negotiable"],
+          "confidence": 0.83,
+          "reasoning": "Language that shuts down conversation violates Conversation principle"
+        },
+        "external_dependencies": {
+          "patterns": ["see attached", "refer to document", "as per figma", "documented elsewhere"],
+          "confidence": 0.86,
+          "reasoning": "External references prevent direct conversation"
+        },
+        "assumption_heavy": {
+          "patterns": ["obviously", "clearly", "of course", "naturally"],
+          "confidence": 0.78,
+          "reasoning": "Assumptions prevent clarifying conversations"
+        }
+      },
+      "analysis_focus": "Does this enable productive conversation about requirements?"
+    },
+    
+    "confirmation_analysis": {
+      "description": "LLM check if acceptance criteria properly confirm shared understanding",
+      "violation_indicators": {
+        "missing_confirmation": {
+          "patterns": ["no acceptance criteria", "TBD", "to be discussed", "see requirements"],
+          "confidence": 0.88,
+          "reasoning": "Missing confirmation criteria violate Confirmation principle"
+        },
+        "vague_confirmation": {
+          "patterns": ["works correctly", "functions properly", "meets expectations", "as expected"],
+          "confidence": 0.81,
+          "reasoning": "Vague criteria don't confirm specific understanding"
+        },
+        "implementation_confirmation": {
+          "patterns": ["code is written", "database updated", "API called", "service deployed"],
+          "confidence": 0.83,
+          "reasoning": "Implementation details don't confirm user value"
+        }
+      },
+      "analysis_focus": "Do acceptance criteria confirm shared understanding of value?"
+    }
+  },
+  
+  "smart_criteria_analysis": {
+    "description": "LLM analysis using SMART criteria - Specific, Measurable, Achievable, Relevant, Time-bound",
+    "framework_source": "Management by Objectives - SMART goals framework",
+    "confidence_range": "0.78-0.86",
+    
+    "smart_principles": {
+      "specific": "Requirements should be clear and unambiguous",
+      "measurable": "Success criteria should be quantifiable or objectively verifiable",
+      "achievable": "Goals should be realistic within team capabilities",
+      "relevant": "Stories should align with user/business objectives",
+      "time_bound": "Completion criteria should be clear"
+    },
+    
+    "specificity_analysis": {
+      "description": "LLM check for clarity and lack of ambiguity",
+      "violation_indicators": {
+        "pronoun_ambiguity": {
+          "patterns": ["it should", "this will", "they can", "that works"],
+          "confidence": 0.81,
+          "reasoning": "Unclear pronouns create ambiguity"
+        },
+        "quantifier_vagueness": {
+          "patterns": ["some", "many", "few", "several", "various", "multiple"],
+          "confidence": 0.84,
+          "reasoning": "Vague quantifiers lack specificity"
+        },
+        "scope_ambiguity": {
+          "patterns": ["relevant items", "appropriate users", "related functions", "associated data"],
+          "confidence": 0.82,
+          "reasoning": "Undefined scope boundaries create ambiguity"
+        }
+      },
+      "analysis_focus": "Are requirements clear and unambiguous?"
+    },
+    
+    "measurability_analysis": {
+      "description": "LLM assessment of quantifiable or verifiable success criteria",
+      "violation_indicators": {
+        "subjective_measures": {
+          "patterns": ["user satisfaction", "good experience", "feels right", "looks professional"],
+          "confidence": 0.86,
+          "reasoning": "Subjective measures cannot be objectively verified"
+        },
+        "relative_measures": {
+          "patterns": ["faster", "better", "improved", "enhanced", "optimized"],
+          "confidence": 0.83,
+          "reasoning": "Relative measures lack baseline for measurement"
+        },
+        "unmeasurable_outcomes": {
+          "patterns": ["robust system", "scalable solution", "maintainable code", "flexible architecture"],
+          "confidence": 0.85,
+          "reasoning": "Abstract qualities lack measurable criteria"
+        }
+      },
+      "analysis_focus": "Can success be objectively measured or verified?"
+    },
+    
+    "achievability_analysis": {
+      "description": "LLM check if goals are realistic within team capabilities",
+      "violation_indicators": {
+        "technology_assumptions": {
+          "patterns": ["new framework", "latest technology", "cutting-edge", "experimental approach"],
+          "confidence": 0.78,
+          "reasoning": "Unproven technology may not be achievable in timeframe"
+        },
+        "resource_assumptions": {
+          "patterns": ["additional team", "external expertise", "specialized skills", "extra budget"],
+          "confidence": 0.80,
+          "reasoning": "Resource assumptions may make goals unachievable"
+        },
+        "scope_overreach": {
+          "patterns": ["complete redesign", "full migration", "total rewrite", "entire system"],
+          "confidence": 0.82,
+          "reasoning": "Massive scope may exceed achievable limits"
+        }
+      },
+      "analysis_focus": "Is this realistically achievable with current team and constraints?"
+    },
+    
+    "relevance_analysis": {
+      "description": "LLM assessment of alignment with user/business objectives",
+      "violation_indicators": {
+        "disconnected_tasks": {
+          "patterns": ["technical cleanup", "code refactoring", "library updates", "tooling improvements"],
+          "confidence": 0.79,
+          "reasoning": "Pure technical tasks may lack user relevance"
+        },
+        "feature_creep": {
+          "patterns": ["nice to have", "would be cool", "might be useful", "could add"],
+          "confidence": 0.77,
+          "reasoning": "Non-essential features may lack business relevance"
+        },
+        "unclear_value": {
+          "patterns": ["for completeness", "best practice", "industry standard", "future-proofing"],
+          "confidence": 0.81,
+          "reasoning": "Abstract justifications lack clear relevance"
+        }
+      },
+      "analysis_focus": "How does this align with user needs and business goals?"
+    }
+  },
+  
+  "given_when_then_bdd_analysis": {
+    "description": "LLM analysis using Given-When-Then BDD structure (Dan North)",
+    "framework_source": "Dan North - Behavior-Driven Development",
+    "confidence_range": "0.79-0.87",
+    
+    "bdd_principles": {
+      "given_context": "Given establishes preconditions and context",
+      "when_action": "When describes the specific user action or event",
+      "then_outcome": "Then specifies the expected observable outcome"
+    },
+    
+    "structure_analysis": {
+      "description": "LLM check if acceptance criteria follow proper BDD structure",
+      "violation_indicators": {
+        "missing_given": {
+          "patterns": ["when user clicks", "user selects", "after clicking"],
+          "confidence": 0.85,
+          "reasoning": "Action without context violates Given-When-Then structure"
+        },
+        "vague_given": {
+          "patterns": ["given the system", "given user is logged", "given appropriate setup"],
+          "confidence": 0.81,
+          "reasoning": "Vague context doesn't establish clear preconditions"
+        },
+        "compound_when": {
+          "patterns": ["when user clicks and then", "when user does X and Y", "when multiple actions"],
+          "confidence": 0.83,
+          "reasoning": "Multiple actions in When clause suggest multiple behaviors"
+        },
+        "implementation_then": {
+          "patterns": ["then database updates", "then API calls", "then code executes"],
+          "confidence": 0.86,
+          "reasoning": "Implementation outcomes aren't user-observable"
+        }
+      },
+      "analysis_focus": "Does this follow proper Given-When-Then structure?"
+    },
+    
+    "context_clarity_analysis": {
+      "description": "LLM assessment of Given clause clarity and completeness",
+      "violation_indicators": {
+        "incomplete_context": {
+          "patterns": ["given logged in", "given on page", "given system ready"],
+          "confidence": 0.82,
+          "reasoning": "Incomplete context prevents test setup"
+        },
+        "assumption_context": {
+          "patterns": ["given normal conditions", "given typical usage", "given standard setup"],
+          "confidence": 0.84,
+          "reasoning": "Assumed context isn't explicitly defined"
+        },
+        "external_context": {
+          "patterns": ["given as per requirements", "given configured elsewhere", "given existing setup"],
+          "confidence": 0.87,
+          "reasoning": "External context references prevent independent testing"
+        }
+      },
+      "analysis_focus": "Is the Given context complete and testable?"
+    },
+    
+    "action_specificity_analysis": {
+      "description": "LLM check if When clause describes specific, testable user actions",
+      "violation_indicators": {
+        "vague_actions": {
+          "patterns": ["when user interacts", "when appropriate action", "when user uses"],
+          "confidence": 0.85,
+          "reasoning": "Vague actions cannot be reliably tested"
+        },
+        "system_actions": {
+          "patterns": ["when system processes", "when background job", "when automatic update"],
+          "confidence": 0.83,
+          "reasoning": "System actions aren't user behaviors"
+        },
+        "multiple_actors": {
+          "patterns": ["when user and admin", "when customer or staff", "when different users"],
+          "confidence": 0.80,
+          "reasoning": "Multiple actors suggest multiple scenarios"
+        }
+      },
+      "analysis_focus": "Is the When action specific and user-observable?"
+    },
+    
+    "outcome_observability_analysis": {
+      "description": "LLM assessment of Then clause observability and measurability",
+      "violation_indicators": {
+        "subjective_outcomes": {
+          "patterns": ["then user is satisfied", "then system feels responsive", "then interface is clean"],
+          "confidence": 0.86,
+          "reasoning": "Subjective outcomes cannot be objectively verified"
+        },
+        "internal_outcomes": {
+          "patterns": ["then data is stored", "then validation runs", "then process completes"],
+          "confidence": 0.84,
+          "reasoning": "Internal outcomes aren't user-observable"
+        },
+        "vague_outcomes": {
+          "patterns": ["then appropriate response", "then correct behavior", "then expected result"],
+          "confidence": 0.88,
+          "reasoning": "Vague outcomes don't specify verifiable behavior"
+        }
+      },
+      "analysis_focus": "Is the Then outcome observable and verifiable by users?"
+    }
+  },
+  
+  "definition_of_ready_analysis": {
+    "description": "LLM analysis using Definition of Ready checklist patterns",
+    "framework_source": "Scrum - Definition of Ready quality gates",
+    "confidence_range": "0.77-0.84",
+    
+    "ready_principles": {
+      "clear_value": "Story clearly articulates user/business value",
+      "acceptance_criteria": "Specific, testable acceptance criteria defined",
+      "dependencies": "Dependencies identified and resolved",
+      "estimates": "Story sized appropriately for sprint",
+      "stakeholder_agreement": "Product Owner and team agree on scope"
+    },
+    
+    "value_clarity_analysis": {
+      "description": "LLM check if story clearly articulates value proposition",
+      "violation_indicators": {
+        "missing_value_statement": {
+          "patterns": ["implement feature", "add functionality", "create component"],
+          "confidence": 0.83,
+          "reasoning": "No clear value statement for user or business"
+        },
+        "technical_value_only": {
+          "patterns": ["improve performance", "refactor code", "upgrade library", "fix technical debt"],
+          "confidence": 0.80,
+          "reasoning": "Technical value without user impact"
+        },
+        "vague_value": {
+          "patterns": ["enhance user experience", "improve system", "make better"],
+          "confidence": 0.82,
+          "reasoning": "Vague value statements don't justify effort"
+        }
+      },
+      "analysis_focus": "Is the user/business value clearly articulated?"
+    },
+    
+    "criteria_completeness_analysis": {
+      "description": "LLM assessment of acceptance criteria completeness and testability",
+      "violation_indicators": {
+        "missing_criteria": {
+          "patterns": ["TBD", "to be defined", "see requirements doc", "as discussed"],
+          "confidence": 0.84,
+          "reasoning": "Missing acceptance criteria prevent ready state"
+        },
+        "untestable_criteria": {
+          "patterns": ["works well", "performs adequately", "user-friendly interface"],
+          "confidence": 0.85,
+          "reasoning": "Untestable criteria don't define done"
+        },
+        "incomplete_scenarios": {
+          "patterns": ["happy path only", "normal case", "basic functionality"],
+          "confidence": 0.78,
+          "reasoning": "Incomplete scenario coverage"
+        }
+      },
+      "analysis_focus": "Are acceptance criteria complete and testable?"
+    },
+    
+    "dependency_analysis": {
+      "description": "LLM check for external dependencies that block implementation",
+      "violation_indicators": {
+        "blocking_dependencies": {
+          "patterns": ["waiting for", "depends on completion", "blocked by", "requires other story"],
+          "confidence": 0.86,
+          "reasoning": "Blocking dependencies prevent ready state"
+        },
+        "external_team_dependencies": {
+          "patterns": ["needs design team", "requires infrastructure", "waiting for API"],
+          "confidence": 0.81,
+          "reasoning": "External team dependencies create delays"
+        },
+        "unclear_dependencies": {
+          "patterns": ["may need", "possibly requires", "might depend on"],
+          "confidence": 0.79,
+          "reasoning": "Unclear dependencies prevent planning"
+        }
+      },
+      "analysis_focus": "Are all dependencies identified and resolved?"
+    },
+    
+    "sizing_appropriateness_analysis": {
+      "description": "LLM assessment if story is appropriately sized for development",
+      "violation_indicators": {
+        "oversized_stories": {
+          "patterns": ["complete module", "entire workflow", "full system", "major redesign"],
+          "confidence": 0.82,
+          "reasoning": "Oversized stories aren't ready for sprint"
+        },
+        "unclear_scope": {
+          "patterns": ["various improvements", "multiple enhancements", "several updates"],
+          "confidence": 0.80,
+          "reasoning": "Unclear scope prevents sizing"
+        },
+        "research_heavy": {
+          "patterns": ["investigate options", "research approaches", "explore solutions"],
+          "confidence": 0.83,
+          "reasoning": "Research stories have unpredictable scope"
+        }
+      },
+      "analysis_focus": "Is this appropriately sized for one iteration?"
+    }
+  },
+  
+  "story_mapping_analysis": {
+    "description": "LLM analysis using Story Mapping principles (Jeff Patton)",
+    "framework_source": "Jeff Patton - User Story Mapping",
+    "confidence_range": "0.76-0.83",
+    
+    "story_mapping_principles": {
+      "user_journey_focus": "Stories should fit within coherent user journeys",
+      "activity_decomposition": "Break down user activities into specific tasks",
+      "value_prioritization": "Prioritize stories by user value and journey criticality",
+      "workflow_coherence": "Stories should support complete user workflows"
+    },
+    
+    "journey_coherence_analysis": {
+      "description": "LLM check if story fits within logical user journey",
+      "violation_indicators": {
+        "orphaned_stories": {
+          "patterns": ["standalone feature", "isolated functionality", "disconnected task"],
+          "confidence": 0.81,
+          "reasoning": "Stories should connect to user journeys, not be isolated"
+        },
+        "workflow_gaps": {
+          "patterns": ["assumes previous step", "continues from", "builds upon existing"],
+          "confidence": 0.83,
+          "reasoning": "Workflow gaps suggest missing journey context"
+        },
+        "journey_jumps": {
+          "patterns": ["skip to final step", "bypass normal flow", "direct to end state"],
+          "confidence": 0.79,
+          "reasoning": "Journey jumps miss intermediate user value"
+        }
+      },
+      "analysis_focus": "Does this story fit within a coherent user journey?"
+    },
+    
+    "activity_breakdown_analysis": {
+      "description": "LLM assessment if story represents appropriate activity decomposition",
+      "violation_indicators": {
+        "mega_activities": {
+          "patterns": ["complete user onboarding", "entire purchase process", "full account management"],
+          "confidence": 0.82,
+          "reasoning": "Mega-activities should be broken into specific tasks"
+        },
+        "micro_tasks": {
+          "patterns": ["click button", "enter single field", "validate one item"],
+          "confidence": 0.78,
+          "reasoning": "Micro-tasks may be too granular for user value"
+        },
+        "implementation_activities": {
+          "patterns": ["setup database", "configure API", "deploy service"],
+          "confidence": 0.84,
+          "reasoning": "Implementation activities aren't user-facing story map elements"
+        }
+      },
+      "analysis_focus": "Is this an appropriate level of activity decomposition?"
+    },
+    
+    "value_prioritization_analysis": {
+      "description": "LLM check if story value aligns with user journey criticality",
+      "violation_indicators": {
+        "edge_case_priority": {
+          "patterns": ["rare scenario", "unlikely case", "exceptional situation"],
+          "confidence": 0.80,
+          "reasoning": "Edge cases shouldn't have high priority in story maps"
+        },
+        "nice_to_have_core": {
+          "patterns": ["would be nice", "could be useful", "might want"],
+          "confidence": 0.77,
+          "reasoning": "Optional features shouldn't be in critical journey path"
+        },
+        "missing_value_context": {
+          "patterns": ["for completeness", "standard practice", "industry requirement"],
+          "confidence": 0.81,
+          "reasoning": "Value justification should relate to user journey needs"
+        }
+      },
+      "analysis_focus": "Does story value align with journey criticality?"
+    },
+    
+    "workflow_support_analysis": {
+      "description": "LLM assessment if story supports complete user workflows",
+      "violation_indicators": {
+        "workflow_dead_ends": {
+          "patterns": ["ends abruptly", "no next step", "workflow stops"],
+          "confidence": 0.83,
+          "reasoning": "Stories should support continuous workflows, not dead ends"
+        },
+        "context_switching": {
+          "patterns": ["switch to different system", "external tool required", "manual handoff"],
+          "confidence": 0.79,
+          "reasoning": "Forced context switches break user workflow coherence"
+        },
+        "incomplete_workflows": {
+          "patterns": ["partial process", "first half only", "incomplete journey"],
+          "confidence": 0.82,
+          "reasoning": "Incomplete workflows don't deliver full user value"
+        }
+      },
+      "analysis_focus": "Does this support complete, coherent user workflows?"
+    }
+  },
+  
+  "impact_mapping_analysis": {
+    "description": "LLM analysis using Impact Mapping framework (Gojko Adzic)",
+    "framework_source": "Gojko Adzic - Impact Mapping",
+    "confidence_range": "0.78-0.85",
+    
+    "impact_mapping_principles": {
+      "goal_alignment": "Stories should connect to specific business goals",
+      "actor_identification": "Clear identification of who will use the feature",
+      "impact_specification": "Define what behavior change will achieve the goal",
+      "deliverable_focus": "Features should enable the desired impact"
+    },
+    
+    "goal_alignment_analysis": {
+      "description": "LLM check if story connects to specific business goals",
+      "violation_indicators": {
+        "missing_goal_connection": {
+          "patterns": ["implement feature", "add functionality", "create capability"],
+          "confidence": 0.84,
+          "reasoning": "No clear connection to business goals"
+        },
+        "vague_business_value": {
+          "patterns": ["improve business", "help company", "support organization"],
+          "confidence": 0.82,
+          "reasoning": "Vague business value doesn't connect to specific goals"
+        },
+        "feature_factory_thinking": {
+          "patterns": ["because requested", "on roadmap", "planned feature"],
+          "confidence": 0.86,
+          "reasoning": "Feature factory thinking bypasses goal alignment"
+        }
+      },
+      "analysis_focus": "How does this story connect to specific business goals?"
+    },
+    
+    "actor_clarity_analysis": {
+      "description": "LLM assessment of actor identification and behavior change",
+      "violation_indicators": {
+        "generic_users": {
+          "patterns": ["users can", "people will", "someone might"],
+          "confidence": 0.83,
+          "reasoning": "Generic users don't represent specific actors with clear motivations"
+        },
+        "system_as_actor": {
+          "patterns": ["system does", "application will", "platform can"],
+          "confidence": 0.85,
+          "reasoning": "System capabilities aren't actor behaviors"
+        },
+        "unclear_motivation": {
+          "patterns": ["user wants", "customer needs", "admin requires"],
+          "confidence": 0.80,
+          "reasoning": "Unclear why actor would want this behavior change"
+        }
+      },
+      "analysis_focus": "Who are the specific actors and why do they want this?"
+    },
+    
+    "impact_specification_analysis": {
+      "description": "LLM check if story specifies measurable behavior change impact",
+      "violation_indicators": {
+        "output_vs_impact": {
+          "patterns": ["feature delivered", "functionality built", "system updated"],
+          "confidence": 0.87,
+          "reasoning": "Outputs aren't impacts - need behavior change specification"
+        },
+        "unmeasurable_impact": {
+          "patterns": ["improved experience", "better process", "enhanced workflow"],
+          "confidence": 0.84,
+          "reasoning": "Unmeasurable impacts can't validate goal achievement"
+        },
+        "assumption_based_impact": {
+          "patterns": ["should increase", "will probably", "might improve"],
+          "confidence": 0.81,
+          "reasoning": "Assumed impacts need validation and measurement"
+        }
+      },
+      "analysis_focus": "What measurable behavior change will this create?"
+    },
+    
+    "deliverable_focus_analysis": {
+      "description": "LLM assessment if deliverable enables the desired impact",
+      "violation_indicators": {
+        "over_engineered_solution": {
+          "patterns": ["comprehensive system", "full platform", "complete solution"],
+          "confidence": 0.82,
+          "reasoning": "Over-engineered deliverables may not focus on specific impact"
+        },
+        "solution_bias": {
+          "patterns": ["using technology X", "built with framework Y", "implemented as Z"],
+          "confidence": 0.85,
+          "reasoning": "Solution bias prevents focus on impact enablement"
+        },
+        "feature_creep": {
+          "patterns": ["also includes", "additionally provides", "comes with extra"],
+          "confidence": 0.83,
+          "reasoning": "Feature creep dilutes focus on core impact"
+        }
+      },
+      "analysis_focus": "Does this deliverable directly enable the desired impact?"
+    }
+  },
+  
+  "integration_with_code_patterns": {
+    "description": "How LLM patterns complement deterministic code detection",
+    
+    "code_first_approach": {
+      "reliable_patterns": "Let code catch obvious anti-patterns first",
+      "llm_for_nuance": "Use LLM for contextual judgment requiring domain knowledge",
+      "combined_confidence": "Show both detection methods with transparency"
+    },
+    
+    "escalation_logic": {
+      "code_detected_critical": "Stop immediately for obvious violations",
+      "llm_for_medium_issues": "Use LLM judgment for contextual assessment",
+      "human_decision_points": "Present options, don't auto-fix"
+    }
+  }
+}

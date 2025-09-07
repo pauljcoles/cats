@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "purpose": "LLM-only contextual patterns requiring judgment and reasoning",
+    "note": "Code-detectable patterns moved to enhanced_code_patterns.py",
+    "confidence_range": "0.75-0.85 (contextual judgment)",
+    "integration_note": "Use only when code patterns trigger LLM analysis need"
+  },
+
+  "contextual_analysis_frameworks": {
+    "gojko_behavior_change": {
+      "description": "Contextual analysis of behavior change focus using Gojko Adzic principles",
+      "analysis_focus": "Does this describe one specific behavior change or multiple?",
+      "reasoning_prompts": [
+        "Would a user see this as one coherent action or multiple separate actions?",
+        "If this story fails, would it fail for one reason or multiple reasons?", 
+        "Can this be independently valuable without other stories?"
+      ],
+      "confidence_indicators": {
+        "high_confidence": "Clear compound behaviors with distinct outcomes",
+        "medium_confidence": "Sequential actions that might be single workflow"
+      }
+    },
+
+    "invest_independence_judgment": {
+      "description": "Contextual assessment of story independence beyond keyword detection", 
+      "analysis_focus": "Can this story be developed, tested, and delivered independently?",
+      "reasoning_prompts": [
+        "Does this story have hidden dependencies not captured by keywords?",
+        "Would a new team member understand this without other story context?",
+        "Can this be tested without requiring other stories to be implemented first?"
+      ],
+      "context_considerations": [
+        "Domain-specific terminology that might imply dependencies",
+        "Business process knowledge requirements",
+        "Shared state or workflow assumptions"
+      ]
+    },
+
+    "smart_achievability_assessment": {
+      "description": "Contextual judgment of story achievability within team constraints",
+      "analysis_focus": "Is this realistically achievable with current team and constraints?",
+      "reasoning_prompts": [
+        "Does this require skills or technology not available to the team?",
+        "Are there external dependencies that could block completion?",
+        "Is the scope realistic for the timeframe implied?"
+      ],
+      "domain_considerations": [
+        "Team capability and experience level",
+        "Technology stack maturity",
+        "External integration complexity"
+      ]
+    },
+
+    "smart_relevance_alignment": {
+      "description": "Contextual assessment of story relevance to user/business goals",
+      "analysis_focus": "How does this align with user needs and business objectives?", 
+      "reasoning_prompts": [
+        "Who specifically benefits from this story and how?",
+        "What user problem does this solve or business goal does this advance?",
+        "Would users notice and value this change?"
+      ],
+      "value_indicators": [
+        "Clear user problem being solved",
+        "Measurable business impact",
+        "User-observable behavior change"
+      ]
+    },
+
+    "story_mapping_journey_coherence": {
+      "description": "Contextual analysis of story fit within user journeys",
+      "analysis_focus": "Does this story fit within a coherent user journey?",
+      "reasoning_prompts": [
+        "What user journey does this story support?",
+        "What would a user do before and after this story?",
+        "Does this create a logical step in a larger workflow?"
+      ],
+      "journey_assessment": [
+        "Identifies user journey context",
+        "Connects to preceding and following activities", 
+        "Supports complete workflow vs isolated task"
+      ]
+    },
+
+    "story_mapping_value_prioritization": {
+      "description": "Contextual evaluation of story value alignment with journey criticality",
+      "analysis_focus": "Does story value align with user journey criticality?",
+      "reasoning_prompts": [
+        "Is this story critical for the core user journey?",
+        "Would users be blocked or frustrated without this?",
+        "Does this enable key user outcomes vs nice-to-have features?"
+      ],
+      "criticality_factors": [
+        "User journey bottlenecks",
+        "Core vs peripheral functionality",
+        "User frustration points"
+      ]
+    },
+
+    "impact_mapping_goal_alignment": {
+      "description": "Contextual assessment of story connection to business goals",
+      "analysis_focus": "How does this story connect to specific business goals?",
+      "reasoning_prompts": [
+        "What business goal does this story advance?",
+        "How will success be measured?",
+        "What behavior change will achieve the goal?"
+      ],
+      "goal_connection_indicators": [
+        "Clear business metric impact",
+        "Specific stakeholder benefit",
+        "Measurable outcome definition"
+      ]
+    },
+
+    "impact_mapping_actor_behavior": {
+      "description": "Contextual analysis of actor identification and behavior change",
+      "analysis_focus": "Who are the specific actors and why do they want this?",
+      "reasoning_prompts": [
+        "Who specifically will use this feature and in what context?",
+        "What motivates this actor to want this behavior change?", 
+        "How will this change their current behavior or workflow?"
+      ],
+      "actor_clarity_factors": [
+        "Specific persona identification",
+        "Clear motivation and context",
+        "Behavior change specification"
+      ]
+    },
+
+    "three_cs_conversation_enablement": {
+      "description": "Contextual assessment of whether story enables productive conversation",
+      "analysis_focus": "Does this enable productive conversation about requirements?",
+      "reasoning_prompts": [
+        "What questions would a developer ask about this story?",
+        "Are there implicit assumptions that need clarification?",
+        "What aspects need discussion vs specification?"
+      ],
+      "conversation_quality": [
+        "Opens dialogue vs closes discussion",
+        "Identifies areas needing clarification",
+        "Enables iterative refinement"
+      ]
+    },
+
+    "definition_of_ready_completeness": {
+      "description": "Contextual assessment of story readiness beyond checklist items",
+      "analysis_focus": "Is this story truly ready for development work?",
+      "reasoning_prompts": [
+        "Would a developer know where to start with this story?",
+        "Are there hidden complexities not captured in acceptance criteria?",
+        "Does the team have shared understanding of what done means?"
+      ],
+      "readiness_indicators": [
+        "Clear starting point for development",
+        "Shared understanding verification",
+        "Risk and complexity assessment"
+      ]
+    }
+  },
+
+  "llm_analysis_guidelines": {
+    "analysis_approach": {
+      "context_first": "Consider domain context and business process knowledge",
+      "user_perspective": "Evaluate from user and developer perspectives", 
+      "reasoning_transparency": "Show step-by-step reasoning process",
+      "confidence_calibration": "Adjust confidence based on context clarity"
+    },
+
+    "response_format": {
+      "structured_analysis": "Provide reasoning, conclusion, and confidence level",
+      "specific_suggestions": "Offer concrete improvement recommendations",
+      "framework_reference": "Identify which framework principle was applied",
+      "decision_rationale": "Explain why this requires human vs AI judgment"
+    },
+
+    "confidence_guidelines": {
+      "high_confidence_0.82_to_0.85": [
+        "Clear contextual violations with domain knowledge",
+        "Obvious misalignment with framework principles",
+        "Strong indicators from reasoning prompts"
+      ],
+      "medium_confidence_0.75_to_0.82": [
+        "Context-dependent issues requiring interpretation",
+        "Partial alignment with some framework principles", 
+        "Domain-specific considerations affecting judgment"
+      ],
+      "transparency_requirement": "Always explain confidence reasoning"
+    }
+  },
+
+  "integration_strategy": {
+    "code_triggers_llm": "Use LLM analysis only when code patterns indicate need",
+    "focused_framework_selection": "Apply only relevant frameworks, not all simultaneously",
+    "contextual_enhancement": "Use domain knowledge to inform analysis",
+    "human_decision_points": "Present analysis for human judgment, don't auto-fix"
+  }
+}

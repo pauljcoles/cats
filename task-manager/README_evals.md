@@ -5,8 +5,14 @@
 ## Quick Start
 
 ```bash
-# Test the eval system with your existing examples
+# Test the original eval system with existing examples
 python3 test_evals_demo.py
+
+# NEW: Test complete BA evaluation system
+python3 -m pytest test_ba_evals.py -v
+
+# Test just the BA workflow with real Mercedes data
+python3 -m pytest test_ba_evals.py::TestBAWorkflow::test_end_to_end_ba_workflow_with_real_data -v
 
 # Open the full analysis notebook
 jupyter notebook eval_runner.ipynb
@@ -17,12 +23,16 @@ jupyter notebook eval_runner.ipynb
 ✅ **Catch AI Hallucinations**: Detect when AI invents requirements not in tickets  
 ✅ **Prevent Implementation Contamination**: Flag technical details in BDD scenarios  
 ✅ **Maintain Quality Standards**: Ensure BDD scenarios follow your gold standard  
+✅ **Validate BA Workflows**: Complete specification analysis and story generation quality  
+✅ **INVEST Compliance**: Ensure user stories meet >0.8 INVEST criteria threshold  
 ✅ **Track Improvements**: Measure AI quality changes over time  
 ✅ **Fast Feedback Loops**: Run evals after every AI prompt/model change  
 
 ## Demo Results
 
-The system successfully distinguishes quality:
+The system successfully distinguishes quality across both traditional and BA workflows:
+
+### Original BDD Evaluation Results
 - **CARCONF-104 (good)**: 75% pass rate
 - **CARCONF-106 (poor)**: 25% pass rate  
 
@@ -31,11 +41,28 @@ Key catches:
 - ❌ Implementation contamination: React, Redux, API details in scenarios
 - ❌ Missing user-observable outcomes in technical scenarios
 
+### NEW: BA Workflow Evaluation Results
+- **SPECMERCEDES-001**: Complete BA pipeline evaluation
+  - Generated 63 user stories with 0.98 average INVEST score
+  - All stories properly traced to specification personas
+  - 189 quality acceptance criteria validated
+  - Domain consistency maintained (Mercedes terminology)
+  - Quality feedback loops scoring 0.96/1.0
+
+Key BA quality validations:
+- ✅ INVEST compliance >0.8 threshold met for all stories
+- ✅ End-to-end specification-to-story traceability confirmed  
+- ✅ Given-When-Then acceptance criteria structure validated
+- ⚠️ Specification structure issues identified for improvement
+
 ## Architecture
 
 ```
 evals/
 ├── core.py                    # Basic eval infrastructure
+├── spec_analysis_evals.py     # NEW: Specification analysis quality checks
+├── story_generation_evals.py  # NEW: INVEST compliance and story quality
+├── ba_workflow_evals.py       # NEW: End-to-end BA workflow validation
 ├── task2_bdd_evals.py        # BDD generation quality checks
 ├── task3a_assessment_evals.py # Assessment decision validation  
 ├── cross_task_evals.py       # P0 preservation, traceability
@@ -46,9 +73,27 @@ traces/                        # CSV files with execution data
 annotations/                   # Human labels for eval accuracy
 eval_runner.ipynb             # Teresa's notebook approach
 test_evals_demo.py            # Quick demonstration
+test_ba_evals.py              # NEW: Comprehensive BA evaluation tests
 ```
 
 ## Core Evals
+
+### NEW: Business Analyst Workflow Evaluation
+
+#### Specification Analysis
+- **`eval_persona_extraction_completeness`** - Validates complete persona data (role, motivations, context)
+- **`eval_business_goal_clarity`** - Ensures goals have measurable success criteria and metrics
+- **`eval_specification_structure`** - Checks structural integrity of specification components
+
+#### Story Generation Quality  
+- **`eval_invest_compliance_threshold`** - Validates stories meet >0.8 INVEST criteria (leverages existing invest_score)
+- **`eval_story_traceability`** - Ensures stories properly map to specification personas
+- **`eval_acceptance_criteria_quality`** - Validates Given-When-Then BDD structure and testability
+
+#### End-to-End BA Workflow
+- **`eval_specification_to_story_flow`** - Complete pipeline validation with quality scoring
+- **`eval_domain_context_consistency`** - Validates domain-specific terminology (Mercedes/BMW/etc.)
+- **`eval_quality_feedback_loops`** - Meta-evaluation of actionable improvement recommendations
 
 ### Task 2 BDD Generation
 - **`eval_no_requirement_invention`** - Catches AI adding features not in ticket
@@ -67,6 +112,45 @@ test_evals_demo.py            # Quick demonstration
 - **`eval_priority_consistency`** - Classifications stay consistent
 
 ## Integration with Your Workflow
+
+### NEW: BA Workflow Integration
+
+#### Run Complete BA Pipeline Evaluation
+
+```python
+# Test complete specification-to-story workflow
+from src.parsing.specification_parser import SpecificationParser
+from src.generation.story_generator import StoryGenerator
+from evals.ba_workflow_evals import eval_specification_to_story_flow
+
+parser = SpecificationParser()
+generator = StoryGenerator()
+
+# Parse specification and generate stories
+spec_data = parser.parse_specification(spec_content, 'SPEC-001')
+stories = generator.generate_stories_from_spec(spec_data, 'mercedes')
+
+# Comprehensive workflow evaluation
+result = eval_specification_to_story_flow(spec_data, stories)
+if result.status == "PASS":
+    print(f"✅ BA workflow validated: {result.message}")
+else:
+    print(f"⚠️ BA workflow issues: {result.message}")
+    # Check details for specific evaluation breakdowns
+```
+
+#### Run pytest BA Evaluation Suite
+
+```bash
+# Run complete BA evaluation test suite
+python3 -m pytest test_ba_evals.py -v
+
+# Run specific evaluation category
+python3 -m pytest test_ba_evals.py::TestSpecificationAnalysis -v
+
+# Run with real specification data
+python3 -m pytest test_ba_evals.py::TestBAWorkflow::test_end_to_end_ba_workflow_with_real_data -v
+```
 
 ### 1. Add Trace Logging
 

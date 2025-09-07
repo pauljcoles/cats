@@ -8,30 +8,50 @@ This repository demonstrates simplified base rules for AI-driven test automation
 
 ## Task Execution Commands
 
-### Task 1: Requirement Validation
+### Task 1: Hybrid Requirement Validation + BA Specification Analysis
 When user says "execute task 1 for [TICKET]":
 
+**Implementation**: Uses enhanced Task1IntegrationEngine from `/home/pauljcoles/code/cats/task-manager/src/validation/task1_integration.py`
+
+**Hybrid Analysis Approach**:
+- **Code-based validation** (100% confidence): Detects vague terms, external references, clear patterns
+- **LLM-based validation** (75-85% confidence): Analyzes multiple behaviors, contextual vagueness, complex conditionals
+- **NEW: BA Specification Analysis**: Teresa Torres-inspired quality evaluations for business analyst workflows
+- **Combined intelligence**: Reliable pattern detection + contextual judgment + business analysis quality
+
+**Execution Flow**:
 1. **Load validation context**:
-   - Apply patterns from `/home/pauljcoles/code/cats/task-manager/base-rules/task-requirement-validation.md`
+   - Execute Python integration: `python /home/pauljcoles/code/cats/task-manager/base-rules/code-rules/task1_integration.py [TICKET]`
    - Load ticket from `/home/pauljcoles/code/cats/task-manager/example-tickets/[TICKET].md`
+   - Apply hybrid evaluation patterns from `HybridGate1Evaluator` class
 
 2. **Apply dynamic context loading**:
    - Extract ticket prefix (e.g., CARCONF-104 → CARCONF) 
    - Check for domain directory at `/home/pauljcoles/code/cats/task-manager/context-rules/[prefix]-domain/`
    - Load `business-domain-config.md` and `test_data.json` if available
-   - Fall back to core patterns if domain not found
+   - Use domain context to enhance LLM analysis accuracy
 
-3. **Run validation gates**:
-   - Step 1: Quality Assessment (completeness, clarity, testability, stability)
-   - Step 2: Architecture Detection (frontend/backend)
-   - Step 3: Priority Classification (P0=ticket ACs, P1=error scenarios, P2=regression, P3-P4=additional)
+3. **Run hybrid validation gates**:
+   - **Code Detection**: Vague terms, external references, implementation contamination (confidence: 1.0)
+   - **LLM Analysis**: Multiple behaviors, contextual clarity, complex conditionals (confidence: 0.75-0.85)  
+   - **Priority Classification**: P0=ticket ACs, P1=error scenarios, P2=regression, P3-P4=additional
+   - **Method Transparency**: Show which issues were detected by code vs LLM reasoning
 
-4. **Generate analysis outputs**:
+3b. **Run BA specification analysis** (NEW):
+   - **Specification Structure**: Document organization and completeness validation
+   - **Persona Extraction Completeness**: Role, motivations, context validation for all personas
+   - **Business Goal Clarity**: Measurable success criteria and metrics assessment
+   - **Overall BA Quality Score**: Combined evaluation with 0-100 scoring (60+ threshold for pass)
+   - **Graceful handling**: Skip analysis for simple tickets without specification elements
+
+4. **Generate enhanced analysis outputs**:
    - Create directory: `/home/pauljcoles/code/cats/task-manager/aiGenerated/[TICKET]/`
    - Save validation report: `/home/pauljcoles/code/cats/task-manager/aiGenerated/[TICKET]/[TICKET]_validation_report.md`
+   - **Enhanced**: Include comprehensive "BA Specification Quality Analysis" section with individual evaluation results
    - Create conversation log: `/home/pauljcoles/code/cats/task-manager/aiGenerated/[TICKET]/[TICKET]_conversation.md`
-   - Follow the format shown in existing validation reports
-   - Include PASS/FAIL decision with specific recommendations
+   - Include hybrid analysis breakdown with confidence levels
+   - **NEW**: Show extracted specification elements summary (personas, goals, journeys, constraints)
+   - Present user choices: Proceed, Apply SRP, Preview, Stop, Details
 
 ### Task 2: BDD Scenario Generation
 When user says "execute task 2 for [ANALYSIS_RESULT]" or "execute task 2 for [TICKET]":
@@ -154,6 +174,26 @@ Each domain contains:
 - **P2 (Regression)**: Existing functionality validation
 - **P3-P4 (Additional)**: Cross-platform, edge cases, comprehensive coverage
 - AI NEVER downgrades ticket requirements from P0 to lower priorities
+
+### NEW: BA Integration Principles
+
+**Teresa Torres Evaluation Framework**:
+- **Simple, focused evaluations** targeting biggest failure modes
+- **Systematic measurement** replaces "vibe checking"
+- **Fast feedback loops** during conversational task execution
+- **Human-AI collaboration**: AI identifies issues, humans make final decisions
+
+**Quality Thresholds**:
+- **BA Quality Score ≥60**: Pass threshold for business analysis quality
+- **BA Quality Score ≥80**: Excellence threshold for optimal quality
+- **INVEST Compliance >0.8**: Story quality threshold using existing proven algorithm
+- **Specification Elements**: All critical sections (personas, goals) must be present
+
+**Integration Approach**:
+- **Non-disruptive**: BA analysis runs alongside existing hybrid validation
+- **Graceful degradation**: Skips BA analysis for simple tickets without specification elements
+- **Enhanced reporting**: Comprehensive quality assessment in existing validation reports
+- **Context-smart**: BA evaluations get focused patterns, not full context files
 
 ## File Paths and Structure
 All file paths should use absolute paths starting with `/home/pauljcoles/code/cats/task-manager/` to ensure consistent access to base rules, examples, and domain configurations.

@@ -1,0 +1,133 @@
+site_name: End-to-End Software Delivery Pipeline
+site_description: "Context-smart E2E pipeline: Requirements Analysis → User Stories → Test Generation → Automation → Quality Gates"
+site_author: Task Manager Team
+site_url: https://your-domain.com
+
+# Repository
+repo_name: e2e-software-pipeline
+repo_url: https://github.com/your-org/e2e-software-pipeline
+edit_uri: edit/main/docs/docs/
+
+# Theme configuration
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode  
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+
+# Extensions
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - attr_list
+  - md_in_html
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+
+# Navigation
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Overview: getting-started/overview.md
+    - Quick Start: getting-started/quickstart.md
+    - Installation: getting-started/installation.md
+  - Architecture:
+    - System Overview: architecture/overview.md
+    - Context Smart Design: architecture/context-smart.md
+    - Folder Structure: architecture/structure.md
+    - LLM vs Code Generation: architecture/llm-vs-code.md
+  - Components:
+    - Specification Parser: components/parser.md
+    - Story Generator: components/story-generator.md
+    - Validation System: components/validation.md
+    - Evaluation System (Evals): components/evals.md
+    - Output Generation: components/output.md
+  - Pipeline Stages:
+    - Requirements Analysis: workflows/analysis.md
+    - Story & Ticket Generation: workflows/stories.md
+    - Test Generation: workflows/test-generation.md
+    - Automation Generation: workflows/automation.md
+    - Quality Gates: workflows/quality.md
+    - Complete E2E Pipeline: workflows/end-to-end.md
+  - Configuration:
+    - Domain Rules: config/domains.md
+    - Gojko Patterns: config/gojko-patterns.md
+    - Context Rules: config/context-rules.md
+  - Examples:
+    - Mercedes Specification: examples/mercedes.md
+    - BMW Domain: examples/bmw.md
+    - Story Templates: examples/stories.md
+  - API Reference:
+    - Parsing Module: api/parsing.md
+    - Generation Module: api/generation.md
+    - Validation Module: api/validation.md
+  - Development:
+    - Contributing: dev/contributing.md
+    - Testing: dev/testing.md
+    - Deployment: dev/deployment.md
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
+
+# Extra configuration
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/your-org/business-analyst-workflow
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+    
+# Copyright
+copyright: Copyright &copy; 2024 Business Analyst Workflow Team
