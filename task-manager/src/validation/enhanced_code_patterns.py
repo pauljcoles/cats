@@ -5,7 +5,7 @@ Extracted from JSON patterns for deterministic, high-confidence detection
 
 import re
 from typing import List, Dict
-from .task1 import LanguageIssue, FailureType, Severity, EvalMethod
+from .types import LanguageIssue, FailureType, Severity, EvalMethod
 
 class EnhancedCodePatterns:
     """

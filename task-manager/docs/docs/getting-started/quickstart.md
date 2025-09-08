@@ -18,7 +18,7 @@ Get the Business Analyst Workflow System running in 5 minutes.
 
 2. **Test the system**:
    ```bash
-   python3 test_new_structure.py
+   python3 src/tests/test_new_structure.py
    ```
 
    Expected output:
@@ -152,6 +152,25 @@ pip install dataclasses typing pathlib
 - Check that your specification has **personas** and **business goals** sections
 - Ensure personas have motivations listed
 - Verify business goals are not empty
+
+## Testing Task 1 Integration
+
+To test the hybrid validation system:
+
+```bash
+# Set Python path and run task1 validation  
+export PYTHONPATH="${PYTHONPATH}:/home/pauljcoles/code/cats/task-manager"
+cd /home/pauljcoles/code/cats/task-manager
+python3 src/validation/task1_integration.py CARCONF-104
+```
+
+Expected output:
+```
+🔍 Executing Task 1 for ticket: CARCONF-104
+📋 Loading ticket from: /home/pauljcoles/code/cats/task-manager/example-tickets/CARCONF-104.md
+✅ Hybrid validation complete
+📄 Report saved to: aiGenerated/CARCONF-104/CARCONF-104_validation_report.md
+```
 
 ## What's Next?
 

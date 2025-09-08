@@ -101,7 +101,7 @@ class Task1IntegrationEngine:
     def _load_ticket_data(self, ticket_id: str) -> Optional[Dict[str, Any]]:
         """Load ticket from existing markdown format"""
         
-        ticket_file = self.base_path / "example-tickets" / f"{ticket_id}.md"
+        ticket_file = self.base_path / "examples/example-tickets" / f"{ticket_id}.md"
         
         if not ticket_file.exists():
             return None
@@ -475,7 +475,7 @@ Generated: {self._get_timestamp()}
 """
         
         # Recommendations
-        if eval_result.recommendations:
+        if hasattr(eval_result, 'recommendations') and eval_result.recommendations:
             report += "## Recommendations\n\n"
             for rec in eval_result.recommendations:
                 report += f"- {rec}\n"
@@ -501,7 +501,7 @@ execute task 1 for {context.ticket_id}
 ## Analysis Process
 
 ### Step 1: Ticket Loading
-✅ Loaded ticket data from example-tickets/{context.ticket_id}.md
+✅ Loaded ticket data from examples/example-tickets/{context.ticket_id}.md
 ✅ Parsed {len(context.ticket_data.get('acceptance_criteria', []))} acceptance criteria
 
 ### Step 2: Dynamic Context Loading  
@@ -761,6 +761,38 @@ This specification analysis provides structured input for story generation. The 
         
         return log
 
+    def execute_ba_analysis_for_specification(self, spec_id: str) -> TaskExecutionContext:
+        """
+        Execute complete BA workflow analysis for a specification
+        This method processes full specifications and provides comprehensive BA workflow assessment
+        """
+        print(f"🎯 Executing BA Analysis for {spec_id}")
+        print("=" * 50)
+        
+        # Step 1: Load specification data
+        print(f"📋 Loading specification {spec_id}...")
+        spec_data = self.parse_specification_for_analysis(spec_id)
+        if not spec_data:
+            print(f"❌ Specification {spec_id} not found")
+            return None
+            
+        # Step 2: Run comprehensive BA analysis
+        print("📊 Running comprehensive BA specification analysis...")
+        self._generate_specification_analysis(spec_data)
+        
+        # Step 3: Create context for conversation workflow
+        context = TaskExecutionContext(
+            ticket_id=spec_id,
+            ticket_data={'specification': spec_data.__dict__},
+            eval_result=None  # No Gate1 eval for specs
+        )
+        context.spec_data = spec_data
+        
+        print(f"📄 Generated BA analysis in /home/pauljcoles/code/cats/task-manager/aiGenerated/{spec_id}")
+        print(f"🎉 BA Analysis complete! Ready for story generation workflow.")
+        
+        return context
+
 
 # Entry point function that Claude CLI will call
 def execute_task_1_for_ticket(ticket_id: str) -> TaskExecutionContext:
@@ -770,12 +802,25 @@ def execute_task_1_for_ticket(ticket_id: str) -> TaskExecutionContext:
     engine = Task1IntegrationEngine()
     return engine.execute_task_1_for_ticket(ticket_id)
 
+def execute_ba_analysis_for_specification(spec_id: str) -> TaskExecutionContext:
+    """
+    Main entry point for 'execute ba analysis for SPEC-123' command
+    Runs complete specification-to-story pipeline validation using eval_specification_to_story_flow
+    """
+    engine = Task1IntegrationEngine()
+    return engine.execute_ba_analysis_for_specification(spec_id)
+
 # For testing
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
-        ticket_id = sys.argv[1]
-        execute_task_1_for_ticket(ticket_id)
+        identifier = sys.argv[1]
+        # Check if it's a specification (starts with SPEC) or ticket
+        if identifier.startswith("SPEC"):
+            execute_ba_analysis_for_specification(identifier)
+        else:
+            execute_task_1_for_ticket(identifier)
     else:
-        print("Usage: python task1_integration.py TICKET-ID")
+        print("Usage: python task1_integration.py TICKET-ID|SPEC-ID")
         print("Example: python task1_integration.py CARCONF-104")
+        print("Example: python task1_integration.py SPECMERCEDES-001")
