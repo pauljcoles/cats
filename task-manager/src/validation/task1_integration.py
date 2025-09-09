@@ -20,7 +20,17 @@ sys.path.append(os.path.join(os.path.dirname(__file__)))
 from .task1 import (
     HybridGate1Evaluator, 
     TaskExecutionContext, 
-    Gate1EvalResult,
+    Gate1EvalResult
+)
+from .validation_types import (
+    UserChoice,
+    LanguageIssue,
+    EvalMethod
+)
+
+# Import Amazon Q LLM client for self-referential calls (commented out - use Claude instead)
+# from src.services.amazonq_llm_client import get_amazonq_client, make_amazonq_call
+from .validation_types import (
     UserChoice,
     LanguageIssue,
     EvalMethod

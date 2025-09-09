@@ -7,8 +7,14 @@ Enhanced with industry-standard framework patterns
 import re
 from dataclasses import dataclass
 from typing import List, Dict, Any, Tuple, Optional
-from .types import LanguageIssue, FailureType, Severity, EvalMethod, UserChoice
+from .validation_types import LanguageIssue, FailureType, Severity, EvalMethod, UserChoice
 from .enhanced_code_patterns import EnhancedCodePatterns
+
+# Import real LLM client
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'services'))
+from llm_client import make_llm_call
 
 # ===== EVALUATION CLASSES =====
 
@@ -325,8 +331,13 @@ Respond with JSON:
 }}
 """
         
-        # Simulate LLM response (in real implementation, call your LLM)
-        llm_response = self._simulate_llm_multiple_behaviors(ac_text)
+        # Make real LLM call using the prompt above
+        llm_response = make_llm_call(llm_prompt, expect_json=True)
+        
+        # Handle LLM response failure gracefully
+        if not llm_response:
+            print(f"   ⚠️ LLM call failed for multiple behaviors check on {ac_id}")
+            return None
         
         if llm_response.get("multiple_behaviors"):
             return LanguageIssue(
@@ -370,8 +381,17 @@ Respond with JSON array:
 [{{"term": "valid", "vague": true, "reason": "no validation criteria specified", "suggestion": "specify validation rules"}}]
 """
         
-        # Simulate LLM analysis
-        llm_response = self._simulate_llm_vagueness_check(ac_text, found_terms)
+        # Make real LLM call using the prompt above
+        llm_response = make_llm_call(llm_prompt, expect_json=True)
+        
+        # Handle LLM response failure gracefully
+        if not llm_response:
+            print(f"   ⚠️ LLM call failed for vagueness check on {ac_id}")
+            return issues
+        
+        # Ensure response is a list
+        if not isinstance(llm_response, list):
+            llm_response = [llm_response] if llm_response else []
         
         for result in llm_response:
             if result.get("vague"):
@@ -414,8 +434,13 @@ Respond with JSON:
 }}
 """
         
-        # Simulate LLM response
-        llm_response = self._simulate_llm_conditional_check(ac_text)
+        # Make real LLM call using the prompt above
+        llm_response = make_llm_call(llm_prompt, expect_json=True)
+        
+        # Handle LLM response failure gracefully
+        if not llm_response:
+            print(f"   ⚠️ LLM call failed for conditional check on {ac_id}")
+            return None
         
         if not llm_response.get("clear_logic"):
             return LanguageIssue(
@@ -434,73 +459,8 @@ Respond with JSON:
     
     # ===== LLM SIMULATION METHODS (Replace with real LLM calls) =====
     
-    def _simulate_llm_multiple_behaviors(self, ac_text: str) -> Dict:
-        """Simulate LLM response for multiple behaviors (replace with real LLM call)"""
-        # Simple simulation based on common patterns
-        text_lower = ac_text.lower()
-        
-        # Check for obvious multiple behavior indicators
-        multiple_indicators = [
-            'price updates' in text_lower and 'highlighted' in text_lower,
-            'validation' in text_lower and 'display' in text_lower,
-            ac_text.count('\n') > 0 and ac_text.count('|') > 4,  # Table with multiple rows
-            'confirmation' in text_lower and ('update' in text_lower or 'save' in text_lower)
-        ]
-        
-        if any(multiple_indicators):
-            return {
-                "multiple_behaviors": True,
-                "explanation": "Contains multiple distinct outcomes",
-                "suggested_split": ["UI state change", "Data validation", "User feedback"]
-            }
-        
-        return {"multiple_behaviors": False}
-    
-    def _simulate_llm_vagueness_check(self, ac_text: str, terms: List[str]) -> List[Dict]:
-        """Simulate LLM vagueness analysis"""
-        results = []
-        
-        for term in terms:
-            # Simple heuristic: term is vague if no specific criteria mentioned nearby
-            context_window = 50
-            term_pos = ac_text.lower().find(term)
-            if term_pos > -1:
-                context = ac_text[max(0, term_pos-context_window):term_pos+context_window+len(term)]
-                
-                # Check for specific criteria near the term
-                has_criteria = any(indicator in context.lower() for indicator in [
-                    'must', 'should', 'exactly', 'at least', 'no more than', 
-                    'equal to', 'contains', 'matches', 'format'
-                ])
-                
-                if not has_criteria:
-                    results.append({
-                        "term": term,
-                        "vague": True,
-                        "reason": f"No specific criteria for '{term}'",
-                        "suggestion": f"Define what makes something '{term}'"
-                    })
-        
-        return results
-    
-    def _simulate_llm_conditional_check(self, ac_text: str) -> Dict:
-        """Simulate LLM conditional logic analysis"""
-        text_lower = ac_text.lower()
-        
-        # Check for unclear conditional patterns
-        unclear_patterns = [
-            'if needed', 'when appropriate', 'as necessary',
-            'depending on' in text_lower and 'criteria' not in text_lower
-        ]
-        
-        if any(unclear_patterns):
-            return {
-                "clear_logic": False,
-                "issues": ["Conditional criteria not specified"],
-                "suggestion": "Define specific conditions and expected behaviors"
-            }
-        
-        return {"clear_logic": True}
+    # ===== REMOVED FAKE LLM SIMULATION METHODS =====
+    # All _simulate_llm_* methods have been replaced with real LLM calls above
     
     # ===== UTILITY METHODS =====
     

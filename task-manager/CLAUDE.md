@@ -117,6 +117,48 @@ When user says "execute task 3b for [APPROVED_SCENARIOS]" or "execute task 3b fo
    - Identify missing step definitions
    - Document integration points with domain data
 
+### Task 5: Generate Stories from Specifications
+When user says "execute task 5 for [SPECIFICATION]":
+
+**Implementation**: Uses Task5IntegrationEngine from `/home/pauljcoles/code/cats/task-manager/src/generation/task5_integration.py`
+
+**Intelligent Story Generation Approach**:
+- **LLM-based requirement extraction** (replaces broken markdown parser): Smart identification of logical story boundaries
+- **Quality-first generation** (applies INVEST during creation): No combinatorial explosion, focused stories only
+- **Traceability maintained**: Each story linked to source requirement section
+- **INVEST compliance**: Independence, Negotiability, Value, Estimability, Size, Testability applied during generation
+
+**Execution Flow**:
+1. **Load specification content**:
+   - Load from `/home/pauljcoles/code/cats/task-manager/specifications/[SPECIFICATION].md`
+   - Raw content processing (no fragile parsing)
+   - Maintain full specification context
+
+2. **Apply LLM-based requirement extraction**:
+   - Identify discrete functional requirements using intelligent patterns
+   - Extract logical story boundaries from specification sections  
+   - Maintain traceability to source sections
+   - Filter requirements suitable for user story generation
+
+3. **Generate focused user stories**:
+   - 1 story per requirement (no persona×goal combinatorial explosion)
+   - Apply INVEST criteria during generation (not after)
+   - Generate meaningful acceptance criteria per story
+   - Apply business value analysis to each story
+   - Cap output at 8-15 focused, high-quality stories
+
+4. **Generate Task 5 outputs**:
+   - Create directory: `/home/pauljcoles/code/cats/task-manager/aiGenerated/[SPECIFICATION]/`
+   - Save stories report: `/home/pauljcoles/code/cats/task-manager/aiGenerated/[SPECIFICATION]/[SPECIFICATION]_generated_stories.md`
+   - Create conversation log: `/home/pauljcoles/code/cats/task-manager/aiGenerated/[SPECIFICATION]/[SPECIFICATION]_conversation.md`
+   - Include requirement extraction breakdown with source traceability
+   - Present user with quality analysis and next steps
+
+5. **Integration with Task 1**:
+   - Generated stories ready for Task 1 validation: `execute task 1 for [SPECIFICATION-STORY-001]`
+   - Stories passing Task 1 are ready for Jira import
+   - Complete pipeline: Specification → Task 5 → Task 1 → BDD (Task 2) → Assessment (Task 3a/3b)
+
 ## Available Test Examples
 
 ### Good Requirements (should PASS validation)
